@@ -1,0 +1,25 @@
+{{- range $chartName, $chart := omit .Values "argo" }}
+{{- with $chart -}}
+{{- if (default .enabled true) }}
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: '{{ include "argo.targetCluster.name" $ }}-{{ include "application.name" . }}'
+spec:
+  project: {{ include "argo.project" $ }}
+  source:
+    {{- include "application.source" . | nindent 4 }}
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+     - CreateNamespace=true
+  destination:
+    name: '{{ include "argo.targetCluster" $ }}'
+    namespace: {{ include "application.namespace" . }}
+
+{{- end }}
+{{- end }}
+{{- end }}

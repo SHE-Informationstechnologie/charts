@@ -1,6 +1,6 @@
 {{- range $chartName, $chart := omit .Values "argo" }}
 {{- with $chart -}}
-{{- if (default true .enabled) }}
+{{- if (.enabled) }}
 
 apiVersion: argoproj.io/v1alpha1
 kind: Application

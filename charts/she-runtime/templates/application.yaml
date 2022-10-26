@@ -1,6 +1,6 @@
 {{- range $chartName, $chart := omit .Values "argo" }}
 {{- with $chart -}}
-{{- if (default .enabled true) }}
+{{- if (default true .enabled) }}
 
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -19,6 +19,8 @@ spec:
   destination:
     name: '{{ include "argo.targetCluster" $ }}'
     namespace: {{ include "application.namespace" . }}
+
+---
 
 {{- end }}
 {{- end }}

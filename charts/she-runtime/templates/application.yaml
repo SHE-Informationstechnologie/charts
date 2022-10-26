@@ -6,8 +6,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: '{{ include "argo.targetCluster.name" $ }}-{{ include "application.name" . }}'
-  annotations:
-    foo: baa
 spec:
   project: {{ include "argo.project" $ }}
   source:

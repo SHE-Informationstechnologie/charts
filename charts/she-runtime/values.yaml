@@ -17,8 +17,8 @@ postgresOperator:
   name: postgres-operator
   enabled: true
   source:
-    repoURL: null
-    path: argocd/ops/tools/postgres-operator
+    repoURL: https://github.com/SHE-Informationstechnologie/postgres-operator-examples.git
+    path: kustomize/install
     targetRevision: HEAD
 
 prometheusOperator:

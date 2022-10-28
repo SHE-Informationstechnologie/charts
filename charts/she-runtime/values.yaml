@@ -25,10 +25,33 @@ prometheusOperator:
   namespace: monitoring
   name: prom-operator
   enabled: true
+  alertmanager:
+    enabled: true
+    ingress:
+      enabled: true
+      className: nginx
+      baseUrl: my.domain
+  grafana:
+    enabled: true
+    ingress:
+      enabled: true
+      className: nginx
+      baseUrl: my.domain
+  prometheus:
+    enabled: true
+    crunchyPostgresExporter:
+      enabled: true
+    serviceMonitorSelectors: "foo,baa"
+    ingress:
+      enabled: true
+      className: nginx
+      baseUrl: my.domain
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 38.0.0
     chart: kube-prometheus-stack
+    helm:
+      values: |
 
 internalIngressController:
   namespace: kube-system

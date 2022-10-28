@@ -29,3 +29,12 @@ prometheusOperator:
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 38.0.0
     chart: kube-prometheus-stack
+
+internalIngressController:
+  namespace: kube-system
+  name: internal-ingress
+  enabled: true
+  source:
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: 4.3.0
+    chart: ingress-nginx

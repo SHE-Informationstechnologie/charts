@@ -21,6 +21,17 @@ postgresOperator:
     path: kustomize/install
     targetRevision: HEAD
 
+customerApplications:
+  enabled: false
+  namespace: she-vendor
+  name: customer-applications
+  source:
+    repoURL: my.repo.url
+    path: path/to/app
+    targetRevision: HEAD
+    directory:
+      recurse: false
+
 eckOperator:
   namespace: eck-operator
   name: eck-operator

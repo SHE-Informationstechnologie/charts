@@ -21,6 +21,15 @@ postgresOperator:
     path: kustomize/install
     targetRevision: HEAD
 
+eckOperator:
+  namespace: eck-operator
+  name: eck-operator
+  enabled: false
+  source:
+    repoURL: https://helm.elastic.co
+    targetRevision:  2.4.0
+    chart: eck-operator
+
 prometheusOperator:
   namespace: monitoring
   name: prom-operator

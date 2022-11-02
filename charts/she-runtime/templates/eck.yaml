@@ -1,5 +1,4 @@
-{{- range $chartName, $chart := omit .Values "argo" "prometheusOperator" "eckOperator"}}
-{{- with $chart -}}
+{{- with .Values.eckOperator -}}
 {{- if .enabled }}
 
 apiVersion: argoproj.io/v1alpha1
@@ -8,6 +7,11 @@ metadata:
   name: '{{ include "argo.targetCluster.name" $ }}-{{ include "application.name" . }}'
 spec:
   project: {{ include "argo.project" $ }}
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: ValidatingWebhookConfiguration
+      jqPathExpressions:
+        - .webhooks[].clientConfig.caBundle
   source:
     {{- include "application.source" . | nindent 4 }}
   syncPolicy:
@@ -15,13 +19,11 @@ spec:
       selfHeal: true
       prune: true
     syncOptions:
-     - CreateNamespace=true
+      - CreateNamespace=true
   destination:
     name: '{{ include "argo.targetCluster" $ }}'
     namespace: {{ include "application.namespace" . }}
 
 ---
-
-{{- end }}
 {{- end }}
 {{- end }}

@@ -20,11 +20,17 @@
 
 {{- define "application.source" }}
   {{- $releaseName := dict "releaseName" (include "application.name" . ) }}
-  {{- if .helm }}
-    {{- $helmsource := dict "helm" (merge $releaseName .helm) }}
-    {{- $source := merge $helmsource .source }}
-    {{- toYaml $source }}
+  {{- if .source.chart }}
+    {{- if .source.helm }}
+        {{- $helmsource := dict "helm" (merge $releaseName .source.helm) }}
+        {{- $source := merge $helmsource .source }}
+        {{- toYaml $source }}
+    {{- else }}
+        {{- $helmsource := dict "helm" $releaseName  }}
+        {{- $source := merge $helmsource .source }}
+        {{- toYaml $source }}
+    {{- end }}
   {{- else }}
-    {{- toYaml (merge (dict "helm" $releaseName) .source) }}
+    {{- toYaml .source }}
   {{- end }}
 {{- end }}

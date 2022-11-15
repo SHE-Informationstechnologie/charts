@@ -17,15 +17,67 @@ postgresOperator:
   name: postgres-operator
   enabled: true
   source:
-    repoURL: null
-    path: argocd/ops/tools/postgres-operator
+    repoURL: https://github.com/SHE-Informationstechnologie/postgres-operator-examples.git
+    path: kustomize/install
     targetRevision: HEAD
+
+customerApplications:
+  enabled: false
+  namespace: she-vendor
+  name: customer-applications
+  source:
+    repoURL: my.repo.url
+    path: path/to/app
+    targetRevision: HEAD
+    directory:
+      recurse: false
+
+eckOperator:
+  namespace: eck-operator
+  name: eck-operator
+  enabled: false
+  source:
+    repoURL: https://helm.elastic.co
+    targetRevision:  2.4.0
+    chart: eck-operator
 
 prometheusOperator:
   namespace: monitoring
   name: prom-operator
   enabled: true
+  alertmanager:
+    enabled: true
+    ingress:
+      enabled: true
+      className: nginx
+      baseUrl: my.domain
+  grafana:
+    enabled: true
+    ingress:
+      enabled: true
+      className: nginx
+      baseUrl: my.domain
+  prometheus:
+    enabled: true
+    crunchyPostgresExporter:
+      enabled: true
+    serviceMonitorSelectors: "foo,baa"
+    ingress:
+      enabled: true
+      className: nginx
+      baseUrl: my.domain
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 38.0.0
     chart: kube-prometheus-stack
+    helm:
+      values: |
+
+internalIngressController:
+  namespace: kube-system
+  name: internal-ingress
+  enabled: true
+  source:
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: 4.3.0
+    chart: ingress-nginx

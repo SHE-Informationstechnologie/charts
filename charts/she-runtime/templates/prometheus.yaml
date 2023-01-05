@@ -155,6 +155,7 @@ spec:
       prune: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
   destination:
     name: '{{ include "argo.targetCluster" $ }}'
     namespace: {{ include "application.namespace" . }}

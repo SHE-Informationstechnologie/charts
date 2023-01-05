@@ -81,3 +81,26 @@ internalIngressController:
     repoURL: https://kubernetes.github.io/ingress-nginx
     targetRevision: 4.3.0
     chart: ingress-nginx
+
+velero:
+  namespace: velero
+  name: velero
+  enabled: true
+  source:
+    repoURL: https://vmware-tanzu.github.io/helm-charts
+    targetRevision: 2.32.1
+    chart: velero
+  initContainers:
+  - name: velero-plugin-for-aws
+    image: velero/velero-plugin-for-aws:v1.5.0
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+    - mountPath: /target
+      name: plugins
+  resources:
+    requests:
+      cpu: 500m
+      memory: 128Mi
+    limits:
+      cpu: 1000m
+      memory: 512Mi

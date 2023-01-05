@@ -1,0 +1,47 @@
+{{- with .Values.velero -}}
+{{- if .enabled }}
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: '{{ include "argo.targetCluster.name" $ }}-{{ include "application.name" . }}'
+spec:
+  project: {{ include "argo.project" $ }}
+  source:
+    repoURL: {{ .source.repoURL }}
+    targetRevision: {{ .source.targetRevision }}
+    chart: {{ .source.chart }}
+    helm:
+      values: |
+        {{- with .initContainers}}
+        initContainers:
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        snapshotsEnabled: true
+        backupsEnabled: true
+        deployRestic: true
+        metrics:
+          enabled: true
+          scrapeInterval: 30s
+          podAnnotations: {}
+          serviceMonitor:
+            enabled: true
+            namespace: monitoring
+        {{- with .resources }}
+        resources:
+        {{- toYaml . | nindent 10 }}
+        {{- end }}
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  destination:
+    name: '{{ include "argo.targetCluster" $ }}'
+    namespace: {{ include "application.namespace" . }}
+
+---
+{{- end }}
+{{- end }}

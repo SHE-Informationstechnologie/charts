@@ -1,6 +1,7 @@
 argo:
   targetCluster: in-cluster
-  targetClusterAltName: ops
+  # targetClusterAltName can be used to override the cluster name for resource naming purposes
+  targetClusterAltName: null
   project: default
 
 sealedSecrets: 

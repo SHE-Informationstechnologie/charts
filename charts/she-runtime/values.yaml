@@ -74,15 +74,6 @@ prometheusOperator:
     helm:
       values: |
 
-publicIngressController:
-  namespace: kube-system
-  name: public-ingress
-  enabled: true
-  source:
-    repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.3.0
-    chart: ingress-nginx
-
 internalIngressController:
   namespace: kube-system
   name: internal-ingress

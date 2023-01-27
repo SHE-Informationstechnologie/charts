@@ -96,10 +96,6 @@ velero:
   namespace: velero
   name: velero
   enabled: true
-  source:
-    repoURL: https://vmware-tanzu.github.io/helm-charts
-    targetRevision: 2.32.1
-    chart: velero
   initContainers:
   - name: velero-plugin-for-aws
     image: velero/velero-plugin-for-aws:v1.5.0
@@ -114,3 +110,9 @@ velero:
     limits:
       cpu: 1000m
       memory: 512Mi
+  source:
+    repoURL: https://vmware-tanzu.github.io/helm-charts
+    targetRevision: 2.32.1
+    chart: velero
+    helm:
+      values: |

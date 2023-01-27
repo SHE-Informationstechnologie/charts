@@ -31,6 +31,9 @@ spec:
         resources:
         {{- toYaml . | nindent 10 }}
         {{- end }}
+        {{- with .source.helm.values }}
+        {{- . | nindent 8 }}
+        {{- end }}
   syncPolicy:
     automated:
       selfHeal: true

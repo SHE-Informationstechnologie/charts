@@ -89,6 +89,8 @@ internalIngressController:
     chart: ingress-nginx
     helm:
       parameters:
+        - name: controller.ingressClass
+          value: nginx-internal
         - name: controller.watchIngressWithoutClass
           value: 'true'
         - name: controller.ingressClassResource.name

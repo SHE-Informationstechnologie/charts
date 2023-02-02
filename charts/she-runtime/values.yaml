@@ -46,16 +46,19 @@ prometheusOperator:
   namespace: monitoring
   name: prom-operator
   enabled: true
+  ingress:
+    enabled: true
+    baseUrl: my.domain
   alertmanager:
     enabled: true
-    ingress:
-      enabled: true
-      baseUrl: my.domain
+    # ingress:
+      # enabled: true
+      # baseUrl: my.domain
   grafana:
     enabled: true
-    ingress:
-      enabled: true
-      baseUrl: my.domain
+    # ingress:
+      # enabled: true
+      # baseUrl: my.domain
   prometheus:
     enabled: true
     crunchyPostgresExporter:
@@ -63,9 +66,9 @@ prometheusOperator:
     serviceMonitorSelectors:
       matchLabels:
         prometheus: she
-    ingress:
-      enabled: true
-      baseUrl: my.domain
+    # ingress:
+      # enabled: true
+      # baseUrl: my.domain
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 44.3.0

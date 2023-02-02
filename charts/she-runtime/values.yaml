@@ -50,22 +50,21 @@ prometheusOperator:
     enabled: true
     ingress:
       enabled: true
-      className: nginx
       baseUrl: my.domain
   grafana:
     enabled: true
     ingress:
       enabled: true
-      className: nginx
       baseUrl: my.domain
   prometheus:
     enabled: true
     crunchyPostgresExporter:
       enabled: true
-    serviceMonitorSelectors: "foo,baa"
+    serviceMonitorSelectors:
+      matchLabels:
+        prometheus: she
     ingress:
       enabled: true
-      className: nginx
       baseUrl: my.domain
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
@@ -104,8 +103,6 @@ argoApp:
       parameters:
         - name: server.ingress.enabled
           value: 'true'
-        - name: server.ingress.ingressClassName
-          value: nginx-internal
 
 velero:
   namespace: velero

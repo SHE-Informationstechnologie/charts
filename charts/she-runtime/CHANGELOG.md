@@ -1,3 +1,7 @@
+# 0.0.18
+
+- Rewrite logic for serviceMonitorSelectors
+
 # 0.0.17
 
 - Added dummy ingress

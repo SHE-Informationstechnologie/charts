@@ -46,6 +46,8 @@ prometheusOperator:
   namespace: monitoring
   name: prom-operator
   enabled: true
+  ingress:
+    baseUrl: my.domain
   alertmanager:
     enabled: true
     ingress:

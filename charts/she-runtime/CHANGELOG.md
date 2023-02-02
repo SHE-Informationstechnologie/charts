@@ -1,3 +1,7 @@
+# 0.0.16
+
+- prometheus Operator allow to set baseUrl for all components
+
 # 0.0.15
 
 - Removed ingressClass from prometheusOperator

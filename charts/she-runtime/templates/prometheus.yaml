@@ -15,7 +15,7 @@ spec:
       values: |
         {{- if .alertmanager.enabled }}
         alertmanager:
-          {{- if .alertmanager.ingress.enabled }}
+          {{- if .alertmanager.ingress.enabled | default .ingress.enabled }}
           ingress:
             ingressClassName: {{ .alertmanager.ingress.className }}
             enabled: true
@@ -33,14 +33,14 @@ spec:
         {{- end }}
         {{- if .grafana.enabled }}
         grafana:
-          {{- if .grafana.ingress.enabled }}
+          {{- if .grafana.ingress.enabled | default .ingress.enabled }}
           ingress:
             ingressClassName: {{ .grafana.ingress.className }}
             enabled: true
             hosts:
               - grafana.{{ .grafana.ingress.baseUrl | default .ingress.baseUrl }}
             tls:
-              - host
+              - hosts:
                  - grafana.{{ .grafana.ingress.baseUrl | default .ingress.baseUrl }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
@@ -133,7 +133,7 @@ spec:
             serviceMonitorSelector:
               matchExpressions:
                 - {key: release, operator: In, values: [{{.prometheus.serviceMonitorSelectors}}]}
-          {{- if .prometheus.ingress.enabled }}
+          {{- if .prometheus.ingress.enabled | default .ingress.enabled }}
           ingress:
             ingressClassName: {{ .prometheus.ingress.className }}
             enabled: true

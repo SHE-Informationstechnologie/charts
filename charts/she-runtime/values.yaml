@@ -100,6 +100,12 @@ argoApp:
     repoURL: https://argoproj.github.io/argo-helm
     targetRevision: 5.19.12
     chart: argo-cd
+    helm:
+      parameters:
+        - name: server.ingress.enabled
+          value: 'true'
+        - name: server.ingress.ingressClassName
+          value: nginx-internal
 
 velero:
   namespace: velero

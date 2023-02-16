@@ -1,6 +1,7 @@
 # 0.0.18
 
 - Rewrite logic for serviceMonitorSelectors
+- Make nginx-internal the default ingress controller, that also watches ingress resources without class
 
 # 0.0.17
 

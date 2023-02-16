@@ -87,7 +87,16 @@ internalIngressController:
     repoURL: https://kubernetes.github.io/ingress-nginx
     targetRevision: 4.4.2
     chart: ingress-nginx
-
+    helm:
+      parameters:
+        - name: controller.ingressClass
+          value: nginx-internal
+        - name: controller.watchIngressWithoutClass
+          value: 'true'
+        - name: controller.ingressClassResource.name
+          value: nginx-internal
+        - name: controller.ingressClassResource.default
+          value: 'true'
 publicIngressController:
   namespace: public-ingress
   name: public-ingress
@@ -96,6 +105,10 @@ publicIngressController:
     repoURL: https://kubernetes.github.io/ingress-nginx
     targetRevision: 4.4.2
     chart: ingress-nginx
+    helm:
+      parameters:
+        - name: controller.ingressClassResource.controllerValue
+          value: k8s.io/ingress-nginx-public
 
 argoApp:
   namespace: argocd

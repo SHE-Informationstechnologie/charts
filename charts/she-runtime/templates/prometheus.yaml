@@ -131,8 +131,7 @@ spec:
                     replacement: '$1'
               {{- end }}
             serviceMonitorSelector:
-              matchExpressions:
-                - {key: release, operator: In, values: [{{.prometheus.serviceMonitorSelectors}}]}
+              {{- toYaml .prometheus.serviceMonitorSelectors | nindent 14 }}
           {{- if .prometheus.ingress.enabled | default .ingress.enabled }}
           ingress:
             ingressClassName: {{ .prometheus.ingress.className }}

@@ -108,7 +108,7 @@ publicIngressController:
     helm:
       parameters:
         - name: controller.ingressClass
-          value: nginx-internal
+          value: public
         - name: controller.ingressClassResource.controllerValue
           value: k8s.io/ingress-nginx-public
 

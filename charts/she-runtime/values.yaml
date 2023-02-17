@@ -107,6 +107,8 @@ publicIngressController:
     chart: ingress-nginx
     helm:
       parameters:
+        - name: controller.ingressClass
+          value: nginx-internal
         - name: controller.ingressClassResource.controllerValue
           value: k8s.io/ingress-nginx-public
 

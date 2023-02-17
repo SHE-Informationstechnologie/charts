@@ -1,3 +1,7 @@
+# 0.0.19
+
+- Rename ingressClass of the public ingress controller from `nginx` to `public` to make it more obvious that things are made accessible by using this class.
+
 # 0.0.18
 
 - Rewrite logic for serviceMonitorSelectors

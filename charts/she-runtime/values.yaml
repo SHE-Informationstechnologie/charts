@@ -109,6 +109,8 @@ publicIngressController:
       parameters:
         - name: controller.ingressClass
           value: public
+        - name: controller.ingressClassResource.name
+          value: public
         - name: controller.ingressClassResource.controllerValue
           value: k8s.io/ingress-nginx-public
 

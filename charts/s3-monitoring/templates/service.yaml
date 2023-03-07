@@ -1,0 +1,17 @@
+{{- if .Values.s3monitoringEnabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-service
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- .Values.commonLabels | toYaml | nindent 4 }}
+spec:
+  ports:
+    - name: {{ .Release.Name }}-service-port
+      port: 8080
+      targetPort: 80
+      protocol: TCP
+  selector:
+    {{- .Values.commonLabels | toYaml | nindent 4 }}
+{{- end }}

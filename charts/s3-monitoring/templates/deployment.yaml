@@ -1,0 +1,46 @@
+{{- if .Values.s3monitoringEnabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- .Values.commonLabels | toYaml | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- .Values.commonLabels | toYaml | nindent 6 }}
+  strategy: {}
+  template:
+    metadata:
+    labels:
+      {{- .Values.commonLabels | toYaml | nindent 6 }}
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        resources: {}
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: metrics-volume
+      - name: cron
+        image: sheitag/s3df
+        resources: {}
+        envFrom:
+        - configMap:
+            name: {{ .Release.Name }}-config-map
+        - secretRef:
+            name: {{ .Release.Name }}-secret
+        volumeMounts:
+        - mountPath: /app/html
+          name: metrics-volume
+      imagePullSecrets:
+      - name: docker-regcred
+      volumes:
+      - name: metrics-volume
+        emptyDir:
+          sizeLimit: 10Mi
+{{- end }}

@@ -1,9 +1,6 @@
 # Whether the s3monitoring is enabled
 s3monitoringEnabled: true
 
-# The name of the s3monitoring-relevant resources
-name: s3monitoring
-
 # The hostname/IP address of the S3 API
 apiHost: ""
 # The Access Key ID of the S3 user

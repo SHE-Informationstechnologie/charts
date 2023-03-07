@@ -5,7 +5,8 @@ metadata:
   name: {{ .Release.Name }}-config-map
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- .Values.commonLabels | toYaml | nindent 4 }}
+    app.kubernetes.io/component: config-map
+    {{- include "common.labels" . | nindent 4 }}
 data:
   ACCESS_KEY_ID: {{ .Values.accessKeyID | quote }}
   API_HOST: {{ .Values.apiHost | quote }}

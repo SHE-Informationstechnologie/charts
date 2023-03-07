@@ -2,43 +2,45 @@
 s3monitoringEnabled: true
 
 # The hostname/IP address of the S3 API
-apiHost: ""
+#apiHost: ""
+
 # The Access Key ID of the S3 user
-accessKeyID: ""
+#accessKeyID: ""
+
 # The S3 user's quota limit in bytes
-quotaLimit: 0
+#quotaLimit: 0
+
 
 # How long the warning conditions below must be true before raising an alert (default: "3h")
-warningDuration: "3h"
+#warningDuration: "3h"
+
 # At which percentage to raise a warning (default: 80)
-warningPercentageUsed: 80
+#warningPercentageUsed: 80
+
 # How many bytes to be left before raising a warning (default: 0, disabled)
 #warningBytesLeft: "0.5 * 1024^4" # 0.5 TiB
-warningBytesLeft: 0
+
 
 # How long the critical conditions below must be true before raising an alert (default: "1h")
-criticalDuration: "1h"
+#criticalDuration: "1h"
+
 # At which percentage to raise a critical alert (default: 95)
-criticalPercentageUsed: 95
+#criticalPercentageUsed: 95
+
 # How many bytes to be left before raising a critical alert (default: 0, disabled)
 #criticalBytesLeft: "1 * 1024^4" # 1 TiB
-criticalBytesLeft: 0
-
-# List of labels to attach to all resources
-commonLabels:
-  app: s3monitoring
 
 
 # Whether or not to set up Prometheus rules
 prometheusEnabled: true
 
-# Whether or not to set up a ServiceMonitor resource
-serviceMonitorEnabled: true
-
-# Namespace for the ServiceMonitor and the PrometheusRule
-prometheusNamespace: monitoring
-
 # List of label to attach to Prometheus-related resources
 prometheusLabels:
   app: prometheus-operator
   #release: prometheus-stack-foobar
+
+# Whether or not to set up a ServiceMonitor resource
+serviceMonitorEnabled: true
+
+# Namespace for the ServiceMonitor and the PrometheusRule
+#prometheusNamespace: monitoring

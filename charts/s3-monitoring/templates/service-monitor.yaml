@@ -3,9 +3,11 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: {{ .Release.Name }}-service-monitor
-  namespace: {{ .Values.prometheusNamespace }}
+  namespace: {{ default .Release.Namespace .Values.prometheusNamespace }}
   labels:
-    {{- .Values.prometheusLabels | toYaml | nindent 4 }}
+    app.kubernetes.io/component: service-monitor
+    {{- include "common.labels" . | nindent 4 }}
+    {{- toYaml .Values.prometheusLabels | nindent 4 }}
 spec:
   endpoints:
   - path: "/metrics"
@@ -15,5 +17,6 @@ spec:
     - {{ .Release.Namespace }}
   selector:
     matchLabels:
-      {{- .Values.commonLabels | toYaml | nindent 6 }}
+      app.kubernetes.io/component: service
+      {{- include "common.labels" . | nindent 6 }}
 {{- end }}

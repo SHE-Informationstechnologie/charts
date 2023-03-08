@@ -7,7 +7,9 @@ metadata:
   labels:
     app.kubernetes.io/component: prometheus-rule
     {{- include "common.labels" . | nindent 4 }}
-    {{- toYaml .Values.prometheusLabels | nindent 4 }}
+    {{- if .Values.prometheusLabels }}
+      {{- toYaml .Values.prometheusLabels | nindent 4 }}
+    {{- end }}
 spec:
   groups:
   - name: {{ .Release.Name }}.rules
@@ -19,23 +21,23 @@ spec:
         severity: warning
       annotations:
         summary: "Approaching S3 quota limit"
-        description: "More than {{ default 80 .warningPercentageUsed }}% used or less than {{ default 0 .warningBytesLeft }} bytes left"
+        description: "More than {{ .warningPercentageUsed }}% used or less than {{ .warningBytesFree }} bytes left"
       expr: |-
-        (s3_percentage_used_total{access_key_id={{ $.Values.accessKeyID }}} >= {{ default 80 .warningPercentageUsed }})
+        (s3_percentage_used_total{access_key_id={{ .accessKey | default "none" }}} >= {{ .warningPercentageUsed }})
         or
-        ({{ default 0 .warningBytesLeft }} > 1 and {{ $.Values.quotaLimit }} - s3_bytes_used_total{access_key_id={{ $.Values.accessKeyID }}} <= {{ default 0 .warningBytesLeft }})
-      for: {{ default "3h" .warningDuration }}
+        ({{ .warningBytesFree }} > 1 and {{ .quotaLimit }} - s3_bytes_used_total{access_key_id={{ .accessKey | default "none" }}} <= {{ .warningBytesFree }})
+      for: {{ .warningDuration }}
     - alert: S3_HittingQuotaLimit
       labels:
         context: s3
         severity: critical
       annotations:
         summary: "Hitting S3 quota limit"
-        description: "More than {{ default 95 .criticalPercentageUsed }}% used or less than {{ default 0 .criticalBytesLeft }} bytes left"
+        description: "More than {{ .criticalPercentageUsed }}% used or less than {{ .criticalBytesFree }} bytes left"
       expr: |-
-        s3_percentage_used_total{access_key_id={{ $.Values.accessKeyID }}} >= {{ default 95 .criticalPercentageUsed }}
+        s3_percentage_used_total{access_key_id={{ .accessKey | default "none" }}} >= {{ .criticalPercentageUsed }}
         or
-        ({{ default 0 .criticalBytesLeft }} > 1 and {{ $.Values.quotaLimit }} - s3_bytes_used_total{access_key_id={{ $.Values.accessKeyID }}} <= {{ default 0 .criticalBytesLeft }})
-      for: {{ default "1h" .criticalDuration }}
+        ({{ .criticalBytesFree }} > 1 and {{ .quotaLimit }} - s3_bytes_used_total{access_key_id={{ .accessKey | default "none" }}} <= {{ .criticalBytesFree }})
+      for: {{ .criticalDuration }}
     {{- end}}
 {{- end }}

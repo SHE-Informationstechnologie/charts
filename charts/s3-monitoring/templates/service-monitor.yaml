@@ -7,7 +7,9 @@ metadata:
   labels:
     app.kubernetes.io/component: service-monitor
     {{- include "common.labels" . | nindent 4 }}
-    {{- toYaml .Values.prometheusLabels | nindent 4 }}
+    {{- if .Values.prometheusLabels }}
+      {{- toYaml .Values.prometheusLabels | nindent 4 }}
+    {{- end }}
 spec:
   endpoints:
   - path: "/metrics"

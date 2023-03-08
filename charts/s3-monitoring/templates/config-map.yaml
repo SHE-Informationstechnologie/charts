@@ -1,0 +1,14 @@
+{{- if .Values.s3monitoringEnabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config-map
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: config-map
+    {{- include "common.labels" . | nindent 4 }}
+data:
+  ACCESS_KEY_ID: {{ .Values.accessKeyID | quote }}
+  API_HOST: {{ .Values.apiHost | quote }}
+  QUOTA_LIMIT: {{ .Values.quotaLimit | quote }}
+{{- end }}

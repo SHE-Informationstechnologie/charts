@@ -1,0 +1,18 @@
+{{- if .Values.s3monitoringEnabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-service
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: service
+    {{- include "common.labels" . | nindent 4 }}
+spec:
+  ports:
+    - name: {{ .Release.Name }}-service-port
+      port: 8080
+      targetPort: 80
+      protocol: TCP
+  selector:
+    {{- include "common.labels" . | nindent 4 }}
+{{- end }}

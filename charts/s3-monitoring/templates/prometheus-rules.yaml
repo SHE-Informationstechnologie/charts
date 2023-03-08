@@ -1,0 +1,43 @@
+{{- if .Values.prometheusEnabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ .Release.Name }}-prometheus-rules
+  namespace: {{ default .Release.Namespace .Values.prometheusNamespace }}
+  labels:
+    app.kubernetes.io/component: prometheus-rule
+    {{- include "common.labels" . | nindent 4 }}
+    {{- if .Values.prometheusLabels }}
+      {{- toYaml .Values.prometheusLabels | nindent 4 }}
+    {{- end }}
+spec:
+  groups:
+  - name: {{ .Release.Name }}.rules
+    {{- with .Values }}
+    rules:
+    - alert: S3_ApproachingQuotaLimit
+      labels:
+        context: s3
+        severity: warning
+      annotations:
+        summary: "Approaching S3 quota limit"
+        description: "More than {{ .warningPercentageUsed }}% used or less than {{ .warningBytesFree }} bytes left"
+      expr: |-
+        (s3_percentage_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} >= {{ .warningPercentageUsed }})
+        or
+        ({{ .warningBytesFree }} > 1 and {{ .quotaLimit }} - s3_bytes_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} <= {{ .warningBytesFree }})
+      for: {{ .warningDuration }}
+    - alert: S3_HittingQuotaLimit
+      labels:
+        context: s3
+        severity: critical
+      annotations:
+        summary: "Hitting S3 quota limit"
+        description: "More than {{ .criticalPercentageUsed }}% used or less than {{ .criticalBytesFree }} bytes left"
+      expr: |-
+        s3_percentage_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} >= {{ .criticalPercentageUsed }}
+        or
+        ({{ .criticalBytesFree }} > 1 and {{ .quotaLimit }} - s3_bytes_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} <= {{ .criticalBytesFree }})
+      for: {{ .criticalDuration }}
+    {{- end}}
+{{- end }}

@@ -1,0 +1,24 @@
+{{- if .Values.serviceMonitorEnabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ .Release.Name }}-service-monitor
+  namespace: {{ default .Release.Namespace .Values.prometheusNamespace }}
+  labels:
+    app.kubernetes.io/component: service-monitor
+    {{- include "common.labels" . | nindent 4 }}
+    {{- if .Values.prometheusLabels }}
+      {{- toYaml .Values.prometheusLabels | nindent 4 }}
+    {{- end }}
+spec:
+  endpoints:
+  - path: "/metrics"
+    port: {{ .Release.Name }}-service-port
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: service
+      {{- include "common.labels" . | nindent 6 }}
+{{- end }}

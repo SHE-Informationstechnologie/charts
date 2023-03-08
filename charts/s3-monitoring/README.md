@@ -26,10 +26,10 @@ For the monitoring to work the user's secret access key is required. This access
 | serviceMonitorEnabled  | false                    | no       |
 
 ## Prometheus metrics
-| Name                                                 | Type |
-|------------------------------------------------------|------|
-| s3_percentage_used_total{access_key_id=<keyID>}      | int  |
-| s3_quota_limit{access_key_id=<keyID>}                | int  |
-| s3_bytes_used_total{access_key_id=<keyID>}           | int  |
-| s3_bytes_used{access_key_id=<keyID>,bucket=<bucket>} | int  |
+| Name                                                           | Type |
+|----------------------------------------------------------------|------|
+| s3_percentage_used_total{access_key_id="accessKeyID"}          | int  |
+| s3_quota_limit{access_key_id="accessKeyID"}                    | int  |
+| s3_bytes_used_total{access_key_id="accessKeyID"}               | int  |
+| s3_bytes_used{access_key_id="accessKeyID",bucket="bucketName"} | int  |
 

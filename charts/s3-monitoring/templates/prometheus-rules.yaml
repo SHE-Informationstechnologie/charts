@@ -23,9 +23,9 @@ spec:
         summary: "Approaching S3 quota limit"
         description: "More than {{ .warningPercentageUsed }}% used or less than {{ .warningBytesFree }} bytes left"
       expr: |-
-        (s3_percentage_used_total{access_key_id={{ .accessKey | default "none" }}} >= {{ .warningPercentageUsed }})
+        (s3_percentage_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} >= {{ .warningPercentageUsed }})
         or
-        ({{ .warningBytesFree }} > 1 and {{ .quotaLimit }} - s3_bytes_used_total{access_key_id={{ .accessKey | default "none" }}} <= {{ .warningBytesFree }})
+        ({{ .warningBytesFree }} > 1 and {{ .quotaLimit }} - s3_bytes_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} <= {{ .warningBytesFree }})
       for: {{ .warningDuration }}
     - alert: S3_HittingQuotaLimit
       labels:
@@ -35,9 +35,9 @@ spec:
         summary: "Hitting S3 quota limit"
         description: "More than {{ .criticalPercentageUsed }}% used or less than {{ .criticalBytesFree }} bytes left"
       expr: |-
-        s3_percentage_used_total{access_key_id={{ .accessKey | default "none" }}} >= {{ .criticalPercentageUsed }}
+        s3_percentage_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} >= {{ .criticalPercentageUsed }}
         or
-        ({{ .criticalBytesFree }} > 1 and {{ .quotaLimit }} - s3_bytes_used_total{access_key_id={{ .accessKey | default "none" }}} <= {{ .criticalBytesFree }})
+        ({{ .criticalBytesFree }} > 1 and {{ .quotaLimit }} - s3_bytes_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} <= {{ .criticalBytesFree }})
       for: {{ .criticalDuration }}
     {{- end}}
 {{- end }}

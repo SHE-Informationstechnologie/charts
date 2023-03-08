@@ -2,5 +2,5 @@ apiVersion: v2
 name: s3-monitoring
 description: S3 usage monitoring with Prometheus metrics export
 type: application
-version: 0.1.0
-appVersion: 0.1.0
+version: 0.0.1
+appVersion: 0.0.1

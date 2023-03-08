@@ -5,7 +5,7 @@ Installs an S3 monitoring solution which monitors a user's S3 usage and provides
 For the monitoring to work the user's secret access key is required. This access key must be provided as a secret named `{{  .Release.Name }}-secret`. The unencrypted secret will be added to the environment of the monitoring pod and is expected to have the following format:
 | Key                   | Value                  |
 |-----------------------|------------------------|
-| AWS_SECRET_ACCESS_KEY | <the actual accesskey> |
+| AWS_SECRET_ACCESS_KEY | the secret access key  |
 
 ## Configuration
 | Name                   | Default                  | Required |

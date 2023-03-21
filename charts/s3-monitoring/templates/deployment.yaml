@@ -15,9 +15,9 @@ spec:
   strategy: {}
   template:
     metadata:
-    labels:
-      app.kubernetes.io/component: pod
-      {{- include "common.labels" . | nindent 6 }}
+      labels:
+        app.kubernetes.io/component: pod
+        {{- include "common.labels" . | nindent 6 }}
     spec:
       containers:
       - name: nginx
@@ -32,7 +32,7 @@ spec:
         image: sheitag/s3df
         resources: {}
         envFrom:
-        - configMap:
+        - configMapRef:
             name: {{ .Release.Name }}-config-map
         - secretRef:
             name: {{ .Release.Name }}-secret

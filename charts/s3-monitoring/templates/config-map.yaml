@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/component: config-map
     {{- include "common.labels" . | nindent 4 }}
 data:
-  ACCESS_KEY_ID: {{ .Values.accessKeyID | quote }}
+  AWS_ACCESS_KEY_ID: {{ .Values.accessKeyID | quote }}
   API_HOST: {{ .Values.apiHost | quote }}
   QUOTA_LIMIT: {{ .Values.quotaLimit | quote }}
 {{- end }}

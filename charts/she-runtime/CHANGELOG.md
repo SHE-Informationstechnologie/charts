@@ -1,3 +1,7 @@
+# 0.0.19
+
+- Allow alertmanager configuration
+
 # 0.0.18
 
 - Rewrite logic for serviceMonitorSelectors

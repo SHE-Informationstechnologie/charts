@@ -15,6 +15,15 @@ spec:
       values: |
         {{- if .alertmanager.enabled }}
         alertmanager:
+          {{- if .alertmanager.secrets }}
+          alertmanagerSpec:
+            secrets:
+              {{- toYaml .alertmanager.secrets | nindent 14 }}
+          {{- end }}
+          {{- if .alertmanager.config }}
+          config:
+            {{- toYaml .alertmanager.config | nindent 12 }}
+          {{- end }}
           {{- if .alertmanager.ingress.enabled | default .ingress.enabled }}
           ingress:
             ingressClassName: {{ .alertmanager.ingress.className }}

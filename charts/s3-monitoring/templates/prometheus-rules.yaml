@@ -15,29 +15,50 @@ spec:
   - name: {{ .Release.Name }}.rules
     {{- with .Values }}
     rules:
-    - alert: S3_ApproachingQuotaLimit
+
+    - alert: S3_ApproachingQuotaLimitPercentage
       labels:
         context: s3
         severity: warning
       annotations:
         summary: "Approaching S3 quota limit"
-        description: "More than {{ .warningPercentageUsed }}% used or less than {{ .warningBytesFree }} bytes left"
+        description: "Reached or exceeded {{ .warningPercentageUsed }}% of the quota limit"
       expr: |-
-        (s3_percentage_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} >= {{ .warningPercentageUsed }})
-        or
-        ({{ .warningBytesFree }} > 1 and {{ .quotaLimit }} - s3_bytes_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} <= {{ .warningBytesFree }})
+        s3_percentage_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} >= {{ .warningPercentageUsed }}
       for: {{ .warningDuration }}
-    - alert: S3_HittingQuotaLimit
+
+    - alert: S3_ApproachingQuotaLimitAbsolute
+      labels:
+        context: s3
+        severity: warning
+      annotations:
+        summary: "Approaching S3 quota limit"
+        description: "Less than {{ .warningBytesFree }} bytes left"
+      expr: |-
+        {{ .quotaLimit }} - s3_bytes_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} <= {{ .warningBytesFree }}
+      for: {{ .warningDuration }}
+
+    - alert: S3_CriticalQuotaLimitPercentage
       labels:
         context: s3
         severity: critical
       annotations:
         summary: "Hitting S3 quota limit"
-        description: "More than {{ .criticalPercentageUsed }}% used or less than {{ .criticalBytesFree }} bytes left"
+        description: "Reached or exceeded {{ .criticalPercentageUsed }}% of the quota limit"
       expr: |-
         s3_percentage_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} >= {{ .criticalPercentageUsed }}
-        or
-        ({{ .criticalBytesFree }} > 1 and {{ .quotaLimit }} - s3_bytes_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} <= {{ .criticalBytesFree }})
       for: {{ .criticalDuration }}
+
+    - alert: S3_CriticalQuotaLimitAbsolute
+      labels:
+        context: s3
+        severity: critical
+      annotations:
+        summary: "Hitting S3 quota limit"
+        description: "Less than {{ .criticalBytesFree }} bytes left"
+      expr: |-
+        {{ .quotaLimit }} - s3_bytes_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} <= {{ .criticalBytesFree }}
+      for: {{ .criticalDuration }}
+
     {{- end}}
 {{- end }}

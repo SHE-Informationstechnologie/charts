@@ -15,7 +15,6 @@ spec:
   - name: {{ .Release.Name }}.rules
     {{- with .Values }}
     rules:
-
     - alert: S3_ApproachingQuotaLimitPercentage
       labels:
         context: s3
@@ -26,7 +25,6 @@ spec:
       expr: |-
         s3_percentage_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} >= {{ .warningPercentageUsed }}
       for: {{ .warningDuration }}
-
     - alert: S3_ApproachingQuotaLimitAbsolute
       labels:
         context: s3
@@ -37,7 +35,6 @@ spec:
       expr: |-
         {{ .quotaLimit }} - s3_bytes_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} <= {{ .warningBytesFree }}
       for: {{ .warningDuration }}
-
     - alert: S3_CriticalQuotaLimitPercentage
       labels:
         context: s3
@@ -48,7 +45,6 @@ spec:
       expr: |-
         s3_percentage_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} >= {{ .criticalPercentageUsed }}
       for: {{ .criticalDuration }}
-
     - alert: S3_CriticalQuotaLimitAbsolute
       labels:
         context: s3
@@ -59,6 +55,5 @@ spec:
       expr: |-
         {{ .quotaLimit }} - s3_bytes_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} <= {{ .criticalBytesFree }}
       for: {{ .criticalDuration }}
-
     {{- end}}
 {{- end }}

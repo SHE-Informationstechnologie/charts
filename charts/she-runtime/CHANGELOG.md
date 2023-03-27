@@ -1,3 +1,9 @@
+# 0.0.20
+## Prometheus
+- Allow configuration of ingress annotations for all subcharts
+- Allow configuration of Grafana Oauth via .grafana.auth.generic_oauth 
+- Allow configuration of Prometheus default rules, to selectively enable/disable Prometheus Default Rules
+
 # 0.0.19
 
 - Allow alertmanager configuration

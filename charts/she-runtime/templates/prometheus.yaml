@@ -91,6 +91,9 @@ spec:
         {{- end }}
         {{- if .prometheus.enabled }}
         prometheus:
+          {{- if .prometheus.defaultRules }}
+            {{ toYaml .prometheus.defaultRules | nindent 12 }}
+          {{- end }}
           prometheusSpec:
             additionalScrapeConfigs:
               {{- if .prometheus.crunchyPostgresExporter.enabled }}

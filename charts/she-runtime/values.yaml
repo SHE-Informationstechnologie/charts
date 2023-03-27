@@ -70,6 +70,11 @@ prometheusOperator:
       # enabled: true
       # baseUrl: my.domain
       # annotations: {}
+    # auth.generic_oauth: # See also https://grafana.com/docs/grafana/latest/setup-grafana/configure-security/configure-authentication/generic-oauth/#generic-oauth-authentication
+      # enabled: true
+      # role_attribute_path: resource_access.grafana.roles[0]
+      # name: Oauth
+      # ...
   prometheus:
     enabled: true
     crunchyPostgresExporter:

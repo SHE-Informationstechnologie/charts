@@ -62,12 +62,14 @@ prometheusOperator:
     # ingress:
       # enabled: true
       # baseUrl: my.domain
+      # annotations: {}
   grafana:
     enabled: true
     ingress: {}
     # ingress:
       # enabled: true
       # baseUrl: my.domain
+      # annotations: {}
   prometheus:
     enabled: true
     crunchyPostgresExporter:
@@ -79,6 +81,7 @@ prometheusOperator:
     # ingress:
       # enabled: true
       # baseUrl: my.domain
+      # annotations: {}
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 44.3.0

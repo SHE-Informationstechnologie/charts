@@ -49,6 +49,7 @@ prometheusOperator:
   ingress:
     enabled: true
     baseUrl: my.domain
+    # annotations: {}
   alertmanager:
     enabled: true
     ingress: {}

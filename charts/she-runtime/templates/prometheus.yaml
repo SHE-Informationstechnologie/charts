@@ -92,6 +92,7 @@ spec:
         {{- if .prometheus.enabled }}
         prometheus:
           {{- if .prometheus.defaultRules }}
+          defaultRules:
             {{ toYaml .prometheus.defaultRules | nindent 12 }}
           {{- end }}
           prometheusSpec:

@@ -37,7 +37,7 @@ spec:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
               {{- if .alertmanager.ingress.annotations }}
-              {{ toYaml .alertmanager.ingress.annotations | indent 14 }}
+              {{ toYaml .alertmanager.ingress.annotations | nindent 14 }}
               {{- end }}
           extraArgs:
               - --insecure
@@ -58,7 +58,7 @@ spec:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
               {{- if .grafana.ingress.annotations }}
-              {{ toYaml .grafana.ingress.annotations | indent 14 }}
+              {{ toYaml .grafana.ingress.annotations | nindent 14 }}
               {{- end }}
           extraArgs:
               - --insecure
@@ -160,7 +160,7 @@ spec:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
               {{- if .prometheus.ingress.annotations }}
-              {{ toYaml .prometheus.ingress.annotations | indent 14 }}
+              {{ toYaml .prometheus.ingress.annotations | nindent 14 }}
               {{- end }}
           extraArgs:
               - --insecure

@@ -88,6 +88,7 @@ prometheusOperator:
       # enabled: true
       # baseUrl: my.domain
       # annotations: {}
+  # defaultRules: {}
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 44.3.0

@@ -90,11 +90,11 @@ spec:
           {{- end }}
         {{- end }}
         {{- if .prometheus.enabled }}
+        {{- if .defaultRules }}
+        defaultRules:
+          {{- toYaml .defaultRules | nindent 12 }}
+        {{- end }}
         prometheus:
-          {{- if .prometheus.defaultRules }}
-          defaultRules:
-            {{- toYaml .prometheus.defaultRules | nindent 12 }}
-          {{- end }}
           prometheusSpec:
             additionalScrapeConfigs:
               {{- if .prometheus.crunchyPostgresExporter.enabled }}

@@ -161,8 +161,14 @@ spec:
                     target_label: schemaname
                     replacement: '$1'
               {{- end }}
+            {{- if .prometheus.serviceMonitorSelectors }}
             serviceMonitorSelector:
               {{- toYaml .prometheus.serviceMonitorSelectors | nindent 14 }}
+            {{- end }}              
+            {{- if .prometheus.additionalAlertManagerConfigs }}
+            additionalAlertManagerConfigs:
+              {{- toYaml .prometheus.additionalAlertManagerConfigs | nindent 14 }}
+            {{- end }}              
           {{- if .prometheus.ingress.enabled | default .ingress.enabled }}
           ingress:
             ingressClassName: {{ .prometheus.ingress.className }}

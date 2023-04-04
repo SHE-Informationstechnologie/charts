@@ -1,3 +1,20 @@
+# 0.0.21
+## Prometheus
+- Allow configuration of additionalAlertManagerConfigs
+- Make prometheus.serviceMonitorSelectors optional
+- Remove prometheus.serviceMonitorSelectors default value, as leading to issues because it could not be overriden
+
+### Breaking Change
+- Remove prometheus.serviceMonitorSelectors default value, as leading to issues because it could not be overriden
+  => Add following entry again on used installations, if needed:
+```
+  prometheusOperator:
+    prometheus:
+      serviceMonitorSelectors:
+        matchLabels:
+          prometheus: she
+```
+
 # 0.0.20
 ## Prometheus
 - Allow configuration of ingress annotations for all subcharts

@@ -15,45 +15,48 @@ spec:
   - name: {{ .Release.Name }}.rules
     {{- with .Values }}
     rules:
+
     - alert: S3_ApproachingQuotaLimitPercentage
       labels:
         context: s3
         severity: warning
       annotations:
-        summary: "Approaching S3 quota limit"
-        description: "Reached or exceeded {{ .warningPercentageUsed }}% of the quota limit"
+        summary: "S3 storage space warning"
+        description: "S3 storage space warning for AccessKeyID {{`{{`}} $labels.access_key_id {{`}}`}}"
       expr: |-
-        s3_percentage_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} >= {{ .warningPercentageUsed }}
-      for: {{ .warningDuration }}
-    - alert: S3_ApproachingQuotaLimitAbsolute
-      labels:
-        context: s3
-        severity: warning
-      annotations:
-        summary: "Approaching S3 quota limit"
-        description: "Less than {{ .warningBytesFree }} bytes left"
-      expr: |-
-        {{ .quotaLimit }} - s3_bytes_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} <= {{ .warningBytesFree }}
-      for: {{ .warningDuration }}
+        s3_percentage_used_total >= 100 - s3_percentage_free_total_warn
+      for: 1h
     - alert: S3_CriticalQuotaLimitPercentage
       labels:
         context: s3
         severity: critical
       annotations:
-        summary: "Hitting S3 quota limit"
-        description: "Reached or exceeded {{ .criticalPercentageUsed }}% of the quota limit"
+        summary: "S3 storage space critical"
+        description: "S3 storage space critical for AccessKeyID {{`{{`}} $labels.access_key_id {{`}}`}}"
       expr: |-
-        s3_percentage_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} >= {{ .criticalPercentageUsed }}
-      for: {{ .criticalDuration }}
-    - alert: S3_CriticalQuotaLimitAbsolute
+        s3_percentage_used_total >= 100 - s3_percentage_free_total_crit
+      for: 1h
+
+    - alert: S3_ApproachingQuotaLimitBytes
+      labels:
+        context: s3
+        severity: warning
+      annotations:
+        summary: "S3 storage space warning"
+        description: "S3 storage space warning for AccessKeyID {{`{{`}} $labels.access_key_id {{`}}`}}"
+      expr: |-
+        s3_bytes_used_total >= s3_bytes_quota_limit - s3_bytes_free_total_warn
+      for: 1h
+    - alert: S3_CriticalQuotaLimitBytes
       labels:
         context: s3
         severity: critical
       annotations:
-        summary: "Hitting S3 quota limit"
-        description: "Less than {{ .criticalBytesFree }} bytes left"
+        summary: "S3 storage space critical"
+        description: "S3 storage space critical for AccessKeyID {{`{{`}} $labels.access_key_id {{`}}`}}"
       expr: |-
-        {{ .quotaLimit }} - s3_bytes_used_total{access_key_id="{{ .accessKeyID | default "none" }}"} <= {{ .criticalBytesFree }}
-      for: {{ .criticalDuration }}
+        s3_bytes_used_total >= s3_bytes_quota_limit - s3_bytes_free_total_crit
+      for: 1h
+
     {{- end}}
 {{- end }}

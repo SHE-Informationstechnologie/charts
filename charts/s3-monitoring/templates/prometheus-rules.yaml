@@ -22,7 +22,7 @@ spec:
         severity: warning
       annotations:
         summary: "S3 storage space warning"
-        description: "S3 storage space warning for AccessKeyID {{`{{`}} $labels.access_key_id {{`}}`}}"
+        description: "S3 storage space utilization of AccessKeyID {{`{{`}} $labels.access_key_id {{`}}`}} reached {{`{{`}} $value | printf \"%.1f\" {{`}}`}}%."
       expr: |-
         s3_percentage_used_total >= 100 - s3_percentage_free_total_warn
       for: 1h
@@ -32,7 +32,7 @@ spec:
         severity: critical
       annotations:
         summary: "S3 storage space critical"
-        description: "S3 storage space critical for AccessKeyID {{`{{`}} $labels.access_key_id {{`}}`}}"
+        description: "S3 storage space utilization of AccessKeyID {{`{{`}} $labels.access_key_id {{`}}`}} reached {{`{{`}} $value | printf \"%.1f\" {{`}}`}}%."
       expr: |-
         s3_percentage_used_total >= 100 - s3_percentage_free_total_crit
       for: 1h
@@ -43,7 +43,7 @@ spec:
         severity: warning
       annotations:
         summary: "S3 storage space warning"
-        description: "S3 storage space warning for AccessKeyID {{`{{`}} $labels.access_key_id {{`}}`}}"
+        description: "S3 storage space of AccessKeyID {{`{{`}} $labels.access_key_id {{`}}`}} at {{`{{`}} $value | humanize1024 {{`}}`}}B."
       expr: |-
         s3_bytes_used_total >= s3_bytes_quota_limit - s3_bytes_free_total_warn
       for: 1h
@@ -53,7 +53,7 @@ spec:
         severity: critical
       annotations:
         summary: "S3 storage space critical"
-        description: "S3 storage space critical for AccessKeyID {{`{{`}} $labels.access_key_id {{`}}`}}"
+        description: "S3 storage space of AccessKeyID {{`{{`}} $labels.access_key_id {{`}}`}} at {{`{{`}} $value | humanize1024 {{`}}`}}B."
       expr: |-
         s3_bytes_used_total >= s3_bytes_quota_limit - s3_bytes_free_total_crit
       for: 1h

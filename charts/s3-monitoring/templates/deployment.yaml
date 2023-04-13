@@ -32,7 +32,7 @@ spec:
         image: sheitag/s3df
         resources: {}
         volumeMounts:
-        - mountPath: /app/s3df.conf
+        - mountPath: /app/conf
           name: config-file
           readOnly: true
         - mountPath: /app/html

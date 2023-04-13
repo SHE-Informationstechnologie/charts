@@ -16,7 +16,7 @@ spec:
     {{- with .Values }}
     rules:
 
-    - alert: S3_ApproachingQuotaLimitPercentage
+    - alert: S3_QuotaLimitBytesWarning
       labels:
         context: s3
         severity: warning
@@ -26,7 +26,7 @@ spec:
       expr: |-
         s3_percentage_used_total >= 100 - s3_percentage_free_total_warn
       for: 1h
-    - alert: S3_CriticalQuotaLimitPercentage
+    - alert: S3_QuotaLimitBytesCritical
       labels:
         context: s3
         severity: critical
@@ -37,7 +37,7 @@ spec:
         s3_percentage_used_total >= 100 - s3_percentage_free_total_crit
       for: 1h
 
-    - alert: S3_ApproachingQuotaLimitBytes
+    - alert: S3_QuotaLimitPercentageWarning
       labels:
         context: s3
         severity: warning
@@ -47,7 +47,7 @@ spec:
       expr: |-
         s3_bytes_used_total >= s3_bytes_quota_limit - s3_bytes_free_total_warn
       for: 1h
-    - alert: S3_CriticalQuotaLimitBytes
+    - alert: S3_QuotaLimitPercentageCritical
       labels:
         context: s3
         severity: critical

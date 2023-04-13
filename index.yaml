@@ -3,6 +3,16 @@ entries:
   s3-monitoring:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2023-04-13T13:16:24.343497489Z"
+    description: S3 usage monitoring with Prometheus metrics export
+    digest: 5a7ea70765369df24ec08a0f2365dabdc9223a99f678b5d410a988321b47a20a
+    name: s3-monitoring
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/s3-monitoring-0.1.7/s3-monitoring-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2023-04-13T12:53:55.654527629Z"
     description: S3 usage monitoring with Prometheus metrics export
     digest: f9545133662ce6ca5e7aa2344608ff5e8ebc34f96302339cf240119042df3596
@@ -282,4 +292,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-runtime-0.0.1/she-runtime-0.0.1.tgz
     version: 0.0.1
-generated: "2023-04-13T12:53:55.65484233Z"
+generated: "2023-04-13T13:16:24.34390059Z"

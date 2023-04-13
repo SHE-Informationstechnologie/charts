@@ -42,7 +42,7 @@ spec:
       volumes:
       - name: config-file
         secret:
-          secretName: {{ .Release.Name }}-secret
+          secretName: {{ .Release.Name }}-secret
       - name: metrics-volume
         emptyDir:
           sizeLimit: 10Mi

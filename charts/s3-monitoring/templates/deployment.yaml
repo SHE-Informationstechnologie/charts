@@ -31,17 +31,18 @@ spec:
       - name: cron
         image: sheitag/s3df
         resources: {}
-        envFrom:
-        - configMapRef:
-            name: {{ .Release.Name }}-config-map
-        - secretRef:
-            name: {{ .Release.Name }}-secret
         volumeMounts:
+        - mountPath: /app/s3df.conf
+          name: config-file
+          readOnly: true
         - mountPath: /app/html
           name: metrics-volume
       imagePullSecrets:
       - name: docker-regcred
       volumes:
+      - name: config-file
+        secret:
+          secretName: {{ .Release.Name }}-secret
       - name: metrics-volume
         emptyDir:
           sizeLimit: 10Mi

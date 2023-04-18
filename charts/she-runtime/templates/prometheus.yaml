@@ -13,6 +13,8 @@ spec:
     chart: {{ .source.chart }}
     helm:
       values: |
+        prometheus-node-exporter:
+          hostNetwork: {{ .prometheusNodeExporter.hostNetwork | default true }}
         {{- if .alertmanager.enabled }}
         alertmanager:
           {{- if .alertmanager.secrets }}

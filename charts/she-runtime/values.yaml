@@ -50,6 +50,8 @@ prometheusOperator:
     enabled: true
     baseUrl: my.domain
     # annotations: {}
+  prometheusNodeExporter:
+    hostNetwork: true
   alertmanager:
     enabled: true
     ingress: {}

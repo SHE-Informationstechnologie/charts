@@ -15,12 +15,21 @@ spec:
       values: |
         prometheus-node-exporter:
           hostNetwork: {{ .prometheusNodeExporter.hostNetwork | default true }}
+        prometheus:
+          {{- with .prometheus.prometheusSpec.storageSpec }}
+          storageSpec:
+            {{ toYaml . }}
+          {{- end }}
         {{- if .alertmanager.enabled }}
         alertmanager:
           {{- if .alertmanager.secrets }}
           alertmanagerSpec:
             secrets:
               {{- toYaml .alertmanager.secrets | nindent 14 }}
+            {{- with .alertmanager.alertmanagerSpec.storage }}
+            storage:
+              {{ toYaml . }}
+            {{- end }}
           {{- end }}
           {{- if .alertmanager.config }}
           config:

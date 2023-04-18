@@ -62,6 +62,7 @@ prometheusOperator:
     ## Secrets is a list of Secrets in the same namespace as the Alertmanager object, which shall be mounted into the
     ## Alertmanager Pods. The Secrets are mounted into /etc/alertmanager/secrets/.
     secrets: []
+    storage: {}
     # ingress:
       # enabled: true
       # baseUrl: my.domain
@@ -91,6 +92,8 @@ prometheusOperator:
       # enabled: true
       # baseUrl: my.domain
       # annotations: {}
+    prometheusSpec:
+      storageSpec: {}
   # defaultRules: {}
   source:
     repoURL: https://prometheus-community.github.io/helm-charts

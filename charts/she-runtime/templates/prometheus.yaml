@@ -29,6 +29,14 @@ spec:
         kubeProxy:
           {{- toYaml . | nindent 10 }}
         {{- end }}
+        {{- with .kubeControllerManager }}
+        kubeControllerManager:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .kubeScheduler }}
+        kubeScheduler:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         prometheus-node-exporter:
           hostNetwork: {{ .prometheusNodeExporter.hostNetwork | default true }}
         {{- if .alertmanager.enabled }}

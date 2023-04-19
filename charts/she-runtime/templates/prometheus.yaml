@@ -13,6 +13,22 @@ spec:
     chart: {{ .source.chart }}
     helm:
       values: |
+        {{- with .coreDns }}
+        coreDns:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .kubeDns }}
+        kubeDns:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .kubeEtcd }}
+        kubeEtcd:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .kubeProxy }}
+        kubeProxy:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         prometheus-node-exporter:
           hostNetwork: {{ .prometheusNodeExporter.hostNetwork | default true }}
         {{- if .alertmanager.enabled }}

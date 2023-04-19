@@ -53,6 +53,8 @@ prometheusOperator:
   prometheusNodeExporter:
     hostNetwork: true
   alertmanager:
+    alertmanagerSpec:
+      storage: {}
     enabled: true
     ingress: {}
     ## Alertmanager configuration directives  

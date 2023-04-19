@@ -15,20 +15,17 @@ spec:
       values: |
         prometheus-node-exporter:
           hostNetwork: {{ .prometheusNodeExporter.hostNetwork | default true }}
-        prometheus:
-          {{- with .prometheus.prometheusSpec.storageSpec }}
-          storageSpec:
-            {{ toYaml . }}
-          {{- end }}
         {{- if .alertmanager.enabled }}
         alertmanager:
-          {{- if .alertmanager.secrets }}
+          {{- if or .alertmanager.secrets .alertmanager.alertmanagerSpec.storage }}
           alertmanagerSpec:
+            {{- with .alertmanager.secrets }}
             secrets:
-              {{- toYaml .alertmanager.secrets | nindent 14 }}
+              {{- toYaml . | nindent 14 }}
+            {{- end }}
             {{- with .alertmanager.alertmanagerSpec.storage }}
             storage:
-              {{ toYaml . }}
+              {{- toYaml . | nindent 14 }}
             {{- end }}
           {{- end }}
           {{- if .alertmanager.config }}
@@ -113,6 +110,12 @@ spec:
         {{- end }}
         prometheus:
           prometheusSpec:
+          {{- if .prometheus.prometheusSpec.storageSpec }}
+            {{- with .prometheus.prometheusSpec.storageSpec }}
+            storageSpec:
+              {{- toYaml . | nindent 14 }}
+            {{- end }}
+          {{- end }}
             additionalScrapeConfigs:
               {{- if .prometheus.crunchyPostgresExporter.enabled }}
               - job_name: 'crunchy-postgres-exporter'

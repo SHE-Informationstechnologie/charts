@@ -17,6 +17,10 @@ spec:
         coreDns:
           {{- toYaml . | nindent 10 }}
         {{- end }}
+        {{- with .kublets }}
+        kubelet:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         {{- with .kubeDns }}
         kubeDns:
           {{- toYaml . | nindent 10 }}

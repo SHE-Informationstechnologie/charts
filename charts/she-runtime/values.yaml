@@ -82,7 +82,11 @@ prometheusOperator:
         # role_attribute_path: resource_access.grafana.roles[0]
         # name: Oauth
         # ...
-    # extraConfigmapMounts: []
+    # extraConfigmapMounts:
+    # - name: example
+    #   mountPath: /etc/example
+    #   configMap: example
+    #   readonly: true
   prometheus:
     enabled: true
     crunchyPostgresExporter:

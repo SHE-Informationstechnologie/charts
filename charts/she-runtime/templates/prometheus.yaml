@@ -108,11 +108,11 @@ spec:
             datasources:
               enabled: true
               env:
-                REQ_SKIP_TLS_VERIFY: 'false'
+                REQ_SKIP_TLS_VERIFY: 'true'
             dashboards:
               enabled: true
               env:
-                REQ_SKIP_TLS_VERIFY: 'false'
+                REQ_SKIP_TLS_VERIFY: 'true'
               label: grafana_dashboard
           {{- with .grafana.extraConfigmapMounts }}
           extraConfigmapMounts:

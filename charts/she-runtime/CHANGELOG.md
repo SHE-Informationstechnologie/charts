@@ -1,3 +1,14 @@
+# 0.0.36
+
+## Prometheus 
+
+- fix 0.0.32 and set skip tls verification to true
+
+# 0.0.32
+
+## Prometheus
+ - skip tls verify in grafana sidecars to allow dashboard refresh
+
 # 0.0.32
 
 ## Prometheus

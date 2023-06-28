@@ -86,7 +86,7 @@ prometheusOperator:
     # - name: example
     #   mountPath: /etc/example
     #   configMap: example
-    #   readonly: true
+    #   readOnly: true
   prometheus:
     enabled: true
     crunchyPostgresExporter:

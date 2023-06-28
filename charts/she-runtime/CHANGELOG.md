@@ -1,3 +1,9 @@
+# 0.0.37
+
+## Prometheus 
+
+- fix skip tls verify in grafana sidecar
+
 # 0.0.36
 
 ## Prometheus 

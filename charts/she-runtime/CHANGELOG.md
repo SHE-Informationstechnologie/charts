@@ -1,3 +1,14 @@
+# 0.0.32
+
+## Prometheus
+ - skip tls verify in grafana sidecars to allow dashboard refresh
+
+# 0.0.31
+
+## Prometheus
+ - give grafana a pvc for alerting rules. 
+
+
 # 0.0.21
 ## Prometheus
 - Allow configuration of additionalAlertManagerConfigs

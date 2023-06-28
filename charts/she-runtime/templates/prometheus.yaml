@@ -105,8 +105,14 @@ spec:
           extraArgs:
               - --insecure
           sidecar:
-            dashboard:
+            datasources:
               enabled: true
+              env:
+                REQ_SKIP_TLS_VERIFY: 'false'
+            dashboards:
+              enabled: true
+              env:
+                REQ_SKIP_TLS_VERIFY: 'false'
               label: grafana_dashboard
           {{- with .grafana.extraConfigmapMounts }}
           extraConfigmapMounts:

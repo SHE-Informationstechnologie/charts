@@ -1,3 +1,9 @@
+# 0.0.38
+
+## Prometheus 
+
+- update grafana sidecar
+
 # 0.0.37
 
 ## Prometheus 

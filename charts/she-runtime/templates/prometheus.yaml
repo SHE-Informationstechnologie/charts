@@ -108,6 +108,10 @@ spec:
             dashboard:
               enabled: true
               label: grafana_dashboard
+          {{- with .grafana.extraConfigmapMounts }}
+          extraConfigmapMounts:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
           grafana.ini:
             analytics:
               check_for_updates: true

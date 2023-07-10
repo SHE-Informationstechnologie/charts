@@ -151,7 +151,7 @@ spec:
         prometheus:
           prometheusSpec:
           {{- if .prometheus.prometheusSpec }}
-            {{- with .prometheus.prometheusSpec }}
+            {{- with unset .prometheus.prometheusSpec "additionalScrapeConfigs" }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
           {{- end }}

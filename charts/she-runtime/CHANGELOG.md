@@ -1,6 +1,12 @@
+# 0.0.40
+
+## Prometheus
+
+- Change handling of prometheusSpec to allow for more flexibility
+
 # 0.0.38
 
-## Prometheus 
+## Prometheus
 
 - update grafana sidecar
 

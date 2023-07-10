@@ -150,10 +150,9 @@ spec:
         {{- end }}
         prometheus:
           prometheusSpec:
-          {{- if .prometheus.prometheusSpec.storageSpec }}
-            {{- with .prometheus.prometheusSpec.storageSpec }}
-            storageSpec:
-              {{- toYaml . | nindent 14 }}
+          {{- if .prometheus.prometheusSpec }}
+            {{- with .prometheus.prometheusSpec }}
+              {{- toYaml . | nindent 12 }}
             {{- end }}
           {{- end }}
             additionalScrapeConfigs:

@@ -41,8 +41,10 @@ spec:
         kubeScheduler:
           {{- toYaml . | nindent 10 }}
         {{- end }}
+        {{- with .prometheusNodeExporter }}
         prometheus-node-exporter:
-          hostNetwork: {{ .prometheusNodeExporter.hostNetwork | default true }}
+          hostNetwork: {{ .hostNetwork }}
+        {{- end }}
         {{- if .alertmanager.enabled }}
         alertmanager:
           {{- if or .alertmanager.secrets .alertmanager.alertmanagerSpec.storage }}

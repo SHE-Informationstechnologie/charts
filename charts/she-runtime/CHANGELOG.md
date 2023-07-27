@@ -1,3 +1,9 @@
+# 0.0.41
+
+## Prometheus
+
+- Fix hostNetwork setting, so that is now actually possible to disable the hostNetwork on NodeExporter
+
 # 0.0.40
 
 ## Prometheus

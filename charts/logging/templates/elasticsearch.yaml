@@ -1,0 +1,10 @@
+{{- $elasticsearchSpec := include "elasticsearch.spec" . -}}
+---
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: {{ include "logging.fullname" . }}
+  labels:
+    {{- include "logging.labels" . | nindent 4 }}
+spec:
+  {{- include "elasticsearch.spec" . | nindent 2 }}

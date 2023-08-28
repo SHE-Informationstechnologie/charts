@@ -1,0 +1,11 @@
+---
+{{- $ilmPolicy := include "filebeat.ilmPolicy" . | fromYaml }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "logging.fullname" . }}
+  labels:
+    {{- include "logging.labels" . | nindent 4 }}
+data:
+  filebeat-ilm.json: |
+    {{ $ilmPolicy | toJson }}

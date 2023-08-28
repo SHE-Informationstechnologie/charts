@@ -1,0 +1,226 @@
+# Default values for monitoring.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Global settings
+general:
+  version: 8.9.1
+
+
+# Elasticsearch specific settings
+elasticsearch:
+  # HINT: Following additional settings can be set
+  # Please consult the documentation or
+  # kubectl explain elasticsearch
+  #
+  # auth: <object>
+  # http: <object>
+  # image: <string>
+  # monitoring: <object>
+  # podDisruptionBudget <object>
+  # remoteClusters <[]object>
+  # revisionHistoryLimit <integer>
+  # secureSettings <[]object>
+  # serviceAccountName <string>
+  # transport <object>
+  # updateStrategy <object>
+  # volumeClaimDeletePolicy <string>
+  
+  # HTTP holds HTTP layer settings for Elasticsearch.
+  http:
+    tls:
+      selfSignedCertificate:
+        # Don't use a self generated certificate for the http endpoints
+        disabled: true
+
+  # NodeSets allow specifying groups of Elasticsearch nodes sharing the same
+  # configuration and Pod templates.
+  nodeSets:
+  - name: elasticsearch-node
+    # Amount of nodes to spawn
+    count: 3
+    config:
+     # Which roles is nodeset supposed to fulfill
+      node.roles: ["master", "data", "ingest"]
+      node.store.allow_mmap: false
+    # Manipulate the pods template
+    # Changes will be merged
+    podTemplate:
+      spec:
+        containers:
+        - name: elasticsearch
+          resources:
+            limits:
+              memory: 4Gi
+              cpu: 1
+          env:
+          - name: ES_JAVA_OPTS
+            value: "-Xms2g -Xmx2g"
+
+    # Define the template used to request volumes
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 200G
+        storageClassName: cinder-rbd
+
+
+# Filebeat configuration
+filebeat:
+  # HINT: Following additional settings can be set
+  # Please consult the documentation or
+  # kubectl explain elasticsearch
+  #
+  # configReg: <object>
+  # deployment: <object>
+  # elasticsearchRef: <object>
+  # ilm: <object>
+  # image: <string>
+  # kibanaRef: <object>
+  # monitoring: <object>
+  # revisionHistoryLimit: <integer>
+  # secureSettings: <[]object>
+  # serviceAccountName: <string>
+  # type: <string>
+  # version: <string>
+
+  config:
+    filebeat:
+      autodiscover:
+        providers:
+        # Use the kubernetes provider and expand logging by ns/pod/node metadata
+        - type: kubernetes
+          node: ${NODE_NAME}
+          hints:
+            enabled: true
+            default_config:
+              type: container
+              paths:
+              - /var/log/containers/*${data.kubernetes.container.id}.log
+    processors:
+    - add_host_metadata: {}
+    logging.json: true
+
+  daemonSet:
+    podTemplate:
+      spec:
+        serviceAccountName: filebeat
+        automountServiceAccountToken: true
+        terminationGracePeriodSeconds: 30
+        dnsPolicy: ClusterFirstWithHostNet
+        # Allows access to more detailed host metadata
+        hostNetwork: true
+        securityContext:
+          runAsUser: 0
+        containers:
+        - name: filebeat
+          securityContext:
+            runAsUser: 0
+            privileged: true
+          volumeMounts:
+          - name: ilmconfig
+            mountPath: /etc/filebeat-ilm.json
+            subPath: filebeat-ilm.json
+          - name: varlogcontainers
+            mountPath: /var/log/containers
+          - name: varlogpods
+            mountPath: /var/log/pods
+          - name: varlibdockercontainers
+            mountPath: /var/lib/docker/containers
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+        tolerations:
+        - operator: Exists
+          effect: NoSchedule
+        volumes:
+        - name: ilmconfig
+          configMap:
+            name: filebeat-ilm
+        - name: varlogcontainers
+          hostPath:
+            path: /var/log/containers
+        - name: varlogpods
+          hostPath:
+            path: /var/log/pods
+        - name: varlibdockercontainers
+          hostPath:
+            path: /var/lib/docker/containers
+
+  # Management the Index Lifecycle Managemt of the filebeat index
+  ilm:
+    enabled: true
+    # When set to true, the lifecycle policy is overwritten at startup
+    overwrite: true
+    # Rotate index from hot to warm phase after x days
+    # This is the prerequisite for deleting the index
+    rotateAfter: 7d
+    # X days after rotating the index to warm phase delete it
+    deleteAfter: 21d
+    # Instead of using a generated ILM policy use a custome one
+    custom:
+      # Enable using the custom policy file
+      enabled: false
+      customFile: |
+        policy:
+          phases:
+            hot:
+              min_age: 0ms
+              actions:
+                rollover:
+                  max_age: 7d
+            delete:
+              min_age: 53d
+              actions:
+                delete: {}
+
+
+# Kibana configuration
+kibana:
+  # HINT: Following additional settings can be set
+  # Please consult the documentation or
+  # kubectl explain elasticsearch
+  #
+  #config <object>
+  # elasticsearchRef <object>
+  # enterpriseSearchRef <object>
+  # image <string>
+  # monitoring <object>
+  # podTemplate <object>
+  # revisionHistoryLimit <[]object>
+  # secureSettings <[]object>
+  # serviceAccountName <string>
+  # version <string>
+
+  # The amount of Kibana instances to spawn
+  count: 1
+
+  # HTTP holds HTTP layer settings for Elasticsearch.
+  http:
+    tls:
+      selfSignedCertificate:
+        # Don't use a self generated certificate for the http endpoints
+        disabled: true
+
+  ingress:
+    enabled: true
+    className: ""
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: chart-example.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls:
+      - secretName: chart-example-tls
+        hosts:
+          - chart-example.local

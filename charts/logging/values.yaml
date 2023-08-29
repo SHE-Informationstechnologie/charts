@@ -47,6 +47,17 @@ elasticsearch:
     # Changes will be merged
     podTemplate:
       spec:
+        affinity:
+          podAntiAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                    - key: common.k8s.elastic.co/type
+                      operator: In
+                      values:
+                        - elasticsearch
+                topologyKey: kubernetes.io/hostname
+
         containers:
         - name: elasticsearch
           resources:
@@ -216,11 +227,11 @@ kibana:
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
     hosts:
-      - host: chart-example.local
+      - host: kibana.example.local
         paths:
           - path: /
             pathType: ImplementationSpecific
     tls:
-      - secretName: chart-example-tls
+      - secretName: example-tls
         hosts:
-          - chart-example.local
+          - kibana.example.local

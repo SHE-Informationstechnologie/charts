@@ -57,6 +57,7 @@ elasticsearch:
                       values:
                         - elasticsearch
                 topologyKey: kubernetes.io/hostname
+                weight: 100
 
         containers:
         - name: elasticsearch

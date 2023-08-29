@@ -122,6 +122,10 @@ spec:
           extraConfigmapMounts:
           {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- with .grafana.extraSecretMounts }}
+          extraSecretMounts:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
           grafana.ini:
             analytics:
               check_for_updates: true

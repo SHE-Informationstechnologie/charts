@@ -3,6 +3,16 @@ entries:
   logging:
   - apiVersion: v2
     appVersion: 8.9.1
+    created: "2023-08-29T15:06:20.987876132Z"
+    description: A Helm chart for Kubernetes
+    digest: cf21e4e2d94745163f73cbf0ab614aa1d831706c9875d844027ac833a78fab2d
+    name: logging
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/logging-1.0.2/logging-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: 8.9.1
     created: "2023-08-29T15:02:01.048567793Z"
     description: A Helm chart for Kubernetes
     digest: 641b2586eb69a581d1c0de71d96e3a018f220df299ede923deb5984911e2ab89
@@ -473,4 +483,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-runtime-0.0.1/she-runtime-0.0.1.tgz
     version: 0.0.1
-generated: "2023-08-29T15:02:01.048683892Z"
+generated: "2023-08-29T15:06:20.988021933Z"

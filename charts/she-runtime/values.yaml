@@ -92,7 +92,7 @@ prometheusOperator:
     #   mountPath: /etc/example
     #   secretName: exmple
     #   readOnly: true
-    #   efaultMode: 0440
+    #   defaultMode: 0440
   prometheus:
     enabled: true
     crunchyPostgresExporter:

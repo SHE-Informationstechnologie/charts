@@ -1,3 +1,9 @@
+# 0.0.42
+
+## Prometheus
+
+- Enable Support for extraSecretMounts in Grafana deployment
+
 # 0.0.41
 
 ## Prometheus

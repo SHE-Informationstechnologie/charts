@@ -8,8 +8,8 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: filebeat
-  namespace: logging
+  namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
-  name: filebeat
+  name: {{ include "logging.fullname" . }}-filebeat
   apiGroup: rbac.authorization.k8s.io

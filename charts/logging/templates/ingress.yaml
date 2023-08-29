@@ -1,7 +1,7 @@
 ---
 # Kibana ingress
 {{- if .Values.kibana.ingress.enabled -}}
-{{- $fullName := include "logging.fullname" . -}}
+{{- $fullName := print (include "logging.fullname" .= "-kb-http" -}}
 {{- $svcPort := 5601 -}}
 {{- if and .Values.kibana.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.kibana.ingress.annotations "kubernetes.io/ingress.class") }}

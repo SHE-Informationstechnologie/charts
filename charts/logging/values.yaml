@@ -36,7 +36,7 @@ elasticsearch:
   # NodeSets allow specifying groups of Elasticsearch nodes sharing the same
   # configuration and Pod templates.
   nodeSets:
-  - name: elasticsearch-node
+  - name: main-node
     # Amount of nodes to spawn
     count: 3
     config:

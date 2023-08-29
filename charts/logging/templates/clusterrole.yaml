@@ -26,9 +26,9 @@ rules:
   - list
   - watch
 - apiGroups:
-  - "jobs"
+  - "batch"
   resources:
-  - batch
+  - jobs
   verbs:
   - get
   - list

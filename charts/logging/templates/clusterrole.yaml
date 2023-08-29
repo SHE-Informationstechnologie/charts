@@ -6,7 +6,8 @@ metadata:
   labels:
     {{- include "logging.labels" . | nindent 4 }}
 rules:
-- apiGroups: [""]
+- apiGroups:
+  - ""
   resources:
   - namespaces
   - pods
@@ -15,3 +16,20 @@ rules:
   - get
   - watch
   - list
+- apiGroups:
+  - "apps"
+  resources:
+  - replicasets
+  - replicasets/scale
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - "jobs"
+  resources:
+  - batch
+  verbs:
+  - get
+  - list
+  - watch

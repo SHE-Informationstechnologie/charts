@@ -3,42 +3,41 @@
 ## Updated all versions of included Helm-Charts/Images
 
 - sealed-secrets 1.0.10 -> 1.5.2
-- postgres-operator 5.3.1-she -> 5.3.1-she-3
-Added PG13 Examples
-- eck-operator 2.6.1 -> 2.9.0
-https://www.elastic.co/guide/en/cloud-on-k8s/current/eck-release-notes.html
-- prom-operator 44.3.0 -> 50.3.1
-https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#upgrading-an-existing-release-to-a-new-major-version
-- ingress-nginx 4.4.2 -> 4.7.1
-https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx?modal=changelog
-- argo 5.19.12 -> 5.45.1
-https://artifacthub.io/packages/helm/argo/argo-cd?modal=changelog
-- velero-container 1.5.0 -> 1.8.0
-- velero 2.32.1 -> 5.0.2
-Included velero-version v1.9.2 -> v1.11.1
-- metrics-server 3.10.0 -> 3.11.0
-https://artifacthub.io/packages/helm/metrics-server/metrics-server?modal=changelog
-
-Breaking changes are summarized below, refer to the original projects changelog for non-breaking changes.
+- postgres-operator 5.3.1-she -> 5.3.1-she-3  
+Added PG13 Examples  
+- eck-operator 2.6.1 -> 2.9.0  
+https://www.elastic.co/guide/en/cloud-on-k8s/current/eck-release-notes.html  
+- prom-operator 44.3.0 -> 50.3.1  
+https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#upgrading-an-existing-release-to-a-new-major-version  
+- ingress-nginx 4.4.2 -> 4.7.1  
+https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx?modal=changelog  
+- argo 5.19.12 -> 5.45.1  
+https://artifacthub.io/packages/helm/argo/argo-cd?modal=changelog  
+- velero-container 1.5.0 -> 1.8.0  
+- velero 2.32.1 -> 5.0.2  
+Included velero-version v1.9.2 -> v1.11.1  
+- metrics-server 3.10.0 -> 3.11.0  
+https://artifacthub.io/packages/helm/metrics-server/metrics-server?modal=changelog  
+Breaking changes are summarized below, refer to the original projects changelog for non-breaking changes.  
 
 ### Breaking Change
 
-- Major version upgrades of included components 
-- eck-operator 2.8.0
-https://www.elastic.co/guide/en/cloud-on-k8s/current/release-notes-2.8.0.html
-Use provided base path for stackconfigpolicy’s snapshot repository #6689 (issue: #6692)
-APM Server: Fix secret token config for APM Server 8.0+ #6769 (issue: #6768)
-- eck-operator 2.9.0
-https://www.elastic.co/guide/en/cloud-on-k8s/current/release-notes-2.9.0.html
-Add Support for volumeClaimTemplates for Logstash controller #6884
-- prom-operator
-https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx?modal=changelog
-Manual upgrade of CRDs required
-- velero
-https://velero.io/docs/v1.10/upgrade-to-1.10/
-https://velero.io/docs/v1.11/upgrade-to-1.11/
-https://github.com/vmware-tanzu/helm-charts/blob/main/charts/velero/README.md#note
-Manual upgrade-steps required
+- Major version upgrades of included components  
+- eck-operator 2.8.0  
+https://www.elastic.co/guide/en/cloud-on-k8s/current/release-notes-2.8.0.html  
+Use provided base path for stackconfigpolicy’s snapshot repository #6689 (issue: #6692)    
+APM Server: Fix secret token config for APM Server 8.0+ #6769 (issue: #6768)  
+- eck-operator 2.9.0  
+https://www.elastic.co/guide/en/cloud-on-k8s/current/release-notes-2.9.0.html  
+Add Support for volumeClaimTemplates for Logstash controller #6884  
+- prom-operator  
+https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx?modal=changelog  
+Manual upgrade of CRDs required  
+- velero  
+https://velero.io/docs/v1.10/upgrade-to-1.10/  
+https://velero.io/docs/v1.11/upgrade-to-1.11/  
+https://github.com/vmware-tanzu/helm-charts/blob/main/charts/velero/README.md#note  
+Manual upgrade-steps required  
 
 # 0.0.42
 

@@ -1,3 +1,22 @@
+# 0.0.43
+
+## All components
+- Updated all versions of included Helm-Charts
+- sealed-secrets 1.0.10 -> 1.5.1
+- postgres-operator 5.3.1-she -> 5.3.1-she-3
+- eck-operator 2.6.1 -> 2.9.0
+- prom-operator 44.3.0 -> 50.3.1
+- internal-ingress 4.4.2 -> 4.7.1
+- public-ingress 4.4.2 -> 4.7.1
+- argo 5.19.12 -> 5.45.1
+- velero-container 1.5.0 -> 1.8.0
+- velero 2.32.1 -> 5.0.2
+- metrics-server 3.10.0 -> 3.11.0
+
+### Breaking Change
+- Major version upgrades of included components 
+//TODO: Detailed description
+
 # 0.0.42
 
 ## Prometheus

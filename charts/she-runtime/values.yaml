@@ -4,13 +4,13 @@ argo:
   targetClusterAltName: null
   project: default
 
-sealedSecrets: 
+sealedSecrets:
   namespace: sealed-secrets
   name: sealed-secrets
   enabled: true
   source:
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 1.5.2 
+    targetRevision: 1.5.2
     chart: sealed-secrets
 
 postgresOperator:

@@ -1,3 +1,7 @@
+# 0.0.44
+Removed trailing whitespaces in values.yaml and CHANGELOG.md
+Fixed version of postgresOperator
+
 # 0.0.43
 
 ## Updated all versions of included Helm-Charts/Images

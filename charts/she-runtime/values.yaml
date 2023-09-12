@@ -20,7 +20,7 @@ postgresOperator:
   source:
     repoURL: https://github.com/SHE-Informationstechnologie/postgres-operator-examples.git
     path: kustomize/install
-    targetRevision: 5.3.1-she-3
+    targetRevision: v5.3.1-she-3
 
 customerApplications:
   enabled: false

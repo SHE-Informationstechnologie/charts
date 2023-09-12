@@ -1,6 +1,9 @@
+# 0.0.45
+- Fixed deployRestic setting in velero since its no longer supported
+
 # 0.0.44
-Removed trailing whitespaces in values.yaml and CHANGELOG.md
-Fixed version of postgresOperator
+- Removed trailing whitespaces in values.yaml and CHANGELOG.md
+- Fixed version of postgresOperator
 
 # 0.0.43
 

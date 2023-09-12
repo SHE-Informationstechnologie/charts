@@ -19,7 +19,7 @@ spec:
         {{- end }}
         snapshotsEnabled: false
         backupsEnabled: false
-        deployRestic: true
+        deployNodeAgent: true
         metrics:
           enabled: true
           scrapeInterval: 30s

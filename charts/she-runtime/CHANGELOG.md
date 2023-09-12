@@ -1,3 +1,6 @@
+# 0.0.46
+- Downgraded velero aws plugin to v1.7.1 since v1.8.0 is not released yet
+
 # 0.0.45
 - Fixed deployRestic setting in velero since its no longer supported
 

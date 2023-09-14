@@ -1,0 +1,77 @@
+{{ if .Values.monitoring.postgresql.alert }}
+
+{{- $labelsHost := "{{ $labels.host }}" -}}
+{{- $labelsStage := "{{ $labels.stage }}" -}}
+{{- $labelsBackup_host := "{{ $labels.backup_host }}" -}}
+{{- $labelsInstance := "{{ $labels.instance }}" -}}
+{{- $labelsBucket := "{{ $labels.bucket }}" -}}
+{{- $labelsStanza := "{{ $labels.stanza }}" -}}
+
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    {{- if .Values.prometheusLabels }}
+    {{- toYaml .Values.prometheusLabels | nindent 4 }}
+    {{- end }}
+  name: pgbackup-alert.rules
+  namespace: {{ .Release.Namespace }}
+spec:
+  groups:
+    -
+      name: pgbackup-nais.rules
+      rules:
+        -
+          alert: PGBackup_Full_Failed
+          annotations:
+            description: "PGBackup Full Process failed Host {{ $labelsHost }} on stage {{ $labelsStage }}"
+            summary: "PGBackup Full Process failed"
+          expr: pgbackrest_backup_full != 0
+          for: 30m
+          labels:
+            context: pgbackup
+            severity: warning
+        -
+          alert: PGBackup_Diff_Failed
+          annotations:
+            description: "PGBackup Diff Process failed Host {{ $labelsHost }} on stage {{ $labelsStage }}"
+            summary: "PGBackup Diff Process failed"
+          expr: pgbackrest_backup_diff != 0
+          for: 30m
+          labels:
+            context: pgbackup
+            severity: warning
+        -
+          alert: PGBackup_S3_FreeSpace
+          expr: pgbackrest_s3_quota_used > 85 OR absent_over_time(pgbackrest_s3_quota_used[2h])
+          for: 30m
+          labels:
+            context: pgbackup
+            severity: warning
+          annotations:
+            summary: "PGBackup S3 Archive is almost full"
+            description: "PGBackup S3 Archive is almost full Host {{ $labelsBackup_host }} / {{ $labelsInstance }}"
+        -
+          alert: PGBackup_S3_BackupAge
+          expr: pgbackrest_s3_age_latest > 48 OR absent_over_time(pgbackrest_s3_age_latest[2h])
+          for: 30m
+          labels:
+            context: pgbackup
+            severity: warning
+          annotations:
+            summary: "PGBackup S3 Archive is too old (more than 48 hours)"
+            description: "PGBackup S3 Archive is too old (more than 48 hours) on Host {{ $labelsBackup_host }} / {{ $labelsInstance }} on bucket {{ $labelsBucket }} for stanza {{ $labelsStanza }}"
+        -
+          alert: PGBackup_S3_GFS_DeleteOldBackups
+          expr: pgbackrest_s3_deleteable_backups > 12
+          for: 2h
+          labels:
+            context: pgbackup
+            severity: warning
+          annotations:
+            summary: "PGBackup S3 Archive has too many deleteable backups (> 12) marked by GFS Rotation, execute cleanupscript."
+            description: "PGBackup S3 Archive has too many deleteable backups marked by GFS Rotation on Host {{ $labelsBackup_host }} / {{ $labelsInstance }} on bucket {{ $labelsBucket }} for stanza {{ $labelsStanza }} - Check marked backups for all stanzas on host {{ $labelsBackup_host }} and then execute there /srv/scripts/s3-backup-monitoring.sh -f REMOVEALL "
+
+{{ end }}

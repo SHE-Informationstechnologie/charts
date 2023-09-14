@@ -1,0 +1,118 @@
+{{ if .Values.monitoring.ingress.nginx }}
+
+{{- $labelsPod := "{{ $labels.pod }}" -}}
+{{- $labelsNodename := "{{ $labels.nodename }}" -}}
+{{- $labelsIngress := "{{ $labels.ingress }}" -}}
+{{- $value := "{{ $value | humanize }}" -}}
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    {{- if .Values.prometheusLabels }}
+    {{- toYaml .Values.prometheusLabels | nindent 4 }}
+    {{- end }}
+  name: nginx-ingress.rules
+  namespace: {{ .Release.Namespace }}
+spec:
+  groups:
+  - name: nginx-ingress.rules
+    rules:
+    - alert: Ingress_Down
+      expr: up{job=~".*ingress.*"} == 0
+      for: 5m
+      labels:
+        context: ingress
+        severity: critical
+      annotations:
+        summary: "Ingress Down"
+        description: "Ingress {{ $labelsPod }} on {{ $labelsNodename }} is down."
+    - alert: Ingress_ScrapeMissing
+      expr: absent(up{job=~".*ingress.*"} == 1)
+      for: 5m
+      labels:
+        context: ingress
+        severity: critical
+      annotations:
+        summary: "Ingress Scrape Missing"
+        description: "Nginx-Ingress instance has disappeared from Prometheus target discovery"
+    # source: https://docs.gitlab.com/ee/user/project/integrations/prometheus_library/nginx_ingress.html
+    - alert: Ingress_HTTPErrorRateHigh
+      expr: |-
+        (sum(rate(nginx_ingress_controller_requests{status=~"5.*",job=~".*ingress.*"}[5m])) by (ingress)
+        /
+        sum(rate(nginx_ingress_controller_requests{job=~".*ingress.*"}[5m])) by (ingress))
+        * 100 > 25
+      for: 5m
+      labels:
+        context: ingress
+        severity: warning
+      annotations:
+        summary: "Ingress HTTP Error Rate High"
+        description: "Ingress {{ $labelsIngress }}} 5xx http error rate is above 25%. Current value: {{ $value }}%"
+    - alert: Ingress_HTTPErrorRateHigh
+      expr: |-
+        (sum(rate(nginx_ingress_controller_requests{status=~"5.*",job=~".*ingress.*"}[5m])) by (ingress)
+        /
+        sum(rate(nginx_ingress_controller_requests{job=~".*ingress.*"}[5m])) by (ingress))
+        * 100 > 50
+      for: 5m
+      labels:
+        context: ingress
+        severity: critical
+      annotations:
+        summary: "Ingress HTTP Error Rate High"
+        description: "Ingress {{ $labelsIngress }}} 5xx http error rate is above 50%. Current value: {{ $value }}%"
+    - alert: Ingress_LatencyHigh
+      expr: |-
+        (sum(rate(nginx_ingress_controller_ingress_upstream_latency_seconds_sum{job=~".*ingress.*",ingress=~".*"}[5m])) by (ingress)
+        /
+        sum(rate(nginx_ingress_controller_ingress_upstream_latency_seconds_count{job=~".*ingress.*",ingress=~".*"}[5m])) by (ingress))
+        * 1000 > 10
+      for: 5m
+      labels:
+        context: ingress
+        severity: warning
+      annotations:
+        summary: "Ingress {{ $labelsIngress }} Latency High"
+        description: "Ingress {{ $labelsIngress }}} latency is above 200ms. Current value: {{ $value }}ms"
+    - alert: Ingress_LatencyHigh
+      expr: |-
+        (sum(rate(nginx_ingress_controller_ingress_upstream_latency_seconds_sum{job=~".*ingress.*",ingress=~".*"}[5m])) by (ingress)
+        /
+        sum(rate(nginx_ingress_controller_ingress_upstream_latency_seconds_count{job=~".*ingress.*",ingress=~".*"}[5m])) by (ingress))
+        * 1000 > 200
+      for: 5m
+      labels:
+        context: ingress
+        severity: critical
+      annotations:
+        summary: "Ingress {{ $labelsIngress }} Latency High"
+        description: "Ingress {{ $labelsIngress }}} latency is above 200ms. Current value: {{ $value }}ms"
+    - alert: Ingress_ThroughputHigh
+      expr: |-
+        sum(label_replace(rate(nginx_ingress_controller_requests{job=~".*ingress.*"}[5m])
+        , "status_code", "${1}xx", "status", "(.)..")) by (status_code,ingress)
+        > 200
+      for: 5m
+      labels:
+        context: ingress
+        severity: warning
+      annotations:
+        summary: "Ingress {{ $labelsIngress }} Throughput High"
+        description: "Ingress {{ $labelsIngress }}} throughput is above 50req/sec. Current value: {{ $value }}req/sec"
+    - alert: Ingress_ThroughputHigh
+      expr: |-
+        sum(label_replace(rate(nginx_ingress_controller_requests{job=~".*ingress.*"}[5m])
+        , "status_code", "${1}xx", "status", "(.)..")) by (status_code,ingress)
+        > 100
+      for: 5m
+      labels:
+        context: ingress
+        severity: critical
+      annotations:
+        summary: "Ingress {{ $labelsIngress }} Throughput High"
+        description: "Ingress {{ $labelsIngress }}} throughput is above 100req/sec. Current value: {{ $value }}req/sec"
+
+{{ end }}

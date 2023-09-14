@@ -1,0 +1,21 @@
+# Labels which are added to all rules.
+# Should match .spec.ruleSelector.matchLabels of the corresponding Prometheus resource.
+prometheusLabels:
+  release: kube-prometheus-stack
+
+# Define which components to monitor
+monitoring:
+  ingress:
+    nginx:      true
+  k8s:
+    apiserver:  true
+    core:       true
+    kubelet:    true
+  node:
+    alert:      true
+    record:     true
+  postgresql:
+    alert:      true
+    bouncer:    true
+    rules:      true
+    backup:     true

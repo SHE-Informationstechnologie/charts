@@ -1,0 +1,50 @@
+{{ if .Values.monitoring.postgresql.bouncer }}
+
+{{- $labelsInstance := "{{ $labels.instance }}" -}}
+{{- $value := "{{ $value }}" -}}
+{{- $labels := "{{ $labels }}" -}}
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    {{- if .Values.prometheusLabels }}
+    {{- toYaml .Values.prometheusLabels | nindent 4 }}
+    {{- end }}
+  name: pgbouncer.rules
+  namespace: {{ .Release.Namespace }}
+spec:
+  groups:
+
+  - name: node_common
+    interval: 30s
+    rules:
+    - alert: PgbouncerLessPoolConnetionsAvailale
+      expr: pgbouncer_databases_pool_size{database!~"pgbouncer.*|postgres"} - pgbouncer_databases_current_connections{database!~"pgbouncer.*|postgres"} < 3
+      for: 10m
+      labels:
+        severity: critical
+      annotations:
+        summary: To less connections in PGBouncer pool available (instance {{ $labelsInstance }})
+        description: "PGBouncer pools are almost empty\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: PgbouncerErrors
+      expr: increase(pgbouncer_errors_count{errmsg!="server conn crashed?"}[1m]) > 10
+      for: 0m
+      labels:
+        severity: warning
+      annotations:
+        summary: PGBouncer errors (instance {{ $labelsInstance }})
+        description: "PGBouncer is logging errors. This may be due to a a server restart or an admin typing commands at the pgbouncer console.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - alert: PgbouncerMaxConnections
+      expr: increase(pgbouncer_errors_count{errmsg="no more connections allowed (max_client_conn)"}[30s]) > 0
+      for: 0m
+      labels:
+        severity: critical
+      annotations:
+        summary: PGBouncer max connections (instance {{ $labelsInstance }})
+        description: "The number of PGBouncer client connections has reached max_client_conn.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+{{ end }}

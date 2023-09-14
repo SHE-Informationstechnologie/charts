@@ -1,0 +1,36 @@
+{{ if .Values.monitoring.postgresql.backup }}
+
+{{- $labelsNodename := "{{ $labels.nodename }}" -}}
+{{- $labelsPod := "{{ $labels.pod }}" -}}
+{{- $labels := "{{ $labels }}" -}}
+{{- $value := "{{ $value }}" -}}
+---
+
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    {{- if .Values.prometheusLabels }}
+    {{- toYaml .Values.prometheusLabels | nindent 4 }}
+    {{- end }}
+  name: postgresql-backup.rules
+  namespace: {{ .Release.Namespace }}
+spec:
+  groups:
+  - name: node-general-alert.rules
+    rules:
+    - alert: PostgreSQL_Backup_Fail
+      expr: node_systemd_unit_state{ state="failed", name=~"pgbackrest-.*@.*" } != 0
+      for: 5m
+      labels:
+        context: node-exporter
+        severity: warning
+      annotations:
+        summary: "One or more postresql backup jobs faild. "
+        description: |
+          {{ $labelsPod }} on {{ $labelsNodename }} is down.
+          VALUE = {{ $value }}
+          LABELS = {{ $labels }}
+          Checkout https://she-ag.atlassian.net/wiki/spaces/CKD/pages/6337888260/Troubleshooting+known+issues
+
+{{ end }}

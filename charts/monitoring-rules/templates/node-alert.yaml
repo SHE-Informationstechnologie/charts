@@ -1,0 +1,42 @@
+
+{{ if .Values.monitoring.node.alert }}
+
+{{- $labelsNodename := "{{ $labels.nodename }}" -}}
+{{- $labelsPod := "{{ $labels.pod }}" -}}
+
+---
+
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    {{- if .Values.prometheusLabels }}
+    {{- toYaml .Values.prometheusLabels | nindent 4 }}
+    {{- end }}
+  name: node-alert.rules
+  namespace: {{ .Release.Namespace }}
+spec:
+  groups:
+  - name: node-general-alert.rules
+    rules:
+    - alert: Node_ExporterDown
+      expr: up{job="node-exporter"} == 0
+      for: 5m
+      labels:
+        context: node-exporter
+        severity: critical
+      annotations:
+        summary: "NodeExporter Down"
+        description: "{{ $labelsPod }} on {{ $labelsNodename }} is down"
+    - alert: Node_ExporterScrapeMissing
+      expr: absent(up{job="node-exporter"} == 1)
+      for: 15m
+      labels:
+        context: node-exporter
+        severity: critical
+      annotations:
+        description: "NodeExporter Scrape Missing"
+        message: "NodeExporter instance has disappeared from Prometheus target discovery"
+
+
+{{ end }}

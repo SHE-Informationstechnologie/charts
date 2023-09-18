@@ -1,3 +1,8 @@
+# 1.0.0
+## BREAKING CHANGE
+## Postgres metrics
+- Added podMonitor
+
 # 0.4.2
 ## Kubernetes metrics
 - Removed all severity_num settings

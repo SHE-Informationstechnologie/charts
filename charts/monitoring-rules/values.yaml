@@ -1,13 +1,48 @@
-# Labels which are added to all rules.
-# Should match .spec.ruleSelector.matchLabels of the corresponding Prometheus resource.
+# Default values for monitoring-rules.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+nameOverride: ""
+fullnameOverride: ""
+
+# General settings affecting every templated resource
 prometheusLabels:
+  # The prometheus operator will only fetch resources containing the correct
+  # 'release'-label.
   release: kube-prometheus-stack
+
+kubernetes:
+  enabled: true
+
+  disabledRules: {}
+    # masterIsMissing: false
+    # wrongAmountOfMasters: false
+
+  masterIsMissing:
+    role: master
+    amount: 3
 
 # Postgres exporter specific metrics
 postgres:
   enabled: true
 
+  disabledRules: {}
+    # pgExporterScrapeError: false
+    # exporterDown: false
+    # pgIsUp: false
+    # pgDataChecksum: false
+    # diskFillPredict: false
+    # pgClusterRoleChange: false
+    # pgDiskSize: false
+    # pgReplicationByteLag: false
+    # pgReplicationSlotsInactive: false
+    # pgArchiveCommandStatus: false
+    # pgSettingsPendingRestart: false
+    # pgBackrestLastCompletedFull: false
+    # pgBackrestLastCompletedIncr: false
+    # pgBackrestLastCompletedDiff: false
+
   pgBackrest:
+    stanza: db
     maxTimeSinceFull: 648000
     maxTimeSinceIncr: 129600
     maxTimeSinceDiff: 129600

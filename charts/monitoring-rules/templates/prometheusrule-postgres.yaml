@@ -10,6 +10,7 @@ spec:
   groups:
   - name: exporter-rules
     rules:
+    {{- if not ( .Values.postgres.disabledRules.pgExporterScrapeError | default false ) }}
     - alert: PGExporterScrapeError
       expr: pg_exporter_last_scrape_error > 0
       for: 60s
@@ -20,6 +21,8 @@ spec:
       annotations:
         summary: {{` 'Postgres Exporter running on {{ $labels.job }} (instance: {{ $labels.instance }}) is encountering scrape errors processing queries. Error count: ( {{ $value }} )' `}}
         description: {{` "At least one of the query results couldn't be parsed." `}}
+    {{- end }}
+    {{- if not ( .Values.postgres.disabledRules.exporterDown | default false ) }}
     - alert: ExporterDown
       expr: avg_over_time(up{job=~".*crunchy-postgres"}[5m]) < 0.5
       for: 10s
@@ -30,9 +33,11 @@ spec:
       annotations:
         description: {{` 'Metrics exporter service for {{ $labels.job }} running on {{ $labels.instance }} has been down at least 50% of the time for the last 5 minutes. Service may be flapping or down.' `}}
         summary: {{` 'Prometheus Exporter Service Down' `}}
+    {{ end }}
 
   - name: postgres-rules
     rules:
+    {{- if not ( .Values.postgres.disabledRules.pgIsUp | default false ) }}
     - alert: PGIsUp
       expr: pg_up < 1
       for: 60s
@@ -43,6 +48,8 @@ spec:
       annotations:
         summary: {{` 'postgres_exporter running on {{ $labels.job }} is unable to communicate with the configured database' `}}
         description: {{` 'Prometheus Instance Down' `}}
+    {{- end }}
+    {{- if not ( .Values.postgres.disabledRules.pgDataChecksum | default false ) }}
     - alert: PGDataChecksum
       expr: ccp_data_checksum_failure > 0
       for: 60s
@@ -53,6 +60,8 @@ spec:
       annotations:
         description: {{` '{{ $labels.job }} has at least one data checksum failure in database {{ $labels.dbname }}. See pg_stat_database system catalog for more information.' `}}
         summary: {{` 'PGSQL Data Checksum failure' `}}
+    {{- end }}
+    {{- if not ( .Values.postgres.disabledRules.diskFillPredict | default false ) }}
     - alert: DiskFillPredict
       expr: predict_linear(ccp_nodemx_data_disk_available_bytes{mount_point!~"tmpfs"}[1h], 24 * 3600) < 0 and 100 * ((ccp_nodemx_data_disk_total_bytes - ccp_nodemx_data_disk_available_bytes) / ccp_nodemx_data_disk_total_bytes) > 70
       for: 5m
@@ -63,6 +72,8 @@ spec:
       annotations:
         summary: {{` 'Disk predicted to be full in 24 hours' `}}
         description: {{` 'Disk on {{ $labels.pg_cluster }}:{{ $labels.kubernetes_pod_name }} is predicted to fill in 24 hrs based on current usage' `}}
+    {{- end }}
+    {{- if not ( .Values.postgres.disabledRules.pgClusterRoleChange | default false ) }}
     - alert: PGClusterRoleChange
       expr: count by (pg_cluster) (ccp_is_in_recovery_status != ignoring(instance,ip,pod,role) (ccp_is_in_recovery_status offset 5m)) >= 1
       for: 60s
@@ -72,6 +83,8 @@ spec:
         severity_num: 300
       annotations:
         summary: {{` '{{ $labels.pg_cluster }} has had a switchover/failover event. Please check this cluster for more details' `}}
+    {{- end }}
+    {{- if not ( .Values.postgres.disabledRules.pgDiskSize | default false ) }}
     - alert: PGDiskSize
       expr: 100 * ((ccp_nodemx_data_disk_total_bytes - ccp_nodemx_data_disk_available_bytes) / ccp_nodemx_data_disk_total_bytes) > 75
       for: 60s
@@ -82,6 +95,8 @@ spec:
       annotations:
         description: {{` 'PGSQL Instance {{ $labels.deployment }} over 75% disk usage at mount point "{{ $labels.mount_point }}": {{ $value }}%' `}}
         summary: {{` PGSQL Instance usage warning `}}
+    {{- end }}
+    {{- if not ( .Values.postgres.disabledRules.pgDiskSize | default false ) }}
     - alert: PGDiskSize
       expr: 100 * ((ccp_nodemx_data_disk_total_bytes - ccp_nodemx_data_disk_available_bytes) / ccp_nodemx_data_disk_total_bytes) > 90
       for: 60s
@@ -92,6 +107,8 @@ spec:
       annotations:
         description: {{` 'PGSQL Instance {{ $labels.deployment }} over 90% disk usage at mount point "{{ $labels.mount_point }}": {{ $value }}%' `}}
         summary: {{` 'PGSQL Instance size critical' `}}
+    {{- end }}
+    {{- if not ( .Values.postgres.disabledRules.pgReplicationByteLag | default false ) }}
     - alert: PGReplicationByteLag
       expr: ccp_replication_lag_size_bytes > {{ required "maxReplicationBytesWarn is required!" .Values.postgres.replication.maxReplicationBytesWarn }}
       for: 60s
@@ -102,6 +119,8 @@ spec:
       annotations:
         description: {{` 'PGSQL Instance {{ $labels.job }} has at least one replica lagging over`}} {{ div .Values.postgres.replication.maxReplicationBytesWarn 1048576 }} {{`MB behind.' `}}
         summary: {{` 'PGSQL Instance replica lag warning' `}}
+    {{- end }}
+    {{- if not ( .Values.postgres.disabledRules.pgReplicationByteLag | default false ) }}
     - alert: PGReplicationByteLag
       expr: ccp_replication_lag_size_bytes > {{ required "maxReplicationBytesCrit is required!" .Values.postgres.replication.maxReplicationBytesCrit }}
       for: 60s
@@ -112,6 +131,8 @@ spec:
       annotations:
         description: {{` 'PGSQL Instance {{ $labels.job }} has at least one replica lagging over`}} {{ div .Values.postgres.replication.maxReplicationBytesCrit 1048576 }} {{`MB behind.' `}}
         summary: {{` 'PGSQL Instance replica lag warning' `}}
+    {{- end }}
+    {{- if not ( .Values.postgres.disabledRules.pgReplicationSlotsInactive | default false ) }}
     - alert: PGReplicationSlotsInactive
       expr: ccp_replication_slots_active == 0
       for: 60s
@@ -122,6 +143,8 @@ spec:
       annotations:
         description: {{` 'PGSQL Instance {{ $labels.job }} has one or more inactive replication slots' `}}
         summary: {{` 'PGSQL Instance inactive replication slot' `}}
+    {{- end }}
+    {{- if not ( .Values.postgres.disabledRules.pgArchiveCommandStatus | default false ) }}
     # ToDo Doesnt make sense to me @hauke
     - alert: PGArchiveCommandStatus
       expr: ccp_archive_command_status_seconds_since_last_fail > 300
@@ -133,6 +156,8 @@ spec:
       annotations:
         description: {{`  'PGSQL Instance {{ $labels.job }} has a recent failing archive command' `}}
         summary: {{`  'Seconds since the last recorded failure of the archive_command' `}}
+    {{- end }}
+    {{- if not ( .Values.postgres.disabledRules.pgSettingsPendingRestart | default false ) }}
     - alert: PGSettingsPendingRestart
       expr: ccp_settings_pending_restart_count > 0
       for: 60s
@@ -142,26 +167,44 @@ spec:
         severity_num: 300
       annotations:
         description: {{`  'One or more settings in the pg_settings system catalog on system {{ $labels.job }} are in a pending_restart state. Check the system catalog for which settings are pending and review postgresql.conf for changes.' `}}
+    {{- end }}
   
   - name: pgbackrest-rules
     rules:
+    {{- if not ( .Values.postgres.disabledRules.pgBackrestLastCompletedFull | default false ) }}
     - alert: PGBackRestLastCompletedFull_main
-      expr: ccp_backrest_last_full_backup_time_since_completion_seconds{stanza="db"} > {{ required "maxTimeSinceFull is required!" .Values.postgres.pgBackrest.maxTimeSinceFull }}
+      expr: ccp_backrest_last_full_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} > {{ required "maxTimeSinceFull is required!" .Values.postgres.pgBackrest.maxTimeSinceFull }}
       for: 60s
       labels:
         service: postgresql
         severity: critical
         severity_num: 300
       annotations:
-        summary: {{` 'Full backup for stanza [main] on system {{ $labels.job }} has not completed in the last week.' `}}
+        summary: {{` 'Full backup for stanza ({{ $labels.stanza }}) on system {{ $labels.job }} has not completed in the last`}} {{ duration (.Values.postgres.pgBackrest.maxTimeSinceFull | toString) }}{{`.'`}}    {{- end }}
+        description: 'There should be a full backup completed not later than the configured max time!'
+    {{- if not ( .Values.postgres.disabledRules.pgBackrestLastCompletedIncr | default false ) }}
     - alert: PGBackRestLastCompletedIncr_main
-      expr: ccp_backrest_last_incr_backup_time_since_completion_seconds{stanza="db"} > {{ required "maxTimeSinceIncr is required!" .Values.postgres.pgBackrest.maxTimeSinceIncr }}
+      expr: ccp_backrest_last_incr_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} > {{ required "maxTimeSinceIncr is required!" .Values.postgres.pgBackrest.maxTimeSinceIncr }}
       for: 60s
       labels:
         service: postgresql
         severity: critical
         severity_num: 300
       annotations:
-        summary: {{` 'Incremental backup for stanza [main] on system {{ $labels.job }} has not completed in the last 24 hours.' `}}
+        summary: {{` 'Incremental backup for stanza ({{ $labels.stanza }}) on system {{ $labels.job }} has not completed in the last`}} {{ duration (.Values.postgres.pgBackrest.maxTimeSinceIncr | toString) }}{{`.'`}}
+        description: 'There should be a incremental backup completed not later than the configured max time!'
+    {{- end }}
+    {{- if not ( .Values.postgres.disabledRules.pgBackrestLastCompletedDiff | default false ) }}
+    - alert: PGBackRestLastCompletedDiff_main
+      expr: ccp_backrest_last_diff_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} > {{ required "maxTimeSinceDiff is required!" .Values.postgres.pgBackrest.maxTimeSinceDiff }}
+      for: 60s
+      labels:
+        service: postgresql
+        severity: critical
+        severity_num: 300
+      annotations:
+        summary: {{` 'Differental backup for stanza ({{ $labels.stanza }}) on system {{ $labels.job }} has not completed in the last`}} {{ duration (.Values.postgres.pgBackrest.maxTimeSinceDiff | toString) }}{{`.'`}}
+        description: 'There should be a differential backup completed not later than the configured max time!'
+    {{- end }}
 
 {{ end }}

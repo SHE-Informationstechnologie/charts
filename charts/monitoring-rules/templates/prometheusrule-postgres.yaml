@@ -17,7 +17,6 @@ spec:
       labels:
         service: postgresql
         severity: critical
-        severity_num: 300
       annotations:
         summary: {{` 'Postgres Exporter running on {{ $labels.job }} (instance: {{ $labels.instance }}) is encountering scrape errors processing queries. Error count: ( {{ $value }} )' `}}
         description: {{` "At least one of the query results couldn't be parsed." `}}
@@ -29,7 +28,6 @@ spec:
       labels:
         service: system
         severity: critical
-        severity_num: 300
       annotations:
         description: {{` 'Metrics exporter service for {{ $labels.job }} running on {{ $labels.instance }} has been down at least 50% of the time for the last 5 minutes. Service may be flapping or down.' `}}
         summary: {{` 'Prometheus Exporter Service Down' `}}
@@ -44,7 +42,6 @@ spec:
       labels:
         service: postgresql
         severity: critical
-        severity_num: 300
       annotations:
         summary: {{` 'postgres_exporter running on {{ $labels.job }} is unable to communicate with the configured database' `}}
         description: {{` 'Prometheus Instance Down' `}}
@@ -56,7 +53,6 @@ spec:
       labels:
         service: postgresql
         severity: critical
-        severity_num: 300
       annotations:
         description: {{` '{{ $labels.job }} has at least one data checksum failure in database {{ $labels.dbname }}. See pg_stat_database system catalog for more information.' `}}
         summary: {{` 'PGSQL Data Checksum failure' `}}
@@ -68,7 +64,6 @@ spec:
       labels:
         service: postgresql
         severity: warning
-        severity_num: 200
       annotations:
         summary: {{` 'Disk predicted to be full in 24 hours' `}}
         description: {{` 'Disk on {{ $labels.pg_cluster }}:{{ $labels.kubernetes_pod_name }} is predicted to fill in 24 hrs based on current usage' `}}
@@ -80,7 +75,6 @@ spec:
       labels:
         service: postgresql
         severity: warning
-        severity_num: 300
       annotations:
         summary: {{` '{{ $labels.pg_cluster }} has had a switchover/failover event. Please check this cluster for more details' `}}
     {{- end }}
@@ -91,7 +85,6 @@ spec:
       labels:
         service: postgresql
         severity: warning
-        severity_num: 200
       annotations:
         description: {{` 'PGSQL Instance {{ $labels.deployment }} over 75% disk usage at mount point "{{ $labels.mount_point }}": {{ $value }}%' `}}
         summary: {{` PGSQL Instance usage warning `}}
@@ -103,7 +96,6 @@ spec:
       labels:
         service: postgresql
         severity: critical
-        severity_num: 300
       annotations:
         description: {{` 'PGSQL Instance {{ $labels.deployment }} over 90% disk usage at mount point "{{ $labels.mount_point }}": {{ $value }}%' `}}
         summary: {{` 'PGSQL Instance size critical' `}}
@@ -115,7 +107,6 @@ spec:
       labels:
         service: postgresql
         severity: warning
-        severity_num: 200
       annotations:
         description: {{` 'PGSQL Instance {{ $labels.job }} has at least one replica lagging over`}} {{ div .Values.postgres.replication.maxReplicationBytesWarn 1048576 }} {{`MB behind.' `}}
         summary: {{` 'PGSQL Instance replica lag warning' `}}
@@ -127,7 +118,6 @@ spec:
       labels:
         service: postgresql
         severity: critical
-        severity_num: 300
       annotations:
         description: {{` 'PGSQL Instance {{ $labels.job }} has at least one replica lagging over`}} {{ div .Values.postgres.replication.maxReplicationBytesCrit 1048576 }} {{`MB behind.' `}}
         summary: {{` 'PGSQL Instance replica lag warning' `}}
@@ -139,7 +129,6 @@ spec:
       labels:
         service: postgresql
         severity: critical
-        severity_num: 300
       annotations:
         description: {{` 'PGSQL Instance {{ $labels.job }} has one or more inactive replication slots' `}}
         summary: {{` 'PGSQL Instance inactive replication slot' `}}
@@ -152,7 +141,6 @@ spec:
       labels:
         service: postgresql
         severity: critical
-        severity_num: 300
       annotations:
         description: {{`  'PGSQL Instance {{ $labels.job }} has a recent failing archive command' `}}
         summary: {{`  'Seconds since the last recorded failure of the archive_command' `}}
@@ -164,7 +152,6 @@ spec:
       labels:
         service: postgresql
         severity: critical
-        severity_num: 300
       annotations:
         description: {{`  'One or more settings in the pg_settings system catalog on system {{ $labels.job }} are in a pending_restart state. Check the system catalog for which settings are pending and review postgresql.conf for changes.' `}}
     {{- end }}
@@ -178,7 +165,6 @@ spec:
       labels:
         service: postgresql
         severity: critical
-        severity_num: 300
       annotations:
         summary: {{` 'Full backup for stanza ({{ $labels.stanza }}) on system {{ $labels.job }} has not completed in the last`}} {{ duration (.Values.postgres.pgBackrest.maxTimeSinceFull | toString) }}{{`.'`}}    {{- end }}
         description: 'There should be a full backup completed not later than the configured max time!'
@@ -189,7 +175,6 @@ spec:
       labels:
         service: postgresql
         severity: critical
-        severity_num: 300
       annotations:
         summary: {{` 'Incremental backup for stanza ({{ $labels.stanza }}) on system {{ $labels.job }} has not completed in the last`}} {{ duration (.Values.postgres.pgBackrest.maxTimeSinceIncr | toString) }}{{`.'`}}
         description: 'There should be a incremental backup completed not later than the configured max time!'
@@ -201,7 +186,6 @@ spec:
       labels:
         service: postgresql
         severity: critical
-        severity_num: 300
       annotations:
         summary: {{` 'Differental backup for stanza ({{ $labels.stanza }}) on system {{ $labels.job }} has not completed in the last`}} {{ duration (.Values.postgres.pgBackrest.maxTimeSinceDiff | toString) }}{{`.'`}}
         description: 'There should be a differential backup completed not later than the configured max time!'

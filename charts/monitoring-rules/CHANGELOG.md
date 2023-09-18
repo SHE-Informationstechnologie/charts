@@ -1,3 +1,7 @@
+# 0.4.1
+## Postgres metrics
+- Removed all severity_num settings
+
 # 0.4.0
 ## Postgres metrics
 - Made all alerts configurable (en-/disable)

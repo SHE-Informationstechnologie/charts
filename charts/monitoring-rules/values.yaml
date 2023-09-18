@@ -3,19 +3,15 @@
 prometheusLabels:
   release: kube-prometheus-stack
 
-# Define which components to monitor
-monitoring:
-  ingress:
-    nginx:      true
-  k8s:
-    apiserver:  true
-    core:       true
-    kubelet:    true
-  node:
-    alert:      true
-    record:     true
-  postgresql:
-    alert:      true
-    bouncer:    true
-    rules:      true
-    backup:     true
+# Postgres exporter specific metrics
+postgres:
+  enabled: true
+
+  pgBackrest:
+    maxTimeSinceFull: 648000
+    maxTimeSinceIncr: 129600
+    maxTimeSinceDiff: 129600
+
+  replication:
+    maxReplicationBytesWarn: 5.24288e+08
+    maxReplicationBytesCrit: 1.048576e+09

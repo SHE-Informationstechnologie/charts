@@ -1,0 +1,167 @@
+{{ if .Values.postgres.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "monitoring-rules.fullname" . }}-crunchy-postgres
+  labels:
+    {{- include "monitoring-rules.labels" . | nindent 4 }}
+    {{ toYaml .Values.prometheusLabels }}
+spec:
+  groups:
+  - name: exporter-rules
+    rules:
+    - alert: PGExporterScrapeError
+      expr: pg_exporter_last_scrape_error > 0
+      for: 60s
+      labels:
+        service: postgresql
+        severity: critical
+        severity_num: 300
+      annotations:
+        summary: {{` 'Postgres Exporter running on {{ $labels.job }} (instance: {{ $labels.instance }}) is encountering scrape errors processing queries. Error count: ( {{ $value }} )' `}}
+        description: {{` "At least one of the query results couldn't be parsed." `}}
+    - alert: ExporterDown
+      expr: avg_over_time(up{job=~".*crunchy-postgres"}[5m]) < 0.5
+      for: 10s
+      labels:
+        service: system
+        severity: critical
+        severity_num: 300
+      annotations:
+        description: {{` 'Metrics exporter service for {{ $labels.job }} running on {{ $labels.instance }} has been down at least 50% of the time for the last 5 minutes. Service may be flapping or down.' `}}
+        summary: {{` 'Prometheus Exporter Service Down' `}}
+
+  - name: postgres-rules
+    rules:
+    - alert: PGIsUp
+      expr: pg_up < 1
+      for: 60s
+      labels:
+        service: postgresql
+        severity: critical
+        severity_num: 300
+      annotations:
+        summary: {{` 'postgres_exporter running on {{ $labels.job }} is unable to communicate with the configured database' `}}
+        description: {{` 'Prometheus Instance Down' `}}
+    - alert: PGDataChecksum
+      expr: ccp_data_checksum_failure > 0
+      for: 60s
+      labels:
+        service: postgresql
+        severity: critical
+        severity_num: 300
+      annotations:
+        description: {{` '{{ $labels.job }} has at least one data checksum failure in database {{ $labels.dbname }}. See pg_stat_database system catalog for more information.' `}}
+        summary: {{` 'PGSQL Data Checksum failure' `}}
+    - alert: DiskFillPredict
+      expr: predict_linear(ccp_nodemx_data_disk_available_bytes{mount_point!~"tmpfs"}[1h], 24 * 3600) < 0 and 100 * ((ccp_nodemx_data_disk_total_bytes - ccp_nodemx_data_disk_available_bytes) / ccp_nodemx_data_disk_total_bytes) > 70
+      for: 5m
+      labels:
+        service: postgresql
+        severity: warning
+        severity_num: 200
+      annotations:
+        summary: {{` 'Disk predicted to be full in 24 hours' `}}
+        description: {{` 'Disk on {{ $labels.pg_cluster }}:{{ $labels.kubernetes_pod_name }} is predicted to fill in 24 hrs based on current usage' `}}
+    - alert: PGClusterRoleChange
+      expr: count by (pg_cluster) (ccp_is_in_recovery_status != ignoring(instance,ip,pod,role) (ccp_is_in_recovery_status offset 5m)) >= 1
+      for: 60s
+      labels:
+        service: postgresql
+        severity: warning
+        severity_num: 300
+      annotations:
+        summary: {{` '{{ $labels.pg_cluster }} has had a switchover/failover event. Please check this cluster for more details' `}}
+    - alert: PGDiskSize
+      expr: 100 * ((ccp_nodemx_data_disk_total_bytes - ccp_nodemx_data_disk_available_bytes) / ccp_nodemx_data_disk_total_bytes) > 75
+      for: 60s
+      labels:
+        service: postgresql
+        severity: warning
+        severity_num: 200
+      annotations:
+        description: {{` 'PGSQL Instance {{ $labels.deployment }} over 75% disk usage at mount point "{{ $labels.mount_point }}": {{ $value }}%' `}}
+        summary: {{` PGSQL Instance usage warning `}}
+    - alert: PGDiskSize
+      expr: 100 * ((ccp_nodemx_data_disk_total_bytes - ccp_nodemx_data_disk_available_bytes) / ccp_nodemx_data_disk_total_bytes) > 90
+      for: 60s
+      labels:
+        service: postgresql
+        severity: critical
+        severity_num: 300
+      annotations:
+        description: {{` 'PGSQL Instance {{ $labels.deployment }} over 90% disk usage at mount point "{{ $labels.mount_point }}": {{ $value }}%' `}}
+        summary: {{` 'PGSQL Instance size critical' `}}
+    - alert: PGReplicationByteLag
+      expr: ccp_replication_lag_size_bytes > {{ required "maxReplicationBytesWarn is required!" .Values.postgres.replication.maxReplicationBytesWarn }}
+      for: 60s
+      labels:
+        service: postgresql
+        severity: warning
+        severity_num: 200
+      annotations:
+        description: {{` 'PGSQL Instance {{ $labels.job }} has at least one replica lagging over`}} {{ div .Values.postgres.replication.maxReplicationBytesWarn 1048576 }} {{`MB behind.' `}}
+        summary: {{` 'PGSQL Instance replica lag warning' `}}
+    - alert: PGReplicationByteLag
+      expr: ccp_replication_lag_size_bytes > {{ required "maxReplicationBytesCrit is required!" .Values.postgres.replication.maxReplicationBytesCrit }}
+      for: 60s
+      labels:
+        service: postgresql
+        severity: critical
+        severity_num: 300
+      annotations:
+        description: {{` 'PGSQL Instance {{ $labels.job }} has at least one replica lagging over`}} {{ div .Values.postgres.replication.maxReplicationBytesCrit 1048576 }} {{`MB behind.' `}}
+        summary: {{` 'PGSQL Instance replica lag warning' `}}
+    - alert: PGReplicationSlotsInactive
+      expr: ccp_replication_slots_active == 0
+      for: 60s
+      labels:
+        service: postgresql
+        severity: critical
+        severity_num: 300
+      annotations:
+        description: {{` 'PGSQL Instance {{ $labels.job }} has one or more inactive replication slots' `}}
+        summary: {{` 'PGSQL Instance inactive replication slot' `}}
+    # ToDo Doesnt make sense to me @hauke
+    - alert: PGArchiveCommandStatus
+      expr: ccp_archive_command_status_seconds_since_last_fail > 300
+      for: 60s
+      labels:
+        service: postgresql
+        severity: critical
+        severity_num: 300
+      annotations:
+        description: {{`  'PGSQL Instance {{ $labels.job }} has a recent failing archive command' `}}
+        summary: {{`  'Seconds since the last recorded failure of the archive_command' `}}
+    - alert: PGSettingsPendingRestart
+      expr: ccp_settings_pending_restart_count > 0
+      for: 60s
+      labels:
+        service: postgresql
+        severity: critical
+        severity_num: 300
+      annotations:
+        description: {{`  'One or more settings in the pg_settings system catalog on system {{ $labels.job }} are in a pending_restart state. Check the system catalog for which settings are pending and review postgresql.conf for changes.' `}}
+  
+  - name: pgbackrest-rules
+    rules:
+    - alert: PGBackRestLastCompletedFull_main
+      expr: ccp_backrest_last_full_backup_time_since_completion_seconds{stanza="db"} > {{ required "maxTimeSinceFull is required!" .Values.postgres.pgBackrest.maxTimeSinceFull }}
+      for: 60s
+      labels:
+        service: postgresql
+        severity: critical
+        severity_num: 300
+      annotations:
+        summary: {{` 'Full backup for stanza [main] on system {{ $labels.job }} has not completed in the last week.' `}}
+    - alert: PGBackRestLastCompletedIncr_main
+      expr: ccp_backrest_last_incr_backup_time_since_completion_seconds{stanza="db"} > {{ required "maxTimeSinceIncr is required!" .Values.postgres.pgBackrest.maxTimeSinceIncr }}
+      for: 60s
+      labels:
+        service: postgresql
+        severity: critical
+        severity_num: 300
+      annotations:
+        summary: {{` 'Incremental backup for stanza [main] on system {{ $labels.job }} has not completed in the last 24 hours.' `}}
+
+{{ end }}

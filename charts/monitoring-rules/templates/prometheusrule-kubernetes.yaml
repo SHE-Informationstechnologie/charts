@@ -17,7 +17,6 @@ spec:
       labels:
         service: kubernetes
         severity: critical
-        severity_num: 300
       annotations:
         summary: {{` 'Master node {{ $labels.node }} is missing!' `}}
         description: {{` 'One of the master nodes {{ $labels.node }} which was present one hour ago went missing!' `}}
@@ -29,7 +28,6 @@ spec:
       labels:
         service: kubernetes
         severity: critical
-        severity_num: 300
       annotations:
         summary: {{` 'Amount of master node {{ $value }} is mismatching!' `}}
         description: {{`'The actual amount of master nodes {{ $value }} is differs to the expected`}} {{ .Values.kubernetes.masterIsMissing.amount }} {{`nodes!'`}}

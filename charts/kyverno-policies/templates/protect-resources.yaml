@@ -1,0 +1,30 @@
+{{ with .Values.policies.protectResourceByLabel }}
+{{ if .enabled }}
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: {{ include "kyverno-policies.fullname" $ }}-protect-resource-by-label
+  namespace: '{{ $.Release.Namespace }}'
+spec:
+  validationFailureAction: {{ .action }}
+  background: false
+  rules:
+  - name: block-deletes-for-protected-resources
+    match:
+      any:
+      - resources:
+          operations:
+            - DELETE
+          kinds:
+            - '*'
+          selector:
+            matchLabels:
+              kubernetes.she.net/protected: 'true'
+    validate:
+      message: |
+        Deleting {{"{{request.oldObject.kind}}/{{request.oldObject.metadata.name}}"}} is prohibited by SHE Policy
+        
+        {{ .message }}
+      deny: {}
+{{ end }}
+{{- end }}

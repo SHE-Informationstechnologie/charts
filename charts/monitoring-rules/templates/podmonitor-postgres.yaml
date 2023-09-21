@@ -1,4 +1,4 @@
-{{ if .Values.postgres.enabled }}
+{{ if and .Values.postgres.enabled .Values.postgres.podMonitor }}
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:

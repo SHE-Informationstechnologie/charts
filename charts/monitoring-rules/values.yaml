@@ -25,6 +25,9 @@ kubernetes:
 postgres:
   enabled: true
 
+  # En-/disable podMonitor which will fetch metrics from postgres pods
+  podMonitor: true
+
   disabledRules: {}
     # pgExporterScrapeError: false
     # exporterDown: false

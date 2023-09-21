@@ -1,6 +1,7 @@
 policies:
   protectResourceByLabel:
     enabled: true
+    action: Enforce
     message: |-
       If you want to delete it anyways make sure to ove the kubernetes.she.net/protected label
 

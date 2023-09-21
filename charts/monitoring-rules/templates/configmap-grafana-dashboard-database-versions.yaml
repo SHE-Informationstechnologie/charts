@@ -1,0 +1,192 @@
+{{- if .Values.postgres.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-database-versions
+  labels:
+    grafana_dashboard: "1"
+data:
+  postgres-database-versions.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": {
+              "type": "grafana",
+              "uid": "-- Grafana --"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 28,
+      "links": [],
+      "liveNow": false,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 23,
+            "x": 0,
+            "y": 0
+          },
+          "id": 2,
+          "options": {
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "9.4.7",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "round((0 * ccp_database_size_bytes{role=\"master\"}) + on (pg_cluster) group_left ccp_postgresql_version_current{role=\"master\"} / 10000)",
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Versions",
+          "transformations": [
+            {
+              "id": "reduce",
+              "options": {
+                "includeTimeField": false,
+                "labelsToFields": true,
+                "mode": "seriesToRows",
+                "reducers": [
+                  "max"
+                ]
+              }
+            },
+            {
+              "id": "labelsToFields",
+              "options": {
+                "keepLabels": [
+                  "cluster",
+                  "dbname",
+                  "kubernetes_namespace"
+                ],
+                "mode": "columns"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Field": true,
+                  "deployment": true,
+                  "instance": true,
+                  "ip": true,
+                  "job": true,
+                  "pg_cluster": true,
+                  "pod": true,
+                  "role": true,
+                  "server": true
+                },
+                "indexByName": {
+                  "Field": 1,
+                  "Max": 12,
+                  "cluster": 2,
+                  "dbname": 3,
+                  "deployment": 4,
+                  "instance": 5,
+                  "ip": 6,
+                  "job": 7,
+                  "kubernetes_namespace": 0,
+                  "pg_cluster": 8,
+                  "pod": 9,
+                  "role": 10,
+                  "server": 11
+                },
+                "renameByName": {
+                  "Max": "Version",
+                  "cluster": "Postgres Cluster",
+                  "dbname": "Database",
+                  "kubernetes_namespace": "Namespace"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "refresh": "",
+      "revision": 1,
+      "schemaVersion": 38,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": []
+      },
+      "time": {
+        "from": "now-5m",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "Postgres Database Versions",
+      "uid": "0_p6B6iSk",
+      "version": 2,
+      "weekStart": ""
+    }
+{{- end }}

@@ -1,3 +1,7 @@
+# 0.0.49
+
+- Fix kyverno chart values (so that they do not get overriden by accident)
+
 # 0.0.48
 
 - Add kyverno-polcies chart in version 0.0.1

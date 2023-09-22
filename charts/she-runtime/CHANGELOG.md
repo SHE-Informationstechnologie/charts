@@ -1,3 +1,7 @@
+# 0.0.48
+
+- Add kyverno-polcies chart in version 0.0.1
+
 # 0.0.47
 
 - Add kyverno to she-runtime

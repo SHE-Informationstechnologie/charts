@@ -213,3 +213,13 @@ kyverno:
       values: 
         admissionController:
           replicas: 3
+
+kyvernoPolicies:
+  enabled: false
+  namespace: kyverno
+  name: kyverno-policies
+  source:
+    repoURL: https://she-informationstechnologie.github.io/charts
+    chart: kyverno-policies
+    targetRevision: 0.0.1
+

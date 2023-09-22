@@ -1,3 +1,7 @@
+# 0.0.50
+
+- update kyverno-polcies chart to 0.0.2
+
 # 0.0.49
 
 - Fix kyverno chart values (so that they do not get overriden by accident)

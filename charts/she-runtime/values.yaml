@@ -221,5 +221,5 @@ kyvernoPolicies:
   source:
     repoURL: https://she-informationstechnologie.github.io/charts
     chart: kyverno-policies
-    targetRevision: 0.0.1
+    targetRevision: 0.0.2
 

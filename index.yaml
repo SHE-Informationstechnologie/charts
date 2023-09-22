@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  kyverno-policies:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2023-09-22T07:54:20.94803356Z"
+    description: A collection of policies for kyverno
+    digest: 532f3a231e328ce7f2e9d246ba2b23552c0e76aeb27f6f03384b424048433a40
+    name: kyverno-policies
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/kyverno-policies-0.0.1/kyverno-policies-0.0.1.tgz
+    version: 0.0.1
   logging:
   - apiVersion: v2
     appVersion: 8.9.1
@@ -614,4 +625,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-runtime-0.0.1/she-runtime-0.0.1.tgz
     version: 0.0.1
-generated: "2023-09-21T22:38:45.428792661Z"
+generated: "2023-09-22T07:54:20.948252901Z"

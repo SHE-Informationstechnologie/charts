@@ -210,9 +210,9 @@ kyverno:
     chart: kyverno
     targetRevision: 3.0.5
     helm:
-      values: 
-        admissionController:
-          replicas: 3
+      parameters:
+        - name: admissionController.replicas
+          value: '3'
 
 kyvernoPolicies:
   enabled: false

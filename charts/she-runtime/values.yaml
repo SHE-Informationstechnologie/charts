@@ -200,3 +200,16 @@ metrics:
           - --kubelet-use-node-status-port
           - --metric-resolution=15s
           - --kubelet-insecure-tls
+
+kyverno:
+  namespace: kyverno
+  name: kyverno
+  enabled: false
+  source:
+    repoURL: https://kyverno.github.io/kyverno
+    chart: kyverno
+    targetRevision: 3.0.5
+    helm:
+      values: 
+        admissionController:
+          replicas: 3

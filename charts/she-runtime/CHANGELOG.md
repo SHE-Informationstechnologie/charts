@@ -1,3 +1,7 @@
+# 0.0.47
+
+- Add kyverno to she-runtime
+
 # 0.0.46
 - Downgraded velero aws plugin to v1.7.1 since v1.8.0 is not released yet
 

@@ -1,3 +1,15 @@
+# 1.2.1
+# Postgres metrics
+# Minor improvements in Grafana dashboard
+
+# 1.2.0
+# Postgres metrics
+- Made the podMonitor en-/disable
+
+# 1.1.0
+# Postgres metrics
+- Added Grafana dashboard for databases and their versions
+
 # 1.0.0
 ## BREAKING CHANGE
 ## Postgres metrics

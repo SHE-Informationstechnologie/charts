@@ -158,6 +158,8 @@ argoApp:
       parameters:
         - name: server.ingress.enabled
           value: 'true'
+        - name: controller.metrics.enabled
+          value: 'true'
 
 velero:
   namespace: velero

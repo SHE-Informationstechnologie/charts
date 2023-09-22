@@ -1,3 +1,7 @@
+# 0.0.51
+
+- enable argocd metrics service
+
 # 0.0.50
 
 - update kyverno-polcies chart to 0.0.2

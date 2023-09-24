@@ -5,6 +5,8 @@ metadata:
   name: grafana-database-versions
   labels:
     grafana_dashboard: "1"
+  annotations:
+    k8s-sidecar-target-directory: "/tmp/dashboards/Postgres"
 data:
   postgres-database-versions.json: |-
     {
@@ -33,10 +35,22 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 28,
       "links": [],
       "liveNow": false,
       "panels": [
+        {
+          "collapsed": false,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
+          "id": 6,
+          "panels": [],
+          "title": "Summary",
+          "type": "row"
+        },
         {
           "datasource": {
             "type": "prometheus",
@@ -45,14 +59,86 @@ data:
           "fieldConfig": {
             "defaults": {
               "color": {
-                "mode": "thresholds"
+                "mode": "palette-classic"
               },
               "custom": {
-                "align": "auto",
-                "cellOptions": {
-                  "type": "auto"
-                },
-                "inspect": false
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "mappings": [],
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 4,
+            "x": 0,
+            "y": 1
+          },
+          "id": 8,
+          "options": {
+            "displayLabels": [],
+            "legend": {
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "values": [
+                "value"
+              ]
+            },
+            "pieType": "donut",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "count_values(\"version\", ccp_postgresql_version_current{role=\"master\"})",
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Versions Share",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "^([1-9]+)0+([0-9]{1,2})$",
+                "renamePattern": "Version: $1.$2"
+              }
+            }
+          ],
+          "transparent": true,
+          "type": "piechart"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
               },
               "mappings": [],
               "thresholds": {
@@ -72,22 +158,25 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 30,
-            "w": 24,
-            "x": 0,
-            "y": 0
+            "h": 2,
+            "w": 2,
+            "x": 4,
+            "y": 1
           },
-          "id": 2,
+          "id": 10,
           "options": {
-            "footer": {
-              "countRows": false,
-              "fields": "",
-              "reducer": [
-                "sum"
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
               ],
-              "show": false
+              "fields": "/^registry\\.developers\\.crunchydata\\.com/crunchydata/postgres\\-operator$/",
+              "values": false
             },
-            "showHeader": true
+            "textMode": "value"
           },
           "pluginVersion": "9.4.7",
           "targets": [
@@ -98,42 +187,160 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "round((0 * ccp_database_size_bytes{role=\"master\"}) + on (pg_cluster) group_left ccp_postgresql_version_current{role=\"master\"} / 10000)",
+              "expr": "kube_pod_container_info{image=~\"^.*postgres-operator:.*$\"}",
+              "format": "time_series",
               "instant": true,
               "legendFormat": "__auto",
               "range": false,
               "refId": "A"
             }
           ],
-          "title": "Versions",
+          "title": "Operator Version",
           "transformations": [
-            {
-              "id": "reduce",
-              "options": {
-                "includeTimeField": false,
-                "labelsToFields": true,
-                "mode": "seriesToRows",
-                "reducers": [
-                  "max"
-                ]
-              }
-            },
             {
               "id": "labelsToFields",
               "options": {
                 "keepLabels": [
-                  "cluster",
-                  "dbname",
-                  "kubernetes_namespace"
+                  "image"
                 ],
-                "mode": "columns"
+                "valueLabel": "__name__"
               }
             },
+            {
+              "id": "extractFields",
+              "options": {
+                "format": "kvp",
+                "keepTime": false,
+                "replace": false,
+                "source": "image"
+              }
+            }
+          ],
+          "type": "stat"
+        },
+        {
+          "collapsed": false,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 9
+          },
+          "id": 16,
+          "panels": [],
+          "title": "Database Versions",
+          "type": "row"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "fixed"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "color-text"
+                },
+                "inspect": true
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "pattern": "^([1-3]+)0+([1-9]+).*$",
+                    "result": {
+                      "color": "orange",
+                      "index": 0,
+                      "text": "$1.$2"
+                    }
+                  },
+                  "type": "regex"
+                },
+                {
+                  "options": {
+                    "pattern": "^([1-4]+)0+([1-9]+).*$",
+                    "result": {
+                      "color": "yellow",
+                      "index": 1,
+                      "text": "$1.$2"
+                    }
+                  },
+                  "type": "regex"
+                },
+                {
+                  "options": {
+                    "pattern": "^([1-5]+)0+([1-9]+).*$",
+                    "result": {
+                      "color": "green",
+                      "index": 2,
+                      "text": "$1.$2"
+                    }
+                  },
+                  "type": "regex"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "dark-red",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 21,
+            "w": 24,
+            "x": 0,
+            "y": 10
+          },
+          "id": 13,
+          "maxPerRow": 12,
+          "options": {
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "frameIndex": 0,
+            "showHeader": true
+          },
+          "pluginVersion": "9.4.7",
+          "repeat": "versions2",
+          "repeatDirection": "h",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "((0 * ccp_database_size_bytes{role=\"master\"}) + on (pg_cluster) group_left ccp_postgresql_version_current{role=\"master\"}) == $versions2",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Versions ($versions2)",
+          "transformations": [
             {
               "id": "organize",
               "options": {
                 "excludeByName": {
-                  "Field": true,
+                  "Time": true,
                   "deployment": true,
                   "instance": true,
                   "ip": true,
@@ -144,8 +351,8 @@ data:
                   "server": true
                 },
                 "indexByName": {
-                  "Field": 1,
-                  "Max": 12,
+                  "Time": 1,
+                  "Value": 12,
                   "cluster": 2,
                   "dbname": 3,
                   "deployment": 4,
@@ -159,11 +366,23 @@ data:
                   "server": 11
                 },
                 "renameByName": {
-                  "Max": "Version",
+                  "Value": "Version",
                   "cluster": "Postgres Cluster",
-                  "dbname": "Database",
-                  "kubernetes_namespace": "Namespace"
+                  "dbname": "Postgres Database",
+                  "kubernetes_namespace": "Kubernetes Namespace"
                 }
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "string",
+                    "targetField": "Version"
+                  }
+                ],
+                "fields": {}
               }
             }
           ],
@@ -176,7 +395,191 @@ data:
       "style": "dark",
       "tags": [],
       "templating": {
-        "list": []
+        "list": [
+          {
+            "current": {
+              "selected": true,
+              "text": "ccp_postgresql_version_current{cluster=\"cdp-stage-demo-01\",deployment=\"cdp-stage-demo-01-cdp-stage-demo-01-h9sz\",instance=\"10.100.142.135:9187\",ip=\"10.100.142.135\",job=\"crunchy-postgres-exporter\",kubernetes_namespace=\"she-vendor\",pg_cluster=\"she-vendor:cdp-stage-demo-01\",pod=\"cdp-stage-demo-01-cdp-stage-demo-01-h9sz-0\",role=\"master\",server=\"localhost:5432\"}",
+              "value": "ccp_postgresql_version_current{cluster=\"cdp-stage-demo-01\",deployment=\"cdp-stage-demo-01-cdp-stage-demo-01-h9sz\",instance=\"10.100.142.135:9187\",ip=\"10.100.142.135\",job=\"crunchy-postgres-exporter\",kubernetes_namespace=\"she-vendor\",pg_cluster=\"she-vendor:cdp-stage-demo-01\",pod=\"cdp-stage-demo-01-cdp-stage-demo-01-h9sz-0\",role=\"master\",server=\"localhost:5432\"}"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "definition": "count_values(\"version\", ccp_postgresql_version_current{role=\"master\"})",
+            "hide": 2,
+            "includeAll": false,
+            "multi": false,
+            "name": "versions",
+            "options": [],
+            "query": {
+              "query": "count_values(\"version\", ccp_postgresql_version_current{role=\"master\"})",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "5",
+              "value": "5"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "definition": "label_values(kube_pod_container_info{image=~\"^.*postgres-operator:.*$\"}, image)",
+            "hide": 2,
+            "includeAll": false,
+            "multi": false,
+            "name": "pgo_version_major",
+            "options": [],
+            "query": {
+              "query": "label_values(kube_pod_container_info{image=~\"^.*postgres-operator:.*$\"}, image)",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 1,
+            "regex": "^.*(?<major>[0-9]+)\\.[0-9]+\\.[0-9]+-[0-9]+$",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "3",
+              "value": "3"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "definition": "label_values(kube_pod_container_info{image=~\"^.*postgres-operator:.*$\"}, image)",
+            "hide": 2,
+            "includeAll": false,
+            "multi": false,
+            "name": "pgo_version_minor",
+            "options": [],
+            "query": {
+              "query": "label_values(kube_pod_container_info{image=~\"^.*postgres-operator:.*$\"}, image)",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 1,
+            "regex": "^.*[0-9]+\\.(?<minor>[0-9]+)\\.[0-9]+-[0-9]+$",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "1",
+              "value": "1"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "definition": "label_values(kube_pod_container_info{image=~\"^.*postgres-operator:.*$\"}, image)",
+            "hide": 2,
+            "includeAll": false,
+            "multi": false,
+            "name": "pgo_version_patch",
+            "options": [],
+            "query": {
+              "query": "label_values(kube_pod_container_info{image=~\"^.*postgres-operator:.*$\"}, image)",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 1,
+            "regex": "^.*[0-9]+\\.[0-9]+\\.(?<patch>[0-9]+)-[0-9]+$",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "0",
+              "value": "0"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "definition": "label_values(kube_pod_container_info{image=~\"^.*postgres-operator:.*$\"}, image)",
+            "hide": 2,
+            "includeAll": false,
+            "multi": false,
+            "name": "pgo_version_build",
+            "options": [],
+            "query": {
+              "query": "label_values(kube_pod_container_info{image=~\"^.*postgres-operator:.*$\"}, image)",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 1,
+            "regex": "^.*[0-9]+\\.[0-9]+\\.[0-9]+-(?<build>[0-9]+)$",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "5.3.1-0",
+              "value": "5.3.1-0"
+            },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "definition": "label_values(kube_pod_container_info{image=~\"^.*postgres-operator:.*$\"}, image)",
+            "hide": 2,
+            "includeAll": false,
+            "multi": false,
+            "name": "pgo_version",
+            "options": [],
+            "query": {
+              "query": "label_values(kube_pod_container_info{image=~\"^.*postgres-operator:.*$\"}, image)",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 1,
+            "regex": "^.*(?<version>[0-9]+\\.[0-9]+\\.[0-9]+\\-[0-9]+)$",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "140007",
+              "value": "140007"
+            },
+            "hide": 0,
+            "includeAll": false,
+            "multi": true,
+            "name": "versions2",
+            "options": [
+              {
+                "selected": true,
+                "text": "140007",
+                "value": "140007"
+              },
+              {
+                "selected": false,
+                "text": "150002",
+                "value": "150002"
+              }
+            ],
+            "query": "140007, 150002",
+            "queryValue": "",
+            "skipUrlSync": false,
+            "type": "custom"
+          }
+        ]
       },
       "time": {
         "from": "now-5m",
@@ -184,9 +587,9 @@ data:
       },
       "timepicker": {},
       "timezone": "",
-      "title": "Postgres Database Versions",
+      "title": "Database Versions",
       "uid": "0_p6B6iSk",
-      "version": 2,
+      "version": 3,
       "weekStart": ""
     }
 {{- end }}

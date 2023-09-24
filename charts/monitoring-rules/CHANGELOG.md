@@ -1,6 +1,10 @@
+# 1.3.0
+# Postgres metrics
+- Improved postgres database version dashboard
+
 # 1.2.1
 # Postgres metrics
-# Minor improvements in Grafana dashboard
+- Minor improvements in Grafana dashboard
 
 # 1.2.0
 # Postgres metrics

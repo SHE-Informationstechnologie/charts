@@ -64,6 +64,16 @@ entries:
     version: 0.1.0
   monitoring-rules:
   - apiVersion: v2
+    appVersion: 2.0.1
+    created: "2023-09-28T21:41:30.382102063Z"
+    description: A Helm chart for Kubernetes
+    digest: f56a80bcfc430d95b3e5557debcc5bbf87b832414657b4fde12f57da010d0b8f
+    name: monitoring-rules
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/monitoring-rules-2.0.1/monitoring-rules-2.0.1.tgz
+    version: 2.0.1
+  - apiVersion: v2
     appVersion: 2.0.0
     created: "2023-09-28T21:33:26.936429769Z"
     description: A Helm chart for Kubernetes
@@ -735,4 +745,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-runtime-0.0.1/she-runtime-0.0.1.tgz
     version: 0.0.1
-generated: "2023-09-28T21:33:26.936704075Z"
+generated: "2023-09-28T21:41:30.382302665Z"

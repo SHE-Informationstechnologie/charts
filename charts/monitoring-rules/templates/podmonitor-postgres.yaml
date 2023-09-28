@@ -10,30 +10,30 @@ spec:
   podMetricsEndpoints:
   - port: exporter
     relabelings:
-    - sourceLabels: 
+    - sourceLabels:
       - __meta_kubernetes_namespace
       action: replace
       targetLabel: kubernetes_namespace
-    - sourceLabels: 
+    - sourceLabels:
       - __meta_kubernetes_pod_name
       targetLabel: pod
-    - sourceLabels: 
+    - sourceLabels:
       - __meta_kubernetes_pod_label_postgres_operator_crunchydata_com_cluster
       - __meta_kubernetes_pod_label_pg_cluster
       targetLabel: cluster
       separator: ""
       replacement: '$1'
-    - sourceLabels: 
+    - sourceLabels:
       - __meta_kubernetes_namespace
       - cluster
       targetLabel: pg_cluster
       separator: ":"
       replacement: '$1$2'
-    - sourceLabels: 
+    - sourceLabels:
       - __meta_kubernetes_pod_ip
       targetLabel: ip
       replacement: '$1'
-    - sourceLabels: 
+    - sourceLabels:
       - __meta_kubernetes_pod_label_postgres_operator_crunchydata_com_instance
       - __meta_kubernetes_pod_label_deployment_name
       targetLabel: deployment

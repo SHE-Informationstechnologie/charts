@@ -1,12 +1,16 @@
+# 2.0.2
+# Postgres metrics
+- Removed special characters in podmonitor which prevent argocd to accept synced status
+
 # 2.0.1
-# MinIO
+# MinIO metrics
 - Added more documentation to MinIO settings
 
 # 2.0.0
 # General
 - Application metrics like postgres and minio are new by default disabled
 
-# MinIO
+# MinIO metrics
 - Added serviceMonitor and rules
 
 # 1.3.0

@@ -236,6 +236,13 @@ spec:
               matchLabels:
                 kubernetes.she.net/prometheus-instance: default
             {{- end }} 
+            ruleSelector:
+            {{- if .prometheus.ruleSelectors }}
+              {{- toYaml .prometheus.ruleSelectors | nindent 14 }}
+            {- else }}
+              matchLabels:
+                kubernetes.she.net/prometheus-instance: default
+            {{- end }} 
             {{- if .prometheus.additionalAlertManagerConfigs }}
             additionalAlertManagerConfigs:
               {{- toYaml .prometheus.additionalAlertManagerConfigs | nindent 14 }}

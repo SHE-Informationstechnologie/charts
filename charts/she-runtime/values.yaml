@@ -109,6 +109,9 @@ prometheusOperator:
 #    podMonitorSelectors:
 #      matchLabels:
 #        kubernetes.she.net/prometheus-instance: default
+#    ruleSelectors:
+#      matchLabels:
+#        kubernetes.she.net/prometheus-instance: default
     ingress: {}
     # ingress:
       # enabled: true

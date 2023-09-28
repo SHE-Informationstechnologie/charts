@@ -99,6 +99,8 @@ prometheusOperator:
     #   defaultMode: 0440
   prometheus:
     enabled: true
+    commonLabels: {}
+#      labelKey: labelValue
     crunchyPostgresExporter:
       enabled: true
 #    serviceMonitorSelectors:

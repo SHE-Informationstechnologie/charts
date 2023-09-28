@@ -1,0 +1,31 @@
+{{ if and .Values.minio.enabled .Values.minio.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "monitoring-rules.fullname" . }}-minio
+  labels:
+    {{- include "monitoring-rules.labels" . | nindent 4 }}
+    {{ toYaml .Values.prometheusLabels }}
+spec:
+  endpoints:
+  - port: https-minio
+    scheme: https
+    path: /minio/v2/metrics/cluster
+    interval: 30s
+    {{- with .Values.minio.serviceMonitor.tlsConfig }}
+    tlsConfig:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+    {{- with .Values.minio.serviceMonitor.bearerTokenSecret }}
+    bearerTokenSecret:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
+  {{- with .Values.minio.serviceMonitor.namespaceSelector }}
+  namespaceSelector:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.minio.serviceMonitor.selector }}
+  selector:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{ end }}

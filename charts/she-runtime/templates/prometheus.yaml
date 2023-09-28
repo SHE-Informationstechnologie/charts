@@ -13,6 +13,8 @@ spec:
     chart: {{ .source.chart }}
     helm:
       values: |
+        commonLabels:
+          {{- dict "kubernetes.she.net/prometheus-instance" "default" | merge (.commonLabels | default dict) | toYaml | nindent 10 }} 
         {{- with .coreDns }}
         coreDns:
           {{- toYaml . | nindent 10 }}

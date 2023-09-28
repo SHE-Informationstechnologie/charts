@@ -1,3 +1,6 @@
+# 0.0.52
+- enable sealed secrets skipRecreate by default
+
 # 0.0.51
 
 - enable argocd metrics service

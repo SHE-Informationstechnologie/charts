@@ -1,3 +1,7 @@
+# 2.0.1
+# MinIO
+- Added more documentation to MinIO settings
+
 # 2.0.0
 # General
 - Application metrics like postgres and minio are new by default disabled

@@ -61,10 +61,20 @@ minio:
   # Service monitor settings
   serviceMonitor:
     enabled: true
+
+    # Configure the tls management of each endpoint
+    # like disabling the verification of server certificates
+    # or setting a custom CA certificate
     tlsConfig:
       insecureSkipVerify: true
+
+    # Tell prometheus which namespace will be observed by this
+    # servicemonitor
     namespaceSelector:
       any: true
+
+    # Add criteria that service monitor uses to select
+    # the services to monitor
     selector:
       matchLabels:
         v1.min.io/tenant: pgbackrest

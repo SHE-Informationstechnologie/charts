@@ -23,7 +23,7 @@ kubernetes:
 
 # Postgres exporter specific metrics
 postgres:
-  enabled: true
+  enabled: false
 
   # En-/disable podMonitor which will fetch metrics from postgres pods
   podMonitor: true
@@ -53,3 +53,23 @@ postgres:
   replication:
     maxReplicationBytesWarn: 5.24288e+08
     maxReplicationBytesCrit: 1.048576e+09
+
+# MinIO embedded exporter metrics
+minio:
+  enabled: false
+
+  # Service monitor settings
+  serviceMonitor:
+    enabled: true
+    tlsConfig:
+      insecureSkipVerify: true
+    namespaceSelector:
+      any: true
+    selector:
+      matchLabels:
+        v1.min.io/tenant: pgbackrest
+
+  disabledRules: {}
+    # clusterDiskOffline: false
+    # nodeDiskOffline: false
+    # diskSpaceUsage: false

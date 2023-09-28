@@ -1,3 +1,10 @@
+# 2.0.0
+# General
+- Application metrics like postgres and minio are new by default disabled
+
+# MinIO
+- Added serviceMonitor and rules
+
 # 1.3.0
 # Postgres metrics
 - Improved postgres database version dashboard

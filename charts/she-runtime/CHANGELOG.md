@@ -1,3 +1,8 @@
+# 0.0.53
+
+- nstead of detecting ServiceMonitors, PodMonitors and PrometheusRules by the release label
+  we use the kubernetes.she.net/prometheus-instance label now
+
 # 0.0.52
 - enable sealed secrets skipRecreate by default
 

@@ -13,6 +13,8 @@ spec:
     chart: {{ .source.chart }}
     helm:
       values: |
+        commonLabels:
+          {{- dict "kubernetes.she.net/prometheus-instance" "default" | merge .commonLabels | toYaml | nindent 10 }} 
         {{- with .coreDns }}
         coreDns:
           {{- toYaml . | nindent 10 }}
@@ -220,10 +222,27 @@ spec:
                     target_label: schemaname
                     replacement: '$1'
               {{- end }}
-            {{- if .prometheus.serviceMonitorSelectors }}
             serviceMonitorSelector:
+            {{- if .prometheus.serviceMonitorSelectors }}
               {{- toYaml .prometheus.serviceMonitorSelectors | nindent 14 }}
-            {{- end }}              
+            {- else }}
+              matchLabels:
+                kubernetes.she.net/prometheus-instance: default
+            {{- end }} 
+            podMonitorSelector:
+            {{- if .prometheus.podMonitorSelectors }}
+              {{- toYaml .prometheus.podMonitorSelectors | nindent 14 }}
+            {- else }}
+              matchLabels:
+                kubernetes.she.net/prometheus-instance: default
+            {{- end }} 
+            ruleSelector:
+            {{- if .prometheus.ruleSelectors }}
+              {{- toYaml .prometheus.ruleSelectors | nindent 14 }}
+            {- else }}
+              matchLabels:
+                kubernetes.she.net/prometheus-instance: default
+            {{- end }} 
             {{- if .prometheus.additionalAlertManagerConfigs }}
             additionalAlertManagerConfigs:
               {{- toYaml .prometheus.additionalAlertManagerConfigs | nindent 14 }}

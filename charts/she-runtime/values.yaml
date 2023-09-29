@@ -99,11 +99,19 @@ prometheusOperator:
     #   defaultMode: 0440
   prometheus:
     enabled: true
+    commonLabels: {}
+#      labelKey: labelValue
     crunchyPostgresExporter:
       enabled: true
 #    serviceMonitorSelectors:
 #      matchLabels:
-#        prometheus: she
+#        kubernetes.she.net/prometheus-instance: default
+#    podMonitorSelectors:
+#      matchLabels:
+#        kubernetes.she.net/prometheus-instance: default
+#    ruleSelectors:
+#      matchLabels:
+#        kubernetes.she.net/prometheus-instance: default
     ingress: {}
     # ingress:
       # enabled: true

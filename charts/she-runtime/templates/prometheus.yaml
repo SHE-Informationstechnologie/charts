@@ -14,7 +14,7 @@ spec:
     helm:
       values: |
         commonLabels:
-          {{- dict "kubernetes.she.net/prometheus-instance" "default" | merge .commonLabels | toYaml | nindent 10 }} 
+          {{- dict "kubernetes.she.net/prometheus-instance" "default" | merge .commonLabels | toYaml | nindent 10 }}
         {{- with .coreDns }}
         coreDns:
           {{- toYaml . | nindent 10 }}
@@ -228,25 +228,25 @@ spec:
             {- else }}
               matchLabels:
                 kubernetes.she.net/prometheus-instance: default
-            {{- end }} 
+            {{- end }}
             podMonitorSelector:
             {{- if .prometheus.podMonitorSelectors }}
               {{- toYaml .prometheus.podMonitorSelectors | nindent 14 }}
             {- else }}
               matchLabels:
                 kubernetes.she.net/prometheus-instance: default
-            {{- end }} 
+            {{- end }}
             ruleSelector:
             {{- if .prometheus.ruleSelectors }}
               {{- toYaml .prometheus.ruleSelectors | nindent 14 }}
             {- else }}
               matchLabels:
                 kubernetes.she.net/prometheus-instance: default
-            {{- end }} 
+            {{- end }}
             {{- if .prometheus.additionalAlertManagerConfigs }}
             additionalAlertManagerConfigs:
               {{- toYaml .prometheus.additionalAlertManagerConfigs | nindent 14 }}
-            {{- end }}              
+            {{- end }}
           {{- if .prometheus.ingress.enabled | default .ingress.enabled }}
           ingress:
             ingressClassName: {{ .prometheus.ingress.className }}

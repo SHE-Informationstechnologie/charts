@@ -50,6 +50,8 @@ prometheusOperator:
   namespace: monitoring
   name: prom-operator
   enabled: true
+  commonLabels: {}
+#    labelKey: labelValue
   ingress:
     enabled: true
     baseUrl: my.domain
@@ -99,8 +101,6 @@ prometheusOperator:
     #   defaultMode: 0440
   prometheus:
     enabled: true
-    commonLabels: {}
-#      labelKey: labelValue
     crunchyPostgresExporter:
       enabled: true
 #    serviceMonitorSelectors:

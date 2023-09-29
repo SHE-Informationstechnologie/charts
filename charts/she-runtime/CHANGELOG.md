@@ -1,3 +1,7 @@
+# 0.0.54
+
+- fix prometheus templating commonLabels error
+
 # 0.0.53
 
 - nstead of detecting ServiceMonitors, PodMonitors and PrometheusRules by the release label

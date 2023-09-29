@@ -225,21 +225,21 @@ spec:
             serviceMonitorSelector:
             {{- if .prometheus.serviceMonitorSelectors }}
               {{- toYaml .prometheus.serviceMonitorSelectors | nindent 14 }}
-            {- else }}
+            {{- else }}
               matchLabels:
                 kubernetes.she.net/prometheus-instance: default
             {{- end }}
             podMonitorSelector:
             {{- if .prometheus.podMonitorSelectors }}
               {{- toYaml .prometheus.podMonitorSelectors | nindent 14 }}
-            {- else }}
+            {{- else }}
               matchLabels:
                 kubernetes.she.net/prometheus-instance: default
             {{- end }}
             ruleSelector:
             {{- if .prometheus.ruleSelectors }}
               {{- toYaml .prometheus.ruleSelectors | nindent 14 }}
-            {- else }}
+            {{- else }}
               matchLabels:
                 kubernetes.she.net/prometheus-instance: default
             {{- end }}

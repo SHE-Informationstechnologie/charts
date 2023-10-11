@@ -50,6 +50,7 @@ prometheusOperator:
   namespace: monitoring
   name: prom-operator
   enabled: true
+  global: {}
   commonLabels: {}
 #    labelKey: labelValue
   ingress:

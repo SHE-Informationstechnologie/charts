@@ -1,3 +1,7 @@
+# 0.0.58
+# PrometheusOperator
+- made global section configurable
+
 # 0.0.57
 
 - fix: add vuln-id metrics and disable ignore unfixed

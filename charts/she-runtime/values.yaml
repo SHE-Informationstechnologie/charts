@@ -252,4 +252,6 @@ trivy-operator:
           labels:
             kubernetes.she.net/prometheus-instance: default
         trivy:
-          ignoreUnfixed: true
+          ignoreUnfixed: false
+        operator:
+          metricsVulnIdEnabled: true

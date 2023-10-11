@@ -1,3 +1,7 @@
+# 0.0.55
+
+- feature: add trivy operator
+
 # 0.0.54
 
 - fix prometheus templating commonLabels error

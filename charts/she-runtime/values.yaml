@@ -64,15 +64,15 @@ prometheusOperator:
   alertmanager:
     alertmanagerSpec:
       storage: {}
+      ## Secrets is a list of Secrets in the same namespace as the Alertmanager object, which shall be mounted into the
+      ## Alertmanager Pods. The Secrets are mounted into /etc/alertmanager/secrets/.
+      secrets: []
     enabled: true
     ingress: {}
     ## Alertmanager configuration directives  
     ## ref: https://prometheus.io/docs/alerting/configuration/#configuration-file  
     ##      https://prometheus.io/webtools/alerting/routing-tree-editor/
     config: {}
-    ## Secrets is a list of Secrets in the same namespace as the Alertmanager object, which shall be mounted into the
-    ## Alertmanager Pods. The Secrets are mounted into /etc/alertmanager/secrets/.
-    secrets: []
     storage: {}
     # ingress:
       # enabled: true

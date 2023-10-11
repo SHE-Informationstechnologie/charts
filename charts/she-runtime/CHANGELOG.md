@@ -1,3 +1,8 @@
+# 0.0.62
+# PrometheusOperator
+### BREAKING CHANGES ####
+- Simplified alertmanagerSpec settings. You need to move "alertmanager.secrets" now to "alertmanager.alertmanagerSpec.secrets"!
+
 # 0.0.61
 # PrometheusOperator
 - Minor fix in nodeExporter

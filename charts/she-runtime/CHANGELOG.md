@@ -1,3 +1,7 @@
+# 0.0.61
+# PrometheusOperator
+- Minor fix in nodeExporter
+
 # 0.0.60
 # PrometheusOperator
 - Made kubeStateMetrics and prometheusOperator (sub-component) configurable 

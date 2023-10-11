@@ -53,7 +53,7 @@ spec:
         {{- end }}
         {{- with .prometheusNodeExporter }}
         prometheus-node-exporter:
-          hostNetwork: {{ .hostNetwork }}
+          {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- if .alertmanager.enabled }}
         alertmanager:

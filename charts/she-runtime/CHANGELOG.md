@@ -1,3 +1,7 @@
+# 0.0.57
+
+- fix: add vuln-id metrics and disable ignore unfixed
+
 # 0.0.56
 
 - fix: fix servicemonitor label for trivy operator

@@ -57,6 +57,8 @@ prometheusOperator:
     enabled: true
     baseUrl: my.domain
     # annotations: {}
+  kubeStateMetrics: {}
+  prometheusOperator: {}
   prometheusNodeExporter:
     hostNetwork: true
   alertmanager:

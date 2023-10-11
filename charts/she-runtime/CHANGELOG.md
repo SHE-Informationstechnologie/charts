@@ -1,3 +1,7 @@
+# 0.0.60
+# PrometheusOperator
+- Made kubeStateMetrics and prometheusOperator (sub-component) configurable 
+
 # 0.0.59
 - removed merge marker
 

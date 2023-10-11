@@ -19,6 +19,10 @@ spec:
         global:
           {{- toYaml . | nindent 10 }}
         {{- end }}
+        {{- with .kubeStateMetrics }}
+        kube-state-metrics:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         {{- with .coreDns }}
         coreDns:
           {{- toYaml . | nindent 10 }}
@@ -159,6 +163,10 @@ spec:
         {{- if .defaultRules }}
         defaultRules:
           {{- toYaml .defaultRules | nindent 12 }}
+        {{- end }}
+        {{- with .prometheusOperator }}
+        prometheusOperator:
+          {{- toYaml . | nindent 10 }}
         {{- end }}
         prometheus:
           prometheusSpec:

@@ -237,3 +237,19 @@ kyvernoPolicies:
     chart: kyverno-policies
     targetRevision: 0.0.2
 
+trivy-operator:
+  enabled: false
+  namespace: trivy-operator
+  name: trivy-operator
+  source:
+    repoURL: https://aquasecurity.github.io/helm-charts/
+    chart: trivy-operator
+    targetRevision: 0.18.1
+    helm:
+      values: |
+        serviceMonitor:
+          enabled: true
+          labels:
+            prometheusOperator.prometheus.serviceMonitorSelectors.matchLabels.kubernetes.she.net/prometheus-instance: default
+        trivy:
+          ignoreUnfixed: true

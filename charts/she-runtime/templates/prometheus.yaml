@@ -13,15 +13,12 @@ spec:
     chart: {{ .source.chart }}
     helm:
       values: |
-<<<<<<< Updated upstream
         commonLabels:
           {{- dict "kubernetes.she.net/prometheus-instance" "default" | merge .commonLabels | toYaml | nindent 10 }}
-=======
         {{- with .global }}
         global:
           {{- toYaml . | nindent 10 }}
         {{- end }}
->>>>>>> Stashed changes
         {{- with .coreDns }}
         coreDns:
           {{- toYaml . | nindent 10 }}

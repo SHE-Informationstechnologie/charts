@@ -250,6 +250,6 @@ trivy-operator:
         serviceMonitor:
           enabled: true
           labels:
-            prometheusOperator.prometheus.serviceMonitorSelectors.matchLabels.kubernetes.she.net/prometheus-instance: default
+            kubernetes.she.net/prometheus-instance: default
         trivy:
           ignoreUnfixed: true

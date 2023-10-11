@@ -1,3 +1,7 @@
+# 0.0.56
+
+- fix: fix servicemonitor label for trivy operator
+
 # 0.0.55
 
 - feature: add trivy operator

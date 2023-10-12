@@ -1,3 +1,7 @@
+# 0.0.64
+# TrivyOperator
+- Fixed Grafana Dashboard
+
 # 0.0.63
 # TrivyOperator
 - Added Grafana Dashboard

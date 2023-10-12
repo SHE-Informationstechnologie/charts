@@ -1,3 +1,7 @@
+# 0.0.63
+# TrivyOperator
+- Added Grafana Dashboard
+
 # 0.0.62
 # PrometheusOperator
 ### BREAKING CHANGES ####

@@ -240,7 +240,7 @@ kyvernoPolicies:
     chart: kyverno-policies
     targetRevision: 0.0.2
 
-trivy-operator:
+trivyOperator:
   enabled: false
   namespace: trivy-operator
   name: trivy-operator

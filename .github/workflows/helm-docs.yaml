@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        chart: [she-runtime, kyverno, logging, monitoring-rules, s3-monitoring, she-runtime]
+        chart: [she-runtime, kyverno-policies, logging, monitoring-rules, s3-monitoring, she-runtime]
 
     steps:
       - name: Checkout

@@ -1,3 +1,7 @@
+# 0.0.65
+# PrometheusOperator fix that node labels are scraped again
+- add `kubernetes.she.net/prometheus-instance` labels to node-exporter ServiceMonitor
+
 # 0.0.64
 # TrivyOperator
 - Fixed Grafana Dashboard

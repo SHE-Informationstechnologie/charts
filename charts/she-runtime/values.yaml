@@ -61,6 +61,10 @@ prometheusOperator:
   prometheusOperator: {}
   prometheusNodeExporter:
     hostNetwork: true
+    prometheus:
+      monitor:
+        additonalLabels:
+          kubernetes.she.net/prometheus-instance: default
   alertmanager:
     alertmanagerSpec:
       storage: {}

@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 0.0.54](https://img.shields.io/badge/Version-0.0.54-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.54](https://img.shields.io/badge/AppVersion-0.0.54-informational?style=flat-square)
+![Version: 0.0.65](https://img.shields.io/badge/Version-0.0.65-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.65](https://img.shields.io/badge/AppVersion-0.0.65-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -75,18 +75,20 @@ SHE default K8s cluster toolset
 | postgresOperator.source.path | string | `"kustomize/install"` |  |
 | postgresOperator.source.repoURL | string | `"https://github.com/SHE-Informationstechnologie/postgres-operator-examples.git"` |  |
 | postgresOperator.source.targetRevision | string | `"v5.3.1-she-3"` |  |
+| prometheusOperator.alertmanager.alertmanagerSpec.secrets | list | `[]` |  |
 | prometheusOperator.alertmanager.alertmanagerSpec.storage | object | `{}` |  |
 | prometheusOperator.alertmanager.config | object | `{}` |  |
 | prometheusOperator.alertmanager.enabled | bool | `true` |  |
 | prometheusOperator.alertmanager.ingress | object | `{}` |  |
-| prometheusOperator.alertmanager.secrets | list | `[]` |  |
 | prometheusOperator.alertmanager.storage | object | `{}` |  |
 | prometheusOperator.commonLabels | object | `{}` |  |
 | prometheusOperator.enabled | bool | `true` |  |
+| prometheusOperator.global | object | `{}` |  |
 | prometheusOperator.grafana.enabled | bool | `true` |  |
 | prometheusOperator.grafana.ingress | object | `{}` |  |
 | prometheusOperator.ingress.baseUrl | string | `"my.domain"` |  |
 | prometheusOperator.ingress.enabled | bool | `true` |  |
+| prometheusOperator.kubeStateMetrics | object | `{}` |  |
 | prometheusOperator.name | string | `"prom-operator"` |  |
 | prometheusOperator.namespace | string | `"monitoring"` |  |
 | prometheusOperator.prometheus.crunchyPostgresExporter.enabled | bool | `true` |  |
@@ -94,6 +96,8 @@ SHE default K8s cluster toolset
 | prometheusOperator.prometheus.ingress | object | `{}` |  |
 | prometheusOperator.prometheus.prometheusSpec.storageSpec | object | `{}` |  |
 | prometheusOperator.prometheusNodeExporter.hostNetwork | bool | `true` |  |
+| prometheusOperator.prometheusNodeExporter.prometheus.monitor.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
+| prometheusOperator.prometheusOperator | object | `{}` |  |
 | prometheusOperator.source.chart | string | `"kube-prometheus-stack"` |  |
 | prometheusOperator.source.helm.values | string | `""` |  |
 | prometheusOperator.source.repoURL | string | `"https://prometheus-community.github.io/helm-charts"` |  |
@@ -114,6 +118,13 @@ SHE default K8s cluster toolset
 | sealedSecrets.source.helm.parameters[0].value | string | `"true"` |  |
 | sealedSecrets.source.repoURL | string | `"https://charts.bitnami.com/bitnami"` |  |
 | sealedSecrets.source.targetRevision | string | `"1.5.2"` |  |
+| trivyOperator.enabled | bool | `false` |  |
+| trivyOperator.name | string | `"trivy-operator"` |  |
+| trivyOperator.namespace | string | `"trivy-operator"` |  |
+| trivyOperator.source.chart | string | `"trivy-operator"` |  |
+| trivyOperator.source.helm.values | string | `"serviceMonitor:\n  enabled: true\n  labels:\n    kubernetes.she.net/prometheus-instance: default\ntrivy:\n  ignoreUnfixed: false\noperator:\n  metricsVulnIdEnabled: true\n"` |  |
+| trivyOperator.source.repoURL | string | `"https://aquasecurity.github.io/helm-charts/"` |  |
+| trivyOperator.source.targetRevision | string | `"0.18.1"` |  |
 | velero.enabled | bool | `true` |  |
 | velero.initContainers[0].image | string | `"velero/velero-plugin-for-aws:v1.7.1"` |  |
 | velero.initContainers[0].imagePullPolicy | string | `"IfNotPresent"` |  |

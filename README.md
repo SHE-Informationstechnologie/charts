@@ -2,7 +2,9 @@
 
 This is the SHE public helm charts repository.
 
+## Working on this Repository
 
+If you want to add charts or modify them make sure to execute `./install-hooks.sh` after you cloned the repository.
 
 ## Installing charts
 

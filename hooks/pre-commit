@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+#
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+
+NOCOLOR='\033[0m'
+
+SCRIPT=${BASH_SOURCE[0]}
+
+function info {
+  echo -e "[${GREEN}Info${NOCOLOR}] ${@}"
+}
+
+function error {
+  >&2 echo -e "[${RED}Error${NOCOLOR}] ${@}"
+}
+
+function warn {
+  echo -e "[${YELLOW}Warn${NOCOLOR}] ${@}"
+}
+
+function check_for_update {
+  if ! command -v diff > /dev/null
+  then
+    info "not checking for update since diff is not installed"
+    return
+  fi
+
+  info "Checking if hooks need to be updated"
+  if ! cmp -s $SCRIPT ./hooks/pre-commit
+  then
+    warn "Your commit hook is outdated please run ./install-hooks.sh again!"
+    exit 1
+  fi
+
+}
+
+check_for_update
+
+info "Executing hooks"
+
+# check if helm docs is installed
+if ! command -v helm-docs > /dev/null
+then
+  error "helm-docs is not installed"
+  exit 1
+fi
+
+# go into every directory that contains a Chart.yaml and generate docs
+
+find ./charts/ -type f -name Chart.yaml -execdir bash -c 'helm-docs 2>/dev/null' \;
+
+
+find ./charts -type f -name README.md -maxdepth 2 -mindepth 2 -exec git add '{}' \;
+
+info "Done"
+

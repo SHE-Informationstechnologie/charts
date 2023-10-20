@@ -1,0 +1,20 @@
+name: Check that docs are generated
+
+on: push
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        chart: [she-runtime, kyverno-policies, logging, monitoring-rules, s3-monitoring, she-runtime]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: gabe565/setup-helm-docs-action@v1
+      - run: helm-docs
+        working-directory: './charts/${{ matrix.chart }}'
+      - run: |
+          git add -N .
+          git diff --quiet || (echo '::error::Please make sure that the README.md is up to date' && exit 1)

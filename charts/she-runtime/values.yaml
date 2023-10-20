@@ -63,7 +63,7 @@ prometheusOperator:
     hostNetwork: true
     prometheus:
       monitor:
-        additonalLabels:
+        additionalLabels:
           kubernetes.she.net/prometheus-instance: default
   alertmanager:
     alertmanagerSpec:

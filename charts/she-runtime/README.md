@@ -96,7 +96,7 @@ SHE default K8s cluster toolset
 | prometheusOperator.prometheus.ingress | object | `{}` |  |
 | prometheusOperator.prometheus.prometheusSpec.storageSpec | object | `{}` |  |
 | prometheusOperator.prometheusNodeExporter.hostNetwork | bool | `true` |  |
-| prometheusOperator.prometheusNodeExporter.prometheus.monitor.additonalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
+| prometheusOperator.prometheusNodeExporter.prometheus.monitor.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
 | prometheusOperator.prometheusOperator | object | `{}` |  |
 | prometheusOperator.source.chart | string | `"kube-prometheus-stack"` |  |
 | prometheusOperator.source.helm.values | string | `""` |  |

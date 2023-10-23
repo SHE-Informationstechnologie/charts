@@ -1,3 +1,7 @@
+# 0.0.72
+# Configure cluster specific trivy dashboard
+- change target-name for argocd to specific cluster
+
 # 0.0.71
 # Add possibility to change Grafana Service Monitor label
 - added to additionalLabel to values.yaml for grafana

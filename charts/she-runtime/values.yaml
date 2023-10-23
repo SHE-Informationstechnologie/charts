@@ -52,7 +52,7 @@ prometheusOperator:
   enabled: true
   global: {}
   commonLabels: {}
-#    labelKey: labelValue
+   # labelKey: labelValue
   ingress:
     enabled: true
     baseUrl: my.domain

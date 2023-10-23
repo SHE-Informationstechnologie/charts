@@ -1,3 +1,7 @@
+# 0.0.68
+# Define kube-state-metrics Service Monitor scrape label
+- add `serviceMonitor.labels.kubernetes.she.net/prometheus-instance=default`
+
 # 0.0.67
 # Define Grafana Service Monitor scrape label
 - fix misspelled label

@@ -1,3 +1,7 @@
+# 0.0.69
+# test release
+- nothing changed
+
 # 0.0.68
 # Define kube-state-metrics Service Monitor scrape label
 - add `serviceMonitor.labels.kubernetes.she.net/prometheus-instance=default`

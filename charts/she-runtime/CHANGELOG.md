@@ -1,3 +1,7 @@
+# 0.0.71
+# Add possibility to change Grafana Service Monitor label
+- added to additionalLabel to values.yaml for grafana
+
 # 0.0.70
 # update kube-state-metrics Service Monitor scrape label
 - added to additionalLabel to values.yaml for kube-state-metrics and grafana operators

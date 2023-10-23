@@ -89,6 +89,7 @@ spec:
         {{- end }}
         {{- if .grafana.enabled }}
         grafana:
+          
           {{- if .grafana.ingress.enabled | default .ingress.enabled }}
           ingress:
             ingressClassName: {{ .grafana.ingress.className }}
@@ -129,6 +130,10 @@ spec:
           extraSecretMounts:
           {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- with .grafana.serviceMonitor }}
+          serviceMonitor:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}  
           grafana.ini:
             analytics:
               check_for_updates: true

@@ -1,3 +1,7 @@
+# 0.0.66
+# Define Grafana Service Monitor scrape label
+- add `serviceMonitor.labels.kubernetes.she.net/prometheus-instance=default`
+
 # 0.0.65
 # PrometheusOperator fix that node labels are scraped again
 - add `kubernetes.she.net/prometheus-instance` labels to node-exporter ServiceMonitor

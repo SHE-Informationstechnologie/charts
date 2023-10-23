@@ -90,6 +90,9 @@ spec:
         {{- if .grafana.enabled }}
         grafana:
           {{- if .grafana.ingress.enabled | default .ingress.enabled }}
+          serviceMonitor:
+            labels:
+              kubernetes.she.net/prometheus-instance=default
           ingress:
             ingressClassName: {{ .grafana.ingress.className }}
             enabled: true

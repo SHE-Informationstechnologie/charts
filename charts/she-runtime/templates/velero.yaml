@@ -27,6 +27,8 @@ spec:
           serviceMonitor:
             enabled: true
             namespace: monitoring
+            additionalLabels:
+              kubernetes.she.net/prometheus-instance: default
         {{- with .resources }}
         resources:
         {{- toYaml . | nindent 10 }}

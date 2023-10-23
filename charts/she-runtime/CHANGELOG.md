@@ -1,3 +1,7 @@
+# 0.0.73
+# configure scrape label for velero
+- add scrape label in template for velero
+
 # 0.0.72
 # Configure cluster specific trivy dashboard
 - change target-name for argocd to specific cluster

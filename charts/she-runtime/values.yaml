@@ -57,7 +57,11 @@ prometheusOperator:
     enabled: true
     baseUrl: my.domain
     # annotations: {}
-  kubeStateMetrics: {}
+  kubeStateMetrics:
+    prometheus:
+      monitor:
+        additionalLabels:
+          kubernetes.she.net/prometheus-instance: default
   prometheusOperator: {}
   prometheusNodeExporter:
     hostNetwork: true
@@ -84,6 +88,9 @@ prometheusOperator:
       # annotations: {}
   grafana:
     enabled: true
+    serviceMonitor:
+      labels:
+        kubernetes.she.net/prometheus-instance: default
     ingress: {}
     # ingress:
       # enabled: true

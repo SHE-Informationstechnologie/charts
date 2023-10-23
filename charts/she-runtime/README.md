@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 0.0.69](https://img.shields.io/badge/Version-0.0.69-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.69](https://img.shields.io/badge/AppVersion-0.0.69-informational?style=flat-square)
+![Version: 0.0.70](https://img.shields.io/badge/Version-0.0.70-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.70](https://img.shields.io/badge/AppVersion-0.0.70-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -86,9 +86,10 @@ SHE default K8s cluster toolset
 | prometheusOperator.global | object | `{}` |  |
 | prometheusOperator.grafana.enabled | bool | `true` |  |
 | prometheusOperator.grafana.ingress | object | `{}` |  |
+| prometheusOperator.grafana.serviceMonitor.labels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
 | prometheusOperator.ingress.baseUrl | string | `"my.domain"` |  |
 | prometheusOperator.ingress.enabled | bool | `true` |  |
-| prometheusOperator.kubeStateMetrics | object | `{}` |  |
+| prometheusOperator.kubeStateMetrics.prometheus.monitor.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
 | prometheusOperator.name | string | `"prom-operator"` |  |
 | prometheusOperator.namespace | string | `"monitoring"` |  |
 | prometheusOperator.prometheus.crunchyPostgresExporter.enabled | bool | `true` |  |

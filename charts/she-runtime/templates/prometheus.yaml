@@ -21,6 +21,9 @@ spec:
         {{- end }}
         {{- with .kubeStateMetrics }}
         kube-state-metrics:
+          serviceMonitor:
+            labels:
+              kubernetes.she.net/prometheus-instance: default
           {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- with .coreDns }}

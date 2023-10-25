@@ -9,7 +9,7 @@ metadata:
   name: {{ include "argo.targetCluster.name" $ }}-grafana-trivy-dashboard
   namespace: monitoring
 data:
-  "grafana-trivy-dashbaord": |
+  "grafana-trivy-dashboard.json": |
     {{ $.Files.Get "dashboards/grafana-dashboard-trivy.json" | fromJson | toJson }}
 
 ---

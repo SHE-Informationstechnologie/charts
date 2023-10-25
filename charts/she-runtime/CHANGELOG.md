@@ -1,3 +1,7 @@
+# 0.0.74
+# change file extension for trivy-dashboard.json
+- added file extension .json to grafana-trivy-dashboard name
+
 # 0.0.73
 # configure scrape label for velero
 - add scrape label in template for velero

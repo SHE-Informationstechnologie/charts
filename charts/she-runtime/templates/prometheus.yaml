@@ -89,7 +89,6 @@ spec:
         {{- end }}
         {{- if .grafana.enabled }}
         grafana:
-          
           {{- if .grafana.ingress.enabled | default .ingress.enabled }}
           ingress:
             ingressClassName: {{ .grafana.ingress.className }}
@@ -122,6 +121,10 @@ spec:
               env:
                 REQ_SKIP_TLS_VERIFY: 'true'
               label: grafana_dashboard
+          {{- with .grafana.envFromSecrets }}
+          envFromSecrets:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- with .grafana.extraConfigmapMounts }}
           extraConfigmapMounts:
           {{- toYaml . | nindent 12 }}

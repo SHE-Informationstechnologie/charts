@@ -1,3 +1,7 @@
+# 0.0.79
+# PrometheusOperator
+- Made envFromSecrets in Grafana configurable
+
 # 0.0.78
 # Update helmhart for dashboards
 - update chart version of grafana-dashboard

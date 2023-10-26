@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  grafana-dashboards:
+  - apiVersion: v2
+    appVersion: 0.0.2
+    created: "2023-10-26T05:52:29.110942657Z"
+    description: A collection of Dashboards for grafana
+    digest: 4999c1760bb4b06776add51000755da1c2f1fa4b7c6fbe6d393ad40fd7f621e0
+    name: grafana-dashboards
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/grafana-dashboards-0.0.2/grafana-dashboards-0.0.2.tgz
+    version: 0.0.2
   kyverno-policies:
   - apiVersion: v2
     appVersion: 0.0.2
@@ -305,6 +316,16 @@ entries:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/s3-monitoring-0.1.0/s3-monitoring-0.1.0.tgz
     version: 0.1.0
   she-runtime:
+  - apiVersion: v2
+    appVersion: 0.0.76
+    created: "2023-10-26T05:52:29.244638285Z"
+    description: SHE default K8s cluster toolset
+    digest: 496ab0598547b4a396450a475700c95d58a4c9254aa634e2f49a6326fe0a0f12
+    name: she-runtime
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-runtime-0.0.76/she-runtime-0.0.76.tgz
+    version: 0.0.76
   - apiVersion: v2
     appVersion: 0.0.75
     created: "2023-10-26T05:29:40.416288977Z"
@@ -955,4 +976,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-runtime-0.0.1/she-runtime-0.0.1.tgz
     version: 0.0.1
-generated: "2023-10-26T05:29:40.416587876Z"
+generated: "2023-10-26T05:52:29.245083886Z"

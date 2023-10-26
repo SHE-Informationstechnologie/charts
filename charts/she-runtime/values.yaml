@@ -269,3 +269,12 @@ trivyOperator:
           ignoreUnfixed: false
         operator:
           metricsVulnIdEnabled: true
+
+grafanaDashboards:
+  enabled: false
+  namespace: monitoring
+  name: grafana-dashboards
+  source:
+    repoURL: https://she-informationstechnologie.github.io/charts
+    chart: grafana-dashboards
+    targetRevision: 0.0.1

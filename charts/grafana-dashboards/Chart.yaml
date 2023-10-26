@@ -1,0 +1,6 @@
+apiVersion: v2
+name: grafanaDashoards
+description: A collection of Dashboards for grafana
+type: application
+version: 0.0.1
+appVersion: "0.0.1"

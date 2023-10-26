@@ -34,6 +34,12 @@ SHE default K8s cluster toolset
 | eckOperator.source.chart | string | `"eck-operator"` |  |
 | eckOperator.source.repoURL | string | `"https://helm.elastic.co"` |  |
 | eckOperator.source.targetRevision | string | `"2.9.0"` |  |
+| grafanaDashboards.enabled | bool | `false` |  |
+| grafanaDashboards.name | string | `"grafana-dashboards"` |  |
+| grafanaDashboards.namespace | string | `"monitoring"` |  |
+| grafanaDashboards.source.chart | string | `"grafana-dashboards"` |  |
+| grafanaDashboards.source.repoURL | string | `"https://she-informationstechnologie.github.io/charts"` |  |
+| grafanaDashboards.source.targetRevision | string | `"0.0.1"` |  |
 | internalIngressController.enabled | bool | `true` |  |
 | internalIngressController.name | string | `"internal-ingress"` |  |
 | internalIngressController.namespace | string | `"internal-ingress"` |  |

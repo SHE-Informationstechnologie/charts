@@ -1,3 +1,7 @@
+# 0.0.76
+# Update helmhart for dashboards
+- update chart version of grafana-dashboard
+
 # 0.0.75
 # New helmchart for dashboards
 - added chart to deploy grafana dashboards

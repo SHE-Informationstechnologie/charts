@@ -1,3 +1,7 @@
+# 0.0.75
+# New helmchart for dashboards
+- added chart to deploy grafana dashboards
+
 # 0.0.74
 # change file extension for trivy-dashboard.json
 - added file extension .json to grafana-trivy-dashboard name

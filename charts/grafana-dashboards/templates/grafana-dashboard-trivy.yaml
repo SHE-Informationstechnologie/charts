@@ -1,4 +1,4 @@
-{{- with .Values.grafanaDashboards.trivy -}}
+{{- with .Values.grafanaDashboard.trivy -}}
 {{- if .enabled }}
 
 apiVersion: v1
@@ -6,7 +6,7 @@ kind: ConfigMap
 metadata:
   labels:
     grafana_dashboard: "1"
-  name: {{ include "argo.targetCluster.name" $ }}-grafana-trivy-dashboard
+  name: grafana-trivy-dashboard
   namespace: monitoring
 data:
   "grafana-trivy-dashboard.json": |

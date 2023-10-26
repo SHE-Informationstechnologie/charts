@@ -1,3 +1,7 @@
+# 0.0.4
+# Fixed Templating
+- fixed templating of trivy dashboards
+
 # 0.0.3
 # Added values
 - fixed templating of trivy dashboards

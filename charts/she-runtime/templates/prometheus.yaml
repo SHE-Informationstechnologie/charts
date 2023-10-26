@@ -121,6 +121,10 @@ spec:
               env:
                 REQ_SKIP_TLS_VERIFY: 'true'
               label: grafana_dashboard
+          {{- with .grafana.envFromConfigMaps }}
+          envFromConfigMaps:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- with .grafana.envFromSecrets }}
           envFromSecrets:
           {{- toYaml . | nindent 12 }}

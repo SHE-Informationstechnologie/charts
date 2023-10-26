@@ -1,3 +1,7 @@
+# 0.0.80
+# PrometheusOperator
+- Made envFromConfigMaps in Grafana configurable
+
 # 0.0.79
 # PrometheusOperator
 - Made envFromSecrets in Grafana configurable

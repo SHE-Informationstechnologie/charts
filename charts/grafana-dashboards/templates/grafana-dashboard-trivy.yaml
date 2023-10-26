@@ -1,4 +1,4 @@
-{{- with .Values.trivyOperator -}}
+{{- with .Values.grafanaDashboards.trivy -}}
 {{- if .enabled }}
 
 apiVersion: v1

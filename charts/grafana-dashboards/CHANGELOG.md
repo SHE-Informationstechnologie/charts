@@ -1,3 +1,7 @@
+# 0.0.3
+# Added values
+- fixed templating of trivy dashboards
+
 # 0.0.2
 # Fix Name of chart
 - fix the name of the chart

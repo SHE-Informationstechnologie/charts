@@ -1,3 +1,7 @@
+# 0.0.77
+# Update helmhart for dashboards
+- update chart version of grafana-dashboard
+
 # 0.0.76
 # Update helmhart for dashboards
 - update chart version of grafana-dashboard

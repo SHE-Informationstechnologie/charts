@@ -277,4 +277,9 @@ grafanaDashboards:
   source:
     repoURL: https://she-informationstechnologie.github.io/charts
     chart: grafana-dashboards
-    targetRevision: 0.0.2
+    targetRevision: 0.0.3
+    # helm:
+    #   values: |
+    #     grafanaDashboard:
+    #       trivy:
+    #         enabled: false

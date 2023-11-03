@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 0.0.82](https://img.shields.io/badge/Version-0.0.82-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.82](https://img.shields.io/badge/AppVersion-0.0.82-informational?style=flat-square)
+![Version: 0.0.83](https://img.shields.io/badge/Version-0.0.83-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.83](https://img.shields.io/badge/AppVersion-0.0.83-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -108,7 +108,7 @@ SHE default K8s cluster toolset
 | prometheusOperator.source.chart | string | `"kube-prometheus-stack"` |  |
 | prometheusOperator.source.helm.values | string | `""` |  |
 | prometheusOperator.source.repoURL | string | `"https://prometheus-community.github.io/helm-charts"` |  |
-| prometheusOperator.source.targetRevision | string | `"50.3.1"` |  |
+| prometheusOperator.source.targetRevision | string | `"52.1.0"` |  |
 | publicIngressController.enabled | bool | `true` |  |
 | publicIngressController.name | string | `"public-ingress"` |  |
 | publicIngressController.namespace | string | `"public-ingress"` |  |

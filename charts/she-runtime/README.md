@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 0.0.80](https://img.shields.io/badge/Version-0.0.80-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.80](https://img.shields.io/badge/AppVersion-0.0.80-informational?style=flat-square)
+![Version: 0.0.81](https://img.shields.io/badge/Version-0.0.81-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.81](https://img.shields.io/badge/AppVersion-0.0.81-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -20,7 +20,7 @@ SHE default K8s cluster toolset
 | argoApp.source.helm.parameters[1].name | string | `"controller.metrics.enabled"` |  |
 | argoApp.source.helm.parameters[1].value | string | `"true"` |  |
 | argoApp.source.repoURL | string | `"https://argoproj.github.io/argo-helm"` |  |
-| argoApp.source.targetRevision | string | `"5.45.1"` |  |
+| argoApp.source.targetRevision | string | `"5.50.1"` |  |
 | customerApplications.enabled | bool | `false` |  |
 | customerApplications.name | string | `"customer-applications"` |  |
 | customerApplications.namespace | string | `"she-vendor"` |  |

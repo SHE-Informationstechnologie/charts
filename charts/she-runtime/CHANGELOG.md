@@ -1,3 +1,8 @@
+# 0.0.82
+# Update nginx-ingress
+
+- take ingress update from renovate
+
 # 0.0.81
 # Update argocd
 

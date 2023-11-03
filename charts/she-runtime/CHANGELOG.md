@@ -1,3 +1,8 @@
+# 0.0.81
+# Update argocd
+
+- take argocd update from ronvate
+
 # 0.0.80
 # PrometheusOperator
 - Made envFromConfigMaps in Grafana configurable

@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 0.0.81](https://img.shields.io/badge/Version-0.0.81-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.81](https://img.shields.io/badge/AppVersion-0.0.81-informational?style=flat-square)
+![Version: 0.0.82](https://img.shields.io/badge/Version-0.0.82-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.82](https://img.shields.io/badge/AppVersion-0.0.82-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -53,7 +53,7 @@ SHE default K8s cluster toolset
 | internalIngressController.source.helm.parameters[3].name | string | `"controller.ingressClassResource.default"` |  |
 | internalIngressController.source.helm.parameters[3].value | string | `"true"` |  |
 | internalIngressController.source.repoURL | string | `"https://kubernetes.github.io/ingress-nginx"` |  |
-| internalIngressController.source.targetRevision | string | `"4.7.1"` |  |
+| internalIngressController.source.targetRevision | string | `"4.8.3"` |  |
 | kyverno.enabled | bool | `false` |  |
 | kyverno.name | string | `"kyverno"` |  |
 | kyverno.namespace | string | `"kyverno"` |  |
@@ -116,7 +116,7 @@ SHE default K8s cluster toolset
 | publicIngressController.source.helm.parameters[0].name | string | `"controller.ingressClassResource.controllerValue"` |  |
 | publicIngressController.source.helm.parameters[0].value | string | `"k8s.io/ingress-nginx-public"` |  |
 | publicIngressController.source.repoURL | string | `"https://kubernetes.github.io/ingress-nginx"` |  |
-| publicIngressController.source.targetRevision | string | `"4.7.1"` |  |
+| publicIngressController.source.targetRevision | string | `"4.8.3"` |  |
 | sealedSecrets.enabled | bool | `true` |  |
 | sealedSecrets.name | string | `"sealed-secrets"` |  |
 | sealedSecrets.namespace | string | `"sealed-secrets"` |  |

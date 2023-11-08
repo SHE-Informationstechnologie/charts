@@ -40,7 +40,7 @@ SHE default K8s cluster toolset
 | eckOperator.namespace | string | `"eck-operator"` |  |
 | eckOperator.source.chart | string | `"eck-operator"` |  |
 | eckOperator.source.repoURL | string | `"https://helm.elastic.co"` |  |
-| eckOperator.source.targetRevision | string | `"2.9.0"` |  |
+| eckOperator.source.targetRevision | string | `"2.10.0"` |  |
 | grafanaDashboards.enabled | bool | `false` |  |
 | grafanaDashboards.name | string | `"grafana-dashboards"` |  |
 | grafanaDashboards.namespace | string | `"monitoring"` |  |

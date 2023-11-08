@@ -2,6 +2,7 @@
 
 - update sealed-secrets operator
 - update ingress-nginx
+- update eck-operator
 
 # 0.0.85
 # MinIO Operator

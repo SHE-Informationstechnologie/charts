@@ -1,3 +1,7 @@
+# 0.0.84
+
+- Enable http2 support on internal ingress
+
 # 0.0.83
 # Update kube-prometheus-stack
 

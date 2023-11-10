@@ -52,6 +52,8 @@ SHE default K8s cluster toolset
 | internalIngressController.source.helm.parameters[2].value | string | `"nginx-internal"` |  |
 | internalIngressController.source.helm.parameters[3].name | string | `"controller.ingressClassResource.default"` |  |
 | internalIngressController.source.helm.parameters[3].value | string | `"true"` |  |
+| internalIngressController.source.helm.parameters[4].name | string | `"controller.config.use-http2"` |  |
+| internalIngressController.source.helm.parameters[4].value | string | `"true"` |  |
 | internalIngressController.source.repoURL | string | `"https://kubernetes.github.io/ingress-nginx"` |  |
 | internalIngressController.source.targetRevision | string | `"4.8.3"` |  |
 | kyverno.enabled | bool | `false` |  |

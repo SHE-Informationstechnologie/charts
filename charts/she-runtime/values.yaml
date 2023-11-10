@@ -159,6 +159,8 @@ internalIngressController:
           value: nginx-internal
         - name: controller.ingressClassResource.default
           value: 'true'
+        - name: controller.config.use-http2
+          value: 'true'
 publicIngressController:
   namespace: public-ingress
   name: public-ingress

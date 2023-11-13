@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 0.0.83](https://img.shields.io/badge/Version-0.0.83-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.83](https://img.shields.io/badge/AppVersion-0.0.83-informational?style=flat-square)
+![Version: 0.0.84](https://img.shields.io/badge/Version-0.0.84-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.84](https://img.shields.io/badge/AppVersion-0.0.84-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -21,6 +21,13 @@ SHE default K8s cluster toolset
 | argoApp.source.helm.parameters[1].value | string | `"true"` |  |
 | argoApp.source.repoURL | string | `"https://argoproj.github.io/argo-helm"` |  |
 | argoApp.source.targetRevision | string | `"5.50.1"` |  |
+| argoWorkflow.enabled | bool | `false` |  |
+| argoWorkflow.name | string | `"argo-workflows"` |  |
+| argoWorkflow.namespace | string | `"argo-workflows"` |  |
+| argoWorkflow.source.chart | string | `"argo-workflows"` |  |
+| argoWorkflow.source.helm.values | string | `"controller:\n  metricsConfig:\n    enabled: true\n  telemetryConfig:\n    enabled: true\n  serviceMonitor:\n    enabled: true\n    additionalLabels:\n      kubernetes.she.net/prometheus-instance: default\n    namespace: \"monitoring\"\nworkflow:\n  serviceAccount:\n    create: true\n    name: \"argo-workflows\"\nserver:\n  authMode: \"server\"\n"` |  |
+| argoWorkflow.source.repoURL | string | `"https://argoproj.github.io/argo-helm"` |  |
+| argoWorkflow.source.targetRevision | string | `"0.38.0"` |  |
 | customerApplications.enabled | bool | `false` |  |
 | customerApplications.name | string | `"customer-applications"` |  |
 | customerApplications.namespace | string | `"she-vendor"` |  |

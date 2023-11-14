@@ -1,20 +1,22 @@
+# 0.0.85
+
+- Enable http2 on internal ingress
+
 # 0.0.84
 
-- Enable http2 support on internal ingress
+# ArgpWorkflow
+- add argoWorkflows stack
 
 # 0.0.83
 # Update kube-prometheus-stack
-
 - update kube-prometheus-stack 
 
 # 0.0.82
 # Update nginx-ingress
-
 - take ingress update from renovate
 
 # 0.0.81
 # Update argocd
-
 - take argocd update from ronvate
 
 # 0.0.80

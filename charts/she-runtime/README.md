@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 0.0.84](https://img.shields.io/badge/Version-0.0.84-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.84](https://img.shields.io/badge/AppVersion-0.0.84-informational?style=flat-square)
+![Version: 0.0.85](https://img.shields.io/badge/Version-0.0.85-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.85](https://img.shields.io/badge/AppVersion-0.0.85-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 

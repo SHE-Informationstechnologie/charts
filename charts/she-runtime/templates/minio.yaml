@@ -1,0 +1,38 @@
+{{- with .Values.minioOperator -}}
+{{- if .enabled }}
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: '{{ include "argo.targetCluster.name" $ }}-{{ include "application.name" . }}'
+spec:
+  project: {{ include "argo.project" $ }}
+  source:
+    repoURL: {{ .source.repoURL }}
+    targetRevision: {{ .source.targetRevision }}
+    chart: {{ .source.chart }}
+    helm:
+      values: |
+        console:
+          ingress:
+            enabled: true
+            ingressClassName: {{ .ingressClassName }}
+            host: {{ .hostName }}
+        operator:
+          env:
+            - name: PROMETHEUS_NAMESPACE
+              value: {{ .prometheusNamespace }}
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  destination:
+    name: '{{ include "argo.targetCluster" $ }}'
+    namespace: {{ include "application.namespace" . }}
+
+---
+{{- end }}
+{{- end }}

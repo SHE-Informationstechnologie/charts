@@ -310,3 +310,18 @@ argoWorkflow:
             name: "argo-workflows"
         server:
           authMode: "server"
+
+minioOperator:
+  enabled: false
+  namespace: minio-operator
+  name: minio-operator
+  ingressClassName: nginx-internal
+  hostName: # must be set by the user
+  prometheusNamespace: monitoring
+  source:
+    repoURL: https://operator.min.io
+    chart: operator
+    targetRevision: 5.0.9
+    helm:
+      values: |
+

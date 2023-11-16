@@ -1,7 +1,10 @@
-# 0.0.84
-# ArgpWorkflow
-- add argoWorkflows stack
+# 0.0.85
+# MinIO Operator
+- add MinIO Operator
 
+# 0.0.84
+# ArgoWorkflow
+- add argoWorkflows stack
 
 # 0.0.83
 # Update kube-prometheus-stack
@@ -13,7 +16,7 @@
 
 # 0.0.81
 # Update argocd
-- take argocd update from ronvate
+- take argocd update from renovate
 
 # 0.0.80
 # PrometheusOperator

@@ -315,13 +315,19 @@ minioOperator:
   enabled: false
   namespace: minio-operator
   name: minio-operator
-  ingressClassName: nginx-internal
-  hostName: # must be set by the user
-  prometheusNamespace: monitoring
   source:
     repoURL: https://operator.min.io
     chart: operator
     targetRevision: 5.0.9
-    helm:
-      values: |
+    # helm:
+    #   values: |
+    #     console:
+    #       ingress:
+    #         enabled: true
+    #         ingressClassName: nginx-internal
+    #         host: # ...
+    #     operator:
+    #       env:
+    #         - name: PROMETHEUS_NAMESPACE
+    #           value: monitoring
 

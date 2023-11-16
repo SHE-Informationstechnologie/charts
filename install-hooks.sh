@@ -18,7 +18,7 @@ info "Installing hooks"
 for hook in $(find ./hooks/ -type f)
 do
   hook_name=$(basename $hook)
-  info "Installint hooks $hook_name"
+  info "Installing hooks $hook_name"
   cp $hook .git/hooks/$hook_name
 done
 

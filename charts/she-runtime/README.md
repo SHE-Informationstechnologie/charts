@@ -83,14 +83,10 @@ SHE default K8s cluster toolset
 | metrics.source.repoURL | string | `"https://kubernetes-sigs.github.io/metrics-server"` |  |
 | metrics.source.targetRevision | string | `"3.11.0"` |  |
 | minioOperator.enabled | bool | `false` |  |
-| minioOperator.hostName | string | `""` |  |
-| minioOperator.ingressClassName | string | `"nginx-internal"` |  |
 | minioOperator.name | string | `"minio-operator"` |  |
 | minioOperator.namespace | string | `"minio-operator"` |  |
-| minioOperator.prometheusNamespace | string | `"monitoring"` |  |
-| minioOperator.source.chart | string | `"operator"`|  |
-| minioOperator.source.helm.values | string | `""` |  |
-| minioOperator.source.repoURL | string | `"https://operator.min.io"`|  |
+| minioOperator.source.chart | string | `"operator"` |  |
+| minioOperator.source.repoURL | string | `"https://operator.min.io"` |  |
 | minioOperator.source.targetRevision | string | `"5.0.9"` |  |
 | postgresOperator.enabled | bool | `true` |  |
 | postgresOperator.name | string | `"postgres-operator"` |  |

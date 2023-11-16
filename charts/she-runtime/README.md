@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 0.0.84](https://img.shields.io/badge/Version-0.0.84-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.84](https://img.shields.io/badge/AppVersion-0.0.84-informational?style=flat-square)
+![Version: 0.0.85](https://img.shields.io/badge/Version-0.0.85-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.85](https://img.shields.io/badge/AppVersion-0.0.85-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -82,6 +82,12 @@ SHE default K8s cluster toolset
 | metrics.source.helm.values | string | `"defaultArgs:\n  - --cert-dir=/tmp\n  - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname\n  - --kubelet-use-node-status-port\n  - --metric-resolution=15s\n  - --kubelet-insecure-tls\n"` |  |
 | metrics.source.repoURL | string | `"https://kubernetes-sigs.github.io/metrics-server"` |  |
 | metrics.source.targetRevision | string | `"3.11.0"` |  |
+| minioOperator.enabled | bool | `false` |  |
+| minioOperator.name | string | `"minio-operator"` |  |
+| minioOperator.namespace | string | `"minio-operator"` |  |
+| minioOperator.source.chart | string | `"operator"` |  |
+| minioOperator.source.repoURL | string | `"https://operator.min.io"` |  |
+| minioOperator.source.targetRevision | string | `"5.0.9"` |  |
 | postgresOperator.enabled | bool | `true` |  |
 | postgresOperator.name | string | `"postgres-operator"` |  |
 | postgresOperator.namespace | string | `"postgres-operator"` |  |

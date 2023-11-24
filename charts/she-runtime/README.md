@@ -146,7 +146,7 @@ SHE default K8s cluster toolset
 | trivyOperator.source.repoURL | string | `"https://aquasecurity.github.io/helm-charts/"` |  |
 | trivyOperator.source.targetRevision | string | `"0.18.1"` |  |
 | velero.enabled | bool | `true` |  |
-| velero.initContainers[0].image | string | `"velero/velero-plugin-for-aws:v1.7.1"` |  |
+| velero.initContainers[0].image | string | `"velero/velero-plugin-for-aws:v1.8.2"` |  |
 | velero.initContainers[0].imagePullPolicy | string | `"IfNotPresent"` |  |
 | velero.initContainers[0].name | string | `"velero-plugin-for-aws"` |  |
 | velero.initContainers[0].volumeMounts[0].mountPath | string | `"/target"` |  |

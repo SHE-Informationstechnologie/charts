@@ -1,6 +1,12 @@
 # 0.0.87 
 
 - update argo-cd
+- update velero-aws-plugin
+
+## Attention
+
+If velero backups are used on the deployed plattform
+it should be tested if it still works after updating to this version
 
 # 0.0.86
 

@@ -1,3 +1,7 @@
+# 0.0.87 
+
+- update argo-cd
+
 # 0.0.86
 
 - update sealed-secrets operator

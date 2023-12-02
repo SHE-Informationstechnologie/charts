@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 0.0.86](https://img.shields.io/badge/Version-0.0.86-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.86](https://img.shields.io/badge/AppVersion-0.0.86-informational?style=flat-square)
+![Version: 0.0.87](https://img.shields.io/badge/Version-0.0.87-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.87](https://img.shields.io/badge/AppVersion-0.0.87-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -20,7 +20,7 @@ SHE default K8s cluster toolset
 | argoApp.source.helm.parameters[1].name | string | `"controller.metrics.enabled"` |  |
 | argoApp.source.helm.parameters[1].value | string | `"true"` |  |
 | argoApp.source.repoURL | string | `"https://argoproj.github.io/argo-helm"` |  |
-| argoApp.source.targetRevision | string | `"5.50.1"` |  |
+| argoApp.source.targetRevision | string | `"5.51.6"` |  |
 | argoWorkflow.enabled | bool | `false` |  |
 | argoWorkflow.name | string | `"argo-workflows"` |  |
 | argoWorkflow.namespace | string | `"argo-workflows"` |  |

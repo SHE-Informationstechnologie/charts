@@ -60,7 +60,7 @@ SHE default K8s cluster toolset
 | internalIngressController.source.helm.parameters[3].name | string | `"controller.ingressClassResource.default"` |  |
 | internalIngressController.source.helm.parameters[3].value | string | `"true"` |  |
 | internalIngressController.source.repoURL | string | `"https://kubernetes.github.io/ingress-nginx"` |  |
-| internalIngressController.source.targetRevision | string | `"4.8.3"` |  |
+| internalIngressController.source.targetRevision | string | `"4.8.4"` |  |
 | kyverno.enabled | bool | `false` |  |
 | kyverno.name | string | `"kyverno"` |  |
 | kyverno.namespace | string | `"kyverno"` |  |
@@ -129,7 +129,7 @@ SHE default K8s cluster toolset
 | publicIngressController.source.helm.parameters[0].name | string | `"controller.ingressClassResource.controllerValue"` |  |
 | publicIngressController.source.helm.parameters[0].value | string | `"k8s.io/ingress-nginx-public"` |  |
 | publicIngressController.source.repoURL | string | `"https://kubernetes.github.io/ingress-nginx"` |  |
-| publicIngressController.source.targetRevision | string | `"4.8.3"` |  |
+| publicIngressController.source.targetRevision | string | `"4.8.4"` |  |
 | sealedSecrets.enabled | bool | `true` |  |
 | sealedSecrets.name | string | `"sealed-secrets"` |  |
 | sealedSecrets.namespace | string | `"sealed-secrets"` |  |

@@ -1,6 +1,7 @@
 # 0.0.86
 
 - update sealed-secrets operator
+- update ingress-nginx
 
 # 0.0.85
 # MinIO Operator

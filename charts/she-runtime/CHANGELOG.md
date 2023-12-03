@@ -4,6 +4,7 @@
 - update ingress-nginx
 - update eck-operator
 - update velero
+- update kube-prometheus stack
 
 # 0.0.85
 # MinIO Operator

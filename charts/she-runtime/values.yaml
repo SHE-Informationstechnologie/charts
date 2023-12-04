@@ -207,7 +207,7 @@ velero:
       memory: 512Mi
   source:
     repoURL: https://vmware-tanzu.github.io/helm-charts
-    targetRevision: 5.0.2
+    targetRevision: 5.1.6
     chart: velero
     helm:
       values: |

@@ -3,6 +3,7 @@
 - update sealed-secrets operator
 - update ingress-nginx
 - update eck-operator
+- update velero
 
 # 0.0.85
 # MinIO Operator

@@ -10,7 +10,7 @@ sealedSecrets:
   enabled: true
   source:
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 1.5.2
+    targetRevision: 1.6.1
     chart: sealed-secrets
     helm:
       parameters:

@@ -1,3 +1,7 @@
+# 0.0.86
+
+- update sealed-secrets operator
+
 # 0.0.85
 # MinIO Operator
 - add MinIO Operator

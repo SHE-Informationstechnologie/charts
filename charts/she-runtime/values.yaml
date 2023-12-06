@@ -10,7 +10,7 @@ sealedSecrets:
   enabled: true
   source:
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 1.5.2
+    targetRevision: 1.6.1
     chart: sealed-secrets
     helm:
       parameters:
@@ -43,7 +43,7 @@ eckOperator:
   enabled: false
   source:
     repoURL: https://helm.elastic.co
-    targetRevision:  2.9.0
+    targetRevision:  2.10.0
     chart: eck-operator
 
 prometheusOperator:
@@ -136,7 +136,7 @@ prometheusOperator:
   # defaultRules: {}
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 52.1.0
+    targetRevision: 55.0.0
     chart: kube-prometheus-stack
     helm:
       values: |
@@ -147,7 +147,7 @@ internalIngressController:
   enabled: true
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.8.3
+    targetRevision: 4.8.4
     chart: ingress-nginx
     helm:
       parameters:
@@ -165,7 +165,7 @@ publicIngressController:
   enabled: true
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.8.3
+    targetRevision: 4.8.4
     chart: ingress-nginx
     helm:
       parameters:
@@ -207,7 +207,7 @@ velero:
       memory: 512Mi
   source:
     repoURL: https://vmware-tanzu.github.io/helm-charts
-    targetRevision: 5.0.2
+    targetRevision: 5.1.6
     chart: velero
     helm:
       values: |

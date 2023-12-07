@@ -137,7 +137,7 @@ SHE default K8s cluster toolset
 | sealedSecrets.source.helm.parameters[0].name | string | `"skipRecreate"` |  |
 | sealedSecrets.source.helm.parameters[0].value | string | `"true"` |  |
 | sealedSecrets.source.repoURL | string | `"https://charts.bitnami.com/bitnami"` |  |
-| sealedSecrets.source.targetRevision | string | `"1.6.1"` |  |
+| sealedSecrets.source.targetRevision | string | `"1.6.2"` |  |
 | trivyOperator.enabled | bool | `false` |  |
 | trivyOperator.name | string | `"trivy-operator"` |  |
 | trivyOperator.namespace | string | `"trivy-operator"` |  |

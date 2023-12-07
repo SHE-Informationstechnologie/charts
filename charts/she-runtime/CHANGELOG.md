@@ -2,6 +2,7 @@
 
 - update argo-cd
 - update velero-aws-plugin
+- update sealed-secrets
 
 ## Attention
 

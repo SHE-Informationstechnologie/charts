@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 0.0.86](https://img.shields.io/badge/Version-0.0.86-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.86](https://img.shields.io/badge/AppVersion-0.0.86-informational?style=flat-square)
+![Version: 0.0.87](https://img.shields.io/badge/Version-0.0.87-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.87](https://img.shields.io/badge/AppVersion-0.0.87-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -20,7 +20,7 @@ SHE default K8s cluster toolset
 | argoApp.source.helm.parameters[1].name | string | `"controller.metrics.enabled"` |  |
 | argoApp.source.helm.parameters[1].value | string | `"true"` |  |
 | argoApp.source.repoURL | string | `"https://argoproj.github.io/argo-helm"` |  |
-| argoApp.source.targetRevision | string | `"5.50.1"` |  |
+| argoApp.source.targetRevision | string | `"5.51.6"` |  |
 | argoWorkflow.enabled | bool | `false` |  |
 | argoWorkflow.name | string | `"argo-workflows"` |  |
 | argoWorkflow.namespace | string | `"argo-workflows"` |  |
@@ -137,7 +137,7 @@ SHE default K8s cluster toolset
 | sealedSecrets.source.helm.parameters[0].name | string | `"skipRecreate"` |  |
 | sealedSecrets.source.helm.parameters[0].value | string | `"true"` |  |
 | sealedSecrets.source.repoURL | string | `"https://charts.bitnami.com/bitnami"` |  |
-| sealedSecrets.source.targetRevision | string | `"1.6.1"` |  |
+| sealedSecrets.source.targetRevision | string | `"1.6.2"` |  |
 | trivyOperator.enabled | bool | `false` |  |
 | trivyOperator.name | string | `"trivy-operator"` |  |
 | trivyOperator.namespace | string | `"trivy-operator"` |  |
@@ -146,7 +146,7 @@ SHE default K8s cluster toolset
 | trivyOperator.source.repoURL | string | `"https://aquasecurity.github.io/helm-charts/"` |  |
 | trivyOperator.source.targetRevision | string | `"0.18.1"` |  |
 | velero.enabled | bool | `true` |  |
-| velero.initContainers[0].image | string | `"velero/velero-plugin-for-aws:v1.7.1"` |  |
+| velero.initContainers[0].image | string | `"velero/velero-plugin-for-aws:v1.8.2"` |  |
 | velero.initContainers[0].imagePullPolicy | string | `"IfNotPresent"` |  |
 | velero.initContainers[0].name | string | `"velero-plugin-for-aws"` |  |
 | velero.initContainers[0].volumeMounts[0].mountPath | string | `"/target"` |  |

@@ -1,3 +1,8 @@
+# 0.0.88
+
+- update velero
+- update kube-prometheus-stack
+
 # 0.0.87 
 
 - update argo-cd

@@ -367,6 +367,16 @@ entries:
     version: 0.1.0
   she-runtime:
   - apiVersion: v2
+    appVersion: 0.0.91
+    created: "2023-12-21T09:28:33.08759687Z"
+    description: SHE default K8s cluster toolset
+    digest: 1e78e8328a37abdbd4b3b21d510b5ab841c0a7326acba8745726a732c03af045
+    name: she-runtime
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-runtime-0.0.91/she-runtime-0.0.91.tgz
+    version: 0.0.91
+  - apiVersion: v2
     appVersion: 0.0.90
     created: "2023-12-21T09:12:03.021902198Z"
     description: SHE default K8s cluster toolset
@@ -1166,4 +1176,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-runtime-0.0.1/she-runtime-0.0.1.tgz
     version: 0.0.1
-generated: "2023-12-21T09:26:47.572760136Z"
+generated: "2023-12-21T09:28:33.087939016Z"

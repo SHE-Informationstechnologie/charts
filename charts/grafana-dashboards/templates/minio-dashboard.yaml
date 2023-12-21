@@ -1,4 +1,4 @@
-{{- with .Values.grafanaDashboard.trivy -}}
+{{- with .Values.grafanaDashboard.minio -}}
 {{- if .enabled }}
 
 apiVersion: v1

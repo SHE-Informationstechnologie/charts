@@ -1,3 +1,7 @@
+# 0.0.6
+# Minio
+- updated minio dashboards datasource
+
 # 0.0.5
 # Minio
 - Added minio dashboards

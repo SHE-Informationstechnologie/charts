@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   grafana-dashboards:
   - apiVersion: v2
+    appVersion: 0.0.5
+    created: "2023-12-21T08:35:33.111176176Z"
+    description: A collection of Dashboards for grafana
+    digest: 2df5c6576b57de03c4b5b4de9bf554494b88ca50646c815192cf13ef5d8ea238
+    name: grafana-dashboards
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/grafana-dashboards-0.0.5/grafana-dashboards-0.0.5.tgz
+    version: 0.0.5
+  - apiVersion: v2
     appVersion: 0.0.4
     created: "2023-10-26T06:42:52.890703642Z"
     description: A collection of Dashboards for grafana
@@ -1116,4 +1126,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-runtime-0.0.1/she-runtime-0.0.1.tgz
     version: 0.0.1
-generated: "2023-12-12T09:14:55.428227868Z"
+generated: "2023-12-21T08:35:33.111350833Z"

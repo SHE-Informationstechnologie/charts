@@ -1,0 +1,17 @@
+{{- with .Values.grafanaDashboard.trivy -}}
+{{- if .enabled }}
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: minio-dashboard
+  namespace: monitoring
+data:
+  "minio-dashboard.json": |
+    {{ $.Files.Get "dashboards/minio-dashboard.json" | fromJson | toJson }}
+
+---
+{{- end }}
+{{- end }}

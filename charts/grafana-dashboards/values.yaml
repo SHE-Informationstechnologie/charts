@@ -1,3 +1,5 @@
 grafanaDashboard:
   trivy:
     enabled: true
+  minnio:
+    enabled: true

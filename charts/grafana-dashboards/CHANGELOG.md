@@ -1,3 +1,7 @@
+# 0.0.5
+# Minio
+- Added minio dashboards
+
 # 0.0.4
 # Fixed Templating
 - fixed templating of trivy dashboards

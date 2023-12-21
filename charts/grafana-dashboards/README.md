@@ -1,6 +1,6 @@
 # grafana-dashboards
 
-![Version: 0.0.4](https://img.shields.io/badge/Version-0.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.4](https://img.shields.io/badge/AppVersion-0.0.4-informational?style=flat-square)
+![Version: 0.0.5](https://img.shields.io/badge/Version-0.0.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.5](https://img.shields.io/badge/AppVersion-0.0.5-informational?style=flat-square)
 
 A collection of Dashboards for grafana
 
@@ -8,6 +8,7 @@ A collection of Dashboards for grafana
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| grafanaDashboard.minnio.enabled | bool | `true` |  |
 | grafanaDashboard.trivy.enabled | bool | `true` |  |
 
 ----------------------------------------------

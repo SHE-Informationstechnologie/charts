@@ -1,3 +1,7 @@
+# 0.0.8
+# Minio
+- added minio replication dashboard
+
 # 0.0.7
 # Minio
 - updated minio dashboards datasource

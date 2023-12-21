@@ -1,3 +1,8 @@
+# 0.0.92
+
+- added replication dashboard for minio
+
+
 # 0.0.91
 
 - update minio dashboards datasources

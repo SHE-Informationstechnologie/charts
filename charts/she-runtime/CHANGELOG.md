@@ -1,3 +1,7 @@
+# 0.0.89
+
+- added minio dashboards
+
 # 0.0.88
 
 - update velero

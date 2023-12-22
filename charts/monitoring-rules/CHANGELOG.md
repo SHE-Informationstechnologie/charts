@@ -1,3 +1,7 @@
+# 2.0.4
+# MinIO Dashboards
+- Added minio and minio-replication dashboards when mino.grafanaDashboards is enabled
+
 # 2.0.3
 # MinIO metrics
 - Don't ask. Just use this version instead of 2.0.2 or 2.0.1 or 2.0.0

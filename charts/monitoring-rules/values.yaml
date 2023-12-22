@@ -62,6 +62,9 @@ minio:
   serviceMonitor:
     enabled: true
 
+  grafanaDashboards:
+    enabled: true
+
     # Configure the tls management of each endpoint
     # like disabling the verification of server certificates
     # or setting a custom CA certificate

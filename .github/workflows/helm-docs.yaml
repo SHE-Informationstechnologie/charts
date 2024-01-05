@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: 
+        uses: actions/checkout@v4
       - uses: gabe565/setup-helm-docs-action@v1
       - run: helm-docs
         working-directory: './charts/${{ matrix.chart }}'

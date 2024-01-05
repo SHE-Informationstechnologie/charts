@@ -1,3 +1,7 @@
+# 2.0.5
+# Trivy Dashboards
+- Added Vulnerability Dashboard for trivy if trivy is enabled.
+
 # 2.0.4
 # MinIO Dashboards
 - Added minio and minio-replication dashboards when mino.grafanaDashboards is enabled

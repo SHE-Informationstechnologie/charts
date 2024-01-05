@@ -86,3 +86,11 @@ minio:
     # clusterDiskOffline: false
     # nodeDiskOffline: false
     # diskSpaceUsage: false
+
+# Trivy Operator Dashboards
+trivy:
+  enabled: false
+
+  # deploy dashboard
+  grafanaDashboards:
+    enabled: true

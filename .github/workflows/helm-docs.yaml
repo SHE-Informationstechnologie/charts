@@ -15,7 +15,8 @@ jobs:
       - uses: gabe565/setup-helm-docs-action@v1
       - run: helm-docs
         working-directory: './charts/${{ matrix.chart }}'
+      - run: find . -type f -name README.md -exec sed -i '$ d' {} \;
+        working-directory: './charts/${{ matrix.chart }}'
       - run: |
-          find ./charts -type f -name README.md -exec sed -i '$ d' {} \;
           git add -N .
           git diff || (echo '::error::Please make sure that the README.md is up to date' && exit 1)

@@ -7,15 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        chart: [ kyverno-policies, logging, monitoring-rules, s3-monitoring, she-runtime]
+        chart: [ grafana-dashboards, kyverno-policies, logging, monitoring-rules, s3-monitoring, she-runtime]
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: 
       - uses: gabe565/setup-helm-docs-action@v1
       - run: helm-docs
         working-directory: './charts/${{ matrix.chart }}'
       - run: |
           find ./charts -type f -name README.md -exec sed -i '$ d' {} \;
           git add -N .
-          git diff || (echo '::error::Please make sure that the README.md is up to date' && exit 1)
+          git diff --quiet || (echo '::error::Please make sure that the README.md is up to date' && exit 1)

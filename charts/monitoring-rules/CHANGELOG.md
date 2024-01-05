@@ -1,3 +1,7 @@
+# 2.0.6
+# Trivy Dashboards
+- update Readme
+
 # 2.0.5
 # Trivy Dashboards
 - Added Vulnerability Dashboard for trivy if trivy is enabled.

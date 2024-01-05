@@ -1,3 +1,7 @@
+# 0.0.93
+
+- update Readme
+
 # 0.0.92
 
 - added replication dashboard for minio

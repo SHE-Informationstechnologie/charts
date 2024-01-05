@@ -7,13 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        chart: [she-runtime, kyverno-policies, logging, monitoring-rules, s3-monitoring, she-runtime]
+        chart: [ grafana-dashboards, kyverno-policies, logging, monitoring-rules, s3-monitoring, she-runtime]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - uses: gabe565/setup-helm-docs-action@v1
       - run: helm-docs
+        working-directory: './charts/${{ matrix.chart }}'
+      - run: find . -type f -name README.md -exec sed -i '$ d' {} \;
         working-directory: './charts/${{ matrix.chart }}'
       - run: |
           git add -N .

@@ -1,3 +1,6 @@
+# 2.0.7
+
+# Add Minio Cluster Repliction alerting rules
 # 2.0.6
 
 # Fix templating issues with grafana dashboards

@@ -1,4 +1,8 @@
 # 2.0.6
+
+# Fix templating issues with grafana dashboards
+
+# 2.0.6
 # Trivy Dashboards
 - update Readme
 

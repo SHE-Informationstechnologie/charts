@@ -5,7 +5,7 @@ metadata:
   name: {{ include "monitoring-rules.fullname" . }}-crunchy-postgres
   labels:
     {{- include "monitoring-rules.labels" . | nindent 4 }}
-    {{ toYaml .Values.prometheusLabels }}
+    {{ toYaml .Values.prometheusLabels | nindent 4 }}
 spec:
   podMetricsEndpoints:
   - port: exporter

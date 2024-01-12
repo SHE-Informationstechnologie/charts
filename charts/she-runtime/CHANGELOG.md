@@ -1,3 +1,7 @@
+# 0.0.94
+
+- bumped chart version of internal and public ingress controller to 4.9.0
+
 # 0.0.93
 
 - update Readme

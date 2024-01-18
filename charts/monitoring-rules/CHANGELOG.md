@@ -1,3 +1,8 @@
+# 2.0.8
+
+- Fix prometheus rule label indentation
+- add minio monitoring rules
+
 # 2.0.6
 
 # Fix templating issues with grafana dashboards

@@ -9,6 +9,5 @@ metadata:
     k8s-sidecar-target-directory: "/tmp/dashboards/Postgres"
 data:
   "grafana-trivy-dashboard.json": |
-    {{ $.Files.Get "dashboards/grafana-dashboard-trivy.json" | fromJson | toJson }}
-
+    {{- $.Files.Get "dashboards/grafana-dashboard-trivy.json" | nindent 4 }}
 {{end}}

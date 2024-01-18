@@ -9,6 +9,6 @@ metadata:
     k8s-sidecar-target-directory: "/tmp/dashboards/Postgres"
 data:
   "minio-dashboard.json": |
-    {{ $.Files.Get "dashboards/minio-dashboard.json" | fromJson | toJson }}
+    {{- $.Files.Get "dashboards/minio-dashboard.json" | nindent 4 }}
 
 {{ end }}

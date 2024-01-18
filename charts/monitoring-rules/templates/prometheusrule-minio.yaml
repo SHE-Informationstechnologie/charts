@@ -5,7 +5,7 @@ metadata:
   name: {{ include "monitoring-rules.fullname" . }}-minio
   labels:
     {{- include "monitoring-rules.labels" . | nindent 4 }}
-    {{ toYaml .Values.prometheusLabels }}
+    {{ toYaml .Values.prometheusLabels | nindent 4 }}
 spec:
   groups:
   - name: minio-rules
@@ -32,12 +32,42 @@ spec:
     {{- end }}
     {{- if not ( default false .Values.minio.disabledRules.diskSpaceUsage ) }}
     - alert: MinioDiskSpaceUsage
-      expr: 'disk_storage_available / disk_storage_total * 100 < 10'
+      expr: 'disk_storage_available / disk_storage_total * 100 < 20'
       for: 0m
       labels:
         severity: warning
       annotations:
         summary: {{` 'Minio disk space usage (instance {{ $labels.instance }})' `}}
+        description: {{` 'Minio available free space is low (< 20%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}' `}}
+    {{- end }}
+    {{- if not ( default false .Values.minio.disabledRules.diskSpaceUsageCritical ) }}
+    - alert: MinioDiskSpaceUsageCritical
+      expr: 'disk_storage_available / disk_storage_total * 100 < 10'
+      for: 0m
+      labels:
+        severity: critical
+      annotations:
+        summary: {{` 'Minio disk space usage (instance {{ $labels.instance }})' `}}
         description: {{` 'Minio available free space is low (< 10%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}' `}}
+    {{- end }}
+    {{- if not ( default false .Values.minio.disabledRules.linkOffline ) }}
+    - alert: MinioClusterReplicationLinkOffline
+      expr: sum by (exported_endpoint, namespace) (minio_cluster_replication_link_online == 0)
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: {{` 'Minio cluster replication not working. Link to {{ $labels.exported_endpoint }} is offline' `}}
+        description: {{` 'Minio cluster replication link to {{ $labels.exported_endpoint }} is offline\n LABELS = {{ $labels }}' `}}
+    {{- end }}
+    {{- if not ( default false .Values.minio.disabledRules.queuedBytes ) }}
+    - alert: MinioClusterReplicationBytesQueuingUp
+      expr: sum by (exported_endpoint, namespace) ( minio_cluster_replication_last_minute_queued_bytes ) > 80 
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: {{` 'Minio cluster replication to {{ $labels.exported_endpoint }} is queuing up bytes.' `}}
+        description: {{` 'Minio cluster replication is queing up bytes. Bytes queued up in the last minute: {{ $value }}' `}}
     {{- end }}
 {{ end }}

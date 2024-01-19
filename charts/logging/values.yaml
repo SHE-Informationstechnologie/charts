@@ -4,7 +4,7 @@
 
 # Global settings
 general:
-  version: 8.9.1
+  version: 8.11.1
 
 
 # Elasticsearch specific settings
@@ -102,6 +102,12 @@ filebeat:
 
   config:
     filebeat:
+      inputs:
+        - type: journald
+          id: everything
+          seek: cursor
+          cursor_seek_fallback: since
+          since: -24h
       autodiscover:
         providers:
         # Use the kubernetes provider and expand logging by ns/pod/node metadata
@@ -137,12 +143,20 @@ filebeat:
           - name: ilmconfig
             mountPath: /etc/filebeat-ilm.json
             subPath: filebeat-ilm.json
-          - name: varlogcontainers
-            mountPath: /var/log/containers
-          - name: varlogpods
-            mountPath: /var/log/pods
           - name: varlibdockercontainers
             mountPath: /var/lib/docker/containers
+          - name: varlog
+            readOnly: true
+            mountPath: /var/log
+          - name: runlog
+            readOnly: true
+            mountPath: /run/log
+          - name: runsystemd
+            readOnly: true
+            mountPath: /run/systemd
+          - name: etcmachineid
+            readOnly: true
+            mountPath: /etc/machine-id
           env:
             - name: NODE_NAME
               valueFrom:
@@ -155,15 +169,21 @@ filebeat:
         - name: ilmconfig
           configMap:
             name: filebeat-ilm
-        - name: varlogcontainers
-          hostPath:
-            path: /var/log/containers
-        - name: varlogpods
-          hostPath:
-            path: /var/log/pods
         - name: varlibdockercontainers
           hostPath:
             path: /var/lib/docker/containers
+        - name: varlog
+          hostPath:
+            path: /var/log
+        - name: runlog
+          hostPath:
+            path: /run/log
+        - name: runsystemd
+          hostPath:
+            path: /run/systemd
+        - name: etcmachineid
+          hostPath:
+            path: /etc/machine-id
 
   # Management the Index Lifecycle Managemt of the filebeat index
   ilm:
@@ -199,7 +219,8 @@ kibana:
   # Please consult the documentation or
   # kubectl explain elasticsearch
   #
-  #config <object>
+  config:
+    monitoring.ui.ccs.enabled: false
   # elasticsearchRef <object>
   # enterpriseSearchRef <object>
   # image <string>
@@ -235,3 +256,5 @@ kibana:
       - secretName: example-tls
         hosts:
           - kibana.example.local
+
+

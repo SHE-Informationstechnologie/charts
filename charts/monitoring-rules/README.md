@@ -13,6 +13,8 @@ A Helm chart for Kubernetes
 | kubernetes.enabled | bool | `true` |  |
 | kubernetes.masterIsMissing.amount | int | `3` |  |
 | kubernetes.masterIsMissing.role | string | `"master"` |  |
+| logging.enabled | bool | `false` |  |
+| logging.podMonitor | bool | `true` |  |
 | minio.disabledRules | object | `{}` |  |
 | minio.enabled | bool | `false` |  |
 | minio.grafanaDashboards.enabled | bool | `true` |  |

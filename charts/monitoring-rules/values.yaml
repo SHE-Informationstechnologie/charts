@@ -96,3 +96,7 @@ trivy:
   # deploy dashboard
   grafanaDashboards:
     enabled: true
+
+logging:
+  enabled: false
+  podMonitor: true

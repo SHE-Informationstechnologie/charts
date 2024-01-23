@@ -3,14 +3,15 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: {{ include "monitoring-rules.fullname" . }}-logging-filebeat
+  namespace: {{ .Values.logging.namespace }}
   labels:
     {{- include "monitoring-rules.labels" . | nindent 4 }}
-    {{ toYaml .Values.prometheusLabels | nindent 4 }}
+    {{- toYaml .Values.prometheusLabels | nindent 4 }}
 spec:
   podMetricsEndpoints:
   - port: metrics
     path: /metrics
   selector:
     matchLabels:
-      todo: TODO
+      k8s-app: filebeat
 {{ end }}

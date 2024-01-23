@@ -37,6 +37,7 @@ A Helm chart for Kubernetes
 | filebeat.config.http.enabled | bool | `true` |  |
 | filebeat.config.http.port | int | `5066` |  |
 | filebeat.config.processors[0].add_host_metadata | object | `{}` |  |
+| filebeat.daemonSet.podTemplate.metadata.labels.k8s-app | string | `"filebeat"` |  |
 | filebeat.daemonSet.podTemplate.spec.automountServiceAccountToken | bool | `true` |  |
 | filebeat.daemonSet.podTemplate.spec.containers[0].env[0].name | string | `"NODE_NAME"` |  |
 | filebeat.daemonSet.podTemplate.spec.containers[0].env[0].valueFrom.fieldRef.fieldPath | string | `"spec.nodeName"` |  |

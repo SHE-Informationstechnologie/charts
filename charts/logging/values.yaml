@@ -121,6 +121,9 @@ filebeat:
       port: 5066
   daemonSet:
     podTemplate:
+      metadata:
+        labels:
+          k8s-app: filebeat
       spec:
         serviceAccountName: filebeat
         automountServiceAccountToken: true

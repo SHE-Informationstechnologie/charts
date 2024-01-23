@@ -99,4 +99,5 @@ trivy:
 
 logging:
   enabled: false
+  namespace: logging
   podMonitor: true

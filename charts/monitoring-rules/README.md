@@ -14,6 +14,7 @@ A Helm chart for Kubernetes
 | kubernetes.masterIsMissing.amount | int | `3` |  |
 | kubernetes.masterIsMissing.role | string | `"master"` |  |
 | logging.enabled | bool | `false` |  |
+| logging.namespace | string | `"logging"` |  |
 | logging.podMonitor | bool | `true` |  |
 | minio.disabledRules | object | `{}` |  |
 | minio.enabled | bool | `false` |  |

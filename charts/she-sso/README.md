@@ -14,6 +14,7 @@ Integration internal cluster services into SHE SSO
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| argocd.annotations."app.kubernetes.io/part-of" | string | `"argocd"` |  |
 | argocd.config.cm."admin.enabled" | string | `"true"` |  |
 | argocd.config.cm."application.instanceLabelKey" | string | `"argocd.argoproj.io/instance"` |  |
 | argocd.config.cm."exec.enabled" | string | `"false"` |  |

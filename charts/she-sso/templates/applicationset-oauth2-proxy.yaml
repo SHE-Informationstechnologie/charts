@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: {{ default (printf "oauth2-proxy-%s" .name) .overwriteName }}
+  name: {{ default "oauth2-proxies" .overwriteName }}
   namespace: {{ default "monitoring" .namespace }}
   labels:
     {{- include "she-sso.labels" $ | nindent 4 }}

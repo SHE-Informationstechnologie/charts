@@ -1,0 +1,97 @@
+# Default values for she-sso.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+oAuthProxyServices:
+  - name: alertmanager
+    # namespace: monitoring
+    ingress:
+      enabled: true
+      # overwriteName: alertmanager-replace
+      hosts:
+        - host: alertmanager.example.com
+          path: /oauth2
+      tls:
+        - hosts:
+            - alertmanager.example.com
+    service:
+      enabled: true
+      # overwriteName: alternative-alertmanager
+
+  - name: prometheus
+    namespace: test
+    overwriteName: test
+    ingress:
+      enabled: true
+      # overwriteName: alertmanager-replace
+      hosts:
+        - host: alertmanager.example.com
+          path: /oauth2
+      tls:
+        - hosts:
+            - alertmanager.example.com
+    service:
+      enabled: true
+      # overwriteName: alternative-alertmanager
+
+oAuthProxy:
+  source:
+    repoURL: https://oauth2-proxy.github.io/manifests
+    chart: oauth2-proxy
+    targetRevision: 6.23.1
+  image:
+    repository: quay.io/oauth2-proxy/oauth2-proxy
+  imagePullSecrets: []
+  redis:
+    enabled: true
+    existingSecret: redis-password
+    passwordKey: password
+    connectionUrl: redis://redis-master.default.svc.cluster.local:6379
+  config:
+    existingSecret: secret-config
+    configFile: |
+      provider = "keycloak-oidc"
+      email_domains = [ "*" ]
+      cookie_domains = ".example.org"
+      cookie_secure = "true"
+      oidc_issuer_url = "https://sso.example.org/realms/example"
+      redirect_url = "https://{{url}}/oauth2/callback"
+      code_challenge_method = "S256"
+      ssl_insecure_skip_verify = "true"
+      set_authorization_header = "true"
+
+
+argocd:
+  enabled: true
+  # namespace: argocd
+  config:
+    cm:
+      admin.enabled: "true"
+      application.instanceLabelKey: argocd.argoproj.io/instance
+      exec.enabled: "false"
+      oidc.config: |
+        name: "Example SSO"
+        clientID: client-id
+        clientSecret: $oidc.keycloak.clientSecret
+        issuer: https://sso.example.com/realms/example
+        skipAudienceCheckWhenTokenHasNoAudience: true
+        requestedScopes: ["openid", "profile", "email", "roles"]
+        requestedIDTokenClaims: {"roles": {"essential": true}}
+      oidc.tls.insecure.skip.verify: "true"
+      server.rbac.log.enforce.enable: "false"
+      timeout.hard.reconciliation: 0s
+      timeout.reconciliation: 180s
+      url: https://argocd.example.com
+    rbac:
+      policy.csv: |
+        g, devops_admin, role:admin
+      policy.default: role:readonly
+      scopes: '[roles]'
+
+redis:
+  enabled: true
+  image:
+    registry: docker.io
+    pullSecrets: []
+  auth:
+    existingSecret: redis-password
+    existingSecretPasswordKey: password

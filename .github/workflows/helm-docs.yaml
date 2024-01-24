@@ -5,18 +5,25 @@ on: push
 jobs:
   docs:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        chart: [ grafana-dashboards, kyverno-policies, logging, monitoring-rules, s3-monitoring, she-runtime]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - uses: gabe565/setup-helm-docs-action@v1
-      - run: helm-docs
-        working-directory: './charts/${{ matrix.chart }}'
-      - run: find . -type f -name README.md -exec sed -i '$ d' {} \;
-        working-directory: './charts/${{ matrix.chart }}'
-      - run: |
-          git add -N .
-          git diff --quiet || (echo '::error::Please make sure that the README.md is up to date' && exit 1)
+      - run: helm-docs --chart-search-root=charts --template-files=./README.md.gotmpl
+      - name: Verify Changed files
+        uses: tj-actions/verify-changed-files@v17
+        id: verify-changed-files
+        with:
+          files: |
+             charts/*/README.md
+      - name: Show information of changed files
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        env:
+          CHANGED_FILES: ${{ steps.verify-changed-files.outputs.changed_files }}
+        run: |        
+          for file in ${CHANGED_FILES}
+          do
+            echo "::error file=${file}::File ${file} has been changed"
+          done
+          exit 1

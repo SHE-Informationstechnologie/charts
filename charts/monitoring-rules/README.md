@@ -37,4 +37,3 @@ A Helm chart for Kubernetes
 | trivy.enabled | bool | `false` |  |
 | trivy.grafanaDashboards.enabled | bool | `true` |  |
 
-----------------------------------------------

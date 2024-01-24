@@ -12,4 +12,3 @@ A collection of policies for kyverno
 | policies.protectResourceByLabel.enabled | bool | `true` |  |
 | policies.protectResourceByLabel.message | string | `"If you want to delete it anyways make sure to remove the kubernetes.she.net/protected label"` |  |
 
-----------------------------------------------

@@ -4,6 +4,16 @@
 
 S3 usage monitoring with Prometheus metrics export
 
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| prometheusEnabled | bool | `false` |  |
+| prometheusLabels | string | `nil` |  |
+| prometheusNamespace | string | `""` |  |
+| s3monitoringEnabled | bool | `false` |  |
+| serviceMonitorEnabled | bool | `false` |  |
+
 ## Required Secrets
 
 For the monitoring to work a config file is required. This config file must be provided as a secret named `{{  .Release.Name }}-secret`. The config file must have the following format:
@@ -14,16 +24,6 @@ YKWJHYKYBZMAYOZ071DC  PJ9AXIFEOG4DNX9MGOZ6RBVN1WOKMVDIHL3C8KVU  default   s3-api
 ```
 The columns `Warn ... free` and `Crit ... free` can be zeroed out to suppress alerts being generated before the storage is full.
 In the example above the first entry has alerts for percentages configured while the second entry has alerts for bytes configured.
-
-## Values
-
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| prometheusEnabled | bool | `false` |  |
-| prometheusLabels | string | `nil` |  |
-| prometheusNamespace | string | `""` |  |
-| s3monitoringEnabled | bool | `false` |  |
-| serviceMonitorEnabled | bool | `false` |  |
 
 ## Prometheus metrics
 | Name                                                           | Type  |
@@ -36,5 +36,3 @@ In the example above the first entry has alerts for percentages configured while
 | s3_percentage_used_total{access_key_id="accessKeyID"}          | float |
 | s3_percentage_free_total_warn{access_key_id="accessKeyID"}     | float |
 | s3_percentage_free_total_warn{access_key_id="accessKeyID"}     | float |
-
-----------------------------------------------

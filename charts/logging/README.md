@@ -97,4 +97,3 @@ A Helm chart for Kubernetes
 | kibana.ingress.tls[0].hosts[0] | string | `"kibana.example.local"` |  |
 | kibana.ingress.tls[0].secretName | string | `"example-tls"` |  |
 
-----------------------------------------------

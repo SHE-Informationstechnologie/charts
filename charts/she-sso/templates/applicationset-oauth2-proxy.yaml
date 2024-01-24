@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: {{ default "oauth2-proxies" .overwriteName }}
-  namespace: {{ default "monitoring" .namespace }}
+  namespace: {{ default "argocd" .namespace }}
   labels:
     {{- include "she-sso.labels" $ | nindent 4 }}
   {{- with .annotations }}
@@ -43,9 +43,8 @@ spec:
             {{- end }}
             {{- with .Values.oAuthProxy.imagePullSecrets }}
             imagePullSecrets:
-            {{ toYaml . | nindent 12 }}
+            {{ toYaml . | nindent 14 }}
             {{- end }}
-            {{- if .Values.oAuthProxy.redis.enabled }}
             sessionStorage:
               type: redis
               redis:
@@ -53,11 +52,12 @@ spec:
                 passwordKey: {{ .Values.oAuthProxy.redis.passwordKey }}
                 standalone:
                   connectionUrl: {{ .Values.oAuthProxy.redis.connectionUrl }}
-            {{- end }}
-            {{- with .Values.oAuthProxy.config }}
             config:
-            {{ toYaml . | nindent 12 }}
-            {{- end }}
+              existingSecret: {{ default (printf "oauth2-proxy-{{name}}") .Values.oAuthProxy.existingSecret }}
+              {{- with .Values.oAuthProxy.config.configFile }}
+              configFile: |-
+              {{- . | nindent 16 }}
+              {{- end }}
       syncPolicy:
         automated:
           selfHeal: true

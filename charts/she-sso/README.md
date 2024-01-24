@@ -1,6 +1,6 @@
 # she-sso
 
-![Version: 0.0.3](https://img.shields.io/badge/Version-0.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.3](https://img.shields.io/badge/AppVersion-0.0.3-informational?style=flat-square)
+![Version: 0.0.4](https://img.shields.io/badge/Version-0.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.4](https://img.shields.io/badge/AppVersion-0.0.4-informational?style=flat-square)
 
 Integration internal cluster services into SHE SSO
 
@@ -38,20 +38,7 @@ Integration internal cluster services into SHE SSO
 | oAuthProxy.source.chart | string | `"oauth2-proxy"` |  |
 | oAuthProxy.source.repoURL | string | `"https://oauth2-proxy.github.io/manifests"` |  |
 | oAuthProxy.source.targetRevision | string | `"6.23.1"` |  |
-| oAuthProxyServices[0].ingress.enabled | bool | `true` |  |
-| oAuthProxyServices[0].ingress.hosts[0].host | string | `"alertmanager.example.com"` |  |
-| oAuthProxyServices[0].ingress.hosts[0].path | string | `"/oauth2"` |  |
-| oAuthProxyServices[0].ingress.tls[0].hosts[0] | string | `"alertmanager.example.com"` |  |
-| oAuthProxyServices[0].name | string | `"alertmanager"` |  |
-| oAuthProxyServices[0].service.enabled | bool | `true` |  |
-| oAuthProxyServices[1].ingress.enabled | bool | `true` |  |
-| oAuthProxyServices[1].ingress.hosts[0].host | string | `"alertmanager.example.com"` |  |
-| oAuthProxyServices[1].ingress.hosts[0].path | string | `"/oauth2"` |  |
-| oAuthProxyServices[1].ingress.tls[0].hosts[0] | string | `"alertmanager.example.com"` |  |
-| oAuthProxyServices[1].name | string | `"prometheus"` |  |
-| oAuthProxyServices[1].namespace | string | `"test"` |  |
-| oAuthProxyServices[1].overwriteName | string | `"test"` |  |
-| oAuthProxyServices[1].service.enabled | bool | `true` |  |
+| oAuthProxyServices | list | `[]` |  |
 | redis.auth.existingSecret | string | `"redis-password"` |  |
 | redis.auth.existingSecretPasswordKey | string | `"password"` |  |
 | redis.enabled | bool | `true` |  |

@@ -1,3 +1,6 @@
+# 0.0.7
+- Added missing argocd annotations
+
 # 0.0.6
 - Fixed various templatings
 

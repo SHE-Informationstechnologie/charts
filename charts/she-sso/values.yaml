@@ -47,6 +47,8 @@ oAuthProxy:
 argocd:
   enabled: true
   # namespace: argocd
+  annotations:
+    app.kubernetes.io/part-of: argocd
   config:
     cm:
       admin.enabled: "true"

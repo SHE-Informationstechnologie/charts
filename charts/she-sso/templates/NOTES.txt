@@ -1,6 +1,9 @@
 IMPORTANT!
 Additional manual installation steps required!
 
-1. Please manually fill out, encrypt (with kubeseal) and deploy all secrets found in "manual/secrets".
-2. Adapt the configuration in your she-runtime to enable the sso integration.
+1. Please manually fill out, encrypt (with kubeseal) and deploy all secrets found in "manual/secrets" (please check: [chart](https://github.com/SHE-Informationstechnologie/charts/tree/main/charts/she-sso/manual/secrets)).
+2. Add configurations to make your ingress controller authenticate all users of your SSO covered services against the SHE SSO provider.
    For that please add following annotations to each ingress, which will be processed by an oauth-proxy (most likely alertmanager and prometheus)
+
+      nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2/start?rd=$escaped_request_uri
+      nginx.ingress.kubernetes.io/auth-url: https://$host/oauth2/auth

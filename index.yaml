@@ -1286,4 +1286,20 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-runtime-0.0.1/she-runtime-0.0.1.tgz
     version: 0.0.1
-generated: "2024-01-18T15:30:48.82577381Z"
+  she-sso:
+  - apiVersion: v2
+    appVersion: 0.0.2
+    created: "2024-01-24T16:45:16.72702753Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 18.8.0
+    description: Integration internal cluster services into SHE SSO
+    digest: 84c881b529809f6596556b5884569d7cd16d48471153d4b6eed4b69894527ee7
+    name: she-sso
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-sso-0.0.2/she-sso-0.0.2.tgz
+    version: 0.0.2
+generated: "2024-01-24T16:45:16.727281906Z"

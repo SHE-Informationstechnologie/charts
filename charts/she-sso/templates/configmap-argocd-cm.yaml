@@ -1,0 +1,18 @@
+---
+{{- if .Values.argocd.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: {{ default "argocd" .Values.argocd.namespace }}
+  labels:
+    {{- include "she-sso.labels" $ | nindent 4 }}
+  {{- with .Values.argocd.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+data:
+{{- with .Values.argocd.config.cm }}
+{{- toYaml . | nindent 2 }}
+{{- end }}
+{{- end }}

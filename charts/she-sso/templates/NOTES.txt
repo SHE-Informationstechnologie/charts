@@ -1,0 +1,6 @@
+IMPORTANT!
+Additional manual installation steps required!
+
+1. Please manually fill out, encrypt (with kubeseal) and deploy all secrets found in "manual/secrets".
+2. Adapt the configuration in your she-runtime to enable the sso integration.
+   For that please add following annotations to each ingress, which will be processed by an oauth-proxy (most likely alertmanager and prometheus)

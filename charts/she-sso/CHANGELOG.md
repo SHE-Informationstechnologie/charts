@@ -1,3 +1,6 @@
+# 0.0.8
+- Improved NOTES.txt and additional manual installation steps
+
 # 0.0.7
 - Added missing argocd annotations
 

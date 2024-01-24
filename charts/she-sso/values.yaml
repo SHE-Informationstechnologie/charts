@@ -1,37 +1,21 @@
 # Default values for she-sso.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-oAuthProxyServices:
-  - name: alertmanager
-    # namespace: monitoring
-    ingress:
-      enabled: true
-      # overwriteName: alertmanager-replace
-      hosts:
-        - host: alertmanager.example.com
-          path: /oauth2
-      tls:
-        - hosts:
-            - alertmanager.example.com
-    service:
-      enabled: true
-      # overwriteName: alternative-alertmanager
-
-  - name: prometheus
-    namespace: test
-    overwriteName: test
-    ingress:
-      enabled: true
-      # overwriteName: alertmanager-replace
-      hosts:
-        - host: alertmanager.example.com
-          path: /oauth2
-      tls:
-        - hosts:
-            - alertmanager.example.com
-    service:
-      enabled: true
-      # overwriteName: alternative-alertmanager
+oAuthProxyServices: []
+  # - name: alertmanager
+  #   # namespace: monitoring
+  #   ingress:
+  #     enabled: true
+  #     # overwriteName: alertmanager-replace
+  #     hosts:
+  #       - host: alertmanager.example.com
+  #         path: /oauth2
+  #     tls:
+  #       - hosts:
+  #           - alertmanager.example.com
+  #   service:
+  #     enabled: true
+  #     # overwriteName: alternative-alertmanager
 
 oAuthProxy:
   source:

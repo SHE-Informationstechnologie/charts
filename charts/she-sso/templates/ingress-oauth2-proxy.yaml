@@ -54,7 +54,11 @@ spec:
               service:
                 name: {{ default (printf "oauth2-proxy-%s" $service.name) $service.service.overwriteName }}
                 port:
-                  number: {{ default "http" $service.service.port }}
+                  {{- if (regexMatch "[0-9]+$" ($service.service.port | toString)) }}
+                  number: {{ $service.service.port }}
+                  {{- else }}
+                  name: {{ default "http" $service.service.port }}
+                  {{- end }}
               {{- else }}
               serviceName: {{ default (printf "oauth2-proxy-%s" $service.name) $service.service.overwriteName }}
               servicePort: {{ default "http" $service.service.port }}

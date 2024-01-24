@@ -2,8 +2,8 @@ apiVersion: v2
 name: she-sso
 description: Integration internal cluster services into SHE SSO
 type: application
-version: 0.0.4
-appVersion: "0.0.4"
+version: 0.0.5
+appVersion: "0.0.5"
 dependencies:
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts

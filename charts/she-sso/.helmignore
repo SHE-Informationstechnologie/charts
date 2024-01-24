@@ -23,4 +23,4 @@
 .vscode/
 
 # Development
-**/*.dev.yaml
+*.dev.yaml

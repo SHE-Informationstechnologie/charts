@@ -1,3 +1,6 @@
+# 0.0.10
+- Fixed stringData in manual secret
+
 # 0.0.9
 - Added documentation in values.yaml and additional step in NOTES.txt
 

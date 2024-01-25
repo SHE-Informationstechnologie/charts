@@ -1,0 +1,21 @@
+manifest should match snapshot:
+  1: |
+    apiVersion: monitoring.coreos.com/v1
+    kind: PodMonitor
+    metadata:
+      labels:
+        app.kubernetes.io/instance: RELEASE-NAME
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: monitoring-rules
+        app.kubernetes.io/version: 2.0.8
+        helm.sh/chart: monitoring-rules-2.0.8
+        release: kube-prometheus-stack
+      name: RELEASE-NAME-monitoring-rules-logging-filebeat
+      namespace: logging
+    spec:
+      podMetricsEndpoints:
+        - path: /metrics
+          port: metrics
+      selector:
+        matchLabels:
+          k8s-app: filebeat

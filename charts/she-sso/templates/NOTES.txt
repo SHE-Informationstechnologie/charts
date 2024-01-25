@@ -7,3 +7,8 @@ Additional manual installation steps required!
 
       nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2/start?rd=$escaped_request_uri
       nginx.ingress.kubernetes.io/auth-url: https://$host/oauth2/auth
+3. We are providing our own ArgoCD configmaps (containing OIDC settings and RBAC mapping). Thats why we need to disable the generation/handling of these configmaps by ArgoCD. So update the Helm installation of ArgoCD App and this settings:
+
+   configs.secret.createSecret=false
+   configs.cm.create=false
+   configs.rbac.create=false

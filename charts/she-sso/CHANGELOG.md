@@ -1,3 +1,6 @@
+# 0.0.9
+- Added documentation in values.yaml and additional step in NOTES.txt
+
 # 0.0.8
 - Improved NOTES.txt and additional manual installation steps
 

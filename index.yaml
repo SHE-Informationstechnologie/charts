@@ -1288,6 +1288,21 @@ entries:
     version: 0.0.1
   she-sso:
   - apiVersion: v2
+    appVersion: 0.0.9
+    created: "2024-01-25T12:01:55.033373515Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 18.8.0
+    description: Integration internal cluster services into SHE SSO
+    digest: dee7d9d76bd142b7d9f06226a46e4a8085c6f771e8d05867c2a2528ec26163e1
+    name: she-sso
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-sso-0.0.9/she-sso-0.0.9.tgz
+    version: 0.0.9
+  - apiVersion: v2
     appVersion: 0.0.8
     created: "2024-01-24T23:38:57.967314462Z"
     dependencies:
@@ -1377,4 +1392,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-sso-0.0.2/she-sso-0.0.2.tgz
     version: 0.0.2
-generated: "2024-01-24T23:38:57.967589787Z"
+generated: "2024-01-25T12:01:55.033554413Z"

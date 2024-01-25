@@ -23,7 +23,7 @@ spec:
     validate:
       message: |
         Deleting {{"{{request.oldObject.kind}}/{{request.oldObject.metadata.name}}"}} is prohibited by SHE Policy
-        
+
         {{ .message }}
       deny: {}
 {{ end }}

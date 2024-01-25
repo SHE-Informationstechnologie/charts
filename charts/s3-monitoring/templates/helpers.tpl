@@ -8,7 +8,7 @@ Expand the name of the chart.
 {{/*
 Common labels
 */}}
-{{- define "common.labels" -}} 
+{{- define "common.labels" -}}
 app.kubernetes.io/name: {{ template "name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/version: {{ .Chart.AppVersion }}

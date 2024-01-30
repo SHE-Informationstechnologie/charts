@@ -14,7 +14,6 @@
 {{ template "chart.requirementsSection" . }}
 
 {{ template "chart.valuesSection" . }}
-
 {{ range $path, $_ :=  ($.Files.Glob "docs/*.md").AsMap }}
-{{ $.Files.Get (print "../../" $path) }}
-{{ end }}
+{{ $.Files.Get (print "../../" $path) -}}
+{{ end -}}

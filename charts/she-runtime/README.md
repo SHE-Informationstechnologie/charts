@@ -161,4 +161,3 @@ SHE default K8s cluster toolset
 | velero.source.helm.values | string | `""` |  |
 | velero.source.repoURL | string | `"https://vmware-tanzu.github.io/helm-charts"` |  |
 | velero.source.targetRevision | string | `"5.1.7"` |  |
-

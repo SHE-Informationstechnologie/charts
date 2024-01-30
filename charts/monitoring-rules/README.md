@@ -36,4 +36,3 @@ A Helm chart for Kubernetes
 | prometheusLabels.release | string | `"kube-prometheus-stack"` |  |
 | trivy.enabled | bool | `false` |  |
 | trivy.grafanaDashboards.enabled | bool | `true` |  |
-

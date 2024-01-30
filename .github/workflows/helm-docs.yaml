@@ -21,7 +21,7 @@ jobs:
         if: steps.verify-changed-files.outputs.files_changed == 'true'
         env:
           CHANGED_FILES: ${{ steps.verify-changed-files.outputs.changed_files }}
-        run: |        
+        run: |
           for file in ${CHANGED_FILES}
           do
             echo "::error file=${file}::File ${file} has been changed"

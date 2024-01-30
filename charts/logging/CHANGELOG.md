@@ -1,3 +1,7 @@
+# 1.1.0
+
+- add filebeat metrics
+
 # 1.0.4
 
 - update README.md

@@ -62,7 +62,7 @@ spec:
     {{- end }}
     {{- if not ( default false .Values.minio.disabledRules.queuedBytes ) }}
     - alert: MinioClusterReplicationBytesQueuingUp
-      expr: sum by (exported_endpoint, namespace) ( minio_cluster_replication_last_minute_queued_bytes ) > 80 
+      expr: sum by (exported_endpoint, namespace) ( minio_cluster_replication_last_minute_queued_bytes ) > 80
       for: 2m
       labels:
         severity: critical

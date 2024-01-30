@@ -4,4 +4,3 @@ policies:
     action: Enforce
     message: |-
       If you want to delete it anyways make sure to remove the kubernetes.she.net/protected label
-

@@ -1,0 +1,17 @@
+suite: test podmonitor filebeat
+templates:
+  - podmonitor-filebeat.yaml
+tests:
+  - it: should work
+    set:
+     logging.enabled: true
+     logging.podMonitor.enabled: true
+    asserts:
+      - isKind:
+          of: PodMonitor
+  - it: manifest should match snapshot
+    set:
+     logging.enabled: true
+     logging.podMonitor.enabled: true
+    asserts:
+      - matchSnapshot: {}

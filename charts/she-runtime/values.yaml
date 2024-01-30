@@ -333,4 +333,3 @@ minioOperator:
     #       env:
     #         - name: PROMETHEUS_NAMESPACE
     #           value: monitoring
-

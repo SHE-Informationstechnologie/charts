@@ -155,7 +155,7 @@ spec:
       annotations:
         description: {{`  'One or more settings in the pg_settings system catalog on system {{ $labels.job }} are in a pending_restart state. Check the system catalog for which settings are pending and review postgresql.conf for changes.' `}}
     {{- end }}
-  
+
   - name: pgbackrest-rules
     rules:
     {{- if not ( .Values.postgres.disabledRules.pgBackrestLastCompletedFull | default false ) }}

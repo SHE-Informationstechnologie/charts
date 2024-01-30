@@ -23,7 +23,7 @@ spec:
     {{- end }}
     {{- if not ( default false .Values.kubernetes.disabledRules.wrongAmountOfMasters ) }}
     - alert: WrongAmountOfMaster
-      expr: count(kube_node_role{role="{{ required "Must define role of master node!" .Values.kubernetes.masterIsMissing.role }}"}) < {{ required "Must define expected amount of master!" .Values.kubernetes.masterIsMissing.amount }} 
+      expr: count(kube_node_role{role="{{ required "Must define role of master node!" .Values.kubernetes.masterIsMissing.role }}"}) < {{ required "Must define expected amount of master!" .Values.kubernetes.masterIsMissing.amount }}
       for: 60s
       labels:
         service: kubernetes

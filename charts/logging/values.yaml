@@ -25,7 +25,7 @@ elasticsearch:
   # transport <object>
   # updateStrategy <object>
   # volumeClaimDeletePolicy <string>
-  
+
   # HTTP holds HTTP layer settings for Elasticsearch.
   http:
     tls:
@@ -116,9 +116,14 @@ filebeat:
     processors:
     - add_host_metadata: {}
     logging.json: true
-
+    http:
+      enabled: true
+      port: 5066
   daemonSet:
     podTemplate:
+      metadata:
+        labels:
+          k8s-app: filebeat
       spec:
         serviceAccountName: filebeat
         automountServiceAccountToken: true
@@ -148,6 +153,23 @@ filebeat:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
+        - name: beats-exporter
+          image: sepa/beats-exporter:220124
+          imagePullPolicy: Always
+          args:
+            - -l=error
+            - -p=5066
+          ports:
+            - containerPort: 8080
+              name: "metrics"
+              protocol: "TCP"
+          securityContext:
+            runAsUser: 1000
+          resources:
+            limits:
+              memory: 64Mi
+            requests:
+              memory: 64Mi
         tolerations:
         - operator: Exists
           effect: NoSchedule

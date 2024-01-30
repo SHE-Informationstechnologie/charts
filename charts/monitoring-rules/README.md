@@ -1,6 +1,6 @@
 # monitoring-rules
 
-![Version: 2.0.8](https://img.shields.io/badge/Version-2.0.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.0.8](https://img.shields.io/badge/AppVersion-2.0.8-informational?style=flat-square)
+![Version: 2.1.0](https://img.shields.io/badge/Version-2.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.0.8](https://img.shields.io/badge/AppVersion-2.0.8-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -13,6 +13,9 @@ A Helm chart for Kubernetes
 | kubernetes.enabled | bool | `true` |  |
 | kubernetes.masterIsMissing.amount | int | `3` |  |
 | kubernetes.masterIsMissing.role | string | `"master"` |  |
+| logging.enabled | bool | `false` |  |
+| logging.namespace | string | `"logging"` |  |
+| logging.podMonitor | bool | `true` |  |
 | minio.disabledRules | object | `{}` |  |
 | minio.enabled | bool | `false` |  |
 | minio.grafanaDashboards.enabled | bool | `true` |  |

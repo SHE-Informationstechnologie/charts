@@ -1,6 +1,6 @@
 # logging
 
-![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 8.9.1](https://img.shields.io/badge/AppVersion-8.9.1-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 8.9.1](https://img.shields.io/badge/AppVersion-8.9.1-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -34,7 +34,10 @@ A Helm chart for Kubernetes
 | filebeat.config.filebeat.autodiscover.providers[0].hints.enabled | bool | `true` |  |
 | filebeat.config.filebeat.autodiscover.providers[0].node | string | `"${NODE_NAME}"` |  |
 | filebeat.config.filebeat.autodiscover.providers[0].type | string | `"kubernetes"` |  |
+| filebeat.config.http.enabled | bool | `true` |  |
+| filebeat.config.http.port | int | `5066` |  |
 | filebeat.config.processors[0].add_host_metadata | object | `{}` |  |
+| filebeat.daemonSet.podTemplate.metadata.labels.k8s-app | string | `"filebeat"` |  |
 | filebeat.daemonSet.podTemplate.spec.automountServiceAccountToken | bool | `true` |  |
 | filebeat.daemonSet.podTemplate.spec.containers[0].env[0].name | string | `"NODE_NAME"` |  |
 | filebeat.daemonSet.podTemplate.spec.containers[0].env[0].valueFrom.fieldRef.fieldPath | string | `"spec.nodeName"` |  |
@@ -50,6 +53,17 @@ A Helm chart for Kubernetes
 | filebeat.daemonSet.podTemplate.spec.containers[0].volumeMounts[2].name | string | `"varlogpods"` |  |
 | filebeat.daemonSet.podTemplate.spec.containers[0].volumeMounts[3].mountPath | string | `"/var/lib/docker/containers"` |  |
 | filebeat.daemonSet.podTemplate.spec.containers[0].volumeMounts[3].name | string | `"varlibdockercontainers"` |  |
+| filebeat.daemonSet.podTemplate.spec.containers[1].args[0] | string | `"-l=error"` |  |
+| filebeat.daemonSet.podTemplate.spec.containers[1].args[1] | string | `"-p=5066"` |  |
+| filebeat.daemonSet.podTemplate.spec.containers[1].image | string | `"sepa/beats-exporter:220124"` |  |
+| filebeat.daemonSet.podTemplate.spec.containers[1].imagePullPolicy | string | `"Always"` |  |
+| filebeat.daemonSet.podTemplate.spec.containers[1].name | string | `"beats-exporter"` |  |
+| filebeat.daemonSet.podTemplate.spec.containers[1].ports[0].containerPort | int | `8080` |  |
+| filebeat.daemonSet.podTemplate.spec.containers[1].ports[0].name | string | `"metrics"` |  |
+| filebeat.daemonSet.podTemplate.spec.containers[1].ports[0].protocol | string | `"TCP"` |  |
+| filebeat.daemonSet.podTemplate.spec.containers[1].resources.limits.memory | string | `"64Mi"` |  |
+| filebeat.daemonSet.podTemplate.spec.containers[1].resources.requests.memory | string | `"64Mi"` |  |
+| filebeat.daemonSet.podTemplate.spec.containers[1].securityContext.runAsUser | int | `1000` |  |
 | filebeat.daemonSet.podTemplate.spec.dnsPolicy | string | `"ClusterFirstWithHostNet"` |  |
 | filebeat.daemonSet.podTemplate.spec.hostNetwork | bool | `true` |  |
 | filebeat.daemonSet.podTemplate.spec.securityContext.runAsUser | int | `0` |  |

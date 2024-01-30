@@ -28,7 +28,7 @@
 - update velero
 - update kube-prometheus-stack
 
-# 0.0.87 
+# 0.0.87
 
 - update argo-cd
 - update velero-aws-plugin
@@ -57,7 +57,7 @@ it should be tested if it still works after updating to this version
 
 # 0.0.83
 # Update kube-prometheus-stack
-- update kube-prometheus-stack 
+- update kube-prometheus-stack
 
 # 0.0.82
 # Update nginx-ingress
@@ -150,7 +150,7 @@ it should be tested if it still works after updating to this version
 
 # 0.0.60
 # PrometheusOperator
-- Made kubeStateMetrics and prometheusOperator (sub-component) configurable 
+- Made kubeStateMetrics and prometheusOperator (sub-component) configurable
 
 # 0.0.59
 - removed merge marker
@@ -280,13 +280,13 @@ Manual upgrade-steps required
 
 # 0.0.37
 
-## Prometheus 
+## Prometheus
 
 - fix skip tls verify in grafana sidecar
 
 # 0.0.36
 
-## Prometheus 
+## Prometheus
 
 - fix 0.0.32 and set skip tls verification to true
 
@@ -303,7 +303,7 @@ Manual upgrade-steps required
 # 0.0.31
 
 ## Prometheus
- - give grafana a pvc for alerting rules. 
+ - give grafana a pvc for alerting rules.
 
 
 # 0.0.21
@@ -326,7 +326,7 @@ Manual upgrade-steps required
 # 0.0.20
 ## Prometheus
 - Allow configuration of ingress annotations for all subcharts
-- Allow configuration of Grafana Oauth via .grafana.auth.generic_oauth 
+- Allow configuration of Grafana Oauth via .grafana.auth.generic_oauth
 - Allow configuration of Prometheus default rules, to selectively enable/disable Prometheus Default Rules
 
 # 0.0.19
@@ -351,4 +351,3 @@ Manual upgrade-steps required
 - Removed ingressClass from prometheusOperator
 - Fixed prometheusOperator.prometheus.serviceMonitorSelector
 - Added server.ingress.enabled parameter to argoApp
-

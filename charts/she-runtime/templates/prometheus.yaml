@@ -140,7 +140,7 @@ spec:
           {{- with .grafana.serviceMonitor }}
           serviceMonitor:
           {{- toYaml . | nindent 12 }}
-          {{- end }}  
+          {{- end }}
           grafana.ini:
             analytics:
               check_for_updates: true

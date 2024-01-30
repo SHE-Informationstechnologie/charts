@@ -1,3 +1,6 @@
+# 2.1.0
+- add filebeat metrics
+
 # 2.0.8
 
 - Fix prometheus rule label indentation

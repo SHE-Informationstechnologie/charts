@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   grafana-dashboards:
   - apiVersion: v2
+    appVersion: 0.0.10
+    created: "2024-01-30T08:06:23.250390706Z"
+    description: A collection of Dashboards for grafana
+    digest: 60b3c68acf520cb97d6d1cedc5d732da6470325058630510b032f19936b249b9
+    name: grafana-dashboards
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/grafana-dashboards-0.0.10/grafana-dashboards-0.0.10.tgz
+    version: 0.0.10
+  - apiVersion: v2
     appVersion: 0.0.9
     created: "2024-01-05T13:29:23.056789939Z"
     description: A collection of Dashboards for grafana
@@ -83,6 +93,16 @@ entries:
     version: 0.0.2
   kyverno-policies:
   - apiVersion: v2
+    appVersion: 0.0.5
+    created: "2024-01-30T08:06:23.336914166Z"
+    description: A collection of policies for kyverno
+    digest: c13ae55e33b659d2817b6b9a7cbb7dfd4780e60d359d76e934d7c45fa37c44de
+    name: kyverno-policies
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/kyverno-policies-0.0.5/kyverno-policies-0.0.5.tgz
+    version: 0.0.5
+  - apiVersion: v2
     appVersion: 0.0.4
     created: "2024-01-05T13:29:23.215506371Z"
     description: A collection of policies for kyverno
@@ -113,6 +133,16 @@ entries:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/kyverno-policies-0.0.1/kyverno-policies-0.0.1.tgz
     version: 0.0.1
   logging:
+  - apiVersion: v2
+    appVersion: 8.9.1
+    created: "2024-01-30T08:06:23.448989786Z"
+    description: A Helm chart for Kubernetes
+    digest: 8bd83ebe41d981923744db1fa930e61e100f00f2b3d757d65475725ec2cafc11
+    name: logging
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/logging-1.1.0/logging-1.1.0.tgz
+    version: 1.1.0
   - apiVersion: v2
     appVersion: 8.9.1
     created: "2024-01-05T13:29:23.367397619Z"
@@ -174,6 +204,16 @@ entries:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/logging-0.1.0/logging-0.1.0.tgz
     version: 0.1.0
   monitoring-rules:
+  - apiVersion: v2
+    appVersion: 2.0.8
+    created: "2024-01-30T08:06:23.641053888Z"
+    description: A Helm chart for Kubernetes
+    digest: 11a3094e6a06ba3b8e2fb60846065e42e3d637ec8ce1f587e2162914aba619ff
+    name: monitoring-rules
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/monitoring-rules-2.1.0/monitoring-rules-2.1.0.tgz
+    version: 2.1.0
   - apiVersion: v2
     appVersion: 2.0.8
     created: "2024-01-18T15:30:48.825356106Z"
@@ -356,6 +396,16 @@ entries:
     version: 0.2.0
   s3-monitoring:
   - apiVersion: v2
+    appVersion: 0.1.9
+    created: "2024-01-30T08:06:23.742427801Z"
+    description: S3 usage monitoring with Prometheus metrics export
+    digest: c9978f52ac467c9d888c9d8be59026e1a0d2a4bfbb01ef9b52a331d5c8310fd7
+    name: s3-monitoring
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/s3-monitoring-0.1.9/s3-monitoring-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v2
     appVersion: 0.1.0
     created: "2024-01-05T13:29:23.668376109Z"
     description: S3 usage monitoring with Prometheus metrics export
@@ -446,6 +496,16 @@ entries:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/s3-monitoring-0.1.0/s3-monitoring-0.1.0.tgz
     version: 0.1.0
   she-runtime:
+  - apiVersion: v2
+    appVersion: 0.0.95
+    created: "2024-01-30T08:06:23.863361785Z"
+    description: SHE default K8s cluster toolset
+    digest: ad539c62bfa3f224d542635e9c2b511e99b7bb069df7f2ff0b52cd345d186bbd
+    name: she-runtime
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-runtime-0.0.95/she-runtime-0.0.95.tgz
+    version: 0.0.95
   - apiVersion: v2
     appVersion: 0.0.94
     created: "2024-01-12T12:54:10.564830085Z"
@@ -1407,4 +1467,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-sso-0.0.2/she-sso-0.0.2.tgz
     version: 0.0.2
-generated: "2024-01-25T17:37:20.444956253Z"
+generated: "2024-01-30T08:06:23.863946672Z"

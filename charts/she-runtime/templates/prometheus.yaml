@@ -141,7 +141,15 @@ spec:
           serviceMonitor:
           {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- with .grafana.smtpConfig }}
+          smtp:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}  
           grafana.ini:
+            {{- with .grafana.smtp }}
+            smtp:
+            {{- toYaml . | nindent 14 }}
+            {{- end }}
             analytics:
               check_for_updates: true
             log:

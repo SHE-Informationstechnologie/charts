@@ -1,3 +1,7 @@
+# 0.0.96
+
+- add Feature to add grafana smtp config
+
 # 0.0.95
 
 - update Readme

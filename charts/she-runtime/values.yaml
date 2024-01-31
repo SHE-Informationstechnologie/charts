@@ -113,6 +113,12 @@ prometheusOperator:
     #   secretName: exmple
     #   readOnly: true
     #   defaultMode: 0440
+    # smtp:
+    #   enabled: false
+    # smtpConfig:
+    #   existingSecret: ""
+    #   userKey: ""
+    #   passwordKey: ""   
   prometheus:
     enabled: true
     crunchyPostgresExporter:

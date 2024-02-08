@@ -1,3 +1,6 @@
+# 0.0.11
+- Fixed broken labels in argocd resources
+
 # 0.0.10
 - Fixed stringData in manual secret
 

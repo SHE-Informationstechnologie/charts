@@ -96,5 +96,3 @@ A Helm chart for Kubernetes
 | kibana.ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | kibana.ingress.tls[0].hosts[0] | string | `"kibana.example.local"` |  |
 | kibana.ingress.tls[0].secretName | string | `"example-tls"` |  |
-
-----------------------------------------------

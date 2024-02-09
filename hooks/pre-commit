@@ -47,16 +47,10 @@ if ! command -v helm-docs >/dev/null; then
   exit 1
 fi
 
-# go into every directory that contains a Chart.yaml and generate docs
+# execute helm-docs
+helm-docs --chart-search-root=charts --template-files=./README.md.gotmpl
 
-find ./charts/ -type f -name Chart.yaml -execdir bash -c 'helm-docs 2>/dev/null' \;
-
-if [ "${OS_VERSION}" = "Darwin" ]; then
-  find ./charts -type f -name README.md -exec sed -i '' -e '$ d' {} \;
-else
-  find ./charts -type f -name README.md -exec sed -i '$ d' {} \;
-fi
-
-find ./charts -type f -name README.md -maxdepth 2 -mindepth 2 -exec git add '{}' \;
+# stage all README.md  files
+git add "*/README.md"
 
 info "Done"

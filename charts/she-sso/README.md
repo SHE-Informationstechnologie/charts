@@ -44,5 +44,3 @@ Integration internal cluster services into SHE SSO
 | redis.enabled | bool | `true` |  |
 | redis.image.pullSecrets | list | `[]` |  |
 | redis.image.registry | string | `"docker.io"` |  |
-
-----------------------------------------------

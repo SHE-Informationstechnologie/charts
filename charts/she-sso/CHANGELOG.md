@@ -1,3 +1,6 @@
+# 0.0.12
+- Nothing
+
 # 0.0.11
 - Fixed broken labels in argocd resources
 

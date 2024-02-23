@@ -1,3 +1,6 @@
+# 0.0.97
+- Added thanos ingress and external setting
+
 # 0.0.96
 
 - add Feature to add grafana smtp config

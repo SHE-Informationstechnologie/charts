@@ -182,6 +182,14 @@ spec:
           {{- toYaml . | nindent 10 }}
         {{- end }}
         prometheus:
+          {{- with .prometheus.thanosIngress }}
+          thanosIngress:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .prometheus.thanosExternalService }}
+          thanosExternalService:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
           prometheusSpec:
           {{- if .prometheus.prometheusSpec }}
             {{- with unset .prometheus.prometheusSpec "additionalScrapeConfigs" }}

@@ -115,6 +115,8 @@ SHE default K8s cluster toolset
 | prometheusOperator.prometheus.enabled | bool | `true` |  |
 | prometheusOperator.prometheus.ingress | object | `{}` |  |
 | prometheusOperator.prometheus.prometheusSpec.storageSpec | object | `{}` |  |
+| prometheusOperator.prometheus.thanosExternalService.enabled | bool | `false` |  |
+| prometheusOperator.prometheus.thanosIngress.enabled | bool | `false` |  |
 | prometheusOperator.prometheusNodeExporter.hostNetwork | bool | `true` |  |
 | prometheusOperator.prometheusNodeExporter.prometheus.monitor.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
 | prometheusOperator.prometheusOperator | object | `{}` |  |

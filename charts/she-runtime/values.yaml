@@ -139,6 +139,10 @@ prometheusOperator:
       # annotations: {}
     prometheusSpec:
       storageSpec: {}
+    thanosIngress:
+      enabled: false
+    thanosExternalService:
+      enabled: false
   # defaultRules: {}
   source:
     repoURL: https://prometheus-community.github.io/helm-charts

@@ -2,5 +2,5 @@ apiVersion: v2
 name: she-runtime
 description: SHE default K8s cluster toolset
 type: application
-version: 0.0.97
-appVersion: "0.0.97"
+version: 0.0.98
+appVersion: "0.0.98"

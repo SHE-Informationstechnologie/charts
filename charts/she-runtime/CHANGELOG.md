@@ -1,3 +1,6 @@
+# 0.0.98
+- Nothing
+
 # 0.0.97
 - Added thanos ingress and external setting
 

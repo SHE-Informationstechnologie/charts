@@ -1,3 +1,6 @@
+# 0.0.100
+- Added missing hooks
+
 # 0.0.99
 - Added thanos service
 

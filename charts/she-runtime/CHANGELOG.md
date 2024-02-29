@@ -1,3 +1,12 @@
+# 0.0.101
+- Fixed thanosServiceExternal
+
+# 0.0.100
+- Added missing hooks
+
+# 0.0.99
+- Added thanos service
+
 # 0.0.98
 - Nothing
 

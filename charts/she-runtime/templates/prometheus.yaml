@@ -186,8 +186,12 @@ spec:
           thanosIngress:
           {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .prometheus.thanosExternalService }}
-          thanosExternalService:
+          {{- with .prometheus.thanosServiceExternal }}
+          thanosServiceExternal:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .prometheus.thanosService }}
+          thanosService:
           {{- toYaml . | nindent 12 }}
           {{- end }}
           prometheusSpec:

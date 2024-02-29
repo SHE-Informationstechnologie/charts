@@ -141,7 +141,9 @@ prometheusOperator:
       storageSpec: {}
     thanosIngress:
       enabled: false
-    thanosExternalService:
+    thanosService:
+      enabled: true
+    thanosServiceExternal:
       enabled: false
   # defaultRules: {}
   source:

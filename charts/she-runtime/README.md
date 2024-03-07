@@ -88,6 +88,12 @@ SHE default K8s cluster toolset
 | minioOperator.source.chart | string | `"operator"` |  |
 | minioOperator.source.repoURL | string | `"https://operator.min.io"` |  |
 | minioOperator.source.targetRevision | string | `"5.0.9"` |  |
+| opensearchOperator.enabled | bool | `false` |  |
+| opensearchOperator.name | string | `"opensearch-operator"` |  |
+| opensearchOperator.namespace | string | `"opensearch-operator"` |  |
+| opensearchOperator.source.chart | string | `"opensearch-operator"` |  |
+| opensearchOperator.source.repoURL | string | `"https://opensearch-project.github.io/opensearch-k8s-operator/"` |  |
+| opensearchOperator.source.targetRevision | string | `"2.5.1"` |  |
 | postgresOperator.enabled | bool | `true` |  |
 | postgresOperator.name | string | `"postgres-operator"` |  |
 | postgresOperator.namespace | string | `"postgres-operator"` |  |

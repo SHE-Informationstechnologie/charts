@@ -345,3 +345,12 @@ minioOperator:
     #       env:
     #         - name: PROMETHEUS_NAMESPACE
     #           value: monitoring
+
+opensearchOperator:
+  enabled: false
+  namespace: opensearch-operator
+  name: opensearch-operator
+  source:
+    repoURL: https://opensearch-project.github.io/opensearch-k8s-operator/
+    chart: opensearch-operator
+    targetRevision: 2.5.1

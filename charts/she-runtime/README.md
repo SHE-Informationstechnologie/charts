@@ -141,6 +141,12 @@ SHE default K8s cluster toolset
 | sealedSecrets.source.helm.parameters[0].value | string | `"true"` |  |
 | sealedSecrets.source.repoURL | string | `"https://charts.bitnami.com/bitnami"` |  |
 | sealedSecrets.source.targetRevision | string | `"1.6.2"` |  |
+| taintController.enabled | bool | `true` |  |
+| taintController.name | string | `"taint-controller"` |  |
+| taintController.namespace | string | `"taint-controller"` |  |
+| taintController.source.chart | string | `"tainter"` |  |
+| taintController.source.repoURL | string | `"https://bagaluten.github.io/charts/"` |  |
+| taintController.source.targetRevision | string | `"0.1.3"` |  |
 | trivyOperator.enabled | bool | `false` |  |
 | trivyOperator.name | string | `"trivy-operator"` |  |
 | trivyOperator.namespace | string | `"trivy-operator"` |  |

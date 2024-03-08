@@ -345,3 +345,16 @@ minioOperator:
     #       env:
     #         - name: PROMETHEUS_NAMESPACE
     #           value: monitoring
+
+taintController:
+  enabled: true
+  namespace: taint-controller
+  name: taint-controller
+  source:
+    repoURL: https://bagaluten.github.io/charts/
+    chart: tainter
+    targetRevision: 0.1.3
+    # helm:
+    #   values: |
+    #     image:
+    #       tag: main

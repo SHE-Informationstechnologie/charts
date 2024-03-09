@@ -1,3 +1,6 @@
+# 0.0.102
+- Added taint controller
+
 # 0.0.101
 - Fixed thanosServiceExternal
 

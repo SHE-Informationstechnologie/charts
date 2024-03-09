@@ -1,3 +1,6 @@
+# 0.0.102
+- First version
+
 # 0.0.101
 - Fixed thanosServiceExternal
 

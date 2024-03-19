@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "minio-mirror.fullname" . }}
+  labels:
+    {{- include "minio-mirror.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{- include "minio-mirror.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "minio-mirror.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "minio-mirror.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        {{- range $config := .Values.config.syncConfig }}
+        - name: mirror-{{ $config.minioBucket }}
+          command: 
+            - /bin/bash
+          args:
+            - -c
+            - |-
+              for var in $(cat {{ default "/etc/minio/credentials" $.Values.config.minioCredentials.existingSecret.volumeMount.mountPath }}/{{ $config.minioSecretKey }}); do export SOURCE_${var}; done
+              for var in $(cat {{ default "/etc/target/credentials" $.Values.config.targetCredentials.existingSecret.volumeMount.mountPath }}/{{ $config.targetSecretKey }}); do export TARGET_${var}; done
+              mc alias set source {{ if default false $.Values.config.general.insecure }}--insecure{{ end }} {{ $.Values.config.general.minioUrl }} ${SOURCE_username} ${SOURCE_password}
+              mc alias set target {{ if default false $.Values.config.general.insecure }}--insecure{{ end }} {{ $.Values.config.general.targetUrl }} ${TARGET_aws_access_key_id} ${TARGET_aws_secret_access_key}
+              touch /tmp/healthy
+              mc mirror --watch {{ if default false $.Values.config.general.insecure }}--insecure{{ end }} {{ if default false $config.syncDeletions }}--remove{{ end }} source/{{ $config.minioBucket }} target/{{ $config.targetBucket }}/{{ $config.targetPrefix }}
+              rm /tmp/healthy
+          securityContext:
+            {{- toYaml $.Values.securityContext | nindent 12 }}
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
+          livenessProbe:
+            {{- toYaml $.Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml $.Values.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml $.Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: minio-credentials
+              mountPath: {{ default "/etc/minio/credentials" $.Values.config.minioCredentials.existingSecret.volumeMount.mountPath }}
+            - name: target-credentials
+              mountPath: {{ default "/etc/target/credentials" $.Values.config.targetCredentials.existingSecret.volumeMount.mountPath }}
+          {{- with $.Values.extraVolumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+        {{- end }}
+      volumes:
+        - name: minio-credentials
+          secret:
+            secretName: {{ .Values.config.minioCredentials.existingSecret.name }}
+            defaultMode: 420
+        - name: target-credentials
+          secret:
+            secretName: {{ .Values.config.targetCredentials.existingSecret.name }}
+            defaultMode: 420
+      {{- with .Values.extraVolumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

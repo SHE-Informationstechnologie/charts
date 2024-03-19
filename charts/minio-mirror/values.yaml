@@ -1,0 +1,105 @@
+# Default values for minio-mirror.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+config:
+  general:
+    minioUrl: https://minio.minio.svc.cluster.local:9000
+    targetUrl: https://s3.exanple.com
+    insecure: true
+
+  minioCredentials:
+    existingSecret:
+      name: secret-name
+      volumeMount: {}
+        # mountPath: /etc/minio/credentials
+
+  targetCredentials:
+    existingSecret:
+      name: secret-name
+      volumeMount: {}
+        # mountPath: /etc/minio/credentials
+
+  syncConfig:
+  - minioBucket: example-bucket
+    minioSecretKey: key-in-secret
+    targetBucket: example-bucket
+    targetSecretKey: key-in-secret
+    targetPrefix: sub/
+    syncDeletions: true
+
+image:
+  repository: minio/mc
+  pullPolicy: IfNotPresent
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+livenessProbe:
+  exec:
+    command:
+      - cat
+      - /tmp/healthy
+  initialDelaySeconds: 5
+  periodSeconds: 5
+
+readinessProbe:
+  exec:
+    command:
+      - cat
+      - /tmp/healthy
+  initialDelaySeconds: 5
+  periodSeconds: 5
+
+# Additional volumes on the output Deployment definition.
+extraVolumes: []
+# - name: foo
+#   secret:
+#     secretName: mysecret
+#     optional: false
+
+# Additional volumeMounts on the output Deployment definition.
+extraVolumeMounts: []
+# - name: foo
+#   mountPath: "/etc/foo"
+#   readOnly: true
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

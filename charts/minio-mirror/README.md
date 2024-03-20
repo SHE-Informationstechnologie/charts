@@ -1,6 +1,6 @@
 # minio-mirror
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: RELEASE.2024-03-13T23-51-57Z](https://img.shields.io/badge/AppVersion-RELEASE.2024--03--13T23--51--57Z-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: RELEASE.2024-03-13T23-51-57Z](https://img.shields.io/badge/AppVersion-RELEASE.2024--03--13T23--51--57Z-informational?style=flat-square)
 
 A Helm chart that provides a minio mirror service
 
@@ -16,7 +16,6 @@ A Helm chart that provides a minio mirror service
 | config.minioCredentials.existingSecret.volumeMount | object | `{}` |  |
 | config.syncConfig[0].minioBucket | string | `"example-bucket"` |  |
 | config.syncConfig[0].minioSecretKey | string | `"key-in-secret"` |  |
-| config.syncConfig[0].syncDeletions | bool | `true` |  |
 | config.syncConfig[0].targetBucket | string | `"example-bucket"` |  |
 | config.syncConfig[0].targetPrefix | string | `"sub/"` |  |
 | config.syncConfig[0].targetSecretKey | string | `"key-in-secret"` |  |

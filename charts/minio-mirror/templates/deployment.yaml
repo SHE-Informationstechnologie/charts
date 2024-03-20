@@ -38,12 +38,20 @@ spec:
           args:
             - -c
             - |-
+              set -e
               for var in $(cat {{ default "/etc/minio/credentials" $.Values.config.minioCredentials.existingSecret.volumeMount.mountPath }}/{{ $config.minioSecretKey }}); do export SOURCE_${var}; done
               for var in $(cat {{ default "/etc/target/credentials" $.Values.config.targetCredentials.existingSecret.volumeMount.mountPath }}/{{ $config.targetSecretKey }}); do export TARGET_${var}; done
               mc alias set source {{ if default false $.Values.config.general.insecure }}--insecure{{ end }} {{ $.Values.config.general.minioUrl }} ${SOURCE_username} ${SOURCE_password}
               mc alias set target {{ if default false $.Values.config.general.insecure }}--insecure{{ end }} {{ $.Values.config.general.targetUrl }} ${TARGET_aws_access_key_id} ${TARGET_aws_secret_access_key}
               touch /tmp/healthy
-              mc mirror --watch {{ if default false $.Values.config.general.insecure }}--insecure{{ end }} {{ if default false $config.syncDeletions }}--remove{{ end }} source/{{ $config.minioBucket }} target/{{ $config.targetBucket }}/{{ $config.targetPrefix }}
+              mc mirror --watch
+              {{- if default false $.Values.config.general.insecure }} --insecure{{ end }}
+              {{- if default false $config.syncDeletions }} --remove{{ end }}
+              {{- if default false $config.overwrite }} --overwrite{{ end }}
+              {{- if default false $config.retry }} --retry{{ end }}
+              {{- if $config.limitUpload }} --limit-upload {{ $config.limitUpload }}{{ end }}
+              {{- if $config.limitDownload }} --limit-download {{ $config.limitDownload }}{{ end }}
+              {{- if true }} source/{{ $config.minioBucket }} target/{{ $config.targetBucket }}/{{ $config.targetPrefix }}{{ end }}
               rm /tmp/healthy
           securityContext:
             {{- toYaml $.Values.securityContext | nindent 12 }}

@@ -26,7 +26,11 @@ config:
     targetBucket: example-bucket
     targetSecretKey: key-in-secret
     targetPrefix: sub/
-    syncDeletions: true
+    # syncDeletions: false
+    # overwrite: false
+    # retry: false
+    # limitUpload: unlimited
+    # limitDownload: unlimited
 
 image:
   repository: minio/mc

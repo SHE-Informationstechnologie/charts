@@ -206,6 +206,16 @@ entries:
   minio-mirror:
   - apiVersion: v2
     appVersion: RELEASE.2024-03-13T23-51-57Z
+    created: "2024-03-22T08:38:36.543317886Z"
+    description: A Helm chart that provides a minio mirror service
+    digest: 0c9f7b8d1836aa34c9d754297983ee70331e0b4835441f2b9dd77f7b3befedd5
+    name: minio-mirror
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/minio-mirror-0.2.1/minio-mirror-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: RELEASE.2024-03-13T23-51-57Z
     created: "2024-03-20T23:29:39.165496469Z"
     description: A Helm chart that provides a minio mirror service
     digest: 6574fc2dff62d7e6dcc8ee3dad54e472fec50d60d12c12a1b6a906b873905681
@@ -527,6 +537,16 @@ entries:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/s3-monitoring-0.1.0/s3-monitoring-0.1.0.tgz
     version: 0.1.0
   she-runtime:
+  - apiVersion: v2
+    appVersion: 0.0.103
+    created: "2024-03-22T08:38:36.675825358Z"
+    description: SHE default K8s cluster toolset
+    digest: 08c7b314ee8b900113ba4aea3f7c8428360ba1df18cf08b0f156e04aa8da9d74
+    name: she-runtime
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-runtime-0.0.103/she-runtime-0.0.103.tgz
+    version: 0.0.103
   - apiVersion: v2
     appVersion: 0.0.102
     created: "2024-03-22T08:15:58.606194832Z"
@@ -1568,4 +1588,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-sso-0.0.2/she-sso-0.0.2.tgz
     version: 0.0.2
-generated: "2024-03-22T08:15:58.606505663Z"
+generated: "2024-03-22T08:38:36.676344192Z"

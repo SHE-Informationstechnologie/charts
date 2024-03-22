@@ -1,3 +1,6 @@
+# 0.2.1
+- nothing
+
 # 0.2.0
 - Added `retry` to retry failed uploads
 - Added `remove` option to sync deleted objects

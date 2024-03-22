@@ -1,3 +1,6 @@
+# 0.0.103
+- Add taint controller
+
 # 0.0.102
 - Add OpenSearch Operator
 

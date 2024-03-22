@@ -354,3 +354,16 @@ opensearchOperator:
     repoURL: https://opensearch-project.github.io/opensearch-k8s-operator/
     chart: opensearch-operator
     targetRevision: 2.5.1
+
+taintController:
+  enabled: false
+  namespace: taint-controller
+  name: taint-controller
+  source:
+    repoURL: https://bagaluten.github.io/charts/
+    chart: tainter
+    targetRevision: 0.1.3
+    # helm:
+    #   values: |
+    #     image:
+    #       tag: main

@@ -356,7 +356,7 @@ opensearchOperator:
     targetRevision: 2.5.1
 
 taintController:
-  enabled: true
+  enabled: false
   namespace: taint-controller
   name: taint-controller
   source:

@@ -147,7 +147,7 @@ SHE default K8s cluster toolset
 | sealedSecrets.source.helm.parameters[0].value | string | `"true"` |  |
 | sealedSecrets.source.repoURL | string | `"https://charts.bitnami.com/bitnami"` |  |
 | sealedSecrets.source.targetRevision | string | `"1.6.2"` |  |
-| taintController.enabled | bool | `true` |  |
+| taintController.enabled | bool | `false` |  |
 | taintController.name | string | `"taint-controller"` |  |
 | taintController.namespace | string | `"taint-controller"` |  |
 | taintController.source.chart | string | `"tainter"` |  |

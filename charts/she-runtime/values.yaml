@@ -43,13 +43,19 @@ eckOperator:
   enabled: false
   source:
     repoURL: https://helm.elastic.co
-    targetRevision:  2.10.0
+    targetRevision:  2.11.1
     chart: eck-operator
 
 prometheusOperator:
   namespace: monitoring
   name: prom-operator
   enabled: true
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 57.1.1
+    chart: kube-prometheus-stack
+    helm:
+      values: |
   global: {}
   commonLabels: {}
    # labelKey: labelValue
@@ -146,12 +152,6 @@ prometheusOperator:
     thanosServiceExternal:
       enabled: false
   # defaultRules: {}
-  source:
-    repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 56.8.0
-    chart: kube-prometheus-stack
-    helm:
-      values: |
 
 internalIngressController:
   namespace: internal-ingress
@@ -159,7 +159,7 @@ internalIngressController:
   enabled: true
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.9.0
+    targetRevision: 4.10.0
     chart: ingress-nginx
     helm:
       parameters:
@@ -171,13 +171,14 @@ internalIngressController:
           value: nginx-internal
         - name: controller.ingressClassResource.default
           value: 'true'
+
 publicIngressController:
   namespace: public-ingress
   name: public-ingress
   enabled: true
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.9.0
+    targetRevision: 4.10.0
     chart: ingress-nginx
     helm:
       parameters:
@@ -190,7 +191,7 @@ argoApp:
   enabled: false
   source:
     repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 5.51.6
+    targetRevision: 6.7.3
     chart: argo-cd
     helm:
       parameters:
@@ -203,6 +204,12 @@ velero:
   namespace: velero
   name: velero
   enabled: true
+  source:
+    repoURL: https://vmware-tanzu.github.io/helm-charts
+    targetRevision: 6.0.0
+    chart: velero
+    helm:
+      values: |
   initContainers:
   - name: velero-plugin-for-aws
     image: velero/velero-plugin-for-aws:v1.9.0
@@ -217,12 +224,6 @@ velero:
     limits:
       cpu: 1000m
       memory: 512Mi
-  source:
-    repoURL: https://vmware-tanzu.github.io/helm-charts
-    targetRevision: 5.1.7
-    chart: velero
-    helm:
-      values: |
 
 metrics:
   namespace: kube-system
@@ -230,7 +231,7 @@ metrics:
   enabled: false
   source:
     repoURL: https://kubernetes-sigs.github.io/metrics-server
-    targetRevision: 3.11.0
+    targetRevision: 3.12.0
     chart: metrics-server
     helm:
       values: |
@@ -261,7 +262,7 @@ kyvernoPolicies:
   source:
     repoURL: https://she-informationstechnologie.github.io/charts
     chart: kyverno-policies
-    targetRevision: 0.0.2
+    targetRevision: 0.0.5
 
 trivyOperator:
   enabled: false
@@ -270,7 +271,7 @@ trivyOperator:
   source:
     repoURL: https://aquasecurity.github.io/helm-charts/
     chart: trivy-operator
-    targetRevision: 0.18.1
+    targetRevision: 0.1.1
     helm:
       values: |
         serviceMonitor:
@@ -289,7 +290,7 @@ grafanaDashboards:
   source:
     repoURL: https://she-informationstechnologie.github.io/charts
     chart: grafana-dashboards
-    targetRevision: 0.0.8
+    targetRevision: 0.0.10
     # helm:
     #   values: |
     #     grafanaDashboard:
@@ -333,7 +334,7 @@ minioOperator:
   source:
     repoURL: https://operator.min.io
     chart: operator
-    targetRevision: 5.0.9
+    targetRevision: 5.0.14
     # helm:
     #   values: |
     #     console:

@@ -1,3 +1,20 @@
+# 1.0.0
+- Updated sealed-secrets from 1.6.0 to 2.0.0 (breaking changes, but none that affect us)
+- Updated eck-operator from 2.10.0 to 2.11.1 (no breaking changes)
+- Updated prometheus-operator from 56.8.0 to 57.1.1 (breaking changes, CRD update necessary)
+  - CRD update: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+- Updated internal/public-ingress from 4.9.1 to 4.10.0 (no breaking changes)
+- Updated argo-cd from 5.53.1 to 6.7.3 (breaking changes, but none that affect us)
+- Updated velero from 5.1.7 to 6.0.0 (this version removes the nodeAgent.privileged field, you should use nodeAgent.containerSecurityContext.privileged instead)
+- Updated metrics server from 3.11.0 to 3.12.0 (no breaking changes)
+- Updated kyverno from 3.0.5 to 3.1.4 (breaking changes, but none that affect us right now)
+- Updated kyverno policies from 0.0.3 to 0.0.5 (no breaking changes)
+- Updated trivy operator from 0.18.1 to 1.19.0 (breaking changes, CRD update necessary)
+  - CRD update: https://github.com/aquasecurity/trivy-operator/releases/tag/v0.19.0
+- Updated grafana dashboards from 0.0.8 to 0.0.10 (no breaking changes)
+- Updated argo-workflows from 0.38.0 to 0.41.0 (no breaking changes)
+- Updated minio operator from 5.0.9 to 5.0.14 (no breaking changes)
+
 # 0.0.104
 - Fixed pipeline and bumped chart to 1.0.4
 

@@ -130,7 +130,7 @@ SHE default K8s cluster toolset
 | prometheusOperator.source.chart | string | `"kube-prometheus-stack"` |  |
 | prometheusOperator.source.helm.values | string | `""` |  |
 | prometheusOperator.source.repoURL | string | `"https://prometheus-community.github.io/helm-charts"` |  |
-| prometheusOperator.source.targetRevision | string | `"55.3.0"` |  |
+| prometheusOperator.source.targetRevision | string | `"56.8.0"` |  |
 | publicIngressController.enabled | bool | `true` |  |
 | publicIngressController.name | string | `"public-ingress"` |  |
 | publicIngressController.namespace | string | `"public-ingress"` |  |
@@ -161,7 +161,7 @@ SHE default K8s cluster toolset
 | trivyOperator.source.repoURL | string | `"https://aquasecurity.github.io/helm-charts/"` |  |
 | trivyOperator.source.targetRevision | string | `"0.18.1"` |  |
 | velero.enabled | bool | `true` |  |
-| velero.initContainers[0].image | string | `"velero/velero-plugin-for-aws:v1.8.2"` |  |
+| velero.initContainers[0].image | string | `"velero/velero-plugin-for-aws:v1.9.0"` |  |
 | velero.initContainers[0].imagePullPolicy | string | `"IfNotPresent"` |  |
 | velero.initContainers[0].name | string | `"velero-plugin-for-aws"` |  |
 | velero.initContainers[0].volumeMounts[0].mountPath | string | `"/target"` |  |

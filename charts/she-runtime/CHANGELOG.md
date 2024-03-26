@@ -1,3 +1,6 @@
+# 1.2.0
+- Updated to 2.0.0 and disabled keyRenewPeriod in sealed secrets
+
 # 1.1.0
 - Added x509 exporter
 

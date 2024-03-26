@@ -1,5 +1,5 @@
 # 0.0.104
-- Fixed pipeline and bumped chart to 1.0.5
+- Fixed pipeline and bumped chart to 1.0.4
 
 # 0.0.103
 - Add taint controller

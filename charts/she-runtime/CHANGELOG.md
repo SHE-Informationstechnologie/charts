@@ -1,3 +1,6 @@
+# 1.1.0
+- Added x509 exporter
+
 # 1.0.1
 - Pipeline fix and bump to 1.0.1
 

@@ -1,3 +1,6 @@
+# 1.2.1
+- Fixed indent in velero default values
+
 # 1.2.0
 - Updated to 2.0.0 and disabled keyRenewPeriod in sealed secrets
 

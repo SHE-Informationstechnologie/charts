@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.0](https://img.shields.io/badge/AppVersion-1.2.0-informational?style=flat-square)
+![Version: 1.2.1](https://img.shields.io/badge/Version-1.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.2.1](https://img.shields.io/badge/AppVersion-1.2.1-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -163,19 +163,10 @@ SHE default K8s cluster toolset
 | trivyOperator.source.repoURL | string | `"https://aquasecurity.github.io/helm-charts/"` |  |
 | trivyOperator.source.targetRevision | string | `"0.1.1"` |  |
 | velero.enabled | bool | `true` |  |
-| velero.initContainers[0].image | string | `"velero/velero-plugin-for-aws:v1.9.0"` |  |
-| velero.initContainers[0].imagePullPolicy | string | `"IfNotPresent"` |  |
-| velero.initContainers[0].name | string | `"velero-plugin-for-aws"` |  |
-| velero.initContainers[0].volumeMounts[0].mountPath | string | `"/target"` |  |
-| velero.initContainers[0].volumeMounts[0].name | string | `"plugins"` |  |
 | velero.name | string | `"velero"` |  |
 | velero.namespace | string | `"velero"` |  |
-| velero.resources.limits.cpu | string | `"1000m"` |  |
-| velero.resources.limits.memory | string | `"512Mi"` |  |
-| velero.resources.requests.cpu | string | `"500m"` |  |
-| velero.resources.requests.memory | string | `"128Mi"` |  |
 | velero.source.chart | string | `"velero"` |  |
-| velero.source.helm.values | string | `""` |  |
+| velero.source.helm.values | string | `"initContainers:\n- name: velero-plugin-for-aws\n  image: velero/velero-plugin-for-aws:v1.9.0\n  imagePullPolicy: IfNotPresent\n  volumeMounts:\n  - mountPath: /target\n    name: plugins\nresources:\n  requests:\n    cpu: 500m\n    memory: 128Mi\n  limits:\n    cpu: 1000m\n    memory: 512Mi\n"` |  |
 | velero.source.repoURL | string | `"https://vmware-tanzu.github.io/helm-charts"` |  |
 | velero.source.targetRevision | string | `"6.0.0"` |  |
 | x509Exporter.enabled | bool | `true` |  |

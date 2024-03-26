@@ -368,3 +368,29 @@ taintController:
     #   values: |
     #     image:
     #       tag: main
+
+x509Exporter:
+  namespace: monitoring
+  name: x509-exporter
+  enabled: true
+  source:
+    repoURL: https://charts.enix.io
+    targetRevision: 3.6.0
+    chart: x509-certificate-exporter
+    helm:
+      values: |
+        prometheusServiceMonitor:
+          extraLabels:
+            kubernetes.she.net/prometheus-instance: default
+        prometheusRules:
+          extraLabels:
+            kubernetes.she.net/prometheus-instance: default
+          disableBuiltinAlertGroup: false
+        secretsExporter:
+          resources:
+            requests:
+              cpu: 20m
+              memory: 20Mi
+            limits:
+              cpu: null
+              memory: 150M

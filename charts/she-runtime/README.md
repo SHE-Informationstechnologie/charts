@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -145,10 +145,8 @@ SHE default K8s cluster toolset
 | sealedSecrets.source.chart | string | `"sealed-secrets"` |  |
 | sealedSecrets.source.helm.parameters[0].name | string | `"skipRecreate"` |  |
 | sealedSecrets.source.helm.parameters[0].value | string | `"true"` |  |
-| sealedSecrets.source.helm.parameters[1].name | string | `"keyRenewPeriod"` |  |
-| sealedSecrets.source.helm.parameters[1].value | string | `"87600h0m"` |  |
 | sealedSecrets.source.repoURL | string | `"https://charts.bitnami.com/bitnami"` |  |
-| sealedSecrets.source.targetRevision | string | `"2.0.0"` |  |
+| sealedSecrets.source.targetRevision | string | `"1.6.2"` |  |
 | taintController.enabled | bool | `false` |  |
 | taintController.name | string | `"taint-controller"` |  |
 | taintController.namespace | string | `"taint-controller"` |  |
@@ -179,3 +177,4 @@ SHE default K8s cluster toolset
 | velero.source.repoURL | string | `"https://vmware-tanzu.github.io/helm-charts"` |  |
 | velero.source.targetRevision | string | `"6.0.0"` |  |
 
+----------------------------------------------

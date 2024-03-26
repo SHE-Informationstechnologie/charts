@@ -1,3 +1,6 @@
+# 1.0.1
+- Pipeline fix and bump to 1.0.1
+
 # 1.0.0
 - Updated sealed-secrets from 1.6.0 to 2.0.0 (breaking changes, but none that affect us)
 - Updated eck-operator from 2.10.0 to 2.11.1 (no breaking changes)

@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 0.0.104](https://img.shields.io/badge/Version-0.0.104-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.104](https://img.shields.io/badge/AppVersion-0.0.104-informational?style=flat-square)
+![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -20,7 +20,7 @@ SHE default K8s cluster toolset
 | argoApp.source.helm.parameters[1].name | string | `"controller.metrics.enabled"` |  |
 | argoApp.source.helm.parameters[1].value | string | `"true"` |  |
 | argoApp.source.repoURL | string | `"https://argoproj.github.io/argo-helm"` |  |
-| argoApp.source.targetRevision | string | `"5.51.6"` |  |
+| argoApp.source.targetRevision | string | `"6.7.3"` |  |
 | argoWorkflow.enabled | bool | `false` |  |
 | argoWorkflow.name | string | `"argo-workflows"` |  |
 | argoWorkflow.namespace | string | `"argo-workflows"` |  |
@@ -40,13 +40,13 @@ SHE default K8s cluster toolset
 | eckOperator.namespace | string | `"eck-operator"` |  |
 | eckOperator.source.chart | string | `"eck-operator"` |  |
 | eckOperator.source.repoURL | string | `"https://helm.elastic.co"` |  |
-| eckOperator.source.targetRevision | string | `"2.10.0"` |  |
+| eckOperator.source.targetRevision | string | `"2.11.1"` |  |
 | grafanaDashboards.enabled | bool | `false` |  |
 | grafanaDashboards.name | string | `"grafana-dashboards"` |  |
 | grafanaDashboards.namespace | string | `"monitoring"` |  |
 | grafanaDashboards.source.chart | string | `"grafana-dashboards"` |  |
 | grafanaDashboards.source.repoURL | string | `"https://she-informationstechnologie.github.io/charts"` |  |
-| grafanaDashboards.source.targetRevision | string | `"0.0.8"` |  |
+| grafanaDashboards.source.targetRevision | string | `"0.0.10"` |  |
 | internalIngressController.enabled | bool | `true` |  |
 | internalIngressController.name | string | `"internal-ingress"` |  |
 | internalIngressController.namespace | string | `"internal-ingress"` |  |
@@ -60,7 +60,7 @@ SHE default K8s cluster toolset
 | internalIngressController.source.helm.parameters[3].name | string | `"controller.ingressClassResource.default"` |  |
 | internalIngressController.source.helm.parameters[3].value | string | `"true"` |  |
 | internalIngressController.source.repoURL | string | `"https://kubernetes.github.io/ingress-nginx"` |  |
-| internalIngressController.source.targetRevision | string | `"4.9.0"` |  |
+| internalIngressController.source.targetRevision | string | `"4.10.0"` |  |
 | kyverno.enabled | bool | `false` |  |
 | kyverno.name | string | `"kyverno"` |  |
 | kyverno.namespace | string | `"kyverno"` |  |
@@ -74,20 +74,20 @@ SHE default K8s cluster toolset
 | kyvernoPolicies.namespace | string | `"kyverno"` |  |
 | kyvernoPolicies.source.chart | string | `"kyverno-policies"` |  |
 | kyvernoPolicies.source.repoURL | string | `"https://she-informationstechnologie.github.io/charts"` |  |
-| kyvernoPolicies.source.targetRevision | string | `"0.0.2"` |  |
+| kyvernoPolicies.source.targetRevision | string | `"0.0.5"` |  |
 | metrics.enabled | bool | `false` |  |
 | metrics.name | string | `"metrics"` |  |
 | metrics.namespace | string | `"kube-system"` |  |
 | metrics.source.chart | string | `"metrics-server"` |  |
 | metrics.source.helm.values | string | `"defaultArgs:\n  - --cert-dir=/tmp\n  - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname\n  - --kubelet-use-node-status-port\n  - --metric-resolution=15s\n  - --kubelet-insecure-tls\n"` |  |
 | metrics.source.repoURL | string | `"https://kubernetes-sigs.github.io/metrics-server"` |  |
-| metrics.source.targetRevision | string | `"3.11.0"` |  |
+| metrics.source.targetRevision | string | `"3.12.0"` |  |
 | minioOperator.enabled | bool | `false` |  |
 | minioOperator.name | string | `"minio-operator"` |  |
 | minioOperator.namespace | string | `"minio-operator"` |  |
 | minioOperator.source.chart | string | `"operator"` |  |
 | minioOperator.source.repoURL | string | `"https://operator.min.io"` |  |
-| minioOperator.source.targetRevision | string | `"5.0.9"` |  |
+| minioOperator.source.targetRevision | string | `"5.0.14"` |  |
 | opensearchOperator.enabled | bool | `false` |  |
 | opensearchOperator.name | string | `"opensearch-operator"` |  |
 | opensearchOperator.namespace | string | `"opensearch-operator"` |  |
@@ -130,7 +130,7 @@ SHE default K8s cluster toolset
 | prometheusOperator.source.chart | string | `"kube-prometheus-stack"` |  |
 | prometheusOperator.source.helm.values | string | `""` |  |
 | prometheusOperator.source.repoURL | string | `"https://prometheus-community.github.io/helm-charts"` |  |
-| prometheusOperator.source.targetRevision | string | `"56.8.0"` |  |
+| prometheusOperator.source.targetRevision | string | `"57.1.1"` |  |
 | publicIngressController.enabled | bool | `true` |  |
 | publicIngressController.name | string | `"public-ingress"` |  |
 | publicIngressController.namespace | string | `"public-ingress"` |  |
@@ -138,7 +138,7 @@ SHE default K8s cluster toolset
 | publicIngressController.source.helm.parameters[0].name | string | `"controller.ingressClassResource.controllerValue"` |  |
 | publicIngressController.source.helm.parameters[0].value | string | `"k8s.io/ingress-nginx-public"` |  |
 | publicIngressController.source.repoURL | string | `"https://kubernetes.github.io/ingress-nginx"` |  |
-| publicIngressController.source.targetRevision | string | `"4.9.0"` |  |
+| publicIngressController.source.targetRevision | string | `"4.10.0"` |  |
 | sealedSecrets.enabled | bool | `true` |  |
 | sealedSecrets.name | string | `"sealed-secrets"` |  |
 | sealedSecrets.namespace | string | `"sealed-secrets"` |  |
@@ -159,7 +159,7 @@ SHE default K8s cluster toolset
 | trivyOperator.source.chart | string | `"trivy-operator"` |  |
 | trivyOperator.source.helm.values | string | `"serviceMonitor:\n  enabled: true\n  labels:\n    kubernetes.she.net/prometheus-instance: default\ntrivy:\n  ignoreUnfixed: false\noperator:\n  metricsVulnIdEnabled: true\n"` |  |
 | trivyOperator.source.repoURL | string | `"https://aquasecurity.github.io/helm-charts/"` |  |
-| trivyOperator.source.targetRevision | string | `"0.18.1"` |  |
+| trivyOperator.source.targetRevision | string | `"0.1.1"` |  |
 | velero.enabled | bool | `true` |  |
 | velero.initContainers[0].image | string | `"velero/velero-plugin-for-aws:v1.9.0"` |  |
 | velero.initContainers[0].imagePullPolicy | string | `"IfNotPresent"` |  |
@@ -175,6 +175,6 @@ SHE default K8s cluster toolset
 | velero.source.chart | string | `"velero"` |  |
 | velero.source.helm.values | string | `""` |  |
 | velero.source.repoURL | string | `"https://vmware-tanzu.github.io/helm-charts"` |  |
-| velero.source.targetRevision | string | `"5.1.7"` |  |
+| velero.source.targetRevision | string | `"6.0.0"` |  |
 
 ----------------------------------------------

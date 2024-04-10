@@ -19,6 +19,10 @@ spec:
         global:
           {{- toYaml . | nindent 10 }}
         {{- end }}
+        {{- with .grafana }}
+        grafana:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         {{- with .kubeStateMetrics }}
         kube-state-metrics:
           {{- toYaml . | nindent 10 }}

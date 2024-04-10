@@ -1,3 +1,6 @@
+# 1.3.0
+- Added support for Grafana specific settings
+
 # 1.2.1
 - Fixed indent in velero default values
 

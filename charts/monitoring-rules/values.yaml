@@ -43,6 +43,8 @@ postgres:
     # pgBackrestLastCompletedFull: false
     # pgBackrestLastCompletedIncr: false
     # pgBackrestLastCompletedDiff: false
+    # PGStatArchiverLastArchiveAgeNan: false
+    # PGStatArchiverLastArchiveAge: false
 
   pgBackrest:
     stanza: db

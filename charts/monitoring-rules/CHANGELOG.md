@@ -1,3 +1,7 @@
+# 2.2.0
+- Add rule that observes when last wal file was written. Alert (warning) if > 600 seconds
+- Add rule that observes when last wal file was written. Alert (critical) if no value is available
+
 # 2.1.1
 - fix prometheus rule label indentation
 

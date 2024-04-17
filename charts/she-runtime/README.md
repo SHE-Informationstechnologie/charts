@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.0](https://img.shields.io/badge/AppVersion-1.3.0-informational?style=flat-square)
+![Version: 1.3.1](https://img.shields.io/badge/Version-1.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.1](https://img.shields.io/badge/AppVersion-1.3.1-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -153,8 +153,9 @@ SHE default K8s cluster toolset
 | taintController.name | string | `"taint-controller"` |  |
 | taintController.namespace | string | `"taint-controller"` |  |
 | taintController.source.chart | string | `"tainter"` |  |
+| taintController.source.helm.values | string | `"config:\n  data: |\n    labelTaints:\n      - taint:\n          key: dedicated\n          value: database\n          effect: NoSchedule\n        selector:\n          key: node-role.kubernetes.io/database\n      - taint:\n          key: dedicated\n          value: minio\n          effect: NoSchedule\n        selector:\n          key: node-role.kubernetes.io/minio\n    ignoreLabel:\n      key: node-role.kubernetes.io/control-plane\n"` |  |
 | taintController.source.repoURL | string | `"https://bagaluten.github.io/charts/"` |  |
-| taintController.source.targetRevision | string | `"0.1.3"` |  |
+| taintController.source.targetRevision | string | `"0.1.4"` |  |
 | trivyOperator.enabled | bool | `false` |  |
 | trivyOperator.name | string | `"trivy-operator"` |  |
 | trivyOperator.namespace | string | `"trivy-operator"` |  |

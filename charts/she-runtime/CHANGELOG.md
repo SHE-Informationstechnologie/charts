@@ -1,3 +1,6 @@
+# 1.3.1
+- Bump Taint Controller version and add a default config
+
 # 1.3.0
 - Added support for Grafana specific settings
 

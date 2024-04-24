@@ -1,3 +1,6 @@
+# 0.3.1
+- Fixed metrics setting in values.yaml
+
 # 0.3.0
 - Added metrics to minio mirror
 

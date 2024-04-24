@@ -2,5 +2,5 @@ apiVersion: v2
 name: minio-mirror
 description: A Helm chart that provides a minio mirror service
 type: application
-version: "0.3.0"
-appVersion: "0.3.0"
+version: "0.3.1"
+appVersion: "0.3.1"

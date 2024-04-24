@@ -1,3 +1,6 @@
+# 3.0.0
+- Updated minio rules and added minio mirror rules
+
 # 2.1.1
 - fix prometheus rule label indentation
 

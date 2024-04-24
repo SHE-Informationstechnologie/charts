@@ -1,0 +1,33 @@
+{{ if .Values.minioMirror.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "monitoring-rules.fullname" . }}-minio-mirror
+  labels:
+    {{- include "monitoring-rules.labels" . | nindent 4 }}
+    {{ toYaml .Values.prometheusLabels | nindent 4 }}
+spec:
+  groups:
+  - name: minio-mirror-rules
+    rules:
+    {{- if not ( default false .Values.minioMirror.disabledRules.failedS3Ops ) }}
+    - alert: MinioMirrorFailedS3Ops
+      expr: 'irate(mc_mirror_failed_s3ops[5m]) > 0'
+      for: 0m
+      labels:
+        severity: critical
+      annotations:
+        summary: {{` 'Minio mirror experiencing failing s3 operations (instance {{ $labels.instance }} (mirror_job {{ $labels.mirror_job }})!)' `}}
+        description: {{` 'Minio mirror experiencing failing s3 operations \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}' `}}
+    {{- end }}
+    {{- if not ( default false .Values.minioMirror.disabledRules.restarts ) }}
+    - alert: MinioMirrorRestarts
+      expr: 'irate(mc_mirror_total_restarts[5m]) > 0'
+      for: 0m
+      labels:
+        severity: warning
+      annotations:
+        summary: {{` 'Minio mirror needs to restart operations (instance {{ $labels.instance }} (mirror_job {{ $labels.mirror_job }})!)' `}}
+        description: {{` 'Minio mirror needs to restart operations \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}' `}}
+    {{- end }}
+{{ end }}

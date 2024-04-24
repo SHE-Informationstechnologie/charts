@@ -93,7 +93,7 @@ SHE default K8s cluster toolset
 | opensearchOperator.namespace | string | `"opensearch-operator"` |  |
 | opensearchOperator.source.chart | string | `"opensearch-operator"` |  |
 | opensearchOperator.source.repoURL | string | `"https://opensearch-project.github.io/opensearch-k8s-operator/"` |  |
-| opensearchOperator.source.targetRevision | string | `"2.5.1"` |  |
+| opensearchOperator.source.targetRevision | string | `"2.6.0"` |  |
 | postgresOperator.enabled | bool | `true` |  |
 | postgresOperator.name | string | `"postgres-operator"` |  |
 | postgresOperator.namespace | string | `"postgres-operator"` |  |

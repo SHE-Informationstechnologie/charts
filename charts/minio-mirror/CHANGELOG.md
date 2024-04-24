@@ -1,3 +1,6 @@
+# 0.3.2
+- Set appVersion to RELEASE.2024-04-18T16-45-29Z
+
 # 0.3.1
 - Fixed metrics setting in values.yaml
 

@@ -83,12 +83,20 @@ minio:
         v1.min.io/tenant: pgbackrest
 
   disabledRules: {}
-    # clusterDiskOffline: false
-    # nodeDiskOffline: false
-    # diskSpaceUsage: false
-    # diskSpaceUsageCritical: false
+    # driveOffline: false
+    # nodeOffline: false
+    # driveSpaceUsage: false
+    # driveSpaceUsageCritical: false
     # queuedBytes: false
     # linkOffline: false
+
+# MinIO mirror
+minioMirror:
+  enabled: false
+
+  disabledRules: {}
+    # failingS3Ops: false
+    # restarts: false
 
 # Trivy Operator Dashboards
 trivy:

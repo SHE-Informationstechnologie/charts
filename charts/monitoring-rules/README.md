@@ -1,6 +1,6 @@
 # monitoring-rules
 
-![Version: 2.1.1](https://img.shields.io/badge/Version-2.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.1.1](https://img.shields.io/badge/AppVersion-2.1.1-informational?style=flat-square)
+![Version: 3.0.0](https://img.shields.io/badge/Version-3.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.0.0](https://img.shields.io/badge/AppVersion-3.0.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -23,6 +23,8 @@ A Helm chart for Kubernetes
 | minio.grafanaDashboards.selector.matchLabels."v1.min.io/tenant" | string | `"pgbackrest"` |  |
 | minio.grafanaDashboards.tlsConfig.insecureSkipVerify | bool | `true` |  |
 | minio.serviceMonitor.enabled | bool | `true` |  |
+| minioMirror.disabledRules | object | `{}` |  |
+| minioMirror.enabled | bool | `false` |  |
 | nameOverride | string | `""` |  |
 | postgres.disabledRules | object | `{}` |  |
 | postgres.enabled | bool | `false` |  |

@@ -1,3 +1,6 @@
+# 0.3.0
+- Added metrics to minio mirror
+
 # 0.2.1
 - nothing
 

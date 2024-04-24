@@ -31,7 +31,7 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        {{- range $config := .Values.config.syncConfig }}
+        {{- range $index, $config := .Values.config.syncConfig }}
         - name: mirror-{{ $config.minioBucket }}
           command: 
             - /bin/bash
@@ -49,10 +49,17 @@ spec:
               {{- if default false $config.syncDeletions }} --remove{{ end }}
               {{- if default false $config.overwrite }} --overwrite{{ end }}
               {{- if default false $config.retry }} --retry{{ end }}
+              {{- if default false $.Values.metrics.enabled }} --monitoring-address 0.0.0.0:{{ add $index $.Values.metrics.basePort }}{{ end }}
               {{- if $config.limitUpload }} --limit-upload {{ $config.limitUpload }}{{ end }}
               {{- if $config.limitDownload }} --limit-download {{ $config.limitDownload }}{{ end }}
               {{- if true }} source/{{ $config.minioBucket }} target/{{ $config.targetBucket }}/{{ $config.targetPrefix }}{{ end }}
               rm /tmp/healthy
+          {{- if default false $.Values.metrics.enabled }}
+          ports:
+            - containerPort: {{ add $index $.Values.metrics.basePort }}
+              name: exporter-{{ $index }}
+              protocol: TCP
+          {{- end }}
           securityContext:
             {{- toYaml $.Values.securityContext | nindent 12 }}
           image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"

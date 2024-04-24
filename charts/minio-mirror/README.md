@@ -32,10 +32,10 @@ A Helm chart that provides a minio mirror service
 | livenessProbe.exec.command[1] | string | `"/tmp/healthy"` |  |
 | livenessProbe.initialDelaySeconds | int | `5` |  |
 | livenessProbe.periodSeconds | int | `5` |  |
-| mirror.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
-| mirror.basePort | int | `8000` |  |
-| mirror.enabled | bool | `true` |  |
-| mirror.labelSelectors."app.kubernetes.io/name" | string | `"minio-mirror"` |  |
+| metrics.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
+| metrics.basePort | int | `8000` |  |
+| metrics.enabled | bool | `true` |  |
+| metrics.labelSelectors."app.kubernetes.io/name" | string | `"minio-mirror"` |  |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
 | podAnnotations | object | `{}` |  |

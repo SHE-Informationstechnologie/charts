@@ -103,7 +103,7 @@ extraVolumeMounts: []
 #   readOnly: true
 
 # Enable metrics for each mirror job
-mirror:
+metrics:
   # Enable exposed ports and podMonitor
   enabled: true
 

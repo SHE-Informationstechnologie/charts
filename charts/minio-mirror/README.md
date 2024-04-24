@@ -1,6 +1,6 @@
 # minio-mirror
 
-![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: RELEASE.2024-03-13T23-51-57Z](https://img.shields.io/badge/AppVersion-RELEASE.2024--03--13T23--51--57Z-informational?style=flat-square)
+![Version: 0.3.1](https://img.shields.io/badge/Version-0.3.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.1](https://img.shields.io/badge/AppVersion-0.3.1-informational?style=flat-square)
 
 A Helm chart that provides a minio mirror service
 
@@ -32,6 +32,10 @@ A Helm chart that provides a minio mirror service
 | livenessProbe.exec.command[1] | string | `"/tmp/healthy"` |  |
 | livenessProbe.initialDelaySeconds | int | `5` |  |
 | livenessProbe.periodSeconds | int | `5` |  |
+| metrics.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
+| metrics.basePort | int | `8000` |  |
+| metrics.enabled | bool | `true` |  |
+| metrics.labelSelectors."app.kubernetes.io/name" | string | `"minio-mirror"` |  |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
 | podAnnotations | object | `{}` |  |

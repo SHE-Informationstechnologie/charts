@@ -102,6 +102,23 @@ extraVolumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
+# Enable metrics for each mirror job
+metrics:
+  # Enable exposed ports and podMonitor
+  enabled: true
+
+  # Each container will expose a port based on its index
+  # and starting from this base value
+  basePort: 8000
+
+  # Select pod to monitor based on this labels
+  labelSelectors:
+    app.kubernetes.io/name: minio-mirror
+
+  # Add labels to the podMonitor
+  additionalLabels:
+    kubernetes.she.net/prometheus-instance: default
+
 nodeSelector: {}
 
 tolerations: []

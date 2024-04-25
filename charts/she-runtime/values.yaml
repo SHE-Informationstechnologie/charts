@@ -356,7 +356,7 @@ opensearchOperator:
   source:
     repoURL: https://opensearch-project.github.io/opensearch-k8s-operator/
     chart: opensearch-operator
-    targetRevision: 2.5.1
+    targetRevision: 2.6.0
 
 taintController:
   enabled: false

@@ -1,3 +1,6 @@
+# 1.3.2
+- Bump opensearch Controller version
+
 # 1.3.1
 - Bump Taint Controller version and add a default config
 

@@ -1,3 +1,6 @@
+# 3.0.1
+- Adjusted minio-mirror failed s3ops rule
+
 # 3.0.0
 - Updated minio rules and added minio mirror rules
 

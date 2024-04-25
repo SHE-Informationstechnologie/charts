@@ -1,3 +1,6 @@
+# 3.0.1
+- Fix alert regarding minio mirror failed s3 ops
+
 # 3.0.0
 - Updated minio rules and added minio mirror rules
 

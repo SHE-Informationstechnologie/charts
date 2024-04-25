@@ -52,5 +52,3 @@ A Helm chart that provides a minio mirror service
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
 | tolerations | list | `[]` |  |
-
-----------------------------------------------

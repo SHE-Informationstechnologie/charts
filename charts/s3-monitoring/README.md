@@ -36,5 +36,3 @@ In the example above the first entry has alerts for percentages configured while
 | s3_percentage_used_total{access_key_id="accessKeyID"}          | float |
 | s3_percentage_free_total_warn{access_key_id="accessKeyID"}     | float |
 | s3_percentage_free_total_warn{access_key_id="accessKeyID"}     | float |
-
-----------------------------------------------

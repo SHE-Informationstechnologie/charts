@@ -177,5 +177,3 @@ SHE default K8s cluster toolset
 | x509Exporter.source.helm.values | string | `"prometheusServiceMonitor:\n  extraLabels:\n    kubernetes.she.net/prometheus-instance: default\nprometheusRules:\n  extraLabels:\n    kubernetes.she.net/prometheus-instance: default\n  disableBuiltinAlertGroup: false\nsecretsExporter:\n  resources:\n    requests:\n      cpu: 20m\n      memory: 20Mi\n    limits:\n      cpu: null\n      memory: 150M\n"` |  |
 | x509Exporter.source.repoURL | string | `"https://charts.enix.io"` |  |
 | x509Exporter.source.targetRevision | string | `"3.6.0"` |  |
-
-----------------------------------------------

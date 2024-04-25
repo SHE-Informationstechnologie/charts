@@ -10,5 +10,3 @@ A collection of Dashboards for grafana
 |-----|------|---------|-------------|
 | grafanaDashboard.minio.enabled | bool | `true` |  |
 | grafanaDashboard.trivy.enabled | bool | `false` |  |
-
-----------------------------------------------

@@ -1,3 +1,6 @@
+# 3.0.2
+- Increased alert delay for minio rules
+
 # 3.0.1
 - Adjusted minio-mirror failed s3ops rule
 

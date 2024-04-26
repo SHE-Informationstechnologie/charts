@@ -13,7 +13,7 @@ spec:
     {{- if not ( default false .Values.minio.disabledRules.driveOffline ) }}
     - alert: MinioClusterDriveOffline
       expr: 'minio_cluster_drive_offline_total > 0'
-      for: 0m
+      for: 5m
       labels:
         severity: critical
       annotations:
@@ -23,7 +23,7 @@ spec:
     {{- if not ( default false .Values.minio.disabledRules.nodeOffline ) }}
     - alert: MinioNodeOffline
       expr: 'minio_cluster_nodes_offline_total > 0'
-      for: 0m
+      for: 5m
       labels:
         severity: critical
       annotations:

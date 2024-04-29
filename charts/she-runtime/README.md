@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 1.3.2](https://img.shields.io/badge/Version-1.3.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.2](https://img.shields.io/badge/AppVersion-1.3.2-informational?style=flat-square)
+![Version: 1.3.3](https://img.shields.io/badge/Version-1.3.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.3](https://img.shields.io/badge/AppVersion-1.3.3-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -88,7 +88,7 @@ SHE default K8s cluster toolset
 | minioOperator.source.chart | string | `"operator"` |  |
 | minioOperator.source.repoURL | string | `"https://operator.min.io"` |  |
 | minioOperator.source.targetRevision | string | `"5.0.14"` |  |
-| opensearchOperator.enabled | bool | `false` |  |
+| opensearchOperator.enabled | bool | `true` |  |
 | opensearchOperator.name | string | `"opensearch-operator"` |  |
 | opensearchOperator.namespace | string | `"opensearch-operator"` |  |
 | opensearchOperator.source.chart | string | `"opensearch-operator"` |  |

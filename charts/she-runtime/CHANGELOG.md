@@ -1,3 +1,6 @@
+# 1.3.3
+- Enabled Opensearch Operator
+
 # 1.3.2
 - Bump opensearch Controller version
 

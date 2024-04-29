@@ -350,7 +350,7 @@ minioOperator:
     #           value: monitoring
 
 opensearchOperator:
-  enabled: false
+  enabled: true
   namespace: opensearch-operator
   name: opensearch-operator
   source:

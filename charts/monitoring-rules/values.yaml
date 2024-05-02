@@ -105,6 +105,13 @@ trivy:
   grafanaDashboards:
     enabled: true
 
+argocd:
+  enabled: false
+
+  disabledRules: {}
+    # AppNotSynced: false
+    # AppNotHealthy: false
+
 logging:
   enabled: false
   namespace: logging

@@ -22,12 +22,12 @@ spec:
     {{- end }}
     {{- if not ( default false .Values.argopd.disabledRules.AppNotHealthy ) }}
      - alert: ArgocdAppUnhealthy
-    expr: argocd_app_info{health_status!="Healthy"} != 0
-    for: 15m
-    labels:
-      severity: warning
-    annotations:
-      summary: ArgoCD service unhealthy (instance {{ $labels.instance }})
-      description: "ArgoCD App {{ $labels.name }} is currently not healthy.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+       expr: argocd_app_info{health_status!="Healthy"} != 0
+       for: 15m
+      labels:
+        severity: warning
+      annotations:
+        summary: ArgoCD service unhealthy (instance {{ $labels.instance }})
+        description: "ArgoCD App {{ $labels.name }} is currently not healthy.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
     {{- end }}
 {{ end }}

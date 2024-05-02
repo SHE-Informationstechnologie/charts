@@ -10,24 +10,34 @@ spec:
   groups:
   - name: argocd-rules
     rules:
-    {{- if not ( default false .Values.argopd.disabledRules.AppNotSynced ) }}
+    {{- if not ( default false .Values.argocd.disabledRules.AppNotSynced ) }}
     - alert: ArgocdAppNotSynced
       expr: argocd_app_info{sync_status!="Synced"} != 0
       for: 15m
       labels:
         severity: warning
       annotations:
-        summary: ArgoCD service not synced (instance {{ $labels.instance }})
-        description: "App {{ $labels.name }} run by argo is currently not in sync.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: {{ `'ArgoCD service not synced (instance {{ $labels.instance }})'` }}
+        description: {{ `'App {{ $labels.name }} run by argo is currently not in sync.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}'` }}
     {{- end }}
     {{- if not ( default false .Values.argopd.disabledRules.AppNotHealthy ) }}
-     - alert: ArgocdAppUnhealthy
-       expr: argocd_app_info{health_status!="Healthy"} != 0
-       for: 15m
+    - alert: ArgocdAppUnhealthy
+      expr: argocd_app_info{health_status!="Healthy"} != 0
+      for: 15m
+     labels:
+       severity: warning
+     annotations:
+       summary: ArgoCD service unhealthy (instance {{ $labels.instance }})
+       description: "ArgoCD App {{ $labels.name }} is currently not healthy.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    {{- if not ( default false .Values.argocd.disabledRules.AppNotHealthy ) }}
+    - alert: ArgocdAppUnhealthy
+      expr: argocd_app_info{health_status!="Healthy"} != 0
+      for: 15m
       labels:
         severity: warning
       annotations:
-        summary: ArgoCD service unhealthy (instance {{ $labels.instance }})
-        description: "ArgoCD App {{ $labels.name }} is currently not healthy.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        summary: {{ `'ArgoCD service unhealthy (instance {{ $labels.instance }})'` }}
+        description: {{`'ArgoCD App {{ $labels.name }} is currently not healthy.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}'`}}"
+>>>>>>> de670da (codereview fixes)
     {{- end }}
 {{ end }}

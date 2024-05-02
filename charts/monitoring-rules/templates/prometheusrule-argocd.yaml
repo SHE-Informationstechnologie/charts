@@ -20,15 +20,16 @@ spec:
         summary: {{ `'ArgoCD service not synced (instance {{ $labels.instance }})'` }}
         description: {{ `'App {{ $labels.name }} run by argo is currently not in sync.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}'` }}
     {{- end }}
-    {{- if not ( default false .Values.argopd.disabledRules.AppNotHealthy ) }}
+    {{- if not ( default false .Values.argocd.disabledRules.AppNotHealthy ) }}
     - alert: ArgocdAppUnhealthy
       expr: argocd_app_info{health_status!="Healthy"} != 0
       for: 15m
-     labels:
-       severity: warning
-     annotations:
-       summary: ArgoCD service unhealthy (instance {{ $labels.instance }})
-       description: "ArgoCD App {{ $labels.name }} is currently not healthy.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+      labels:
+        severity: warning
+      annotations:
+        summary: {{ `'ArgoCD service unhealthy (instance {{ $labels.instance }})'`}}
+        description: {{`'ArgoCD App {{ $labels.name }} is currently not healthy.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}'`}}
+    {{- end }}
     {{- if not ( default false .Values.argocd.disabledRules.AppNotHealthy ) }}
     - alert: ArgocdAppUnhealthy
       expr: argocd_app_info{health_status!="Healthy"} != 0
@@ -37,7 +38,6 @@ spec:
         severity: warning
       annotations:
         summary: {{ `'ArgoCD service unhealthy (instance {{ $labels.instance }})'` }}
-        description: {{`'ArgoCD App {{ $labels.name }} is currently not healthy.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}'`}}"
->>>>>>> de670da (codereview fixes)
+        description: {{`'ArgoCD App {{ $labels.name }} is currently not healthy.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}'`}}
     {{- end }}
 {{ end }}

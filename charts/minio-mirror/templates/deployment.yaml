@@ -93,6 +93,7 @@ spec:
         - name: liveness-probe-script
           configMap:
             name: {{ include "minio-mirror.fullname" . }}
+            defaultMode: 0777
       {{- with .Values.extraVolumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}

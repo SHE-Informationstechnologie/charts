@@ -75,6 +75,8 @@ spec:
               mountPath: {{ default "/etc/minio/credentials" $.Values.config.minioCredentials.existingSecret.volumeMount.mountPath }}
             - name: target-credentials
               mountPath: {{ default "/etc/target/credentials" $.Values.config.targetCredentials.existingSecret.volumeMount.mountPath }}
+            - name: liveness-probe-script
+              mountPath: /opt/
           {{- with $.Values.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -88,6 +90,10 @@ spec:
           secret:
             secretName: {{ .Values.config.targetCredentials.existingSecret.name }}
             defaultMode: 420
+        - name: liveness-probe-script
+          configMap:
+            name: {{ include "minio-mirror.fullname" . }}
+            defaultMode: 0777
       {{- with .Values.extraVolumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}

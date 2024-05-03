@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "minio-mirror.fullname" . }}
+  labels:
+    {{- include "minio-mirror.labels" . | nindent 4 }}
+data:
+  liveness-probe.sh: |
+    #!/bin/bash
+{{- range $index, $config := .Values.config.syncConfig }}    
+    METRIC_ENDPOINT="http://localhost:{{ add $index $.Values.metrics.basePort }}/metrics"
+    TEMP_FILE="/tmp/mirror_value.txt-{{ $config.minioBucket }}"
+    CURRENT_VALUE=$(curl -s $METRIC_ENDPOINT | grep 'mc_mirror_failed_s3ops' | grep -v '#' | awk '{print $2}') 
+    if [ -f "$TEMP_FILE" ]; then
+        LAST_KNOWN_VALUE=$(cat $TEMP_FILE)
+    else
+        LAST_KNOWN_VALUE=0
+    fi
+    if [ "$CURRENT_VALUE" -gt "$LAST_KNOWN_VALUE" ]; then
+        echo "$CURRENT_VALUE" > $TEMP_FILE
+        exit 1
+    else
+        echo "$CURRENT_VALUE" > $TEMP_FILE
+    fi
+{{- end }}
+    exit 0

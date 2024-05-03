@@ -76,7 +76,7 @@ spec:
             - name: target-credentials
               mountPath: {{ default "/etc/target/credentials" $.Values.config.targetCredentials.existingSecret.volumeMount.mountPath }}
             - name: liveness-probe-script
-              mountPath: /opt/liveness-probe.sh
+              mountPath: /opt/
           {{- with $.Values.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}

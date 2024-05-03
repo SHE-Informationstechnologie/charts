@@ -1,6 +1,6 @@
 # minio-mirror
 
-![Version: 0.3.2](https://img.shields.io/badge/Version-0.3.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: RELEASE.2024-04-18T16-45-29Z](https://img.shields.io/badge/AppVersion-RELEASE.2024--04--18T16--45--29Z-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: RELEASE.2024-04-18T16-45-29Z](https://img.shields.io/badge/AppVersion-RELEASE.2024--04--18T16--45--29Z-informational?style=flat-square)
 
 A Helm chart that provides a minio mirror service
 
@@ -28,10 +28,10 @@ A Helm chart that provides a minio mirror service
 | image.repository | string | `"minio/mc"` |  |
 | image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
-| livenessProbe.exec.command[0] | string | `"cat"` |  |
-| livenessProbe.exec.command[1] | string | `"/tmp/healthy"` |  |
+| livenessProbe.exec.command[0] | string | `"/opt/liveness-probe.sh"` |  |
+| livenessProbe.failureThreshold | int | `1` |  |
 | livenessProbe.initialDelaySeconds | int | `5` |  |
-| livenessProbe.periodSeconds | int | `5` |  |
+| livenessProbe.periodSeconds | int | `30` |  |
 | metrics.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
 | metrics.basePort | int | `8000` |  |
 | metrics.enabled | bool | `true` |  |

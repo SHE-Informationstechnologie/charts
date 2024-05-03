@@ -1,3 +1,6 @@
+# 0.4.0
+- Add livenessprobe to restart container at failure
+
 # 0.3.2
 - Set appVersion to RELEASE.2024-04-18T16-45-29Z
 

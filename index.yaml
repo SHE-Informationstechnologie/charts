@@ -206,6 +206,16 @@ entries:
   minio-mirror:
   - apiVersion: v2
     appVersion: RELEASE.2024-04-18T16-45-29Z
+    created: "2024-05-03T13:18:01.816388131Z"
+    description: A Helm chart that provides a minio mirror service
+    digest: dc02f2fffc02b217d22cbf3c8da23295de633ad018d9ec752d90aa1f9e64190f
+    name: minio-mirror
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/minio-mirror-0.4.0/minio-mirror-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
+    appVersion: RELEASE.2024-04-18T16-45-29Z
     created: "2024-04-24T22:50:06.407893745Z"
     description: A Helm chart that provides a minio mirror service
     digest: 096a77c4c856671d3d58a0e6ac60737b675a842e3cba3e9485539eb21e72650e
@@ -1728,4 +1738,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-sso-0.0.2/she-sso-0.0.2.tgz
     version: 0.0.2
-generated: "2024-05-02T13:20:59.711434817Z"
+generated: "2024-05-03T13:18:01.816668373Z"

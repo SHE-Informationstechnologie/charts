@@ -33,9 +33,9 @@ config:
     # limitDownload: unlimited
 
 image:
-  repository: minio/mc
-  pullPolicy: IfNotPresent
+  repository: mettendorfit/mc-plus
   tag: ""
+  pullPolicy: IfNotPresent
 
 imagePullSecrets: []
 nameOverride: ""

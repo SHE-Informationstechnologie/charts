@@ -76,10 +76,10 @@ resources: {}
 livenessProbe:
   exec:
     command:
-      - cat
-      - /tmp/healthy
+      - /opt/liveness-probe.sh
   initialDelaySeconds: 5
-  periodSeconds: 5
+  periodSeconds: 30
+  failureThreshold: 1
 
 readinessProbe:
   exec:

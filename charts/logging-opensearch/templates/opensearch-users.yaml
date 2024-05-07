@@ -6,9 +6,8 @@ metadata:
   labels:
     {{- include "logging-opensearch.labels" $ | nindent 4 }}
 spec:
-  {{- range $key := ( list "opensearchCluster" ) }}
-  {{- toYaml ( default ( pick $.Values.global $key ) ( pick $user $key ) ) | nindent 2 }}
-  {{- end }}
+  opensearchCluster:
+    name: {{ default ( include "logging-opensearch.opensearchName" $ ) ( dig "opensearchCluster" "name" "" $user ) }}
   {{- with ( $user := omit $user "roles" ) }}
   {{- toYaml $user | nindent 2 }}
   {{- end }}

@@ -1,5 +1,5 @@
 {{- if .Values.opensearch.ingress.enabled -}}
-{{- $fullName := include "chart.fullname" . -}}
+{{- $fullName := include "logging-opensearch.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
 {{- if and .Values.opensearch.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.opensearch.ingress.annotations "kubernetes.io/ingress.class") }}
@@ -17,7 +17,7 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    {{- include "chart.labels" . | nindent 4 }}
+    {{- include "logging-opensearch.labels" . | nindent 4 }}
   {{- with .Values.opensearch.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}

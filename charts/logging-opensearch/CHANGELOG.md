@@ -1,3 +1,6 @@
+# 0.2.1
+- Patched includes in ingress
+
 # 0.2.0
 - Added ingress resource for opensearch
 

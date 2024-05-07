@@ -25,7 +25,7 @@ A Helm chart that provides a minio mirror service
 | extraVolumes | list | `[]` |  |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.repository | string | `"minio/mc"` |  |
+| image.repository | string | `"mettendorfit/mc-plus"` |  |
 | image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
 | livenessProbe.exec.command[0] | string | `"/opt/liveness-probe.sh"` |  |

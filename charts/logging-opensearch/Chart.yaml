@@ -1,0 +1,11 @@
+apiVersion: v2
+type: application
+name: logging-opensearch
+description: A Helm chart which deploys a Opensearch cluster manifests, its configuation and fluent bit
+dependencies:
+  - name: fluent-bit
+    alias: fluentbit
+    repository: https://fluent.github.io/helm-charts
+    version: 0.46.4
+appVersion: "0.1.0"
+version: 0.1.0

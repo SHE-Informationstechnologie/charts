@@ -2,7 +2,7 @@
 apiVersion: opensearch.opster.io/v1
 kind: OpensearchIndexTemplate
 metadata:
-  name: {{ include "logging-opensearch.fullname" . }}-access
+  name: {{ include "logging-opensearch.name" . }}-access
   labels:
     {{- include "logging-opensearch.labels" . | nindent 4 }}
 spec:

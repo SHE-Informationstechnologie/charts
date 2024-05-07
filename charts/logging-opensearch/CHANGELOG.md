@@ -1,3 +1,6 @@
+# 0.1.4
+- Using short names in manifests due to max length
+
 # 0.1.3
 - Fixed release pipeline and updates lock file #2
 

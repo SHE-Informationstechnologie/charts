@@ -1,3 +1,6 @@
+# 0.3.0
+- Added service override name
+
 # 0.2.3
 - Another opensearch name fix
 

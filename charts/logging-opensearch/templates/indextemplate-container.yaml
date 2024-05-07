@@ -1,0 +1,77 @@
+{{- if .Values.indexTemplates.defaultTemplates.container }}
+apiVersion: opensearch.opster.io/v1
+kind: OpensearchIndexTemplate
+metadata:
+  name: {{ include "logging-opensearch.fullname" . }}-container
+  labels:
+    {{- include "logging-opensearch.labels" . | nindent 4 }}
+spec:
+  name: container
+  {{- with .Values.global.opensearchCluster }}
+  opensearchCluster:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+  indexPatterns:
+    - "container-*"
+  dataStream:
+    timestamp_field:
+      name: "@timestamp"
+  priority: 1
+  template:
+    {
+      "mappings": {
+        "dynamic": "false",
+        "properties": {
+          "kubernetes": {
+            "type": "object",
+            "properties": {
+              "annotations": {
+                "dynamic": "true",
+                "type": "object"
+              },
+              "container_image": {
+                "type": "keyword",
+                "ignore_above": 256
+              },
+              "container_name": {
+                "type": "keyword",
+                "ignore_above": 256
+              },
+              "docker_id": {
+                "type": "keyword",
+                "ignore_above": 256
+              },
+              "host": {
+                "type": "keyword",
+                "ignore_above": 256
+              },
+              "labels": {
+                "dynamic": "true",
+                "type": "object"
+              },
+              "namespace_name": {
+                "type": "keyword",
+                "ignore_above": 256
+              },
+              "pod_id": {
+                "type": "keyword",
+                "ignore_above": 256
+              },
+              "pod_name": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "log": {
+            "type": "text"
+          },
+          "stream": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      }
+    }
+  version: 1
+{{- end }}

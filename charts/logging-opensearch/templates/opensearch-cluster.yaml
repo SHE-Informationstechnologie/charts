@@ -1,0 +1,15 @@
+{{- if .Values.opensearch.enabled }}
+apiVersion: opensearch.opster.io/v1
+kind: OpenSearchCluster
+metadata:
+  name: {{ include "logging-opensearch.fullname" . }}
+  labels:
+    {{- include "logging-opensearch.labels" . | nindent 4 }}
+spec:
+  {{- range $key := ( list "opensearchCluster" ) }}
+  {{- toYaml ( default ( pick $.Values.global $key ) ( pick $.Values.opensearch.settings $key ) ) | nindent 2 }}
+  {{- end }}
+  {{- with .Values.opensearch.settings }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }}

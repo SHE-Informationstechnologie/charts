@@ -1,6 +1,6 @@
 # minio-mirror
 
-![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: RELEASE.2024-04-18T16-45-29Z](https://img.shields.io/badge/AppVersion-RELEASE.2024--04--18T16--45--29Z-informational?style=flat-square)
+![Version: 0.4.1](https://img.shields.io/badge/Version-0.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: RELEASE.2024-04-18T16-45-29Z.1](https://img.shields.io/badge/AppVersion-RELEASE.2024--04--18T16--45--29Z.1-informational?style=flat-square)
 
 A Helm chart that provides a minio mirror service
 
@@ -25,7 +25,7 @@ A Helm chart that provides a minio mirror service
 | extraVolumes | list | `[]` |  |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.repository | string | `"minio/mc"` |  |
+| image.repository | string | `"mettendorfit/mc-plus"` |  |
 | image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
 | livenessProbe.exec.command[0] | string | `"/opt/liveness-probe.sh"` |  |

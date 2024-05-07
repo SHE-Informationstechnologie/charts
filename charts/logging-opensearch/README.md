@@ -1,6 +1,6 @@
 # logging-opensearch
 
-![Version: 0.1.6](https://img.shields.io/badge/Version-0.1.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.6](https://img.shields.io/badge/AppVersion-0.1.6-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.0](https://img.shields.io/badge/AppVersion-0.2.0-informational?style=flat-square)
 
 A Helm chart which deploys a Opensearch cluster manifests, its configuation and fluent bit
 
@@ -31,6 +31,13 @@ A Helm chart which deploys a Opensearch cluster manifests, its configuation and 
 | indexTemplates.global | string | `nil` |  |
 | nameOverride | string | `""` |  |
 | opensearch.enabled | bool | `true` |  |
+| opensearch.ingress.annotations | object | `{}` |  |
+| opensearch.ingress.className | string | `""` |  |
+| opensearch.ingress.enabled | bool | `false` |  |
+| opensearch.ingress.hosts[0].host | string | `"chart-example.local"` |  |
+| opensearch.ingress.hosts[0].paths[0].path | string | `"/"` |  |
+| opensearch.ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
+| opensearch.ingress.tls | list | `[]` |  |
 | opensearch.roles[0].clusterPermissions[0] | string | `"cluster_composite_ops"` |  |
 | opensearch.roles[0].clusterPermissions[1] | string | `"cluster_monitor"` |  |
 | opensearch.roles[0].indexPermissions[0].allowedActions[0] | string | `"create_index"` |  |

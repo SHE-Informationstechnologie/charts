@@ -1,3 +1,6 @@
+# 0.2.0
+- Added ingress resource for opensearch
+
 # 0.1.6
 - Fixed opensearch cluster name generation in indextemplates
 

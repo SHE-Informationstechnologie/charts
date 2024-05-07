@@ -1,5 +1,5 @@
 {{- if .Values.opensearch.ingress.enabled -}}
-{{- $fullName := include "logging-opensearch.fullname" . -}}
+{{- $name := include "logging-opensearch.opensearchName" . -}}
 {{- if and .Values.opensearch.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.opensearch.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.opensearch.ingress.annotations "kubernetes.io/ingress.class" .Values.opensearch.ingress.className}}
@@ -14,7 +14,7 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
+  name: {{ $name }}
   labels:
     {{- include "logging-opensearch.labels" . | nindent 4 }}
   {{- with .Values.opensearch.ingress.annotations }}
@@ -48,11 +48,11 @@ spec:
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: {{ $fullName }}-dashboards
+                name: {{ $name }}-dashboards
                 port:
                   number: 5601
               {{- else }}
-              serviceName: {{ $fullName }}-dashboards
+              serviceName: {{ $name }}-dashboards
               servicePort: 5601
               {{- end }}
           {{- end }}

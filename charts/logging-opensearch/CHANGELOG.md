@@ -1,3 +1,6 @@
+# 0.2.3
+- Another opensearch name fix
+
 # 0.2.2
 - Patched port and service name in ingress
 

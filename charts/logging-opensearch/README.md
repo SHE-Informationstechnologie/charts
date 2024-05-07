@@ -1,6 +1,6 @@
 # logging-opensearch
 
-![Version: 0.2.3](https://img.shields.io/badge/Version-0.2.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.3](https://img.shields.io/badge/AppVersion-0.2.3-informational?style=flat-square)
+![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.0](https://img.shields.io/badge/AppVersion-0.3.0-informational?style=flat-square)
 
 A Helm chart which deploys a Opensearch cluster manifests, its configuation and fluent bit
 
@@ -47,6 +47,7 @@ A Helm chart which deploys a Opensearch cluster manifests, its configuation and 
 | opensearch.roles[0].indexPermissions[0].indexPatterns[1] | string | `"container-*"` |  |
 | opensearch.roles[0].indexPermissions[0].indexPatterns[2] | string | `"access-*"` |  |
 | opensearch.roles[0].name | string | `"fluentbit"` |  |
+| opensearch.service.overrideName | string | `"opensearch-cluster"` |  |
 | opensearch.settings.confMgmt.smartScaler | bool | `true` |  |
 | opensearch.settings.dashboards.enable | bool | `true` |  |
 | opensearch.settings.dashboards.opensearchCredentialsSecret.name | string | `"dashboards-credentials-secret"` |  |

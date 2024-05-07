@@ -140,7 +140,12 @@ fluentbit:
 
 # Deploy opensearch cluster
 opensearch:
+  # En-/Disable Opensearch deployment
   enabled: true
+
+  # Override name used to target service in ingress resource
+  service:
+    overrideName: opensearch-cluster
 
   ingress:
     enabled: false

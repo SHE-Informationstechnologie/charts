@@ -2,7 +2,7 @@
 apiVersion: opensearch.opster.io/v1
 kind: OpensearchRole
 metadata:
-  name: {{ include "logging-opensearch.name" $ }}-{{ $role.name }}
+  name: {{ $role.name }}
   labels:
     {{- include "logging-opensearch.labels" $ | nindent 4 }}
 spec:

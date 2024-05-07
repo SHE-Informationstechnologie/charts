@@ -2,7 +2,7 @@
 apiVersion: opensearch.opster.io/v1
 kind: OpensearchUser
 metadata:
-  name: {{ include "logging-opensearch.fullname" $ }}-{{ $user.name }}
+  name: {{ include "logging-opensearch.name" $ }}-{{ $user.name }}
   labels:
     {{- include "logging-opensearch.labels" $ | nindent 4 }}
 spec:

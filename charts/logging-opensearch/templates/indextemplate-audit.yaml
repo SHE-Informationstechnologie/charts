@@ -7,10 +7,8 @@ metadata:
     {{- include "logging-opensearch.labels" . | nindent 4 }}
 spec:
   name: audit
-  {{- with .Values.global.opensearchCluster }}
   opensearchCluster:
-  {{- toYaml . | nindent 4 }}
-  {{- end }}
+    name: {{- include "logging-opensearch.opensearchName" . }}
   indexPatterns:
     - "audit-*"
   dataStream:

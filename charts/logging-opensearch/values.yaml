@@ -7,10 +7,11 @@ fullnameOverride: ""
 
 # Global settings that are set in the event that
 # they are not exceeded in the resources themselves
-global:
-  opensearchCluster:
-    name: opensearch-cluster
-  test: tom
+global: {}
+  # Overwrite the Opensearch cluster name on global level
+  # Default: {{ include "logging-opensearch.name" . }}
+  # opensearchCluster:
+  #   name: opensearch-cluster
 
 # Deploy Fluent Bit
 fluentbit:

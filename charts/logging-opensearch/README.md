@@ -1,6 +1,6 @@
 # logging-opensearch
 
-![Version: 0.1.4](https://img.shields.io/badge/Version-0.1.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.4](https://img.shields.io/badge/AppVersion-0.1.4-informational?style=flat-square)
+![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.5](https://img.shields.io/badge/AppVersion-0.1.5-informational?style=flat-square)
 
 A Helm chart which deploys a Opensearch cluster manifests, its configuation and fluent bit
 
@@ -23,8 +23,7 @@ A Helm chart which deploys a Opensearch cluster manifests, its configuation and 
 | fluentbit.dashboards.labelValue | int | `1` |  |
 | fluentbit.dashboards.namespace | string | `"monitoring"` |  |
 | fullnameOverride | string | `""` |  |
-| global.opensearchCluster.name | string | `"opensearch-cluster"` |  |
-| global.test | string | `"tom"` |  |
+| global | object | `{}` |  |
 | indexTemplates.additionalTemplates | list | `[]` |  |
 | indexTemplates.defaultTemplates.access | bool | `true` |  |
 | indexTemplates.defaultTemplates.audit | bool | `true` |  |

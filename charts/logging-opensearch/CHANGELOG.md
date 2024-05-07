@@ -1,3 +1,6 @@
+# 0.1.5
+- Fixed opensearch cluster name generation
+
 # 0.1.4
 - Using short names in manifests due to max length
 

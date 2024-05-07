@@ -1,3 +1,6 @@
+# 0.2.2
+- Patched port and service name in ingress
+
 # 0.2.1
 - Patched includes in ingress
 

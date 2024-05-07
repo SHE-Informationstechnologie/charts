@@ -1,3 +1,6 @@
+# 0.4.1
+- Fixing README and missing hook execution
+
 # 0.4.0
 - Add livenessprobe to restart container at failure
 

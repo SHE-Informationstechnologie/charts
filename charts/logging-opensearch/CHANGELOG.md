@@ -1,3 +1,6 @@
+# 0.1.2
+- Fixed release pipeline and updates lock file
+
 # 0.1.1
 - Added missing directories and files
 

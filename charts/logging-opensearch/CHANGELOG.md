@@ -1,3 +1,6 @@
+# 0.1.3
+- Fixed release pipeline and updates lock file #2
+
 # 0.1.2
 - Fixed release pipeline and updates lock file
 

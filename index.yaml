@@ -203,7 +203,34 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/logging-0.1.0/logging-0.1.0.tgz
     version: 0.1.0
+  logging-opensearch:
+  - apiVersion: v2
+    appVersion: 0.1.3
+    created: "2024-05-07T13:21:16.86725775Z"
+    dependencies:
+    - alias: fluentbit
+      name: fluent-bit
+      repository: https://fluent.github.io/helm-charts
+      version: 0.46.4
+    description: A Helm chart which deploys a Opensearch cluster manifests, its configuation
+      and fluent bit
+    digest: 16dc279fe4378198b6dbaec075b2a3ce138317b59676b29547b2083ea0629225
+    name: logging-opensearch
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/logging-opensearch-0.1.3/logging-opensearch-0.1.3.tgz
+    version: 0.1.3
   minio-mirror:
+  - apiVersion: v2
+    appVersion: RELEASE.2024-04-18T16-45-29Z.1
+    created: "2024-05-07T13:21:17.036068893Z"
+    description: A Helm chart that provides a minio mirror service
+    digest: 6f3675b3e9794197315912ad45f85f0c4c8bb7ba0e868be0aa989d3dc4bb0684
+    name: minio-mirror
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/minio-mirror-0.4.1/minio-mirror-0.4.1.tgz
+    version: 0.4.1
   - apiVersion: v2
     appVersion: RELEASE.2024-04-18T16-45-29Z
     created: "2024-05-03T13:18:01.816388131Z"
@@ -1738,4 +1765,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-sso-0.0.2/she-sso-0.0.2.tgz
     version: 0.0.2
-generated: "2024-05-03T13:18:01.816668373Z"
+generated: "2024-05-07T13:21:17.036331484Z"

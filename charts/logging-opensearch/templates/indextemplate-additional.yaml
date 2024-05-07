@@ -1,0 +1,10 @@
+{{- range $template := .Values.additionalIndexTemplates }}
+apiVersion: opensearch.opster.io/v1
+kind: OpensearchIndexTemplate
+metadata:
+  name: {{ include "logging-opensearch.fullname" $ }}-{{ $template.name }}
+  labels:
+    {{- include "logging-opensearch.labels" $ | nindent 4 }}
+spec:
+  {{- toYaml $template | nindent 2 }}
+{{- end }}

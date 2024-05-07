@@ -1,3 +1,6 @@
+# 0.3.1
+- Patched context in gress
+
 # 0.3.0
 - Added service override name
 

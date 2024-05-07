@@ -1,3 +1,6 @@
+# 0.1.6
+- Fixed opensearch cluster name generation in indextemplates
+
 # 0.1.5
 - Fixed opensearch cluster name generation
 

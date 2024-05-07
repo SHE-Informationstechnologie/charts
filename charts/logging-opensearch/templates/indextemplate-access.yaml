@@ -8,7 +8,7 @@ metadata:
 spec:
   name: access
   opensearchCluster:
-    name: {{- include "logging-opensearch.opensearchName" . }}
+    name: {{ include "logging-opensearch.opensearchName" . }}
   indexPatterns:
     - "access-*"
   dataStream:

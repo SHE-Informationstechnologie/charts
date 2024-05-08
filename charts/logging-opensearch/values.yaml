@@ -244,40 +244,46 @@ opensearch:
           enable: true
           maxUnavailable: 1
 
-# Deploy opensearch index templates
-indexTemplates:
-  global:
+  # Deploy Opensearch ISM policies
+  ismPolicies:
+    defaultPolicies:
+      # Disabled until issue is solved (check: https://github.com/opensearch-project/opensearch-k8s-operator/issues/801)
+      logRollOver: false
 
-  # En-/Disable default templates
-  defaultTemplates:
-    access: true
-    audit: true
-    container: true
+  # Deploy opensearch index templates
+  indexTemplates:
+    global:
 
-  # Additional to the default index templates
-  # deploy custom ones
-  additionalTemplates: []
-  # - name: example
-  #   indexPatterns:
-  #     - "example-*"
-  #   dataStream:
-  #     timestamp_field:
-  #       name: "@timestamp"
-  #   priority: 1
-  #   template: |
-  #     {
-  #       "mappings": {
-  #         "dynamic": "false",
-  #         "properties": {
-  #           "example": {
-  #             "type": "keyword",
-  #             "ignore_above": 256
-  #           },
-  #           "example2": {
-  #             "type": "text",
-  #             "ignore_above": 256
-  #           }
-  #         }
-  #       }
-  #     }
-  #   version: 1
+    # En-/Disable default templates
+    defaultTemplates:
+      access: true
+      audit: true
+      container: true
+
+    # Additional to the default index templates
+    # deploy custom ones
+    additionalTemplates: []
+    # - name: example
+    #   indexPatterns:
+    #     - "example-*"
+    #   dataStream:
+    #     timestamp_field:
+    #       name: "@timestamp"
+    #   priority: 1
+    #   template: |
+    #     {
+    #       "mappings": {
+    #         "dynamic": "false",
+    #         "properties": {
+    #           "example": {
+    #             "type": "keyword",
+    #             "ignore_above": 256
+    #           },
+    #           "example2": {
+    #             "type": "text",
+    #             "ignore_above": 256
+    #           }
+    #         }
+    #       }
+    #     }
+    #   version: 1

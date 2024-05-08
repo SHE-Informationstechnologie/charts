@@ -1,4 +1,4 @@
-{{- if .Values.indexTemplates.defaultTemplates.audit }}
+{{- if .Values.opensearch.indexTemplates.defaultTemplates.audit }}
 apiVersion: opensearch.opster.io/v1
 kind: OpensearchIndexTemplate
 metadata:

@@ -1,0 +1,41 @@
+{{- if .Values.opensearch.ismPolicies.defaultPolicies.logRollOver }}
+apiVersion: opensearch.opster.io/v1
+kind: OpenSearchISMPolicy
+metadata:
+  name: {{ include "logging-opensearch.name" . }}-log-rollover
+  labels:
+    {{- include "logging-opensearch.labels" . | nindent 4 }}
+spec:
+  opensearchCluster:
+    name: {{ include "logging-opensearch.opensearchName" . }}
+  policyId: rollover
+  description: "Rollover ISM policy for logs"
+  ismTemplate:
+    priority: 100
+    indexPatterns:
+      - "container-*"
+      - "audit-*"
+      - "access-logs-*"
+  defaultState: hot
+  states:
+    - name: hot
+      actions:
+        - indexPriority:
+            priority: 100
+      transitions:
+        - stateName: warm
+          conditions:
+            minIndexAge: 7d
+    - name: warm
+      actions:
+        - indexPriority:
+            priority: 50
+      transitions:
+        - stateName: delete
+          conditions:
+            minIndexAge: 30d
+    - name: delete
+      transitions: []
+      actions:
+        - delete: {}
+{{- end }}

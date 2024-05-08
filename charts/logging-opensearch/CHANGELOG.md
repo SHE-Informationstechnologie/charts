@@ -1,3 +1,6 @@
+# 1.0.0
+- Moved indexTemplate setting to opensearch section and added disabled ISM policy
+
 # 0.3.3
 - Added secret Ref and toleration to fluentbit
 

@@ -92,7 +92,7 @@ fluentbit:
           Suppress_Type_Name On
           tls On
           tls.verify Off
-          HTTP_User admin
+          HTTP_User fluentbit
           HTTP_Passwd ${password}
           Trace_Error On
           Replace_Dots On
@@ -107,7 +107,7 @@ fluentbit:
           Suppress_Type_Name On
           tls On
           tls.verify Off
-          HTTP_User admin
+          HTTP_User fluentbit
           HTTP_Passwd ${password}
           Trace_Error On
 
@@ -121,7 +121,7 @@ fluentbit:
           Suppress_Type_Name On
           tls On
           tls.verify Off
-          HTTP_User admin
+          HTTP_User fluentbit
           HTTP_Passwd ${password}
           Trace_Error On
 

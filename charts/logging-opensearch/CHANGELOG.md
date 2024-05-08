@@ -1,3 +1,6 @@
+# 0.3.2
+- Fixed opensearch roles and users
+
 # 0.3.1
 - Patched context in gress
 

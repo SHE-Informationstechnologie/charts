@@ -1,4 +1,4 @@
-{{- if .Values.indexTemplates.defaultTemplates.access }}
+{{- if .Values.opensearch.indexTemplates.defaultTemplates.access }}
 apiVersion: opensearch.opster.io/v1
 kind: OpensearchIndexTemplate
 metadata:

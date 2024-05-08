@@ -1,6 +1,6 @@
 # logging-opensearch
 
-![Version: 0.3.2](https://img.shields.io/badge/Version-0.3.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.2](https://img.shields.io/badge/AppVersion-0.3.2-informational?style=flat-square)
+![Version: 0.3.3](https://img.shields.io/badge/Version-0.3.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.3.3](https://img.shields.io/badge/AppVersion-0.3.3-informational?style=flat-square)
 
 A Helm chart which deploys a Opensearch cluster manifests, its configuation and fluent bit
 
@@ -22,6 +22,10 @@ A Helm chart which deploys a Opensearch cluster manifests, its configuation and 
 | fluentbit.dashboards.labelKey | string | `"grafana_dashboard"` |  |
 | fluentbit.dashboards.labelValue | int | `1` |  |
 | fluentbit.dashboards.namespace | string | `"monitoring"` |  |
+| fluentbit.envFrom[0].secretRef.name | string | `"fluentbit-password"` |  |
+| fluentbit.logLevel | string | `"info"` |  |
+| fluentbit.tolerations[0].effect | string | `"NoSchedule"` |  |
+| fluentbit.tolerations[0].operator | string | `"Exists"` |  |
 | fullnameOverride | string | `""` |  |
 | global | object | `{}` |  |
 | indexTemplates.additionalTemplates | list | `[]` |  |

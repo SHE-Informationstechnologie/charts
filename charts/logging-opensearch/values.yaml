@@ -138,6 +138,14 @@ fluentbit:
           Format      regex
           Regex       ^(?<remote_addr>[^ ]+) - (?<user_identity>[^ ]+) \[(?<timestamp>[^\]]+)\] \"(?<method>\S+)(?: +(?<request_uri>\S+)(?: +(?<protocol>\S+))?)?\" (?<status>\d+) (?<bytes_sent>\d+) \"(?<referrer>[^"]*)\" \"(?<user_agent>[^"]*)\" (?<request_length>[^ ]*) (?<request_time>[^ ]*) \[(?<proxy_upstream_name>[^ ]*)\] \[(?<proxy_alternative_upstream_name>[^ ]*)\] (?<upstream_addr>[^ ]*) (?<upstream_response_length>[^ ]*) (?<upstream_response_time>[^ ]*) (?<upstream_status>[^ ]*) (?<reg_id>[^ ]*).*$
 
+  tolerations:
+    - operator: Exists
+      effect: NoSchedule
+  envFrom:
+    - secretRef:
+        name: fluentbit-password
+  logLevel: info
+
 # Deploy opensearch cluster
 opensearch:
   # En-/Disable Opensearch deployment

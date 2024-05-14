@@ -1,3 +1,6 @@
+# 1.0.4
+- Added workaround #798'
+
 # 1.0.1
 - Removed name from OpensearchRole and OpensearchUser
 

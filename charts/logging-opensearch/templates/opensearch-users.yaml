@@ -3,6 +3,7 @@ apiVersion: opensearch.opster.io/v1
 kind: OpensearchUser
 metadata:
   name: {{ $user.name }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "logging-opensearch.labels" $ | nindent 4 }}
 spec:

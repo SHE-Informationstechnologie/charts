@@ -1,3 +1,6 @@
+# 1.0.1
+- Removed name from OpensearchRole and OpensearchUser
+
 # 1.0.0
 - Moved indexTemplate setting to opensearch section and added disabled ISM policy
 

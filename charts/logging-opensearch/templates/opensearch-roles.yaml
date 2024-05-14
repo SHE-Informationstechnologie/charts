@@ -8,7 +8,7 @@ metadata:
 spec:
   opensearchCluster:
     name: {{ default ( include "logging-opensearch.opensearchName" $ ) ( dig "opensearchCluster" "name" "" $role ) }}
-  {{- with $role }}
+  {{- with ( $role := omit $role "name" ) }}
   {{- toYaml . | nindent 2 }}
   {{- end }}
 {{- end }}

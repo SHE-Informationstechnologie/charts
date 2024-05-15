@@ -15,7 +15,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ $name }}
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Release.Namespace | default "logging" }}
   labels:
     {{- include "logging-opensearch.labels" . | nindent 4 }}
   {{- with .Values.opensearch.ingress.annotations }}

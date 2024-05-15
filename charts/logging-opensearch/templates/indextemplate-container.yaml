@@ -3,6 +3,7 @@ apiVersion: opensearch.opster.io/v1
 kind: OpensearchIndexTemplate
 metadata:
   name: {{ include "logging-opensearch.name" . }}-container
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "logging-opensearch.labels" . | nindent 4 }}
 spec:

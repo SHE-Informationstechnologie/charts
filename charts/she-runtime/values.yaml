@@ -396,6 +396,11 @@ x509Exporter:
     chart: x509-certificate-exporter
     helm:
       values: |
+        secretTypes:
+        - type: kubernetes.io/tls
+          key: tls.crt
+        - type: Opaque
+          key: tls.crt
         prometheusServiceMonitor:
           extraLabels:
             kubernetes.she.net/prometheus-instance: default

@@ -206,6 +206,22 @@ entries:
   logging-opensearch:
   - apiVersion: v2
     appVersion: 1.0.4
+    created: "2024-05-17T12:26:21.566691429Z"
+    dependencies:
+    - alias: fluentbit
+      name: fluent-bit
+      repository: https://fluent.github.io/helm-charts
+      version: 0.46.4
+    description: A Helm chart which deploys a Opensearch cluster manifests, its configuation
+      and fluent bit
+    digest: c4e1bdf582a613243b73b8a68bd09f5135df47e497cbb625031eed3e98562feb
+    name: logging-opensearch
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/logging-opensearch-1.0.5/logging-opensearch-1.0.5.tgz
+    version: 1.0.5
+  - apiVersion: v2
+    appVersion: 1.0.4
     created: "2024-05-14T10:20:29.47670495Z"
     dependencies:
     - alias: fluentbit
@@ -1989,4 +2005,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-sso-0.0.2/she-sso-0.0.2.tgz
     version: 0.0.2
-generated: "2024-05-14T10:20:29.477062061Z"
+generated: "2024-05-17T12:26:21.56698509Z"

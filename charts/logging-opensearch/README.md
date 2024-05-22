@@ -1,6 +1,6 @@
 # logging-opensearch
 
-![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.4](https://img.shields.io/badge/AppVersion-1.0.4-informational?style=flat-square)
+![Version: 1.0.6](https://img.shields.io/badge/Version-1.0.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.5](https://img.shields.io/badge/AppVersion-1.0.5-informational?style=flat-square)
 
 A Helm chart which deploys a Opensearch cluster manifests, its configuation and fluent bit
 
@@ -8,7 +8,7 @@ A Helm chart which deploys a Opensearch cluster manifests, its configuation and 
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://fluent.github.io/helm-charts | fluentbit(fluent-bit) | 0.46.4 |
+| https://fluent.github.io/helm-charts | fluentbit(fluent-bit) | 0.46.7 |
 
 ## Values
 

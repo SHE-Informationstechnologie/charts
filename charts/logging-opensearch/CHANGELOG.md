@@ -1,3 +1,6 @@
+# 1.0.6
+- Bumped version of fluent-bit chart to 0.46.7 which included application version 3.04'
+
 # 1.0.4
 - Added workaround #798'
 

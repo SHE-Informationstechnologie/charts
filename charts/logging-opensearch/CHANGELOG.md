@@ -1,3 +1,6 @@
+# 1.0.8
+- Fixed wrong context in namespace setting
+
 # 1.0.7
 - Fixed fluentbit dep'
 

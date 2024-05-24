@@ -1,3 +1,6 @@
+# 1.1.0
+- Increased buffer_size of opensearch output to handle busy opensearch and big responses
+
 # 1.0.8
 - Fixed wrong context in namespace setting
 

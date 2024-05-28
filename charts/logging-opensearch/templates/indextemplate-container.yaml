@@ -49,7 +49,7 @@ spec:
                 "ignore_above": 256
               },
               "labels": {
-                "dynamic": "true",
+                "dynamic": "false",
                 "type": "object"
               },
               "namespace_name": {

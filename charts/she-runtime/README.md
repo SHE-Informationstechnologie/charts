@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 1.3.3](https://img.shields.io/badge/Version-1.3.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.3](https://img.shields.io/badge/AppVersion-1.3.3-informational?style=flat-square)
+![Version: 1.3.4](https://img.shields.io/badge/Version-1.3.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.3.4](https://img.shields.io/badge/AppVersion-1.3.4-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -162,7 +162,7 @@ SHE default K8s cluster toolset
 | trivyOperator.source.chart | string | `"trivy-operator"` |  |
 | trivyOperator.source.helm.values | string | `"serviceMonitor:\n  enabled: true\n  labels:\n    kubernetes.she.net/prometheus-instance: default\ntrivy:\n  ignoreUnfixed: false\noperator:\n  metricsVulnIdEnabled: true\n"` |  |
 | trivyOperator.source.repoURL | string | `"https://aquasecurity.github.io/helm-charts/"` |  |
-| trivyOperator.source.targetRevision | string | `"0.19.4"` |  |
+| trivyOperator.source.targetRevision | string | `"0.19.1"` |  |
 | velero.enabled | bool | `true` |  |
 | velero.name | string | `"velero"` |  |
 | velero.namespace | string | `"velero"` |  |

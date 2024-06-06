@@ -1,5 +1,5 @@
 # 1.3.3
-- Fixed trivy version (was 0.1.x instead of 0.19.x)
+- Fixed trivy version (was 0.1.1 instead of 0.19.4)
 
 # 1.3.2
 - Bump opensearch Controller version

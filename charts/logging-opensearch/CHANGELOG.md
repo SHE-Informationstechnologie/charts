@@ -1,3 +1,6 @@
+# 1.1.2
+- fixed version for release
+
 # 1.1.0
 - Increased buffer_size of opensearch output to handle busy opensearch and big responses
 

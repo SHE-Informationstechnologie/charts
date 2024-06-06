@@ -1,3 +1,6 @@
+# 1.3.4
+- Fixed trivy version (was 0.19.4 instead of 0.19.1)
+
 # 1.3.3
 - Fixed trivy version (was 0.1.1 instead of 0.19.4)
 

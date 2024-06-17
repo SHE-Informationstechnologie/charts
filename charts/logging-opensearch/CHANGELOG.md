@@ -1,3 +1,7 @@
+# 1.1.3
+- New parser for processing plaintext logs from Postgresql
+- Re-enabled dynamic mapping for Kubernetes labels
+
 # 1.1.2
 - fixed version for release
 

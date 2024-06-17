@@ -52,6 +52,15 @@ fluentbit:
           Buffer_Chunk_Size 15m
           Buffer_Max_Size 64m
 
+      [INPUT]
+          Name tail
+          Path /var/log/postgresql/*.log*
+          Tag plaintext.*
+          Parser generic_plaintext
+          Mem_Buf_Limit 5m
+          Buffer_Chunk_Size 15m
+          Buffer_Max_Size 64m
+
     filters: |
       [FILTER]
           Name kubernetes
@@ -80,6 +89,14 @@ fluentbit:
           Name grep
           Match ingress-nginx.*
           Exclude log ^.+$
+
+      [FILTER]
+          Name kubernetes
+          Match plaintext.*
+          Merge_Log On
+          Keep_Log Off
+          K8S-Logging.Parser On
+          K8S-Logging.Exclude On
 
     outputs: |
       [OUTPUT]
@@ -128,6 +145,21 @@ fluentbit:
           Trace_Error On
           Buffer_Size 2MB
 
+      [OUTPUT]
+          Name opensearch
+          Match plaintext.*
+          Host opensearch-cluster.logging.svc
+          Port 9200
+          Index container-%Y.%m
+          Retry_Limit 3
+          Suppress_Type_Name On
+          tls On
+          tls.verify Off
+          HTTP_User fluentbit
+          HTTP_Passwd ${password}
+          Trace_Error On
+          Buffer_Size 2MB
+
     customParsers: |
       [PARSER]
           Name docker_no_time
@@ -140,6 +172,13 @@ fluentbit:
           Name        accesslogs
           Format      regex
           Regex       ^(?<remote_addr>[^ ]+) - (?<user_identity>[^ ]+) \[(?<timestamp>[^\]]+)\] \"(?<method>\S+)(?: +(?<request_uri>\S+)(?: +(?<protocol>\S+))?)?\" (?<status>\d+) (?<bytes_sent>\d+) \"(?<referrer>[^"]*)\" \"(?<user_agent>[^"]*)\" (?<request_length>[^ ]*) (?<request_time>[^ ]*) \[(?<proxy_upstream_name>[^ ]*)\] \[(?<proxy_alternative_upstream_name>[^ ]*)\] (?<upstream_addr>[^ ]*) (?<upstream_response_length>[^ ]*) (?<upstream_response_time>[^ ]*) (?<upstream_status>[^ ]*) (?<reg_id>[^ ]*).*$
+
+      [PARSER]
+          Name generic_plaintext
+          Format regex
+          Regex ^(?<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3}) (?<log_level>\w+): (?<message>.*)$
+          Time_Key timestamp
+          Time_Format %Y-%m-%d %H:%M:%S,%L
 
   tolerations:
     - operator: Exists

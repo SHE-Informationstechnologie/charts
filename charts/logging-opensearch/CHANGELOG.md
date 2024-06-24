@@ -1,3 +1,6 @@
+# 1.1.3
+- fixed kibana backend role reference
+
 # 1.1.2
 - fixed version for release
 

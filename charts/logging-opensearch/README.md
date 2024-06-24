@@ -1,6 +1,6 @@
 # logging-opensearch
 
-![Version: 1.1.2](https://img.shields.io/badge/Version-1.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.2](https://img.shields.io/badge/AppVersion-1.1.2-informational?style=flat-square)
+![Version: 1.1.3](https://img.shields.io/badge/Version-1.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.3](https://img.shields.io/badge/AppVersion-1.1.3-informational?style=flat-square)
 
 A Helm chart which deploys a Opensearch cluster manifests, its configuation and fluent bit
 
@@ -81,7 +81,7 @@ A Helm chart which deploys a Opensearch cluster manifests, its configuation and 
 | opensearch.settings.security.config.securityConfigSecret.name | string | `"securityconfig-secret"` |  |
 | opensearch.settings.security.tls.http.generate | bool | `true` |  |
 | opensearch.settings.security.tls.transport.generate | bool | `true` |  |
-| opensearch.users[0].backendRoles[0] | string | `"kibanauser"` |  |
+| opensearch.users[0].backendRoles[0] | string | `"kibana_user"` |  |
 | opensearch.users[0].name | string | `"fluentbit"` |  |
 | opensearch.users[0].passwordFrom.key | string | `"password"` |  |
 | opensearch.users[0].passwordFrom.name | string | `"fluentbit-password"` |  |

@@ -180,7 +180,7 @@ opensearch:
         name: fluentbit-password
         key: password
       backendRoles:
-        - kibanauser
+        - kibana_user
       roles:
         - fluentbit
 

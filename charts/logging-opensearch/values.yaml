@@ -35,7 +35,7 @@ fluentbit:
 
       [INPUT]
           Name tail
-          Path /var/log/containers/*ingress-nginx*.log
+          Path /var/log/containers/*ingress-nginx*
           Tag ingress-nginx.*
           multiline.parser cri
           Mem_Buf_Limit 5m

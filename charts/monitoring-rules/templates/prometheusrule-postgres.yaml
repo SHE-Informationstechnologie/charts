@@ -160,7 +160,7 @@ spec:
     rules:
     {{- if not ( .Values.postgres.disabledRules.pgBackrestLastCompletedFull | default false ) }}
     - alert: PGBackRestLastCompletedFull_main
-      expr: ccp_backrest_last_full_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} > {{ required "maxTimeSinceFull is required!" .Values.postgres.pgBackrest.maxTimeSinceFull }}
+      expr: (ccp_backrest_last_full_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} and on (deployment) (count by (deployment) (ccp_is_in_recovery_status{role="master"} > 1))) > {{ required "maxTimeSinceFull is required!" .Values.postgres.pgBackrest.maxTimeSinceFull }}
       for: 60s
       labels:
         service: postgresql
@@ -170,7 +170,7 @@ spec:
         description: 'There should be a full backup completed not later than the configured max time!'
     {{- if not ( .Values.postgres.disabledRules.pgBackrestLastCompletedIncr | default false ) }}
     - alert: PGBackRestLastCompletedIncr_main
-      expr: ccp_backrest_last_incr_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} > {{ required "maxTimeSinceIncr is required!" .Values.postgres.pgBackrest.maxTimeSinceIncr }}
+      expr: (ccp_backrest_last_incr_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} and on (deployment) (count by (deployment) (ccp_is_in_recovery_status{role="master"} > 1))) > {{ required "maxTimeSinceIncr is required!" .Values.postgres.pgBackrest.maxTimeSinceIncr }}
       for: 60s
       labels:
         service: postgresql
@@ -181,7 +181,7 @@ spec:
     {{- end }}
     {{- if not ( .Values.postgres.disabledRules.pgBackrestLastCompletedDiff | default false ) }}
     - alert: PGBackRestLastCompletedDiff_main
-      expr: ccp_backrest_last_diff_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} > {{ required "maxTimeSinceDiff is required!" .Values.postgres.pgBackrest.maxTimeSinceDiff }}
+      expr: (ccp_backrest_last_diff_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} and on (deployment) (count by (deployment) (ccp_is_in_recovery_status{role="master"} > 1))) > {{ required "maxTimeSinceDiff is required!" .Values.postgres.pgBackrest.maxTimeSinceDiff }}
       for: 60s
       labels:
         service: postgresql

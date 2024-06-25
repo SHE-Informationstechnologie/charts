@@ -1,3 +1,6 @@
+# 3.2.0
+- Limited backup alerts for postgres to non-standby clusters
+
 # 3.0.2
 - Increased alert delay for minio rules
 

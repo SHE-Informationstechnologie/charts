@@ -59,7 +59,7 @@ spec:
     {{- end }}
     {{- if not ( .Values.postgres.disabledRules.diskFillPredict | default false ) }}
     - alert: DiskFillPredict
-      expr: predict_linear(ccp_nodemx_data_disk_available_bytes{mount_point!~"tmpfs"}[1h], 24 * 3600) < 0 and 100 * ((ccp_nodemx_data_disk_total_bytes - ccp_nodemx_data_disk_available_bytes) / ccp_nodemx_data_disk_total_bytes) > 70
+      expr: predict_linear(ccp_nodemx_data_disk_available_bytes{mount_point!~"tmpfs"}[1h], 24 * 3600) < 0 and 100 * ((ccp_nodemx_data_disk_total_bytes{mount_point="/pgdata"} - ccp_nodemx_data_disk_available_bytes{mount_point="/pgdata"}) / ccp_nodemx_data_disk_total_bytes{mount_point="/pgdata"}) > 70
       for: 5m
       labels:
         service: postgresql
@@ -80,7 +80,7 @@ spec:
     {{- end }}
     {{- if not ( .Values.postgres.disabledRules.pgDiskSize | default false ) }}
     - alert: PGDiskSize
-      expr: 100 * ((ccp_nodemx_data_disk_total_bytes - ccp_nodemx_data_disk_available_bytes) / ccp_nodemx_data_disk_total_bytes) > 75
+      expr: 100 * ((ccp_nodemx_data_disk_total_bytes{mount_point="/pgdata"} - ccp_nodemx_data_disk_available_bytes{mount_point="/pgdata"}) / ccp_nodemx_data_disk_total_bytes{mount_point="/pgdata"}) > 75
       for: 60s
       labels:
         service: postgresql

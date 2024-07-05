@@ -1,3 +1,6 @@
+# 3.2.1
+- Limited DiskFillPredict and PGDiskSize alerts to pgdata mount point
+
 # 3.2.0
 - Limited backup alerts for postgres to non-standby clusters
 

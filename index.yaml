@@ -629,6 +629,16 @@ entries:
     version: 0.1.0
   monitoring-rules:
   - apiVersion: v2
+    appVersion: 3.2.1
+    created: "2024-07-05T14:00:09.757837046Z"
+    description: A curated set of prometheus alerting rules for Kubernetes.
+    digest: d75aa25a37ae01186fb7fd6dc25785f7906a34177e851a71ed7b670ec88a2c97
+    name: monitoring-rules
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/monitoring-rules-3.2.1/monitoring-rules-3.2.1.tgz
+    version: 3.2.1
+  - apiVersion: v2
     appVersion: 3.2.0
     created: "2024-06-25T20:27:39.364365892Z"
     description: A curated set of prometheus alerting rules for Kubernetes.
@@ -2131,4 +2141,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-sso-0.0.2/she-sso-0.0.2.tgz
     version: 0.0.2
-generated: "2024-06-25T20:27:39.364780043Z"
+generated: "2024-07-05T14:00:09.758247004Z"

@@ -1,3 +1,6 @@
+# 3.3.0
+- Added Amphora metrics
+
 # 3.2.1
 - Limited DiskFillPredict and PGDiskSize alerts to pgdata mount point
 

@@ -1,6 +1,6 @@
 # monitoring-rules
 
-![Version: 3.2.1](https://img.shields.io/badge/Version-3.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.2.1](https://img.shields.io/badge/AppVersion-3.2.1-informational?style=flat-square)
+![Version: 3.3.0](https://img.shields.io/badge/Version-3.3.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.3.0](https://img.shields.io/badge/AppVersion-3.3.0-informational?style=flat-square)
 
 A curated set of prometheus alerting rules for Kubernetes.
 
@@ -8,6 +8,15 @@ A curated set of prometheus alerting rules for Kubernetes.
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| amphora.enabled | bool | `false` |  |
+| amphora.endpoints.addresses[0].ip | string | `"1.2.3.4"` |  |
+| amphora.endpoints.enabled | bool | `true` |  |
+| amphora.grafanaDashboards.enabled | bool | `true` |  |
+| amphora.prometheusRules.disabledRules | object | `{}` |  |
+| amphora.prometheusRules.enabled | bool | `true` |  |
+| amphora.service.enabled | bool | `true` |  |
+| amphora.service.port | int | `8080` |  |
+| amphora.serviceMonitor.enabled | bool | `true` |  |
 | argocd.disabledRules | object | `{}` |  |
 | argocd.enabled | bool | `false` |  |
 | fullnameOverride | string | `""` |  |

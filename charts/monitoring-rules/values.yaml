@@ -10,6 +10,48 @@ prometheusLabels:
   # 'release'-label.
   release: kube-prometheus-stack
 
+# Amphora load balancer metrics
+amphora:
+  enabled: false
+
+  # Since the load balancers are running outside of Kubernetes
+  # we need to define a fixed range of ip addresses, from which
+  # Prometheus can scrape the metrics. This is configured via endpoints
+  endpoints:
+    enabled: true
+    addresses:
+    - ip: 1.2.3.4
+
+  # En-/Disable Grafana dashboards
+  grafanaDashboards:
+    enabled: true
+
+  # Service settings
+  service:
+    enabled: true
+    port: 8080
+
+  # Service settings
+  serviceMonitor:
+    enabled: true
+    # namespaceSelector:
+    #     matchNames:
+    #     - monitoring
+    # selector:
+    #   matchLabels:
+    #     app: example-amphora
+
+  # Prometheus rules / alerts
+  prometheusRules:
+    enabled: true
+    disabledRules: {}
+      # octaviaLoadBalancerPoolDown: false
+      # octaviaListenerDown: false
+      # octaviaMemberDown: false
+      # octaviaHighConnections: false
+      # octaviaHighBackendResponseTime: false
+      # octaviaHighPoolErrorRate: false
+
 kubernetes:
   enabled: true
 

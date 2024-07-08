@@ -1,0 +1,13 @@
+{{- if .Values.amphora.grafanaDashboards.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: amphora-dashboard
+  labels:
+    grafana_dashboard: "1"
+  annotations:
+    k8s-sidecar-target-directory: "/tmp/dashboards/Amphora"
+data:
+  "amphora-dashboard.json": |
+    {{- $.Files.Get "dashboards/amphora-dashboard.json" | nindent 4 }}
+{{ end }}

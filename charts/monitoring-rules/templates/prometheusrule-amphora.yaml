@@ -1,0 +1,73 @@
+{{ if and .Values.amphora.enabled .Values.amphora.prometheusRules.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "monitoring-rules.fullname" . }}-amphora
+  labels:
+    {{- include "monitoring-rules.labels" . | nindent 4 }}
+    {{ toYaml .Values.prometheusLabels | nindent 4 }}
+spec:
+  groups:
+  - name: amphora-rules
+    rules:
+    {{- if not ( default false .Values.amphora.prometheusRules.disabledRules.OctaviaLoadBalancerPoolDown ) }}
+    - alert: OctaviaLoadBalancerPoolDown
+      expr: openstack_octavia_pool_status == 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: {{ `'Load Balancer Pool (pool id {{ $labels.pool }}) is down'` }}
+        description: {{ `'The load balancer pool with ID {{ $labels.pool }} has been down for more than 5 minutes.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}'` }}
+    {{- end }}
+    {{- if not ( default false .Values.amphora.prometheusRules.disabledRules.OctaviaListenerDown ) }}
+    - alert: OctaviaListenerDown
+      expr: octavia_listener_status == 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: {{ `'Load Balancer Listener (listener id {{ $labels.listener }}) is down'` }}
+        description: {{ `'The load balancer listener with ID {{ $labels.listener }} has been down for more than 5 minutes.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}'` }}
+    {{- end }}
+    {{- if not ( default false .Values.amphora.prometheusRules.disabledRules.OctaviaMemberDown ) }}
+    - alert: OctaviaMemberDown
+      expr: octavia_member_status == 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: {{ `'Load Balancer Member (member id {{ $labels.member }}) is down'` }}
+        description: {{ `'The load balancer member with ID {{ $labels.member }} and pool ID {{ $labels.pool }} has been down for more than 5 minutes.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}'` }}
+    {{- end }}
+    {{- if not ( default false .Values.amphora.prometheusRules.disabledRules.OctaviaHighConnections ) }}
+    - alert: OctaviaHighConnections
+      expr: octavia_loadbalancer_current_connections >= (octavia_loadbalancer_max_connections * 0.9)
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: {{ `'Load Balancer current connections (instance {{ $labels.instance }}) experienced a high amount of connections'` }}
+        description: {{ `'The load balancer {{ $labels.instance }} is experiencing more than 90% of the maximal of connections for more than 5 minutes.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}'` }}
+    {{- end }}
+    {{- if not ( default false .Values.amphora.prometheusRules.disabledRules.OctaviaHighBackendResponseTime ) }}
+    - alert: OctaviaHighBackendResponseTime
+      expr: octavia_member_response_time_average_seconds > 1
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: {{ `'High backend response time on Load Balancer member (member id {{ $labels.member }})'` }}
+        description: {{ `'The load balancer member with ID {{ $labels.member }} and pool ID {{ $labels.member }} has an average backend response time of more than 1 second for the past 5 minutes.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}'` }}
+    {{- end }}
+    {{- if not ( default false .Values.amphora.prometheusRules.disabledRules.OctaviaHighPoolErrorRate ) }}
+    - alert: OctaviaHighPoolErrorRate
+      expr: rate(octavia_pool_response_errors_total[5m]) > 0
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: {{ `'High error rate on Load Balancer Pool (pool id {{ $labels.pool }})'` }}
+        description: {{ `'The load balancer pool with ID {{ $labels.pool }} has an error rate of more than 5% for the past 5 minutes.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}'` }}
+    {{- end }}
+{{ end }}

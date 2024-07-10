@@ -1,3 +1,6 @@
+# 1.4.0
+- x509Exporter: monitor also Opaque secrets
+
 # 1.3.4
 - Fixed trivy version (was 0.19.4 instead of 0.19.1)
 

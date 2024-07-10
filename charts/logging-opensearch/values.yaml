@@ -52,6 +52,24 @@ fluentbit:
           Buffer_Chunk_Size 15m
           Buffer_Max_Size 64m
 
+      # [INPUT]
+      #     Name                syslog
+      #     Path                /var/log/*syslog.log*
+      #     Tag                 syslog
+      #     Buffer_Chunk_Size   32000
+      #     Buffer_Max_Size     64000
+      #     Receive_Buffer_Size 512000
+      
+      # [INPUT]
+      #     Name            systemd
+      #     Path            /run/log/journal
+      #     Tag             kubelet
+      #     Systemd_Filter  _SYSTEMD_UNIT=kubelet.service
+
+      # [INPUT]
+      #     Name   kmsg
+      #     Tag    kernel
+
     filters: |
       [FILTER]
           Name kubernetes
@@ -128,6 +146,51 @@ fluentbit:
           Trace_Error On
           Buffer_Size 2MB
 
+      # [OUTPUT]
+      #     Name opensearch
+      #     Match syslog
+      #     Host opensearch-cluster.logging.svc
+      #     Port 9200
+      #     Index syslog-logs-%Y.%m
+      #     Retry_Limit 3
+      #     Suppress_Type_Name On
+      #     tls On
+      #     tls.verify Off
+      #     HTTP_User fluentbit
+      #     HTTP_Passwd ${password}
+      #     Trace_Error On
+      #     Buffer_Size 2MB
+
+      # [OUTPUT]
+      #     Name opensearch
+      #     Match kubelet
+      #     Host opensearch-cluster.logging.svc
+      #     Port 9200
+      #     Index kubelet-logs-%Y.%m
+      #     Retry_Limit 3
+      #     Suppress_Type_Name On
+      #     tls On
+      #     tls.verify Off
+      #     HTTP_User fluentbit
+      #     HTTP_Passwd ${password}
+      #     Trace_Error On
+      #     Buffer_Size 2MB
+
+      # [OUTPUT]
+      #     Name opensearch
+      #     Match kernel
+      #     Host opensearch-cluster.logging.svc
+      #     Port 9200
+      #     Index kernel-logs-%Y.%m
+      #     Retry_Limit 3
+      #     Suppress_Type_Name On
+      #     tls On
+      #     tls.verify Off
+      #     HTTP_User fluentbit
+      #     HTTP_Passwd ${password}
+      #     Trace_Error On
+      #     Buffer_Size 2MB
+
     customParsers: |
       [PARSER]
           Name docker_no_time
@@ -194,6 +257,9 @@ opensearch:
             - audit-*
             - container-*
             - access-*
+            - kernel-*
+            - syslog-*
+            - kubelet-*
           allowedActions:
             - create_index
             - index
@@ -262,6 +328,9 @@ opensearch:
       access: true
       audit: true
       container: true
+      kernel: false
+      syslog: false
+      kubelet: false
 
     # Additional to the default index templates
     # deploy custom ones

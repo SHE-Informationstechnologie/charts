@@ -1,3 +1,6 @@
+# 3.3.3
+- Fix Amphora's ServiceMonitor template
+
 # 3.3.2
 - Added missing trigger to en-/disable Amphora endpoints
 

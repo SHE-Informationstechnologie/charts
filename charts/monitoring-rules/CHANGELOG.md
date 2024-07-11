@@ -1,3 +1,6 @@
+# 3.3.4
+- Fix Grafana dashboard ConfigMaps
+
 # 3.3.3
 - Fix Amphora's ServiceMonitor template
 

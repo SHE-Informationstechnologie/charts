@@ -1,3 +1,6 @@
+# 3.3.2
+- Added missing trigger to en-/disable Amphora endpoints
+
 # 3.3.0
 - Added Amphora metrics
 

@@ -1,4 +1,4 @@
-{{ if .Values.amphora.enabled }}
+{{ if and .Values.amphora.enabled .Values.amphora.endpoints.enabled }}
 apiVersion: v1
 kind: Endpoints
 metadata:

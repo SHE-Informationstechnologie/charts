@@ -8,6 +8,6 @@ metadata:
   annotations:
     k8s-sidecar-target-directory: "/tmp/dashboards/Amphora"
 data:
-  "amphora-dashboard.json": |
+  amphora-dashboard.json: |
     {{- $.Files.Get "dashboards/amphora-dashboard.json" | nindent 4 }}
-{{ end }}
+{{- end }}

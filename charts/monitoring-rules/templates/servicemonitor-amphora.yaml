@@ -25,6 +25,7 @@ spec:
     {{- toYaml .Values.amphora.serviceMonitor.selector | nindent 4 }}
   {{- else }}
   selector:
-    app: {{ include "monitoring-rules.fullname" . }}-amphora
+    matchLabels:
+      app: {{ include "monitoring-rules.fullname" . }}-amphora
   {{- end }}
 {{ end }}

@@ -6,9 +6,8 @@ metadata:
   labels:
     grafana_dashboard: "1"
   annotations:
-    k8s-sidecar-target-directory: "/tmp/dashboards/Postgres"
+    k8s-sidecar-target-directory: "/tmp/dashboards/Minio"
 data:
-  "minio-dashboard.json": |
+  minio-dashboard.json: |
     {{- $.Files.Get "dashboards/minio-dashboard.json" | nindent 4 }}
-
-{{ end }}
+{{- end }}

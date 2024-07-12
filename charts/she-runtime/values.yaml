@@ -285,23 +285,6 @@ trivyOperator:
         operator:
           metricsVulnIdEnabled: true
 
-grafanaDashboards:
-  enabled: false
-  namespace: monitoring
-  name: grafana-dashboards
-  source:
-    repoURL: https://she-informationstechnologie.github.io/charts
-    chart: grafana-dashboards
-    targetRevision: 0.0.10
-    # helm:
-    #   values: |
-    #     grafanaDashboard:
-    #       trivy:
-    #         enabled: false
-    #       minio:
-    #         enabled: false
-
-
 argoWorkflow:
   enabled: false
   namespace: argo-workflows

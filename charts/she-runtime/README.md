@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 1.4.0](https://img.shields.io/badge/Version-1.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.4.0](https://img.shields.io/badge/AppVersion-1.4.0-informational?style=flat-square)
+![Version: 1.4.1](https://img.shields.io/badge/Version-1.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.4.1](https://img.shields.io/badge/AppVersion-1.4.1-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -41,12 +41,6 @@ SHE default K8s cluster toolset
 | eckOperator.source.chart | string | `"eck-operator"` |  |
 | eckOperator.source.repoURL | string | `"https://helm.elastic.co"` |  |
 | eckOperator.source.targetRevision | string | `"2.11.1"` |  |
-| grafanaDashboards.enabled | bool | `false` |  |
-| grafanaDashboards.name | string | `"grafana-dashboards"` |  |
-| grafanaDashboards.namespace | string | `"monitoring"` |  |
-| grafanaDashboards.source.chart | string | `"grafana-dashboards"` |  |
-| grafanaDashboards.source.repoURL | string | `"https://she-informationstechnologie.github.io/charts"` |  |
-| grafanaDashboards.source.targetRevision | string | `"0.0.10"` |  |
 | internalIngressController.enabled | bool | `true` |  |
 | internalIngressController.name | string | `"internal-ingress"` |  |
 | internalIngressController.namespace | string | `"internal-ingress"` |  |

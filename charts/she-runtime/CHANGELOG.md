@@ -1,3 +1,6 @@
+# 1.4.1
+- Remove obsolete grafanaDashboard section since dashboards became part of the monitoring rules charts
+
 # 1.4.0
 - x509Exporter: monitor also Opaque secrets
 

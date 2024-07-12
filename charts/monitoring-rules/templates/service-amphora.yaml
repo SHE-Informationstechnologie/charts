@@ -6,6 +6,7 @@ metadata:
   labels:
     {{- include "monitoring-rules.labels" . | nindent 4 }}
     {{ toYaml .Values.prometheusLabels | nindent 4 }}
+    app: {{ include "monitoring-rules.fullname" . }}-amphora
 spec:
   ports:
     - name: metrics

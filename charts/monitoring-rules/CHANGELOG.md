@@ -1,3 +1,6 @@
+# 3.3.5
+- Add missing label to Amphora service
+
 # 3.3.4
 - Fix Grafana dashboard ConfigMaps
 

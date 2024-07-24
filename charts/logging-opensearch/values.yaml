@@ -250,8 +250,8 @@ opensearch:
   # Deploy Opensearch ISM policies
   ismPolicies:
     defaultPolicies:
-      # ISM in the opensearch-operator < v2.6.1 which we are currently using has some issues.
-      # There is also an unmarged PR that might fix some bugs (while bringing in some new ones):
+      # ISM in the opensearch-operator <= v2.6.1, which we are currently using, has some issues.
+      # There is also an unmerged PR that might fix some bugs (while bringing in some new ones):
       #
       #   https://github.com/opensearch-project/opensearch-k8s-operator/pull/846
       #

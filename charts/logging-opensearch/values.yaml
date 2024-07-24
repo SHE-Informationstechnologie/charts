@@ -250,7 +250,12 @@ opensearch:
   # Deploy Opensearch ISM policies
   ismPolicies:
     defaultPolicies:
-      # Disabled until issue is solved (check: https://github.com/opensearch-project/opensearch-k8s-operator/issues/801)
+      # ISM in the opensearch-operator < v2.6.1 which we are currently using has some issues.
+      # There is also an unmarged PR that might fix some bugs (while bringing in some new ones):
+      #
+      #   https://github.com/opensearch-project/opensearch-k8s-operator/pull/846
+      #
+      # So, let's wait until the dust settles before enabling ISM.
       logRollOver: false
 
   # Deploy opensearch index templates

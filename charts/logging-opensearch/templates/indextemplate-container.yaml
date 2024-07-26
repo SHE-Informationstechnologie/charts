@@ -12,12 +12,9 @@ spec:
     name: {{ include "logging-opensearch.opensearchName" . }}
   indexPatterns:
     - "container-*"
-  # Issue: https://github.com/opensearch-project/opensearch-k8s-operator/issues/798
-  # Details: This issue causes re-syncs in ArgoCD since custom timefields keep getting
-  #          ignored by the operator. Un-comment this when the issue is fixed.
-  # dataStream:
-  #   timestamp_field:
-  #     name: "@timestamp"
+  dataStream:
+    timestamp_field:
+      name: "@timestamp"
   dataStream: {}
   priority: 1
   template:

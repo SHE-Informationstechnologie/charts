@@ -1,8 +1,11 @@
+# 1.2.0
+- Reenable timestamp fields for index templates now that issue #798 in the operator is fixed in v2.6.1
+
 # 1.1.3
-- fixed kibana backend role reference
+- Fixed kibana backend role reference
 
 # 1.1.2
-- fixed version for release
+- Fixed version for release
 
 # 1.1.0
 - Increased buffer_size of opensearch output to handle busy opensearch and big responses

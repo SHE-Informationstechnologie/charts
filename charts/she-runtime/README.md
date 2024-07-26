@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 1.4.1](https://img.shields.io/badge/Version-1.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.4.1](https://img.shields.io/badge/AppVersion-1.4.1-informational?style=flat-square)
+![Version: 1.4.2](https://img.shields.io/badge/Version-1.4.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.4.2](https://img.shields.io/badge/AppVersion-1.4.2-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -87,7 +87,7 @@ SHE default K8s cluster toolset
 | opensearchOperator.namespace | string | `"opensearch-operator"` |  |
 | opensearchOperator.source.chart | string | `"opensearch-operator"` |  |
 | opensearchOperator.source.repoURL | string | `"https://opensearch-project.github.io/opensearch-k8s-operator/"` |  |
-| opensearchOperator.source.targetRevision | string | `"2.6.0"` |  |
+| opensearchOperator.source.targetRevision | string | `"2.6.1"` |  |
 | postgresOperator.enabled | bool | `true` |  |
 | postgresOperator.name | string | `"postgres-operator"` |  |
 | postgresOperator.namespace | string | `"postgres-operator"` |  |

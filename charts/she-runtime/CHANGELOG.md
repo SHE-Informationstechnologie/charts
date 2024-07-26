@@ -1,3 +1,6 @@
+# 1.4.2
+- Bump opensearch-operator version to v2.6.1
+
 # 1.4.1
 - Remove obsolete grafanaDashboard section since dashboards became part of the monitoring rules charts
 

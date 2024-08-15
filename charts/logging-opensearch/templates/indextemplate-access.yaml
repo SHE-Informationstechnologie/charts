@@ -68,13 +68,15 @@ spec:
             "ignore_above": 256
           },
           "upstream_response_length": {
-            "type": "integer"
+            "type": "keyword",
+            "ignore_above": 256
           },
           "upstream_response_time": {
             "type": "float"
           },
           "upstream_status": {
-            "type": "integer"
+            "type": "keyword",
+            "ignore_above": 256
           },
           "req_id": {
             "type": "keyword",

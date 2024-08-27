@@ -1,3 +1,6 @@
+# 1.2.1
+- Be more relaxed with parsing upstream_status and upstream_response_length in indextemplate-access
+
 # 1.2.0
 - Reenable timestamp fields for index templates now that issue #798 in the operator is fixed in v2.6.1
 

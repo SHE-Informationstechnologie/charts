@@ -60,6 +60,7 @@ fluentbit:
           Keep_Log Off
           K8S-Logging.Parser On
           K8S-Logging.Exclude On
+          Buffer_Size 67108864B
 
       [FILTER]
           Name kubernetes
@@ -96,7 +97,7 @@ fluentbit:
           HTTP_Passwd ${password}
           Trace_Error On
           Replace_Dots On
-          Buffer_Size 2MB
+          Buffer_Size 67108864B
 
       [OUTPUT]
           Name opensearch
@@ -111,7 +112,7 @@ fluentbit:
           HTTP_User fluentbit
           HTTP_Passwd ${password}
           Trace_Error On
-          Buffer_Size 2MB
+          Buffer_Size 67108864B
 
       [OUTPUT]
           Name opensearch
@@ -126,7 +127,7 @@ fluentbit:
           HTTP_User fluentbit
           HTTP_Passwd ${password}
           Trace_Error On
-          Buffer_Size 2MB
+          Buffer_Size 67108864B
 
     customParsers: |
       [PARSER]

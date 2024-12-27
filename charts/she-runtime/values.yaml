@@ -375,7 +375,7 @@ x509Exporter:
   enabled: true
   source:
     repoURL: https://charts.enix.io
-    targetRevision: 3.6.0
+    targetRevision: 3.18.1
     chart: x509-certificate-exporter
     helm:
       values: |

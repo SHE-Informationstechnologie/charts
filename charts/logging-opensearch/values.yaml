@@ -159,6 +159,8 @@ opensearch:
   service:
     overrideName: opensearch-cluster
 
+  imagePullSecrets: []
+
   ingress:
     enabled: false
     className: ""

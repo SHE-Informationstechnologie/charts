@@ -1,3 +1,6 @@
+# 1.2.2
+- Introducing Image pull secrets in the values
+
 # 1.2.1
 - Be more relaxed with parsing upstream_status and upstream_response_length in indextemplate-access
 

@@ -7,5 +7,5 @@ dependencies:
     alias: fluentbit
     repository: https://fluent.github.io/helm-charts
     version: 0.46.7
-appVersion: "1.2.2"
-version: 1.2.2
+appVersion: "1.2.3"
+version: 1.2.3

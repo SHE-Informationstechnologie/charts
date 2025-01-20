@@ -13,6 +13,8 @@ global: {}
   # opensearchCluster:
   #   name: opensearch-cluster
 
+imagePullSecrets: []
+
 # Deploy Fluent Bit
 fluentbit:
   dashboards:
@@ -158,8 +160,6 @@ opensearch:
   # Override name used to target service in ingress resource
   service:
     overrideName: opensearch-cluster
-
-  imagePullSecrets: []
 
   ingress:
     enabled: false

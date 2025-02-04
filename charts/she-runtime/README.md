@@ -1,6 +1,6 @@
 # she-runtime
 
-![Version: 1.4.2](https://img.shields.io/badge/Version-1.4.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.4.2](https://img.shields.io/badge/AppVersion-1.4.2-informational?style=flat-square)
+![Version: 1.4.3](https://img.shields.io/badge/Version-1.4.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.4.3](https://img.shields.io/badge/AppVersion-1.4.3-informational?style=flat-square)
 
 SHE default K8s cluster toolset
 
@@ -20,7 +20,7 @@ SHE default K8s cluster toolset
 | argoApp.source.helm.parameters[1].name | string | `"controller.metrics.enabled"` |  |
 | argoApp.source.helm.parameters[1].value | string | `"true"` |  |
 | argoApp.source.repoURL | string | `"https://argoproj.github.io/argo-helm"` |  |
-| argoApp.source.targetRevision | string | `"6.7.3"` |  |
+| argoApp.source.targetRevision | string | `"6.11.1"` |  |
 | argoWorkflow.enabled | bool | `false` |  |
 | argoWorkflow.name | string | `"argo-workflows"` |  |
 | argoWorkflow.namespace | string | `"argo-workflows"` |  |
@@ -40,7 +40,7 @@ SHE default K8s cluster toolset
 | eckOperator.namespace | string | `"eck-operator"` |  |
 | eckOperator.source.chart | string | `"eck-operator"` |  |
 | eckOperator.source.repoURL | string | `"https://helm.elastic.co"` |  |
-| eckOperator.source.targetRevision | string | `"2.11.1"` |  |
+| eckOperator.source.targetRevision | string | `"2.16.1"` |  |
 | internalIngressController.enabled | bool | `true` |  |
 | internalIngressController.name | string | `"internal-ingress"` |  |
 | internalIngressController.namespace | string | `"internal-ingress"` |  |
@@ -54,7 +54,7 @@ SHE default K8s cluster toolset
 | internalIngressController.source.helm.parameters[3].name | string | `"controller.ingressClassResource.default"` |  |
 | internalIngressController.source.helm.parameters[3].value | string | `"true"` |  |
 | internalIngressController.source.repoURL | string | `"https://kubernetes.github.io/ingress-nginx"` |  |
-| internalIngressController.source.targetRevision | string | `"4.10.0"` |  |
+| internalIngressController.source.targetRevision | string | `"4.12.0"` |  |
 | kyverno.enabled | bool | `false` |  |
 | kyverno.name | string | `"kyverno"` |  |
 | kyverno.namespace | string | `"kyverno"` |  |
@@ -94,37 +94,13 @@ SHE default K8s cluster toolset
 | postgresOperator.source.path | string | `"kustomize/install"` |  |
 | postgresOperator.source.repoURL | string | `"https://github.com/SHE-Informationstechnologie/postgres-operator-examples.git"` |  |
 | postgresOperator.source.targetRevision | string | `"v5.3.1-she-3"` |  |
-| prometheusOperator.alertmanager.alertmanagerSpec.secrets | list | `[]` |  |
-| prometheusOperator.alertmanager.alertmanagerSpec.storage | object | `{}` |  |
-| prometheusOperator.alertmanager.config | object | `{}` |  |
-| prometheusOperator.alertmanager.enabled | bool | `true` |  |
-| prometheusOperator.alertmanager.ingress | object | `{}` |  |
-| prometheusOperator.alertmanager.storage | object | `{}` |  |
-| prometheusOperator.commonLabels | object | `{}` |  |
 | prometheusOperator.enabled | bool | `true` |  |
-| prometheusOperator.global | object | `{}` |  |
-| prometheusOperator.grafana.enabled | bool | `true` |  |
-| prometheusOperator.grafana.ingress | object | `{}` |  |
-| prometheusOperator.grafana.serviceMonitor.labels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
-| prometheusOperator.ingress.baseUrl | string | `"my.domain"` |  |
-| prometheusOperator.ingress.enabled | bool | `true` |  |
-| prometheusOperator.kubeStateMetrics.prometheus.monitor.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
 | prometheusOperator.name | string | `"prom-operator"` |  |
 | prometheusOperator.namespace | string | `"monitoring"` |  |
-| prometheusOperator.prometheus.crunchyPostgresExporter.enabled | bool | `true` |  |
-| prometheusOperator.prometheus.enabled | bool | `true` |  |
-| prometheusOperator.prometheus.ingress | object | `{}` |  |
-| prometheusOperator.prometheus.prometheusSpec.storageSpec | object | `{}` |  |
-| prometheusOperator.prometheus.thanosIngress.enabled | bool | `false` |  |
-| prometheusOperator.prometheus.thanosService.enabled | bool | `true` |  |
-| prometheusOperator.prometheus.thanosServiceExternal.enabled | bool | `false` |  |
-| prometheusOperator.prometheusNodeExporter.hostNetwork | bool | `true` |  |
-| prometheusOperator.prometheusNodeExporter.prometheus.monitor.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
-| prometheusOperator.prometheusOperator | object | `{}` |  |
 | prometheusOperator.source.chart | string | `"kube-prometheus-stack"` |  |
-| prometheusOperator.source.helm.values | string | `""` |  |
+| prometheusOperator.source.helm.values | string | `"global: {}\n  commonLabels: {}\n\nkubeStateMetrics:\n  serviceMonitor:\n    additionalLabels:\n      kubernetes.she.net/prometheus-instance: default\n\nprometheusOperator: \n  hostNetwork: true\n\nprometheusNodeExporter:\n  serviceMonitor:\n    additionalLabels:\n      kubernetes.she.net/prometheus-instance: default\n\nalertmanager:\n  enabled: true\n  ingress:\n    enabled: true\n    hosts:\n      - my.domain\n    annotations: { }\n  alertmanagerSpec:\n    storage: {}\n    ## Secrets is a list of Secrets in the same namespace as the Alertmanager object, which shall be mounted into the\n    ## Alertmanager Pods. The Secrets are mounted into /etc/alertmanager/secrets/.\n    secrets: []\n    ## Alertmanager configuration directives  \n    ## ref: https://prometheus.io/docs/alerting/configuration/#configuration-file  \n    ##      https://prometheus.io/webtools/alerting/routing-tree-editor/\n\ngrafana:\n  enabled: true\n  serviceMonitor:\n    labels:\n      kubernetes.she.net/prometheus-instance: default\n  ingress:\n    enabled: true\n    hosts:\n      - my.domain\n    annotations: {}\n\nprometheus:\n  enabled: true\n  crunchyPostgresExporter:\n    enabled: true\n  ingress:\n    enabled: true\n    baseUrl: my.domain\n    annotations: {}\n  prometheusSpec:\n    storageSpec: {}\n  thanosIngress:\n    enabled: false\n  thanosService:\n    enabled: true\n  thanosServiceExternal:\n    enabled: false\n"` |  |
 | prometheusOperator.source.repoURL | string | `"https://prometheus-community.github.io/helm-charts"` |  |
-| prometheusOperator.source.targetRevision | string | `"57.1.1"` |  |
+| prometheusOperator.source.targetRevision | string | `"68.4.5"` |  |
 | publicIngressController.enabled | bool | `true` |  |
 | publicIngressController.name | string | `"public-ingress"` |  |
 | publicIngressController.namespace | string | `"public-ingress"` |  |
@@ -132,7 +108,7 @@ SHE default K8s cluster toolset
 | publicIngressController.source.helm.parameters[0].name | string | `"controller.ingressClassResource.controllerValue"` |  |
 | publicIngressController.source.helm.parameters[0].value | string | `"k8s.io/ingress-nginx-public"` |  |
 | publicIngressController.source.repoURL | string | `"https://kubernetes.github.io/ingress-nginx"` |  |
-| publicIngressController.source.targetRevision | string | `"4.10.0"` |  |
+| publicIngressController.source.targetRevision | string | `"4.12.0"` |  |
 | sealedSecrets.enabled | bool | `true` |  |
 | sealedSecrets.name | string | `"sealed-secrets"` |  |
 | sealedSecrets.namespace | string | `"sealed-secrets"` |  |
@@ -142,7 +118,7 @@ SHE default K8s cluster toolset
 | sealedSecrets.source.helm.parameters[1].name | string | `"keyRenewPeriod"` |  |
 | sealedSecrets.source.helm.parameters[1].value | string | `"0"` |  |
 | sealedSecrets.source.repoURL | string | `"https://charts.bitnami.com/bitnami"` |  |
-| sealedSecrets.source.targetRevision | string | `"2.0.0"` |  |
+| sealedSecrets.source.targetRevision | string | `"2.17.1"` |  |
 | taintController.enabled | bool | `false` |  |
 | taintController.name | string | `"taint-controller"` |  |
 | taintController.namespace | string | `"taint-controller"` |  |
@@ -161,15 +137,15 @@ SHE default K8s cluster toolset
 | velero.name | string | `"velero"` |  |
 | velero.namespace | string | `"velero"` |  |
 | velero.source.chart | string | `"velero"` |  |
-| velero.source.helm.values | string | `"initContainers:\n- name: velero-plugin-for-aws\n  image: velero/velero-plugin-for-aws:v1.9.0\n  imagePullPolicy: IfNotPresent\n  volumeMounts:\n  - mountPath: /target\n    name: plugins\nresources:\n  requests:\n    cpu: 500m\n    memory: 128Mi\n  limits:\n    cpu: 1000m\n    memory: 512Mi\n"` |  |
+| velero.source.helm.values | string | `"initContainers:\n- name: velero-plugin-for-aws\n  image: velero/velero-plugin-for-aws:v1.11.0\n  imagePullPolicy: IfNotPresent\n  volumeMounts:\n  - mountPath: /target\n    name: plugins\n# - name: velero-plugin-for-azure\n#   image: velero/velero-plugin-for-microsoft-azure:v1.11.0\n#   imagePullPolicy: IfNotPresent\n#   volumeMounts:\n#   - mountPath: /target\n#     name: plugins\n\nresources:\n  requests:\n    cpu: 500m\n    memory: 128Mi\n  limits:\n    cpu: 1000m\n    memory: 512Mi\n"` |  |
 | velero.source.repoURL | string | `"https://vmware-tanzu.github.io/helm-charts"` |  |
-| velero.source.targetRevision | string | `"6.0.0"` |  |
+| velero.source.targetRevision | string | `"8.3.0"` |  |
 | x509Exporter.enabled | bool | `true` |  |
 | x509Exporter.name | string | `"x509-exporter"` |  |
 | x509Exporter.namespace | string | `"monitoring"` |  |
-| x509Exporter.source.chart | string | `"x509-certificate-exporter"` |  |
+| x509Exporter.source.chart | string | `nil` |  |
 | x509Exporter.source.helm.values | string | `"secretTypes:\n- type: kubernetes.io/tls\n  key: tls.crt\n- type: Opaque\n  key: tls.crt\nprometheusServiceMonitor:\n  extraLabels:\n    kubernetes.she.net/prometheus-instance: default\nprometheusRules:\n  extraLabels:\n    kubernetes.she.net/prometheus-instance: default\n  disableBuiltinAlertGroup: false\nsecretsExporter:\n  resources:\n    requests:\n      cpu: 20m\n      memory: 20Mi\n    limits:\n      cpu: null\n      memory: 150M\n"` |  |
-| x509Exporter.source.repoURL | string | `"https://charts.enix.io"` |  |
-| x509Exporter.source.targetRevision | string | `"3.6.0"` |  |
+| x509Exporter.source.repoURL | string | `"httpsx509-certificate-exporter://charts.enix.io"` |  |
+| x509Exporter.source.targetRevision | string | `"3.18.1"` |  |
 
 ----------------------------------------------

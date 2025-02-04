@@ -17,7 +17,6 @@
 - bump ingress-nginx to 4.12.0
 - bump sealed-secrets to 2.17.1
 
-
 # 1.4.2
 - Bump opensearch-operator version to v2.6.1
 

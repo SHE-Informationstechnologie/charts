@@ -346,7 +346,7 @@ x509Exporter:
   source:
     repoURL: https://charts.enix.io
     targetRevision: 3.18.1
-    chart: 
+    chart: x509-certificate-exporter
     helm:
       values: |
         secretTypes:

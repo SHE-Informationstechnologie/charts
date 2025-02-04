@@ -344,7 +344,7 @@ x509Exporter:
   name: x509-exporter
   enabled: true
   source:
-    repoURL: httpsx509-certificate-exporter://charts.enix.io
+    repoURL: https://charts.enix.io
     targetRevision: 3.18.1
     chart: 
     helm:

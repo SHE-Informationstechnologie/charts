@@ -10,7 +10,7 @@ sealedSecrets:
   enabled: true
   source:
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 2.0.0
+    targetRevision: 2.17.1
     chart: sealed-secrets
     helm:
       parameters:
@@ -45,7 +45,7 @@ eckOperator:
   enabled: false
   source:
     repoURL: https://helm.elastic.co
-    targetRevision:  2.11.1
+    targetRevision:  2.16.1
     chart: eck-operator
 
 prometheusOperator:
@@ -54,106 +54,69 @@ prometheusOperator:
   enabled: true
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 57.1.1
+    targetRevision: 68.4.5  # <- coming from 57.2.1
     chart: kube-prometheus-stack
     helm:
       values: |
-  global: {}
-  commonLabels: {}
-   # labelKey: labelValue
-  ingress:
-    enabled: true
-    baseUrl: my.domain
-    # annotations: {}
-  kubeStateMetrics:
-    prometheus:
-      monitor:
-        additionalLabels:
-          kubernetes.she.net/prometheus-instance: default
-  prometheusOperator: {}
-  prometheusNodeExporter:
-    hostNetwork: true
-    prometheus:
-      monitor:
-        additionalLabels:
-          kubernetes.she.net/prometheus-instance: default
-  alertmanager:
-    alertmanagerSpec:
-      storage: {}
-      ## Secrets is a list of Secrets in the same namespace as the Alertmanager object, which shall be mounted into the
-      ## Alertmanager Pods. The Secrets are mounted into /etc/alertmanager/secrets/.
-      secrets: []
-    enabled: true
-    ingress: {}
-    ## Alertmanager configuration directives  
-    ## ref: https://prometheus.io/docs/alerting/configuration/#configuration-file  
-    ##      https://prometheus.io/webtools/alerting/routing-tree-editor/
-    config: {}
-    storage: {}
-    # ingress:
-      # enabled: true
-      # baseUrl: my.domain
-      # annotations: {}
-  grafana:
-    enabled: true
-    serviceMonitor:
-      labels:
-        kubernetes.she.net/prometheus-instance: default
-    ingress: {}
-    # ingress:
-      # enabled: true
-      # baseUrl: my.domain
-      # annotations: {}
-    # auth:
-      # generic_oauth: # See also https://grafana.com/docs/grafana/latest/setup-grafana/configure-security/configure-authentication/generic-oauth/#generic-oauth-authentication
-        # enabled: true
-        # role_attribute_path: resource_access.grafana.roles[0]
-        # name: Oauth
-        # ...
-    # extraConfigmapMounts:
-    # - name: example
-    #   mountPath: /etc/example
-    #   configMap: example
-    #   readOnly: true
-    # extraSecretMounts:
-    # - name: example-name
-    #   mountPath: /etc/example
-    #   secretName: exmple
-    #   readOnly: true
-    #   defaultMode: 0440
-    # smtp:
-    #   enabled: false
-    # smtpConfig:
-    #   existingSecret: ""
-    #   userKey: ""
-    #   passwordKey: ""   
-  prometheus:
-    enabled: true
-    crunchyPostgresExporter:
-      enabled: true
-#    serviceMonitorSelectors:
-#      matchLabels:
-#        kubernetes.she.net/prometheus-instance: default
-#    podMonitorSelectors:
-#      matchLabels:
-#        kubernetes.she.net/prometheus-instance: default
-#    ruleSelectors:
-#      matchLabels:
-#        kubernetes.she.net/prometheus-instance: default
-    ingress: {}
-    # ingress:
-      # enabled: true
-      # baseUrl: my.domain
-      # annotations: {}
-    prometheusSpec:
-      storageSpec: {}
-    thanosIngress:
-      enabled: false
-    thanosService:
-      enabled: true
-    thanosServiceExternal:
-      enabled: false
-  # defaultRules: {}
+        global: {}
+          commonLabels: {}
+
+        kubeStateMetrics:
+          serviceMonitor:
+            additionalLabels:
+              kubernetes.she.net/prometheus-instance: default
+
+        prometheusOperator: 
+          hostNetwork: true
+
+        prometheusNodeExporter:
+          serviceMonitor:
+            additionalLabels:
+              kubernetes.she.net/prometheus-instance: default
+
+        alertmanager:
+          enabled: true
+          ingress:
+            enabled: true
+            hosts:
+              - my.domain
+            annotations: { }
+          alertmanagerSpec:
+            storage: {}
+            ## Secrets is a list of Secrets in the same namespace as the Alertmanager object, which shall be mounted into the
+            ## Alertmanager Pods. The Secrets are mounted into /etc/alertmanager/secrets/.
+            secrets: []
+            ## Alertmanager configuration directives  
+            ## ref: https://prometheus.io/docs/alerting/configuration/#configuration-file  
+            ##      https://prometheus.io/webtools/alerting/routing-tree-editor/
+
+        grafana:
+          enabled: true
+          serviceMonitor:
+            labels:
+              kubernetes.she.net/prometheus-instance: default
+          ingress:
+            enabled: true
+            hosts:
+              - my.domain
+            annotations: {}
+
+        prometheus:
+          enabled: true
+          crunchyPostgresExporter:
+            enabled: true
+          ingress:
+            enabled: true
+            baseUrl: my.domain
+            annotations: {}
+          prometheusSpec:
+            storageSpec: {}
+          thanosIngress:
+            enabled: false
+          thanosService:
+            enabled: true
+          thanosServiceExternal:
+            enabled: false
 
 internalIngressController:
   namespace: internal-ingress
@@ -161,7 +124,7 @@ internalIngressController:
   enabled: true
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.10.0
+    targetRevision: 4.12.0
     chart: ingress-nginx
     helm:
       parameters:
@@ -180,7 +143,7 @@ publicIngressController:
   enabled: true
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.10.0
+    targetRevision: 4.12.0
     chart: ingress-nginx
     helm:
       parameters:
@@ -193,7 +156,7 @@ argoApp:
   enabled: false
   source:
     repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 6.7.3
+    targetRevision: 6.11.1
     chart: argo-cd
     helm:
       parameters:
@@ -208,17 +171,24 @@ velero:
   enabled: true
   source:
     repoURL: https://vmware-tanzu.github.io/helm-charts
-    targetRevision: 6.0.0
+    targetRevision: 8.3.0
     chart: velero
     helm:
       values: |
         initContainers:
         - name: velero-plugin-for-aws
-          image: velero/velero-plugin-for-aws:v1.9.0
+          image: velero/velero-plugin-for-aws:v1.11.0
           imagePullPolicy: IfNotPresent
           volumeMounts:
           - mountPath: /target
             name: plugins
+        # - name: velero-plugin-for-azure
+        #   image: velero/velero-plugin-for-microsoft-azure:v1.11.0
+        #   imagePullPolicy: IfNotPresent
+        #   volumeMounts:
+        #   - mountPath: /target
+        #     name: plugins
+
         resources:
           requests:
             cpu: 500m
@@ -374,9 +344,9 @@ x509Exporter:
   name: x509-exporter
   enabled: true
   source:
-    repoURL: https://charts.enix.io
-    targetRevision: 3.6.0
-    chart: x509-certificate-exporter
+    repoURL: httpsx509-certificate-exporter://charts.enix.io
+    targetRevision: 3.18.1
+    chart: 
     helm:
       values: |
         secretTypes:

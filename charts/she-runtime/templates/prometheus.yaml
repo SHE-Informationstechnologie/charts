@@ -24,7 +24,7 @@ spec:
           {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- with .kubeStateMetrics }}
-        kube-state-metrics:
+        kubestatemetrics:
           {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- with .coreDns }}
@@ -56,7 +56,7 @@ spec:
           {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- with .prometheusNodeExporter }}
-        prometheus-node-exporter:
+        prometheusNnodeExporter:
           {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- if .alertmanager.enabled }}
@@ -296,7 +296,7 @@ spec:
               - prometheus.{{ .prometheus.ingress.baseUrl | default .ingress.baseUrl }}
             tls:
               - hosts:
-                 - prometheus.{{ .prometheus.ingress.baseUrl | default .ingress.baseUrl }}
+                  - prometheus.{{ .prometheus.ingress.baseUrl | default .ingress.baseUrl }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP

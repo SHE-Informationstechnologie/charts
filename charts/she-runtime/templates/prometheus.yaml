@@ -73,10 +73,10 @@ spec:
             ingressClassName: {{ .alertmanager.ingress.className }}
             enabled: true
             hosts:
-              - {{ .alertmanager.ingress.hosts | default .alertmanager.ingress.hosts }}
+              - {{ .alertmanager.ingress.hosts }}
             tls:
               - hosts:
-                  - {{ .alertmanager.ingress.hosts | default .alertmanager.ingress.hosts }}
+                  - {{ .alertmanager.ingress.hosts  }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
@@ -97,10 +97,10 @@ spec:
             ingressClassName: {{ .grafana.ingress.className }}
             enabled: true
             hosts:
-              - {{ .grafana.ingress.hosts | default grafana.ingress.hosts }}
+              - {{ .grafana.ingress.hosts}}
             tls:
               - hosts:
-                  - .{{ .grafana.ingress.hosts | default .grafana.ingress.hosts }}
+                  - {{ .grafana.ingress.hosts}}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
@@ -161,8 +161,8 @@ spec:
             grafana_net:
               url: https://grafana.net
             server:
-              domain: "{{ .grafana.ingress.hosts | default .grafana.ingress.hosts }}"
-              root_url: https://{{ .grafana.ingress.hosts | default .grafana.ingress.hosts }}
+              domain: "{{ .grafana.ingress.hosts }}"
+              root_url: https://{{ .grafana.ingress.hosts }}
               router_logging: true
               enforce_domain: true
             auth:
@@ -292,10 +292,10 @@ spec:
             ingressClassName: {{ .prometheus.ingress.className }}
             enabled: true
             hosts:
-              - {{ .prometheus.ingress.hosts | default .prometheus.ingress.hosts }}
+              - {{ .prometheus.ingress.hosts }}
             tls:
               - hosts:
-                  - {{ .prometheus.ingress.hosts | default .prometheus.ingress.hosts }}
+                  - {{ .prometheus.ingress.hosts }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP

@@ -69,15 +69,14 @@ spec:
           config:
             {{- toYaml .alertmanager.config | nindent 12 }}
           {{- end }}
-          {{- if .alertmanager.ingress.enabled | default .ingress.enabled }}
           ingress:
             ingressClassName: {{ .alertmanager.ingress.className }}
             enabled: true
             hosts:
-              - alertmanager.{{ .alertmanager.ingress.baseUrl | default .ingress.baseUrl }}
+              - alertmanager.{{ .alertmanager.ingress.hosts | default .alertmanager.ingress.hosts }}
             tls:
               - hosts:
-                  - alertmanager.{{ .alertmanager.ingress.baseUrl | default .ingress.baseUrl }}
+                  - alertmanager.{{ .alertmanager.ingress.hosts | default .alertmanager.ingress.hosts }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
@@ -98,10 +97,10 @@ spec:
             ingressClassName: {{ .grafana.ingress.className }}
             enabled: true
             hosts:
-              - grafana.{{ .grafana.ingress.baseUrl | default .ingress.baseUrl }}
+              - grafana.{{ .grafana.ingress.hosts | default grafana.ingress.hosts }}
             tls:
               - hosts:
-                  - grafana.{{ .grafana.ingress.baseUrl | default .ingress.baseUrl }}
+                  - grafana.{{ .grafana.ingress.hosts | default .grafana.ingress.hosts }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
@@ -162,8 +161,8 @@ spec:
             grafana_net:
               url: https://grafana.net
             server:
-              domain: "grafana.{{ .grafana.ingress.baseUrl | default .ingress.baseUrl }}"
-              root_url: https://grafana.{{ .grafana.ingress.baseUrl | default .ingress.baseUrl }}
+              domain: "{{ .grafana.ingress.hosts | default .grafana.ingress.hosts }}"
+              root_url: https://{{ .grafana.ingress.hosts | default .grafana.ingress.hosts }}
               router_logging: true
               enforce_domain: true
             auth:
@@ -293,10 +292,10 @@ spec:
             ingressClassName: {{ .prometheus.ingress.className }}
             enabled: true
             hosts:
-              - prometheus.{{ .prometheus.ingress.baseUrl | default .ingress.baseUrl }}
+              - {{ .prometheus.ingress.hosts | default .prometheus.ingress.hosts }}
             tls:
               - hosts:
-                  - prometheus.{{ .prometheus.ingress.baseUrl | default .ingress.baseUrl }}
+                  - {{ .prometheus.ingress.hosts | default .prometheus.ingress.hosts }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP

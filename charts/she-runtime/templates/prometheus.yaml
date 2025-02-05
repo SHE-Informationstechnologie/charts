@@ -89,7 +89,6 @@ spec:
         {{- end }}
         {{- if .grafana.enabled }}
         grafana:
-          {{- if .grafana.ingress.enabled | default .ingress.enabled }}
           ingress:
             ingressClassName: {{ .grafana.ingress.className }}
             enabled: true

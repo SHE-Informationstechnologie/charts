@@ -92,10 +92,10 @@ spec:
             ingressClassName: {{ .grafana.ingress.className }}
             enabled: true
             hosts:
-              - {{ .grafana.ingress.hosts}}
+              - {{ .grafana.ingress.hosts | default grafana.ingress.hosts }}
             tls:
               - hosts:
-                  - {{ .grafana.ingress.hosts}}
+                  - .{{ .grafana.ingress.hosts | default .grafana.ingress.hosts }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP

@@ -59,7 +59,7 @@ prometheusOperator:
     helm:
       values: |
         global: {}
-          commonLabels: {}
+        commonLabels: {}
 
         kubeStateMetrics:
           serviceMonitor:

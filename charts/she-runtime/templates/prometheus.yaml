@@ -73,10 +73,10 @@ spec:
             ingressClassName: {{ .alertmanager.ingress.className }}
             enabled: true
             hosts:
-              - alertmanager.{{ .alertmanager.ingress.hosts | default .alertmanager.ingress.hosts }}
+              - {{ .alertmanager.ingress.hosts | default .alertmanager.ingress.hosts }}
             tls:
               - hosts:
-                  - alertmanager.{{ .alertmanager.ingress.hosts | default .alertmanager.ingress.hosts }}
+                  - {{ .alertmanager.ingress.hosts | default .alertmanager.ingress.hosts }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP

@@ -80,9 +80,6 @@ spec:
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
-              {{- if .ingress.annotations }}
-              {{- toYaml .ingress.annotations | nindent 14 }}
-              {{- end }}
               {{- if .alertmanager.ingress.annotations }}
               {{- toYaml .alertmanager.ingress.annotations | nindent 14 }}
               {{- end }}
@@ -104,9 +101,6 @@ spec:
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
-              {{- if .ingress.annotations }}
-              {{- toYaml .ingress.annotations | nindent 14 }}
-              {{- end }}
               {{- if .grafana.ingress.annotations }}
               {{- toYaml .grafana.ingress.annotations | nindent 14 }}
               {{- end }}
@@ -299,9 +293,6 @@ spec:
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
-              {{- if .ingress.annotations }}
-              {{- toYaml .ingress.annotations | nindent 14 }}
-              {{- end }}
               {{- if .prometheus.ingress.annotations }}
               {{- toYaml .prometheus.ingress.annotations | nindent 14 }}
               {{- end }}

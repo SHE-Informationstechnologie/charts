@@ -73,10 +73,14 @@ spec:
             ingressClassName: {{ .alertmanager.ingress.ingressClassName }}
             enabled: true
             hosts:
-              {{- range .alertmanager.ingress.hosts }} - {{.}} {{- end }}
+              {{- range .alertmanager.ingress.hosts }} 
+              - {{.}}
+              {{- end }}
             tls:
               - hosts: 
-                {{- range .alertmanager.ingress.hosts }} - {{.}} {{- end }}
+                {{- range .alertmanager.ingress.hosts }}
+                - {{.}}
+                {{- end }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
@@ -92,10 +96,14 @@ spec:
             ingressClassName: {{ .grafana.ingress.ingressClassName }}
             enabled: true
             hosts: 
-              {{- range .grafana.ingress.hosts }} - {{.}} {{- end }}
+              {{- range .grafana.ingress.hosts }} 
+              - {{.}}
+              {{- end }}
             tls:
               - hosts: 
-                {{- range .grafana.ingress.hosts }} - {{.}} {{- end }}
+                {{- range .grafana.ingress.hosts }}
+                - {{.}}
+                {{- end }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
@@ -282,10 +290,14 @@ spec:
             ingressClassName: {{ .prometheus.ingress.ingressClassName }}
             enabled: true
             hosts: 
-              {{- range .prometheus.ingress.hosts }} - {{.}} {{- end }}
+              {{- range .prometheus.ingress.hosts }}
+              - {{.}}
+              {{- end }}
             tls:
               - hosts: 
-                {{- range .prometheus.ingress.hosts }} - {{.}} {{- end }}
+                {{- range .prometheus.ingress.hosts }}
+                - {{.}}
+                {{- end }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP

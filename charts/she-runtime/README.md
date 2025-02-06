@@ -94,6 +94,12 @@ SHE default K8s cluster toolset
 | postgresOperator.source.path | string | `"kustomize/install"` |  |
 | postgresOperator.source.repoURL | string | `"https://github.com/SHE-Informationstechnologie/postgres-operator-examples.git"` |  |
 | postgresOperator.source.targetRevision | string | `"v5.3.1-she-3"` |  |
+| prometheusOperator.alertmanager.alertmanagerSpec.secrets | list | `[]` |  |
+| prometheusOperator.alertmanager.alertmanagerSpec.storage | object | `{}` |  |
+| prometheusOperator.alertmanager.enabled | bool | `true` |  |
+| prometheusOperator.alertmanager.ingress.annotations | object | `{}` |  |
+| prometheusOperator.alertmanager.ingress.enabled | bool | `true` |  |
+| prometheusOperator.alertmanager.ingress.hosts[0] | string | `"my.domain"` |  |
 | prometheusOperator.commonLabels | object | `{}` |  |
 | prometheusOperator.enabled | bool | `true` |  |
 | prometheusOperator.global | object | `{}` |  |
@@ -114,12 +120,6 @@ SHE default K8s cluster toolset
 | prometheusOperator.prometheus.thanosIngress.enabled | bool | `false` |  |
 | prometheusOperator.prometheus.thanosService.enabled | bool | `true` |  |
 | prometheusOperator.prometheus.thanosServiceExternal.enabled | bool | `false` |  |
-| prometheusOperator.prometheusNodeExporter.alertmanager.alertmanagerSpec.secrets | list | `[]` |  |
-| prometheusOperator.prometheusNodeExporter.alertmanager.alertmanagerSpec.storage | object | `{}` |  |
-| prometheusOperator.prometheusNodeExporter.alertmanager.enabled | bool | `true` |  |
-| prometheusOperator.prometheusNodeExporter.alertmanager.ingress.annotations | object | `{}` |  |
-| prometheusOperator.prometheusNodeExporter.alertmanager.ingress.enabled | bool | `true` |  |
-| prometheusOperator.prometheusNodeExporter.alertmanager.ingress.hosts[0] | string | `"my.domain"` |  |
 | prometheusOperator.prometheusNodeExporter.serviceMonitor.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
 | prometheusOperator.prometheusOperator.hostNetwork | bool | `true` |  |
 | prometheusOperator.source.chart | string | `"kube-prometheus-stack"` |  |

@@ -73,21 +73,23 @@ prometheusOperator:
     serviceMonitor:
       additionalLabels:
         kubernetes.she.net/prometheus-instance: default
-    alertmanager:
+
+  alertmanager:
+    enabled: true
+    ingress:
       enabled: true
-      ingress:
-        enabled: true
-        hosts:
-          - my.domain
-        annotations: { }
-      alertmanagerSpec:
-        storage: {}
-        ## Secrets is a list of Secrets in the same namespace as the Alertmanager object, which shall be mounted into the
-        ## Alertmanager Pods. The Secrets are mounted into /etc/alertmanager/secrets/.
-        secrets: []
-        ## Alertmanager configuration directives  
-        ## ref: https://prometheus.io/docs/alerting/configuration/#configuration-file  
-        ##      https://prometheus.io/webtools/alerting/routing-tree-editor/
+      hosts:
+        - my.domain
+      annotations: { }
+    alertmanagerSpec:
+      storage: {}
+      ## Secrets is a list of Secrets in the same namespace as the Alertmanager object, which shall be mounted into the
+      ## Alertmanager Pods. The Secrets are mounted into /etc/alertmanager/secrets/.
+      secrets: []
+      ## Alertmanager configuration directives
+      ## ref: https://prometheus.io/docs/alerting/configuration/#configuration-file
+      ##  https://prometheus.io/webtools/alerting/routing-tree-editor/
+
   grafana:
     enabled: true
     serviceMonitor:
@@ -98,6 +100,7 @@ prometheusOperator:
       hosts:
         - my.domain
       annotations: {}
+
   prometheus:
     enabled: true
     crunchyPostgresExporter:

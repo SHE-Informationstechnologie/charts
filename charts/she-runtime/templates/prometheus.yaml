@@ -154,7 +154,7 @@ spec:
               url: https://grafana.net
             server:
               domain: "{{ .grafana.ingress.hosts }}"
-              root_url: https://{{ .grafana.ingress.hosts }}
+              root_url: "https://{{ .grafana.ingress.hosts }}"
               router_logging: true
               enforce_domain: true
             auth:

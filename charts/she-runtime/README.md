@@ -145,7 +145,7 @@ SHE default K8s cluster toolset
 | sealedSecrets.source.helm.parameters[0].value | string | `"true"` |  |
 | sealedSecrets.source.helm.parameters[1].name | string | `"keyRenewPeriod"` |  |
 | sealedSecrets.source.helm.parameters[1].value | string | `"0"` |  |
-| sealedSecrets.source.repoURL | string | `"https://charts.bitnami.com/bitnami"` |  |
+| sealedSecrets.source.repoURL | string | `"https://bitnami-labs.github.io/sealed-secrets"` |  |
 | sealedSecrets.source.targetRevision | string | `"2.17.1"` |  |
 | taintController.enabled | bool | `false` |  |
 | taintController.name | string | `"taint-controller"` |  |

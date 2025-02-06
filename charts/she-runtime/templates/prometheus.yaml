@@ -70,7 +70,7 @@ spec:
             {{- toYaml .alertmanager.config | nindent 12 }}
           {{- end }}
           ingress:
-            ingressClassName: {{ .alertmanager.ingress.className }}
+            ingressClassName: {{ .alertmanager.ingress.ingressClassName }}
             enabled: true
             hosts: {{- toYaml .alertmanager.ingress.hosts | nindent 14 }}
             tls:
@@ -87,7 +87,7 @@ spec:
         {{- if .grafana.enabled }}
         grafana:
           ingress:
-            ingressClassName: {{ .grafana.ingress.className }}
+            ingressClassName: {{ .grafana.ingress.ingressClassName }}
             enabled: true
             hosts: {{- toYaml .grafana.ingress.hosts | nindent 14 }}
             tls:
@@ -277,7 +277,7 @@ spec:
             {{- end }}
           {{- if .prometheus.ingress.enabled }}
           ingress:
-            ingressClassName: {{ .prometheus.ingress.className }}
+            ingressClassName: {{ .prometheus.ingress.ingressClassName }}
             enabled: true
             hosts: {{- toYaml .prometheus.ingress.hosts | nindent 14 }}
             tls:

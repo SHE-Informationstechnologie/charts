@@ -100,6 +100,7 @@ SHE default K8s cluster toolset
 | prometheusOperator.alertmanager.ingress.annotations | object | `{}` |  |
 | prometheusOperator.alertmanager.ingress.enabled | bool | `true` |  |
 | prometheusOperator.alertmanager.ingress.hosts[0] | string | `"my.domain"` |  |
+| prometheusOperator.alertmanager.ingress.ingressClassName | string | `"nginx-internal"` |  |
 | prometheusOperator.commonLabels | object | `{}` |  |
 | prometheusOperator.enabled | bool | `true` |  |
 | prometheusOperator.global | object | `{}` |  |
@@ -107,6 +108,7 @@ SHE default K8s cluster toolset
 | prometheusOperator.grafana.ingress.annotations | object | `{}` |  |
 | prometheusOperator.grafana.ingress.enabled | bool | `true` |  |
 | prometheusOperator.grafana.ingress.hosts[0] | string | `"my.domain"` |  |
+| prometheusOperator.grafana.ingress.ingressClassName | string | `"nginx-internal"` |  |
 | prometheusOperator.grafana.serviceMonitor.labels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
 | prometheusOperator.kubeStateMetrics.serviceMonitor.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
 | prometheusOperator.name | string | `"prom-operator"` |  |
@@ -116,6 +118,7 @@ SHE default K8s cluster toolset
 | prometheusOperator.prometheus.ingress.annotations | object | `{}` |  |
 | prometheusOperator.prometheus.ingress.baseUrl | string | `"my.domain"` |  |
 | prometheusOperator.prometheus.ingress.enabled | bool | `true` |  |
+| prometheusOperator.prometheus.ingress.ingressClassName | string | `"nginx-internal"` |  |
 | prometheusOperator.prometheus.prometheusSpec.storageSpec | object | `{}` |  |
 | prometheusOperator.prometheus.thanosIngress.enabled | bool | `false` |  |
 | prometheusOperator.prometheus.thanosService.enabled | bool | `true` |  |

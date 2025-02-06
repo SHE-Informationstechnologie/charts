@@ -77,6 +77,7 @@ prometheusOperator:
   alertmanager:
     enabled: true
     ingress:
+      ingressClassName: nginx-internal
       enabled: true
       hosts:
         - my.domain
@@ -96,6 +97,7 @@ prometheusOperator:
       labels:
         kubernetes.she.net/prometheus-instance: default
     ingress:
+      ingressClassName: nginx-internal
       enabled: true
       hosts:
         - my.domain
@@ -106,6 +108,7 @@ prometheusOperator:
     crunchyPostgresExporter:
       enabled: true
     ingress:
+      ingressClassName: nginx-internal
       enabled: true
       baseUrl: my.domain
       annotations: {}

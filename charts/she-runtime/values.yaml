@@ -58,65 +58,62 @@ prometheusOperator:
     chart: kube-prometheus-stack
     helm:
       values: |
-        global: {}
-        commonLabels: {}
+  global: {}
+  commonLabels: {}
 
-        kubeStateMetrics:
-          serviceMonitor:
-            additionalLabels:
-              kubernetes.she.net/prometheus-instance: default
+  kubeStateMetrics:
+    serviceMonitor:
+      additionalLabels:
+        kubernetes.she.net/prometheus-instance: default
 
-        prometheusOperator: 
-          hostNetwork: true
+  prometheusOperator: 
+    hostNetwork: true
 
-        prometheusNodeExporter:
-          serviceMonitor:
-            additionalLabels:
-              kubernetes.she.net/prometheus-instance: default
-
-        alertmanager:
-          enabled: true
-          ingress:
-            enabled: true
-            hosts:
-              - my.domain
-            annotations: { }
-          alertmanagerSpec:
-            storage: {}
-            ## Secrets is a list of Secrets in the same namespace as the Alertmanager object, which shall be mounted into the
-            ## Alertmanager Pods. The Secrets are mounted into /etc/alertmanager/secrets/.
-            secrets: []
-            ## Alertmanager configuration directives  
-            ## ref: https://prometheus.io/docs/alerting/configuration/#configuration-file  
-            ##      https://prometheus.io/webtools/alerting/routing-tree-editor/
-
-        grafana:
-          enabled: true
-          serviceMonitor:
-            labels:
-              kubernetes.she.net/prometheus-instance: default
-          ingress:
-            enabled: true
-            hosts:
-              - my.domain
-            annotations: {}
-
-        prometheus:
-          enabled: true
-          crunchyPostgresExporter:
-            enabled: true
-          ingress:
-            enabled: true
-            baseUrl: my.domain
-            annotations: {}
-          prometheusSpec:
-            storageSpec: {}
-          thanosIngress:
-            enabled: false
-          thanosService:
-            enabled: true
-          thanosServiceExternal:
-            enabled: false
+  prometheusNodeExporter:
+    serviceMonitor:
+      additionalLabels:
+        kubernetes.she.net/prometheus-instance: default
+    alertmanager:
+      enabled: true
+      ingress:
+        enabled: true
+        hosts:
+          - my.domain
+        annotations: { }
+      alertmanagerSpec:
+        storage: {}
+        ## Secrets is a list of Secrets in the same namespace as the Alertmanager object, which shall be mounted into the
+        ## Alertmanager Pods. The Secrets are mounted into /etc/alertmanager/secrets/.
+        secrets: []
+        ## Alertmanager configuration directives  
+        ## ref: https://prometheus.io/docs/alerting/configuration/#configuration-file  
+        ##      https://prometheus.io/webtools/alerting/routing-tree-editor/
+  grafana:
+    enabled: true
+    serviceMonitor:
+      labels:
+        kubernetes.she.net/prometheus-instance: default
+    ingress:
+      enabled: true
+      hosts:
+        - my.domain
+      annotations: {}
+  prometheus:
+    enabled: true
+    crunchyPostgresExporter:
+      enabled: true
+    ingress:
+      enabled: true
+      baseUrl: my.domain
+      annotations: {}
+    prometheusSpec:
+      storageSpec: {}
+    thanosIngress:
+      enabled: false
+    thanosService:
+      enabled: true
+    thanosServiceExternal:
+      enabled: false
 
 internalIngressController:
   namespace: internal-ingress

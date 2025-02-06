@@ -253,7 +253,7 @@ spec:
                   - source_labels: [schemaname]
                     target_label: schemaname
                     replacement: '$1'
-              {{- end }}
+            {{- end }}
             serviceMonitorSelector:
             {{- if .prometheus.serviceMonitorSelectors }}
               {{- toYaml .prometheus.serviceMonitorSelectors | nindent 14 }}

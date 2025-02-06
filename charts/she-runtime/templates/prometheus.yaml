@@ -72,9 +72,9 @@ spec:
           ingress:
             ingressClassName: {{ .alertmanager.ingress.ingressClassName }}
             enabled: true
-            hosts: {{- toYaml .alertmanager.ingress.hosts | nindent 14 }}
+            hosts: {{ toYaml .alertmanager.ingress.hosts | nindent 14 }}
             tls:
-              - hosts: {{- toYaml .alertmanager.ingress.hosts |nindent 16 }}
+              - hosts: {{ toYaml .alertmanager.ingress.hosts |nindent 16 }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
@@ -89,9 +89,9 @@ spec:
           ingress:
             ingressClassName: {{ .grafana.ingress.ingressClassName }}
             enabled: true
-            hosts: {{- toYaml .grafana.ingress.hosts | nindent 14 }}
+            hosts: {{ toYaml .grafana.ingress.hosts | nindent 14 }}
             tls:
-              - hosts: {{- toYaml .grafana.ingress.hosts | nindent 16 }}
+              - hosts: {{ toYaml .grafana.ingress.hosts | nindent 16 }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
@@ -279,9 +279,9 @@ spec:
           ingress:
             ingressClassName: {{ .prometheus.ingress.ingressClassName }}
             enabled: true
-            hosts: {{- toYaml .prometheus.ingress.hosts | nindent 14 }}
+            hosts: {{ toYaml .prometheus.ingress.hosts | nindent 14 }}
             tls:
-              - hosts: {{- toYaml .prometheus.ingress.hosts | nindent 16 }}
+              - hosts: {{ toYaml .prometheus.ingress.hosts | nindent 16 }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP

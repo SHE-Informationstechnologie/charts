@@ -20,14 +20,14 @@ SHE default K8s cluster toolset
 | argoApp.source.helm.parameters[1].name | string | `"controller.metrics.enabled"` |  |
 | argoApp.source.helm.parameters[1].value | string | `"true"` |  |
 | argoApp.source.repoURL | string | `"https://argoproj.github.io/argo-helm"` |  |
-| argoApp.source.targetRevision | string | `"6.11.1"` |  |
+| argoApp.source.targetRevision | string | `"7.8.2"` |  |
 | argoWorkflow.enabled | bool | `false` |  |
 | argoWorkflow.name | string | `"argo-workflows"` |  |
 | argoWorkflow.namespace | string | `"argo-workflows"` |  |
 | argoWorkflow.source.chart | string | `"argo-workflows"` |  |
 | argoWorkflow.source.helm.values | string | `"controller:\n  metricsConfig:\n    enabled: true\n  telemetryConfig:\n    enabled: true\n  serviceMonitor:\n    enabled: true\n    additionalLabels:\n      kubernetes.she.net/prometheus-instance: default\n    namespace: \"monitoring\"\nworkflow:\n  serviceAccount:\n    create: true\n    name: \"argo-workflows\"\nserver:\n  authMode: \"server\"\n"` |  |
 | argoWorkflow.source.repoURL | string | `"https://argoproj.github.io/argo-helm"` |  |
-| argoWorkflow.source.targetRevision | string | `"0.38.0"` |  |
+| argoWorkflow.source.targetRevision | string | `"0.45.4"` |  |
 | customerApplications.enabled | bool | `false` |  |
 | customerApplications.name | string | `"customer-applications"` |  |
 | customerApplications.namespace | string | `"she-vendor"` |  |
@@ -62,7 +62,7 @@ SHE default K8s cluster toolset
 | kyverno.source.helm.parameters[0].name | string | `"admissionController.replicas"` |  |
 | kyverno.source.helm.parameters[0].value | string | `"3"` |  |
 | kyverno.source.repoURL | string | `"https://kyverno.github.io/kyverno"` |  |
-| kyverno.source.targetRevision | string | `"3.0.5"` |  |
+| kyverno.source.targetRevision | string | `"3.3.5"` |  |
 | kyvernoPolicies.enabled | bool | `false` |  |
 | kyvernoPolicies.name | string | `"kyverno-policies"` |  |
 | kyvernoPolicies.namespace | string | `"kyverno"` |  |
@@ -75,7 +75,7 @@ SHE default K8s cluster toolset
 | metrics.source.chart | string | `"metrics-server"` |  |
 | metrics.source.helm.values | string | `"defaultArgs:\n  - --cert-dir=/tmp\n  - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname\n  - --kubelet-use-node-status-port\n  - --metric-resolution=15s\n  - --kubelet-insecure-tls\n"` |  |
 | metrics.source.repoURL | string | `"https://kubernetes-sigs.github.io/metrics-server"` |  |
-| metrics.source.targetRevision | string | `"3.12.0"` |  |
+| metrics.source.targetRevision | string | `"3.12.2"` |  |
 | minioOperator.enabled | bool | `false` |  |
 | minioOperator.name | string | `"minio-operator"` |  |
 | minioOperator.namespace | string | `"minio-operator"` |  |
@@ -87,7 +87,7 @@ SHE default K8s cluster toolset
 | opensearchOperator.namespace | string | `"opensearch-operator"` |  |
 | opensearchOperator.source.chart | string | `"opensearch-operator"` |  |
 | opensearchOperator.source.repoURL | string | `"https://opensearch-project.github.io/opensearch-k8s-operator/"` |  |
-| opensearchOperator.source.targetRevision | string | `"2.6.1"` |  |
+| opensearchOperator.source.targetRevision | string | `"2.7.0"` |  |
 | postgresOperator.enabled | bool | `true` |  |
 | postgresOperator.name | string | `"postgres-operator"` |  |
 | postgresOperator.namespace | string | `"postgres-operator"` |  |
@@ -160,7 +160,7 @@ SHE default K8s cluster toolset
 | trivyOperator.source.chart | string | `"trivy-operator"` |  |
 | trivyOperator.source.helm.values | string | `"serviceMonitor:\n  enabled: true\n  labels:\n    kubernetes.she.net/prometheus-instance: default\ntrivy:\n  ignoreUnfixed: false\noperator:\n  metricsVulnIdEnabled: true\n"` |  |
 | trivyOperator.source.repoURL | string | `"https://aquasecurity.github.io/helm-charts/"` |  |
-| trivyOperator.source.targetRevision | string | `"0.19.1"` |  |
+| trivyOperator.source.targetRevision | string | `"0.25.0"` |  |
 | velero.enabled | bool | `true` |  |
 | velero.name | string | `"velero"` |  |
 | velero.namespace | string | `"velero"` |  |

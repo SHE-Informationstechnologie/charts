@@ -1,7 +1,8 @@
 # 1.4.3
 - Bump eck-operator version to 2.16.1
 - Bump x509-certificate-exporter version to 3.18.1
-- Bump argoapp to version 6.11.1
+- Bump argoapp to version 7.8.2
+- Bump metrics server to version 3.12.2
 - Bump kube-prometheus-stack to version 68.4.5
   Need to update CRDs:
     kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.79.0/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagerconfigs.yaml
@@ -17,6 +18,8 @@
 - bump ingress-nginx to 4.12.0
 - bump sealed-secrets to 2.17.1
 - bump postgres-operator to 5.7.1
+- bump trivy-operator to 0.25.0
+- bump opensearch-operator to 2.7.0
 
 # 1.4.2
 - Bump opensearch-operator version to v2.6.1

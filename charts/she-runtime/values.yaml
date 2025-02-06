@@ -159,7 +159,7 @@ argoApp:
   enabled: false
   source:
     repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 6.11.1
+    targetRevision: 7.8.2
     chart: argo-cd
     helm:
       parameters:
@@ -206,7 +206,7 @@ metrics:
   enabled: false
   source:
     repoURL: https://kubernetes-sigs.github.io/metrics-server
-    targetRevision: 3.12.0
+    targetRevision: 3.12.2
     chart: metrics-server
     helm:
       values: |
@@ -224,7 +224,7 @@ kyverno:
   source:
     repoURL: https://kyverno.github.io/kyverno
     chart: kyverno
-    targetRevision: 3.0.5
+    targetRevision: 3.3.5
     helm:
       parameters:
         - name: admissionController.replicas
@@ -246,7 +246,7 @@ trivyOperator:
   source:
     repoURL: https://aquasecurity.github.io/helm-charts/
     chart: trivy-operator
-    targetRevision: 0.19.1
+    targetRevision: 0.25.0
     helm:
       values: |
         serviceMonitor:
@@ -265,7 +265,7 @@ argoWorkflow:
   source:
     repoURL: https://argoproj.github.io/argo-helm
     chart: argo-workflows
-    targetRevision: 0.38.0
+    targetRevision: 0.45.4
     helm:
       values: |
         controller:
@@ -312,7 +312,7 @@ opensearchOperator:
   source:
     repoURL: https://opensearch-project.github.io/opensearch-k8s-operator/
     chart: opensearch-operator
-    targetRevision: 2.6.1
+    targetRevision: 2.7.0
 
 taintController:
   enabled: false

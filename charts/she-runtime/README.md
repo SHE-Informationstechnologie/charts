@@ -93,7 +93,7 @@ SHE default K8s cluster toolset
 | postgresOperator.namespace | string | `"postgres-operator"` |  |
 | postgresOperator.source.path | string | `"kustomize/install"` |  |
 | postgresOperator.source.repoURL | string | `"https://github.com/SHE-Informationstechnologie/postgres-operator-examples.git"` |  |
-| postgresOperator.source.targetRevision | string | `"v5.3.1-she-3"` |  |
+| postgresOperator.source.targetRevision | string | `"v5.7.1-she-2"` |  |
 | prometheusOperator.alertmanager.alertmanagerSpec.secrets | list | `[]` |  |
 | prometheusOperator.alertmanager.alertmanagerSpec.storage | object | `{}` |  |
 | prometheusOperator.alertmanager.enabled | bool | `true` |  |

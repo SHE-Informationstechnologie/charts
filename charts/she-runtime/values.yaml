@@ -68,6 +68,8 @@ prometheusOperator:
 
   prometheusOperator: 
     hostNetwork: true
+    web:
+      listenAddress: ":40250"
 
   prometheusNodeExporter:
     serviceMonitor:

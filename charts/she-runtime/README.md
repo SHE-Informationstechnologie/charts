@@ -125,6 +125,7 @@ SHE default K8s cluster toolset
 | prometheusOperator.prometheus.thanosServiceExternal.enabled | bool | `false` |  |
 | prometheusOperator.prometheusNodeExporter.serviceMonitor.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
 | prometheusOperator.prometheusOperator.hostNetwork | bool | `true` |  |
+| prometheusOperator.prometheusOperator.web.listenAddress | string | `":40250"` |  |
 | prometheusOperator.source.chart | string | `"kube-prometheus-stack"` |  |
 | prometheusOperator.source.helm.values | string | `""` |  |
 | prometheusOperator.source.repoURL | string | `"https://prometheus-community.github.io/helm-charts"` |  |

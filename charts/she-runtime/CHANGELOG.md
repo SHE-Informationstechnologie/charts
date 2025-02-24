@@ -1,4 +1,4 @@
-# 1.4.3
+# 1.5.0
 - Bump eck-operator version to 2.16.1
 - Bump x509-certificate-exporter version to 3.18.1
 - Bump argoapp to version 7.8.2

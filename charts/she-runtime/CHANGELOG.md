@@ -8,7 +8,7 @@
 - bump postgres-operator to 5.7.1
 - bump trivy-operator to 0.25.0
 - bump opensearch-operator to 2.7.0
-- Bump kube-prometheus-stack to version 69.1.2
+- Bump kube-prometheus-stack to version 69.4.1
 
   Following The documentation in https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
 

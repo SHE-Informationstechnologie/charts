@@ -9,18 +9,11 @@
 - bump trivy-operator to 0.25.0
 - bump opensearch-operator to 2.7.0
 - Bump kube-prometheus-stack to version 69.1.2
-  Need to update CRDs:
-    kubectl delete crd alertmanagerconfigs.monitoring.coreos.com
-    kubectl delete crd alertmanagers.monitoring.coreos.com
-    kubectl delete crd podmonitors.monitoring.coreos.com
-    kubectl delete crd probes.monitoring.coreos.com
-    kubectl delete crd prometheusagents.monitoring.coreos.com
-    kubectl delete crd prometheuses.monitoring.coreos.com
-    kubectl delete crd prometheusrules.monitoring.coreos.com
-    kubectl delete crd scrapeconfigs.monitoring.coreos.com
-    kubectl delete crd servicemonitors.monitoring.coreos.com
-    kubectl delete crd thanosrulers.monitoring.coreos.com
 
+  Following The documentation in https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
+
+  Need to update CRDs:
+    ```bash
     kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagerconfigs.yaml
     kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagers.yaml
     kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_podmonitors.yaml
@@ -31,6 +24,7 @@
     kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_scrapeconfigs.yaml
     kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml
     kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_thanosrulers.yaml
+    ```
 
 # 1.4.2
 - Bump opensearch-operator version to v2.6.1

@@ -129,7 +129,7 @@ SHE default K8s cluster toolset
 | prometheusOperator.source.chart | string | `"kube-prometheus-stack"` |  |
 | prometheusOperator.source.helm.values | string | `""` |  |
 | prometheusOperator.source.repoURL | string | `"https://prometheus-community.github.io/helm-charts"` |  |
-| prometheusOperator.source.targetRevision | string | `"69.1.2"` |  |
+| prometheusOperator.source.targetRevision | string | `"69.4.1"` |  |
 | publicIngressController.enabled | bool | `true` |  |
 | publicIngressController.name | string | `"public-ingress"` |  |
 | publicIngressController.namespace | string | `"public-ingress"` |  |

@@ -1,0 +1,11 @@
+apiVersion: v2
+type: application
+name: opensearch-cluster
+description: A Helm chart which deploys a Opensearch cluster manifests and its configuation
+dependencies:
+  - name: opensearch-cluster
+    repository: https://opensearch-project.github.io/opensearch-k8s-operator/
+    version: 3.0.0
+    condition: opensearch-cluster.enabled
+appVersion: "2.7.0"
+version: 1.0.0

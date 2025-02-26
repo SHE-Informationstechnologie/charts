@@ -3,3 +3,6 @@
 *.iml
 out
 gen
+charts/*/charts
+charts/opensearch-cluster/Chart.lock
+**/.DS_Store

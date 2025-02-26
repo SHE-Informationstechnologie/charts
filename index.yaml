@@ -221,6 +221,22 @@ entries:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/logging-opensearch-1.2.3/logging-opensearch-1.2.3.tgz
     version: 1.2.3
   - apiVersion: v2
+    appVersion: 1.2.3
+    created: "2025-02-26T14:01:42.200114752Z"
+    dependencies:
+    - alias: fluentbit
+      name: fluent-bit
+      repository: https://fluent.github.io/helm-charts
+      version: 0.46.7
+    description: A Helm chart which deploys a Opensearch cluster manifests, its configuation
+      and fluent bit
+    digest: 7203e4515866662dc0f1b6db7e194b94c7003ee251c7ab1be262b414dd5a909d
+    name: logging-opensearch
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/logging-opensearch-1.2.3-1/logging-opensearch-1.2.3-1.tgz
+    version: 1.2.3-1
+  - apiVersion: v2
     appVersion: 1.2.2
     created: "2025-01-17T13:38:27.058029796Z"
     dependencies:
@@ -1012,6 +1028,23 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/monitoring-rules-0.2.0/monitoring-rules-0.2.0.tgz
     version: 0.2.0
+  opensearch-cluster:
+  - apiVersion: v2
+    appVersion: 2.7.0
+    created: "2025-02-26T14:01:42.38994831Z"
+    dependencies:
+    - condition: opensearch-cluster.enabled
+      name: opensearch-cluster
+      repository: https://opensearch-project.github.io/opensearch-k8s-operator/
+      version: 3.0.0
+    description: A Helm chart which deploys a Opensearch cluster manifests and its
+      configuation
+    digest: bb4e1218d7fdf84cf78e2817284cd67283101e83096f823d6d73804487a30eba
+    name: opensearch-cluster
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/opensearch-cluster-1.0.0/opensearch-cluster-1.0.0.tgz
+    version: 1.0.0
   s3-monitoring:
   - apiVersion: v2
     appVersion: 0.1.9
@@ -2295,4 +2328,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-sso-0.0.2/she-sso-0.0.2.tgz
     version: 0.0.2
-generated: "2025-01-20T10:46:12.865083216Z"
+generated: "2025-02-26T14:01:42.390766777Z"

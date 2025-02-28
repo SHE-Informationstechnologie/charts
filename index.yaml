@@ -1064,6 +1064,22 @@ entries:
   opensearch-cluster:
   - apiVersion: v2
     appVersion: 2.7.0
+    created: "2025-02-28T09:04:15.088166832Z"
+    dependencies:
+    - condition: opensearch-cluster.enabled
+      name: opensearch-cluster
+      repository: https://opensearch-project.github.io/opensearch-k8s-operator/
+      version: 3.0.0
+    description: A Helm chart which deploys a Opensearch cluster manifests and its
+      configuation
+    digest: 3b985b793d2db1af1676e556836c72f992d6bf2b07d9feafae29112c6c799991
+    name: opensearch-cluster
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/opensearch-cluster-1.0.3/opensearch-cluster-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
+    appVersion: 2.7.0
     created: "2025-02-28T07:57:05.546377667Z"
     dependencies:
     - condition: opensearch-cluster.enabled
@@ -2393,4 +2409,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-sso-0.0.2/she-sso-0.0.2.tgz
     version: 0.0.2
-generated: "2025-02-28T08:49:32.402954645Z"
+generated: "2025-02-28T09:04:15.088640109Z"

@@ -5,4 +5,5 @@ out
 gen
 charts/*/charts
 charts/opensearch-cluster/Chart.lock
+charts/fluentbit/Chart.lock
 **/.DS_Store

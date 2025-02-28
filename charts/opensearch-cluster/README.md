@@ -1,6 +1,6 @@
 # opensearch-cluster
 
-![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.7.0](https://img.shields.io/badge/AppVersion-2.7.0-informational?style=flat-square)
+![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.7.0](https://img.shields.io/badge/AppVersion-2.7.0-informational?style=flat-square)
 
 A Helm chart which deploys a Opensearch cluster manifests and its configuation
 
@@ -104,7 +104,7 @@ A Helm chart which deploys a Opensearch cluster manifests and its configuation
 | opensearch-cluster.indexTemplates | list | `[]` | List of OpensearchIndexTemplate. Check values.yaml file for examples. |
 | opensearch-cluster.ismPolicies | list | `[]` | List of OpenSearchISMPolicy. Check values.yaml file for examples. |
 | opensearch-cluster.nameOverride | string | `"opensearch-cluster"` |  |
-| opensearch-cluster.roles | list | `[{"clusterPermissions":["cluster_composite_ops","cluster_monitor"],"indexPermissions":[{"allowedActions":["create_index","index","write"],"indexPatterns":["audit-*","container-*","access-*"]}],"name":"fluentbit"}]` | List of OpensearchRole. Check values.yaml file for examples. |
+| opensearch-cluster.roles | list | `[{"clusterPermissions":["cluster_composite_ops","cluster_monitor"],"indexPermissions":[{"allowedActions":["create_index","index","write"],"indexPatterns":["audit-*","container-*","access-*","ss4o_metrics-*","network-*"]}],"name":"fluentbit"}]` | List of OpensearchRole. Check values.yaml file for examples. |
 | opensearch-cluster.serviceAccount.annotations | object | `{}` | Service Account annotations |
 | opensearch-cluster.serviceAccount.create | bool | `false` | Create Service Account |
 | opensearch-cluster.serviceAccount.name | string | `""` | Service Account name. Set `general.serviceAccount` to use this Service Account for the Opensearch cluster |

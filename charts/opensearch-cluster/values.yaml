@@ -5,7 +5,7 @@ opensearch-cluster:
   # This is a YAML-formatted file.
   # Declare variables to be passed into your templates.
 
-  nameOverride: "opensearch-cluster"
+  nameOverride: ""
   fullnameOverride: ""
 
   serviceAccount:
@@ -98,7 +98,7 @@ opensearch-cluster:
       serviceAccount: ""
 
       # -- Opensearch service name
-      serviceName: "opensearch-cluster"
+      serviceName: ""
 
       # -- Enable setVMMaxMapCount. OpenSearch requires the Linux kernel vm.max_map_count option to be set to at least 262144
       setVMMaxMapCount: true
@@ -433,8 +433,6 @@ opensearch-cluster:
     - name: fluentbit
       secretName: "fluentbit-password"
       secretKey: "password"
-      backendRoles:
-        - kibana_user
       roles:
         - fluentbit
   #  - name: "example-user"
@@ -452,6 +450,8 @@ opensearch-cluster:
         - fluentbit
       roles:
         - fluentbit
+      backendRoles:
+        - kibana_user
   #  - name: admin_access
   #    users:
   #      - example-user

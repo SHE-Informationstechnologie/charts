@@ -1,6 +1,6 @@
 # opensearch-cluster
 
-![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.7.0](https://img.shields.io/badge/AppVersion-2.7.0-informational?style=flat-square)
+![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.7.0](https://img.shields.io/badge/AppVersion-2.7.0-informational?style=flat-square)
 
 A Helm chart which deploys a Opensearch cluster manifests and its configuation
 
@@ -64,7 +64,7 @@ A Helm chart which deploys a Opensearch cluster manifests and its configuation
 | opensearch-cluster.cluster.general.podSecurityContext | object | `{}` | Opensearch pod security context configuration |
 | opensearch-cluster.cluster.general.securityContext | object | `{}` | Opensearch securityContext |
 | opensearch-cluster.cluster.general.serviceAccount | string | `""` | Opensearch serviceAccount name. If Service Account doesn't exist it could be created by setting `serviceAccount.create` and `serviceAccount.name` |
-| opensearch-cluster.cluster.general.serviceName | string | `"opensearch-cluster"` | Opensearch service name |
+| opensearch-cluster.cluster.general.serviceName | string | `""` | Opensearch service name |
 | opensearch-cluster.cluster.general.setVMMaxMapCount | bool | `true` | Enable setVMMaxMapCount. OpenSearch requires the Linux kernel vm.max_map_count option to be set to at least 262144 |
 | opensearch-cluster.cluster.general.snapshotRepositories | list | `[]` | Opensearch snapshot repositories configuration |
 | opensearch-cluster.cluster.general.vendor | string | `"Opensearch"` |  |
@@ -103,13 +103,13 @@ A Helm chart which deploys a Opensearch cluster manifests and its configuation
 | opensearch-cluster.fullnameOverride | string | `""` |  |
 | opensearch-cluster.indexTemplates | list | `[]` | List of OpensearchIndexTemplate. Check values.yaml file for examples. |
 | opensearch-cluster.ismPolicies | list | `[]` | List of OpenSearchISMPolicy. Check values.yaml file for examples. |
-| opensearch-cluster.nameOverride | string | `"opensearch-cluster"` |  |
+| opensearch-cluster.nameOverride | string | `""` |  |
 | opensearch-cluster.roles | list | `[{"clusterPermissions":["cluster_composite_ops","cluster_monitor"],"indexPermissions":[{"allowedActions":["create_index","index","write"],"indexPatterns":["audit-*","container-*","access-*","ss4o_metrics-*","network-*"]}],"name":"fluentbit"}]` | List of OpensearchRole. Check values.yaml file for examples. |
 | opensearch-cluster.serviceAccount.annotations | object | `{}` | Service Account annotations |
 | opensearch-cluster.serviceAccount.create | bool | `false` | Create Service Account |
 | opensearch-cluster.serviceAccount.name | string | `""` | Service Account name. Set `general.serviceAccount` to use this Service Account for the Opensearch cluster |
 | opensearch-cluster.tenants | list | `[]` | List of additional tenants. Check values.yaml file for examples. |
-| opensearch-cluster.users | list | `[{"backendRoles":["kibana_user"],"name":"fluentbit","roles":["fluentbit"],"secretKey":"password","secretName":"fluentbit-password"}]` | List of OpensearchUser. Check values.yaml file for examples. |
-| opensearch-cluster.usersRoleBinding | list | `[{"name":"fluentbit-access","roles":["fluentbit"],"users":["fluentbit"]}]` | Allows to link any number of users, backend roles and roles with a OpensearchUserRoleBinding. Each user in the binding will be granted each role Check values.yaml file for examples. |
+| opensearch-cluster.users | list | `[{"name":"fluentbit","roles":["fluentbit"],"secretKey":"password","secretName":"fluentbit-password"}]` | List of OpensearchUser. Check values.yaml file for examples. |
+| opensearch-cluster.usersRoleBinding | list | `[{"backendRoles":["kibana_user"],"name":"fluentbit-access","roles":["fluentbit"],"users":["fluentbit"]}]` | Allows to link any number of users, backend roles and roles with a OpensearchUserRoleBinding. Each user in the binding will be granted each role Check values.yaml file for examples. |
 
 ----------------------------------------------

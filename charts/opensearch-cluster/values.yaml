@@ -429,9 +429,8 @@ opensearch-cluster:
   # -- List of OpensearchUser. Check values.yaml file for examples.
   users:
     - name: fluentbit
-      passwordFrom:
-        name: fluentbit-password
-        key: password
+      secretName: "fluentbit-password"
+      secretKey: "password"
       backendRoles:
         - kibana_user
       roles:

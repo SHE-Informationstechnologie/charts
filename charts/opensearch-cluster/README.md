@@ -1,6 +1,6 @@
 # opensearch-cluster
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.7.0](https://img.shields.io/badge/AppVersion-2.7.0-informational?style=flat-square)
+![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.7.0](https://img.shields.io/badge/AppVersion-2.7.0-informational?style=flat-square)
 
 A Helm chart which deploys a Opensearch cluster manifests and its configuation
 
@@ -109,7 +109,7 @@ A Helm chart which deploys a Opensearch cluster manifests and its configuation
 | opensearch-cluster.serviceAccount.create | bool | `false` | Create Service Account |
 | opensearch-cluster.serviceAccount.name | string | `""` | Service Account name. Set `general.serviceAccount` to use this Service Account for the Opensearch cluster |
 | opensearch-cluster.tenants | list | `[]` | List of additional tenants. Check values.yaml file for examples. |
-| opensearch-cluster.users | list | `[{"backendRoles":["kibana_user"],"name":"fluentbit","passwordFrom":{"key":"password","name":"fluentbit-password"},"roles":["fluentbit"]}]` | List of OpensearchUser. Check values.yaml file for examples. |
+| opensearch-cluster.users | list | `[{"backendRoles":["kibana_user"],"name":"fluentbit","roles":["fluentbit"],"secretKey":"password","secretName":"fluentbit-password"}]` | List of OpensearchUser. Check values.yaml file for examples. |
 | opensearch-cluster.usersRoleBinding | list | `[{"name":"fluentbit-access","roles":["fluentbit"],"users":["fluentbit"]}]` | Allows to link any number of users, backend roles and roles with a OpensearchUserRoleBinding. Each user in the binding will be granted each role Check values.yaml file for examples. |
 
 ----------------------------------------------

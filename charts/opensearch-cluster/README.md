@@ -109,7 +109,7 @@ A Helm chart which deploys a Opensearch cluster manifests and its configuation
 | opensearch-cluster.serviceAccount.create | bool | `false` | Create Service Account |
 | opensearch-cluster.serviceAccount.name | string | `""` | Service Account name. Set `general.serviceAccount` to use this Service Account for the Opensearch cluster |
 | opensearch-cluster.tenants | list | `[]` | List of additional tenants. Check values.yaml file for examples. |
-| opensearch-cluster.users | list | `[{"name":"fluentbit","roles":["fluentbit"],"secretKey":"password","secretName":"fluentbit-password"}]` | List of OpensearchUser. Check values.yaml file for examples. |
-| opensearch-cluster.usersRoleBinding | list | `[{"backendRoles":["kibana_user"],"name":"fluentbit-access","roles":["fluentbit"],"users":["fluentbit"]}]` | Allows to link any number of users, backend roles and roles with a OpensearchUserRoleBinding. Each user in the binding will be granted each role Check values.yaml file for examples. |
+| opensearch-cluster.users | list | `[{"backendRoles":["kibana_user"],"name":"fluentbit","roles":["fluentbit"],"secretKey":"password","secretName":"fluentbit-password"}]` | List of OpensearchUser. Check values.yaml file for examples. |
+| opensearch-cluster.usersRoleBinding | list | `[{"name":"fluentbit-access","roles":["fluentbit"],"users":["fluentbit"]}]` | Allows to link any number of users, backend roles and roles with a OpensearchUserRoleBinding. Each user in the binding will be granted each role Check values.yaml file for examples. |
 
 ----------------------------------------------

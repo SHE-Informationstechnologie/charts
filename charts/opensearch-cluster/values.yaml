@@ -435,6 +435,8 @@ opensearch-cluster:
       secretKey: "password"
       roles:
         - fluentbit
+      backendRoles:
+        - kibana_user
   #  - name: "example-user"
   #    secretName: "example-secret"
   #    secretKey: "password-key"
@@ -450,8 +452,6 @@ opensearch-cluster:
         - fluentbit
       roles:
         - fluentbit
-      backendRoles:
-        - kibana_user
   #  - name: admin_access
   #    users:
   #      - example-user

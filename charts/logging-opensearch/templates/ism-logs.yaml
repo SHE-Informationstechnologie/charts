@@ -16,6 +16,9 @@ spec:
       - "container-*"
       - "audit-*"
       - "access-logs-*"
+      - syslog-logs-*
+      - kubelet-logs-*
+      - kernel-logs-*
   defaultState: hot
   states:
     - name: hot

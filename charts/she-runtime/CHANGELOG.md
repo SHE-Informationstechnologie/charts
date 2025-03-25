@@ -1,3 +1,6 @@
+# 1.5.0
+- tbd.
+
 # 1.4.2
 - Bump opensearch-operator version to v2.6.1
 

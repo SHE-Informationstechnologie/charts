@@ -1064,6 +1064,22 @@ entries:
   opensearch-cluster:
   - apiVersion: v2
     appVersion: 2.7.0
+    created: "2025-04-09T11:56:01.921944385Z"
+    dependencies:
+    - condition: opensearch-cluster.enabled
+      name: opensearch-cluster
+      repository: https://opensearch-project.github.io/opensearch-k8s-operator/
+      version: 3.0.0
+    description: A Helm chart which deploys a Opensearch cluster manifests and its
+      configuation
+    digest: 0cf096d07b00417f708e35c0566e6593b3475fad547456031002c090a22b539a
+    name: opensearch-cluster
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/opensearch-cluster-1.0.4/opensearch-cluster-1.0.4.tgz
+    version: 1.0.4
+  - apiVersion: v2
+    appVersion: 2.7.0
     created: "2025-02-28T09:04:15.088166832Z"
     dependencies:
     - condition: opensearch-cluster.enabled
@@ -1228,6 +1244,16 @@ entries:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/s3-monitoring-0.1.0/s3-monitoring-0.1.0.tgz
     version: 0.1.0
   she-runtime:
+  - apiVersion: v2
+    appVersion: 1.5.0
+    created: "2025-04-09T11:56:02.060735299Z"
+    description: SHE default K8s cluster toolset
+    digest: ae64cba7f9244a058503d77541f4cb0f401456e4202179e1b4f6497bf88da693
+    name: she-runtime
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-runtime-1.5.0/she-runtime-1.5.0.tgz
+    version: 1.5.0
   - apiVersion: v2
     appVersion: 1.4.2
     created: "2024-07-26T07:36:56.547895309Z"
@@ -2409,4 +2435,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-sso-0.0.2/she-sso-0.0.2.tgz
     version: 0.0.2
-generated: "2025-02-28T09:04:15.088640109Z"
+generated: "2025-04-09T11:56:02.06116087Z"

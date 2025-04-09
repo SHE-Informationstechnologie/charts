@@ -1,5 +1,14 @@
 # 1.5.0
-- tbd.
+- Read the Docs for detailed Changelogs and possible breaking changes before upgrading.
+- Bump ArgoCD to v7.8.5
+- Bump argoWorkflow to v0.45.8
+- Bump Nginx Ingress to v4.12.1
+- Bump Kyverno to v3.3.5 
+- Bump Kube-Prometheus-Stack to v69.4.1
+- Bump Sealed Secrets to v2.5.6
+- Bump Trivy Operator to v0.25.0
+- Bump x509 Exporter to v3.18.1
+
 
 # 1.4.2
 - Bump opensearch-operator version to v2.6.1

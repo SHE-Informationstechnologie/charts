@@ -13,8 +13,12 @@ spec:
     chart: {{ .source.chart }}
     helm:
       values: |
+        {{- with .crds }}
+        crds:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         commonLabels:
-          {{- dict "kubernetes.she.net/prometheus-instance" "default" | merge .commonLabels | toYaml | nindent 10 }}
+        {{- dict "kubernetes.she.net/prometheus-instance" "default" | merge (default dict .commonLabels) | toYaml | nindent 10 }}
         {{- with .global }}
         global:
           {{- toYaml . | nindent 10 }}
@@ -114,8 +118,6 @@ spec:
           extraArgs:
               - --insecure
           sidecar:
-            image:
-              tag: '1.24.4'
             datasources:
               enabled: true
               env:
@@ -139,6 +141,10 @@ spec:
           {{- end }}
           {{- with .grafana.extraSecretMounts }}
           extraSecretMounts:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .grafana.resources }}
+          resources:
           {{- toYaml . | nindent 12 }}
           {{- end }}
           {{- with .grafana.serviceMonitor }}
@@ -313,7 +319,7 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
-      prune: true
+      prune: false
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true

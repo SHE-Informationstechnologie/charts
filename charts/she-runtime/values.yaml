@@ -403,3 +403,8 @@ x509Exporter:
             limits:
               cpu: null
               memory: 150M
+            secretTypes:
+            - type: kubernetes.io/tls
+              key: tls.crt
+            - type: Opaque
+              key: tls.crt

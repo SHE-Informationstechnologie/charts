@@ -7,5 +7,5 @@ appVersion: "0.0.12"
 dependencies:
   - name: redis
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: "18.8.0"
+    version: "20.13.4"
     condition: redis.enabled

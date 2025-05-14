@@ -3,6 +3,22 @@ entries:
   fluentbit:
   - apiVersion: v2
     appVersion: 0.48.6
+    created: "2025-05-14T08:28:50.397666811Z"
+    dependencies:
+    - alias: fluentbit
+      condition: fluentbit.enabled
+      name: fluent-bit
+      repository: https://fluent.github.io/helm-charts
+      version: 0.48.6
+    description: A Helm chart which deploys fluent bit
+    digest: 9dd981cf8e69465ec35cf1fa0a276d6e910fdd986f597e23f4f682b5774c2116
+    name: fluentbit
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/fluentbit-1.0.2/fluentbit-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: 0.48.6
     created: "2025-02-28T08:49:32.402486912Z"
     dependencies:
     - alias: fluentbit
@@ -2435,4 +2451,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-sso-0.0.2/she-sso-0.0.2.tgz
     version: 0.0.2
-generated: "2025-04-09T11:56:02.06116087Z"
+generated: "2025-05-14T08:28:50.397918909Z"

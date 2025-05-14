@@ -1,5 +1,7 @@
 fluentbit:
   enabled: true
+  image:
+    repository: fluent/fluent-bit
   dashboards:
     enabled: true
     labelKey: grafana_dashboard

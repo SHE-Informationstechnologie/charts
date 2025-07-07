@@ -24,8 +24,8 @@ A Helm chart which deploys fluent bit
 | fluentbit.dashboards.namespace | string | `"monitoring"` |  |
 | fluentbit.enabled | bool | `true` |  |
 | fluentbit.envFrom[0].secretRef.name | string | `"fluentbit-password"` |  |
+| fluentbit.image.repository | string | `"fluent/fluent-bit"` |  |
 | fluentbit.logLevel | string | `"info"` |  |
 | fluentbit.tolerations[0].effect | string | `"NoSchedule"` |  |
 | fluentbit.tolerations[0].operator | string | `"Exists"` |  |
 
-----------------------------------------------

@@ -1,0 +1,17 @@
+{{- with .Values.grafanaDashboard.postgres -}}
+{{- if .enabled }}
+
+apiVersion: v1
+data:
+  "postgresql_query_statistics.json": |
+    {{ $.Files.Get "dashboards/postgresql_query_statistics.json" | fromJson | toJson | indent 4 }}
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-dashboard-postgresql-query-statistics
+  namespace: monitoring
+
+---
+{{- end }}
+{{- end }}

@@ -1,3 +1,7 @@
+# 0.0.11
+# Postgres
+- add Postgres dashboards
+
 # 0.0.10
 - update Readme
 

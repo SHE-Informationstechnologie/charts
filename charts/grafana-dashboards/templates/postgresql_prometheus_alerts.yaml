@@ -1,0 +1,17 @@
+{{- with .Values.grafanaDashboard.postgres -}}
+{{- if .enabled }}
+
+apiVersion: v1
+data:
+  "postgresql_prometheus_alerts.json": |
+    {{ $.Files.Get "dashboards/postgresql_prometheus_alerts.json" | fromJson | toJson | indent 4 }}
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-dashboard-postgresql-prometheus-alerts
+  namespace: monitoring
+
+---
+{{- end }}
+{{- end }}

@@ -9,6 +9,7 @@ A collection of Dashboards for grafana
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | grafanaDashboard.minio.enabled | bool | `true` |  |
+| grafanaDashboard.postgres.enabled | bool | `false` |  |
 | grafanaDashboard.trivy.enabled | bool | `false` |  |
 
 ----------------------------------------------

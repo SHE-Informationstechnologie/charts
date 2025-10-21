@@ -198,7 +198,7 @@ argoApp:
   enabled: false
   source:
     repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 7.8.5
+    targetRevision: 7.9.1
     chart: argo-cd
     helm:
       parameters:

@@ -47,7 +47,7 @@ eckOperator:
   enabled: false
   source:
     repoURL: https://helm.elastic.co
-    targetRevision:  2.11.1
+    targetRevision:  3.2.0
     chart: eck-operator
 
 prometheusOperator:

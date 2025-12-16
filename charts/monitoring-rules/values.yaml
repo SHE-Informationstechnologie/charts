@@ -158,3 +158,13 @@ logging:
   enabled: false
   namespace: logging
   podMonitor: true
+
+velero:
+  enabled: false
+  namespace: velero
+
+  disabledRules: {}
+    # backupFailureError: false
+    # highBackupDuration: false
+    # highRestoreFailureRate: false
+    # veleroUpStatus: false

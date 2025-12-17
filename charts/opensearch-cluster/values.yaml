@@ -115,7 +115,7 @@ opensearch-cluster:
       vendor: Opensearch
 
       # -- Opensearch version
-      version: 2.19.0
+      version: 2.3.0
 
     # OpenSearchCluster boostrap pod configuration
     bootstrap:
@@ -165,6 +165,7 @@ opensearch-cluster:
 
       # -- dashboards image
       image: docker.io/opensearchproject/opensearch-dashboards
+
 
       # -- dashboards image pull policy
       imagePullPolicy: "IfNotPresent"
@@ -226,7 +227,7 @@ opensearch-cluster:
       tolerations: []
 
       # -- dashboards version
-      version: 2.19.0
+      version: 2.3.0
 
     # initHelper configuration
     initHelper:
@@ -264,7 +265,7 @@ opensearch-cluster:
           pvc:
             accessModes:
               - ReadWriteOnce
-            storageClass: 
+            storageClass:
         nodeSelector:
         pdb:
           enable: true
@@ -501,6 +502,7 @@ opensearch-cluster:
   #  - name: example-index-template
   #    indexPatterns:
   #      - "logs-2020-01-*"
+  #    dataStream: null # optional
   #    composedOf: # optional
   #      - example-component-template
   #    priority: 100 # optional

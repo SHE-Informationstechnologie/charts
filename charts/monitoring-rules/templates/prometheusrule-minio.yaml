@@ -10,45 +10,45 @@ spec:
   groups:
   - name: minio-rules
     rules:
-    {{- if not ( default false .Values.minio.disabledRules.clusterDiskOffline ) }}
-    - alert: MinioClusterDiskOffline
-      expr: 'minio_cluster_disk_offline_total > 0'
-      for: 0m
+    {{- if not ( default false .Values.minio.disabledRules.driveOffline ) }}
+    - alert: MinioClusterDriveOffline
+      expr: 'minio_cluster_drive_offline_total > 0'
+      for: 5m
       labels:
         severity: critical
       annotations:
-        summary: {{` 'Minio cluster disk offline (instance {{ $labels.instance }}!)' `}}
-        description: {{` 'Minio cluster disk is offline\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}' `}}
+        summary: {{` 'Minio cluster drive offline (instance {{ $labels.instance }}!)' `}}
+        description: {{` 'Minio cluster drive is offline\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}' `}}
     {{- end }}
-    {{- if not ( default false .Values.minio.disabledRules.nodeDiskOffline ) }}
-    - alert: MinioNodeDiskOffline
+    {{- if not ( default false .Values.minio.disabledRules.nodeOffline ) }}
+    - alert: MinioNodeOffline
       expr: 'minio_cluster_nodes_offline_total > 0'
-      for: 0m
+      for: 5m
       labels:
         severity: critical
       annotations:
-        summary: {{` 'Minio node disk offline (instance {{ $labels.instance }})' `}}
-        description: {{` 'Minio cluster node disk is offline\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}' `}}
+        summary: {{` 'Minio node offline (instance {{ $labels.instance }})' `}}
+        description: {{` 'Minio cluster node is offline\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}' `}}
     {{- end }}
-    {{- if not ( default false .Values.minio.disabledRules.diskSpaceUsage ) }}
-    - alert: MinioDiskSpaceUsage
-      expr: 'disk_storage_available / disk_storage_total * 100 < 20'
+    {{- if not ( default false .Values.minio.disabledRules.driveSpaceUsage ) }}
+    - alert: MinioDriveSpaceUsage
+      expr: 'minio_cluster_capacity_usable_free_bytes / minio_cluster_capacity_usable_total_bytes * 100 < 20'
       for: 0m
       labels:
         severity: warning
       annotations:
-        summary: {{` 'Minio disk space usage (instance {{ $labels.instance }})' `}}
+        summary: {{` 'Minio drive space usage (instance {{ $labels.instance }})' `}}
         description: {{` 'Minio available free space is low (< 20%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}' `}}
     {{- end }}
-    {{- if not ( default false .Values.minio.disabledRules.diskSpaceUsageCritical ) }}
-    - alert: MinioDiskSpaceUsageCritical
-      expr: 'disk_storage_available / disk_storage_total * 100 < 10'
+    {{- if not ( default false .Values.minio.disabledRules.driveSpaceUsageCritical ) }}
+    - alert: MinioDriveSpaceUsageCritical
+      expr: 'minio_cluster_capacity_usable_free_bytes / minio_cluster_capacity_usable_total_bytes * 100 < 10'
       for: 0m
       labels:
         severity: critical
       annotations:
-        summary: {{` 'Minio disk space usage (instance {{ $labels.instance }})' `}}
-        description: {{` 'Minio available free space is low (< 10%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}' `}}
+        summary: {{` 'Minio drive space usage (instance {{ $labels.instance }})' `}}
+        description: {{` 'Minio available free space is critical (< 10%)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}' `}}
     {{- end }}
     {{- if not ( default false .Values.minio.disabledRules.linkOffline ) }}
     - alert: MinioClusterReplicationLinkOffline

@@ -1,0 +1,68 @@
+{{- if .Values.velero.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "monitoring-rules.fullname" . }}-velero
+  labels:
+    {{- include "monitoring-rules.labels" . | nindent 4 }}
+    {{- with .Values.prometheusLabels }}
+    {{ toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  groups:
+    - name: velero-rules
+      rules:
+        {{- $dr := .Values.velero.disabledRules | default dict }}
+
+        {{- if not ($dr.backupFailureError | default false) }}
+        - alert: VeleroBackupFailure
+          annotations:
+            description: {{` 'Backup failures detected on {{ $labels.instance }}.' `}}
+            summary: Velero backup failures detected.
+          expr: |
+            increase(velero_backup_failure_total{job="integrations/velero"}[5m]) > 0
+          for: 5m
+          labels:
+            service: velero
+            severity: critical
+        {{- end }}
+
+        {{- if not ($dr.highBackupDuration | default false) }}
+        - alert: VeleroHighBackupDuration
+          annotations:
+            description: {{` 'Backup duration on {{ $labels.instance }} is higher than the average duration over the past 48 hours. The current value is {{ $value | printf "%.2f" }} seconds.' `}}
+            summary: {{` 'Velero backups on {{ $labels.instance }} taking longer than usual.' `}}
+          expr: |
+            histogram_quantile(0.5, sum(rate(velero_backup_duration_seconds_bucket{job="integrations/velero"}[5m])) by (le, schedule)) > 1.2 * 1.2 * avg_over_time(histogram_quantile(0.5, sum(rate(velero_backup_duration_seconds_bucket{job="integrations/velero"}[48h])) by (le, schedule))[5m:])
+          for: 5m
+          labels:
+            service: velero
+            severity: warning
+        {{- end }}
+
+        {{- if not ($dr.highRestoreFailureRate | default false) }}
+        - alert: VeleroHighRestoreFailureRate
+          annotations:
+            description: {{` 'Restore failures detected on {{ $labels.instance }}.' `}}
+            summary: Velero restore failures detected.
+          expr: |
+            increase(velero_restore_failed_total{job="integrations/velero"}[5m]) > 0
+          for: 5m
+          labels:
+            service: velero
+            severity: critical
+        {{- end }}
+
+        {{- if not ($dr.veleroUpStatus | default false) }}
+        - alert: VeleroUpStatus
+          annotations:
+            description: {{` 'Cannot find any metrics related to Velero on {{ $labels.instance }}. This may indicate further issues with Velero or the scraping agent.' `}}
+            summary: Velero is down.
+          expr: |
+            up{job="integrations/velero"} == 0
+          for: 5m
+          labels:
+            service: velero
+            severity: critical
+        {{- end }}
+{{- end }}

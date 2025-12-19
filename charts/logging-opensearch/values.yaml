@@ -1,0 +1,300 @@
+# Default values for logging-opensearch.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+
+# Global settings that are set in the event that
+# they are not exceeded in the resources themselves
+global: {}
+  # Overwrite the Opensearch cluster name on global level
+  # Default: {{ include "logging-opensearch.name" . }}
+  # opensearchCluster:
+  #   name: opensearch-cluster
+
+imagePullSecrets: []
+
+# Deploy Fluent Bit
+fluentbit:
+  dashboards:
+    enabled: true
+    labelKey: grafana_dashboard
+    labelValue: 1
+    namespace: monitoring
+  config:
+    inputs: |
+      [INPUT]
+          Name tail
+          Path /var/log/containers/*.log
+          Exclude_Path *ingress-nginx*
+          Tag kube.*
+          multiline.parser cri
+          Mem_Buf_Limit 5m
+          Skip_Long_Lines On
+          Buffer_Chunk_Size 15m
+          Buffer_Max_Size 64m
+
+      [INPUT]
+          Name tail
+          Path /var/log/containers/*ingress-nginx*.log
+          Tag ingress-nginx.*
+          multiline.parser cri
+          Mem_Buf_Limit 5m
+          Buffer_Chunk_Size 15m
+          Buffer_Max_Size 64m
+
+      [INPUT]
+          Name tail
+          Path /var/log/audit/*.log
+          Tag audit.*
+          Parser json
+          Mem_Buf_Limit 5m
+          Skip_Long_Lines On
+          Buffer_Chunk_Size 15m
+          Buffer_Max_Size 64m
+
+    filters: |
+      [FILTER]
+          Name kubernetes
+          Match kube.*
+          Merge_Log On
+          Keep_Log Off
+          K8S-Logging.Parser On
+          K8S-Logging.Exclude On
+          Buffer_Size 67108864B
+
+      [FILTER]
+          Name kubernetes
+          Match ingress-nginx.*
+          Merge_Log On
+          Keep_Log Off
+          K8S-Logging.Parser On
+          K8S-Logging.Exclude On
+
+      [FILTER]
+          Name parser
+          Match ingress-nginx.*
+          Key_Name log
+          Parser accesslogs
+          Reserve_Data On
+
+      [FILTER]
+          Name grep
+          Match ingress-nginx.*
+          Exclude log ^.+$
+
+    outputs: |
+      [OUTPUT]
+          Name opensearch
+          Match kube.*
+          Host opensearch-cluster.logging.svc
+          Port 9200
+          Index container-%Y.%m
+          Retry_Limit 3
+          Suppress_Type_Name On
+          tls On
+          tls.verify Off
+          HTTP_User fluentbit
+          HTTP_Passwd ${password}
+          Trace_Error On
+          Replace_Dots On
+          Buffer_Size 67108864B
+
+      [OUTPUT]
+          Name opensearch
+          Match audit.*
+          Host opensearch-cluster.logging.svc
+          Port 9200
+          Index audit-%Y.%m
+          Retry_Limit 3
+          Suppress_Type_Name On
+          tls On
+          tls.verify Off
+          HTTP_User fluentbit
+          HTTP_Passwd ${password}
+          Trace_Error On
+          Buffer_Size 67108864B
+
+      [OUTPUT]
+          Name opensearch
+          Match ingress-nginx.*
+          Host opensearch-cluster.logging.svc
+          Port 9200
+          Index access-logs-%Y.%m
+          Retry_Limit 3
+          Suppress_Type_Name On
+          tls On
+          tls.verify Off
+          HTTP_User fluentbit
+          HTTP_Passwd ${password}
+          Trace_Error On
+          Buffer_Size 67108864B
+
+    customParsers: |
+      [PARSER]
+          Name docker_no_time
+          Format json
+          Time_Keep Off
+          Time_Key time
+          Time_Format %Y-%m-%dT%H:%M:%S.%L
+
+      [PARSER]
+          Name        accesslogs
+          Format      regex
+          Regex       ^(?<remote_addr>[^ ]+) - (?<user_identity>[^ ]+) \[(?<timestamp>[^\]]+)\] \"(?<method>\S+)(?: +(?<request_uri>\S+)(?: +(?<protocol>\S+))?)?\" (?<status>\d+) (?<bytes_sent>\d+) \"(?<referrer>[^"]*)\" \"(?<user_agent>[^"]*)\" (?<request_length>[^ ]*) (?<request_time>[^ ]*) \[(?<proxy_upstream_name>[^ ]*)\] \[(?<proxy_alternative_upstream_name>[^ ]*)\] (?<upstream_addr>[^ ]*) (?<upstream_response_length>[^ ]*) (?<upstream_response_time>[^ ]*) (?<upstream_status>[^ ]*) (?<reg_id>[^ ]*).*$
+
+  tolerations:
+    - operator: Exists
+      effect: NoSchedule
+  envFrom:
+    - secretRef:
+        name: fluentbit-password
+  logLevel: info
+
+# Deploy opensearch cluster
+opensearch:
+  # En-/Disable Opensearch deployment
+  enabled: true
+
+  # Override name used to target service in ingress resource
+  service:
+    overrideName: opensearch-cluster
+
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: chart-example.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+
+  users:
+    - name: fluentbit
+      passwordFrom:
+        name: fluentbit-password
+        key: password
+      backendRoles:
+        - kibana_user
+      roles:
+        - fluentbit
+
+  roles:
+    - name: fluentbit
+      clusterPermissions:
+        - cluster_composite_ops
+        - cluster_monitor
+      indexPermissions:
+        - indexPatterns:
+            - audit-*
+            - container-*
+            - access-*
+          allowedActions:
+            - create_index
+            - index
+            - write
+
+  settings:
+    security:
+      config:
+        adminCredentialsSecret:
+          name: admin-credentials-secret
+        securityConfigSecret:
+          name: securityconfig-secret
+      tls:
+        transport:
+          generate: true
+        http:
+          generate: true
+    general:
+      serviceName: opensearch-cluster
+      setVMMaxMapCount: true
+      version: 2.11.1
+      httpPort: 9200
+      vendor: opensearch
+      monitoring:
+        enable: true
+        scrapeInterval: 30s
+      pluginsList: ["repository-s3"]
+    confMgmt:
+      smartScaler: true
+    dashboards:
+      enable: true
+      version: 2.11.1
+      replicas: 1
+      opensearchCredentialsSecret:
+        name: dashboards-credentials-secret
+    nodePools:
+      - component: nodes
+        replicas: 3
+        diskSize: "200Gi"
+        persistence:
+          pvc:
+            accessModes:
+              - ReadWriteOnce
+            storageClass: block-encrypted-storage-beta
+        nodeSelector:
+        roles:
+          - "cluster_manager"
+          - "data"
+          - "ingest"
+        pdb:
+          enable: true
+          maxUnavailable: 1
+
+  # Deploy Opensearch ISM policies
+  ismPolicies:
+    defaultPolicies:
+      # ISM in the opensearch-operator <= v2.6.1, which we are currently using, has some issues.
+      # There is also an unmerged PR that might fix some bugs (while bringing in some new ones):
+      #
+      #   https://github.com/opensearch-project/opensearch-k8s-operator/pull/846
+      #
+      # So, let's wait until the dust settles before enabling ISM.
+      logRollOver: false
+
+  # Deploy opensearch index templates
+  indexTemplates:
+    global:
+
+    # En-/Disable default templates
+    defaultTemplates:
+      access: true
+      audit: true
+      container: true
+
+    # Additional to the default index templates
+    # deploy custom ones
+    additionalTemplates: []
+    # - name: example
+    #   indexPatterns:
+    #     - "example-*"
+    #   dataStream:
+    #     timestamp_field:
+    #       name: "@timestamp"
+    #   priority: 1
+    #   template: |
+    #     {
+    #       "mappings": {
+    #         "dynamic": "false",
+    #         "properties": {
+    #           "example": {
+    #             "type": "keyword",
+    #             "ignore_above": 256
+    #           },
+    #           "example2": {
+    #             "type": "text",
+    #             "ignore_above": 256
+    #           }
+    #         }
+    #       }
+    #     }
+    #   version: 1

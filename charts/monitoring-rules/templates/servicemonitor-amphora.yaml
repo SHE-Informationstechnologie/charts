@@ -1,0 +1,31 @@
+{{ if and .Values.amphora.enabled .Values.amphora.serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "monitoring-rules.fullname" . }}-amphora
+  labels:
+    {{- include "monitoring-rules.labels" . | nindent 4 }}
+    {{ toYaml .Values.prometheusLabels | nindent 4 }}
+spec:
+  endpoints:
+  - port: metrics
+    scheme: http
+    path: /metrics
+    interval: 30s
+  {{- if .Values.amphora.serviceMonitor.namespaceSelector }}
+  namespaceSelector:
+    {{- toYaml .Values.amphora.serviceMonitor.namespaceSelector | nindent 4 }}
+  {{- else }}
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
+  {{- end }}
+  {{- if .Values.amphora.serviceMonitor.selector }}
+  selector:
+    {{- toYaml .Values.amphora.serviceMonitor.selector | nindent 4 }}
+  {{- else }}
+  selector:
+    matchLabels:
+      app: {{ include "monitoring-rules.fullname" . }}-amphora
+  {{- end }}
+{{ end }}

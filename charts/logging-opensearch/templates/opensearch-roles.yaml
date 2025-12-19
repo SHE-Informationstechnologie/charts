@@ -1,0 +1,15 @@
+{{- range $role := .Values.opensearch.roles }}
+apiVersion: opensearch.opster.io/v1
+kind: OpensearchRole
+metadata:
+  name: {{ $role.name }}
+  namespace: {{ $.Release.Namespace | default "logging" }}
+  labels:
+    {{- include "logging-opensearch.labels" $ | nindent 4 }}
+spec:
+  opensearchCluster:
+    name: {{ default ( include "logging-opensearch.opensearchName" $ ) ( dig "opensearchCluster" "name" "" $role ) }}
+  {{- with ( $role := omit $role "name" ) }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }}

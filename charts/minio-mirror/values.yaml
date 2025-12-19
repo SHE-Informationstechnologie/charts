@@ -33,9 +33,9 @@ config:
     # limitDownload: unlimited
 
 image:
-  repository: minio/mc
-  pullPolicy: IfNotPresent
+  repository: mettendorfit/mc-plus
   tag: ""
+  pullPolicy: IfNotPresent
 
 imagePullSecrets: []
 nameOverride: ""
@@ -76,10 +76,10 @@ resources: {}
 livenessProbe:
   exec:
     command:
-      - cat
-      - /tmp/healthy
+      - /opt/liveness-probe.sh
   initialDelaySeconds: 5
-  periodSeconds: 5
+  periodSeconds: 30
+  failureThreshold: 1
 
 readinessProbe:
   exec:
@@ -101,6 +101,23 @@ extraVolumeMounts: []
 # - name: foo
 #   mountPath: "/etc/foo"
 #   readOnly: true
+
+# Enable metrics for each mirror job
+metrics:
+  # Enable exposed ports and podMonitor
+  enabled: true
+
+  # Each container will expose a port based on its index
+  # and starting from this base value
+  basePort: 8000
+
+  # Select pod to monitor based on this labels
+  labelSelectors:
+    app.kubernetes.io/name: minio-mirror
+
+  # Add labels to the podMonitor
+  additionalLabels:
+    kubernetes.she.net/prometheus-instance: default
 
 nodeSelector: {}
 

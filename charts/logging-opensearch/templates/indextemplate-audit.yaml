@@ -1,0 +1,221 @@
+{{- if .Values.opensearch.indexTemplates.defaultTemplates.audit }}
+apiVersion: opensearch.opster.io/v1
+kind: OpensearchIndexTemplate
+metadata:
+  name: {{ include "logging-opensearch.name" . }}-audit
+  namespace: {{ .Release.Namespace | default "logging" }}
+  labels:
+    {{- include "logging-opensearch.labels" . | nindent 4 }}
+spec:
+  name: audit
+  opensearchCluster:
+    name: {{ include "logging-opensearch.opensearchName" . }}
+  indexPatterns:
+    - "audit-*"
+  dataStream:
+    timestamp_field:
+      name: "@timestamp"
+  dataStream: {}
+  priority: 1
+  template:
+    {
+      "mappings": {
+        "dynamic": "false",
+        "properties": {
+          "@timestamp": {
+            "type": "date"
+          },
+          "apiVersion": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "auditID": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "kind": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "level": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "objectRef": {
+            "properties": {
+              "apiGroup": {
+                "type": "text",
+                "fields": {}
+              },
+              "apiVersion": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "name": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "namespace": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "resource": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "resourceVersion": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "subresource": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "uid": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              }
+            }
+          },
+          "sourceIPs": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "stage": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "stageTimestamp": {
+            "type": "date"
+          },
+          "user": {
+            "properties": {
+              "extra": {
+                "type": "object"
+              },
+              "groups": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "uid": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "username": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              }
+            }
+          },
+          "userAgent": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "verb": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "autodiscover.event.kubernetes.labels": {
+            "type": "object"
+          },
+          "responseObject": {
+            "type": "object"
+          },
+          "requestObject": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  version: 1
+{{- end }}

@@ -1,3 +1,36 @@
+# 3.3.6
+- Fix datasource problem in amphora-dashboard
+
+# 3.3.5
+- Add missing label to Amphora service
+
+# 3.3.4
+- Fix Grafana dashboard ConfigMaps
+
+# 3.3.3
+- Fix Amphora's ServiceMonitor template
+
+# 3.3.2
+- Added missing trigger to en-/disable Amphora endpoints
+
+# 3.3.0
+- Added Amphora metrics
+
+# 3.2.1
+- Limited DiskFillPredict and PGDiskSize alerts to pgdata mount point
+
+# 3.2.0
+- Limited backup alerts for postgres to non-standby clusters
+
+# 3.0.2
+- Increased alert delay for minio rules
+
+# 3.0.1
+- Adjusted minio-mirror failed s3ops rule
+
+# 3.0.0
+- Updated minio rules and added minio mirror rules
+
 # 2.2.0
 - Add rule that observes when last wal file was written. Alert (warning) if > 600 seconds
 - Add rule that observes when last wal file was written. Alert (critical) if no value is available

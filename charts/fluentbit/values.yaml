@@ -1,0 +1,138 @@
+fluentbit:
+  enabled: true
+  image:
+    repository: fluent/fluent-bit
+  dashboards:
+    enabled: true
+    labelKey: grafana_dashboard
+    labelValue: 1
+    namespace: monitoring
+  tolerations:
+    - operator: Exists
+      effect: NoSchedule
+  envFrom:
+    - secretRef:
+        name: fluentbit-password
+  logLevel: info
+  config:
+    inputs: |
+      [INPUT]
+          Name tail
+          Path /var/log/containers/*.log
+          Exclude_Path *ingress-nginx*
+          Tag kube.*
+          multiline.parser cri
+          Mem_Buf_Limit 5m
+          Skip_Long_Lines On
+          Buffer_Chunk_Size 15m
+          Buffer_Max_Size 64m
+
+      [INPUT]
+          Name tail
+          Path /var/log/containers/*ingress-nginx*.log
+          Tag ingress-nginx.*
+          multiline.parser cri
+          Mem_Buf_Limit 5m
+          Buffer_Chunk_Size 15m
+          Buffer_Max_Size 64m
+
+      [INPUT]
+          Name tail
+          Path /var/log/audit/*.log
+          Tag audit.*
+          Parser json
+          Mem_Buf_Limit 5m
+          Skip_Long_Lines On
+          Buffer_Chunk_Size 15m
+          Buffer_Max_Size 64m
+
+    filters: |
+      [FILTER]
+          Name kubernetes
+          Match kube.*
+          Merge_Log On
+          Keep_Log Off
+          K8S-Logging.Parser On
+          K8S-Logging.Exclude On
+          Buffer_Size 67108864B
+
+      [FILTER]
+          Name kubernetes
+          Match ingress-nginx.*
+          Merge_Log On
+          Keep_Log Off
+          K8S-Logging.Parser On
+          K8S-Logging.Exclude On
+
+      [FILTER]
+          Name parser
+          Match ingress-nginx.*
+          Key_Name log
+          Parser accesslogs
+          Reserve_Data On
+
+      [FILTER]
+          Name grep
+          Match ingress-nginx.*
+          Exclude log ^.+$
+
+    outputs: |
+      [OUTPUT]
+          Name opensearch
+          Match kube.*
+          Host opensearch-cluster.logging.svc
+          Port 9200
+          Index container-%Y.%m
+          Retry_Limit 3
+          Suppress_Type_Name On
+          tls On
+          tls.verify Off
+          HTTP_User fluentbit
+          HTTP_Passwd ${password}
+          Trace_Error On
+          Replace_Dots On
+          Buffer_Size 67108864B
+
+      [OUTPUT]
+          Name opensearch
+          Match audit.*
+          Host opensearch-cluster.logging.svc
+          Port 9200
+          Index audit-%Y.%m
+          Retry_Limit 3
+          Suppress_Type_Name On
+          tls On
+          tls.verify Off
+          HTTP_User fluentbit
+          HTTP_Passwd ${password}
+          Trace_Error On
+          Buffer_Size 67108864B
+
+      [OUTPUT]
+          Name opensearch
+          Match ingress-nginx.*
+          Host opensearch-cluster.logging.svc
+          Port 9200
+          Index access-logs-%Y.%m
+          Retry_Limit 3
+          Suppress_Type_Name On
+          tls On
+          tls.verify Off
+          HTTP_User fluentbit
+          HTTP_Passwd ${password}
+          Trace_Error On
+          Buffer_Size 67108864B
+
+    customParsers: |
+      [PARSER]
+          Name docker_no_time
+          Format json
+          Time_Keep Off
+          Time_Key time
+          Time_Format %Y-%m-%dT%H:%M:%S.%L
+
+      [PARSER]
+          Name        accesslogs
+          Format      regex
+          Regex       ^(?<remote_addr>[^ ]+) - (?<user_identity>[^ ]+) \[(?<timestamp>[^\]]+)\] \"(?<method>\S+)(?: +(?<request_uri>\S+)(?: +(?<protocol>\S+))?)?\" (?<status>\d+) (?<bytes_sent>\d+) \"(?<referrer>[^"]*)\" \"(?<user_agent>[^"]*)\" (?<request_length>[^ ]*) (?<request_time>[^ ]*) \[(?<proxy_upstream_name>[^ ]*)\] \[(?<proxy_alternative_upstream_name>[^ ]*)\] (?<upstream_addr>[^ ]*) (?<upstream_response_length>[^ ]*) (?<upstream_response_time>[^ ]*) (?<upstream_status>[^ ]*) (?<reg_id>[^ ]*).*$
+

@@ -1,0 +1,29 @@
+{{- if .Values.metrics.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "minio-mirror.fullname" . }}
+  labels:
+    {{- with .Values.metrics.additionalLabels -}}
+    {{ toYaml . | nindent 4 }}
+    {{- end }}
+    {{- include "minio-mirror.labels" . | nindent 4 }}
+spec:
+  selector:
+    {{- with .Values.metrics.labelSelectors }}
+    matchLabels:
+      {{ toYaml . | nindent 6 }}
+    {{- end }}
+
+  podMetricsEndpoints:
+  {{- range $index, $config := .Values.config.syncConfig }}
+    - port: exporter-{{ $index }}
+      interval: 10s
+      relabelings:
+        - sourceLabels:
+          - __name__
+          action: replace
+          targetLabel: mirror_job
+          replacement: {{ $config.minioBucket }}
+  {{- end }}
+{{- end }}

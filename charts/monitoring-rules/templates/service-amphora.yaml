@@ -1,0 +1,15 @@
+{{ if .Values.amphora.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "monitoring-rules.fullname" . }}-amphora
+  labels:
+    {{- include "monitoring-rules.labels" . | nindent 4 }}
+    {{ toYaml .Values.prometheusLabels | nindent 4 }}
+    app: {{ include "monitoring-rules.fullname" . }}-amphora
+spec:
+  ports:
+    - name: metrics
+      port: {{ .Values.amphora.service.port }}
+      targetPort: metrics
+{{ end }}

@@ -59,7 +59,7 @@ spec:
     {{- end }}
     {{- if not ( .Values.postgres.disabledRules.diskFillPredict | default false ) }}
     - alert: DiskFillPredict
-      expr: predict_linear(ccp_nodemx_data_disk_available_bytes{mount_point!~"tmpfs"}[1h], 24 * 3600) < 0 and 100 * ((ccp_nodemx_data_disk_total_bytes - ccp_nodemx_data_disk_available_bytes) / ccp_nodemx_data_disk_total_bytes) > 70
+      expr: predict_linear(ccp_nodemx_data_disk_available_bytes{mount_point!~"tmpfs"}[1h], 24 * 3600) < 0 and 100 * ((ccp_nodemx_data_disk_total_bytes{mount_point="/pgdata"} - ccp_nodemx_data_disk_available_bytes{mount_point="/pgdata"}) / ccp_nodemx_data_disk_total_bytes{mount_point="/pgdata"}) > 70
       for: 5m
       labels:
         service: postgresql
@@ -80,7 +80,7 @@ spec:
     {{- end }}
     {{- if not ( .Values.postgres.disabledRules.pgDiskSize | default false ) }}
     - alert: PGDiskSize
-      expr: 100 * ((ccp_nodemx_data_disk_total_bytes - ccp_nodemx_data_disk_available_bytes) / ccp_nodemx_data_disk_total_bytes) > 75
+      expr: 100 * ((ccp_nodemx_data_disk_total_bytes{mount_point="/pgdata"} - ccp_nodemx_data_disk_available_bytes{mount_point="/pgdata"}) / ccp_nodemx_data_disk_total_bytes{mount_point="/pgdata"}) > 75
       for: 60s
       labels:
         service: postgresql
@@ -180,7 +180,7 @@ spec:
     rules:
     {{- if not ( .Values.postgres.disabledRules.pgBackrestLastCompletedFull | default false ) }}
     - alert: PGBackRestLastCompletedFull_main
-      expr: ccp_backrest_last_full_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} > {{ required "maxTimeSinceFull is required!" .Values.postgres.pgBackrest.maxTimeSinceFull }}
+      expr: (ccp_backrest_last_full_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} and on (deployment) (count by (deployment) (ccp_is_in_recovery_status{role="master"} > 1))) > {{ required "maxTimeSinceFull is required!" .Values.postgres.pgBackrest.maxTimeSinceFull }}
       for: 60s
       labels:
         service: postgresql
@@ -190,7 +190,7 @@ spec:
         description: 'There should be a full backup completed not later than the configured max time!'
     {{- if not ( .Values.postgres.disabledRules.pgBackrestLastCompletedIncr | default false ) }}
     - alert: PGBackRestLastCompletedIncr_main
-      expr: ccp_backrest_last_incr_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} > {{ required "maxTimeSinceIncr is required!" .Values.postgres.pgBackrest.maxTimeSinceIncr }}
+      expr: (ccp_backrest_last_incr_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} and on (deployment) (count by (deployment) (ccp_is_in_recovery_status{role="master"} > 1))) > {{ required "maxTimeSinceIncr is required!" .Values.postgres.pgBackrest.maxTimeSinceIncr }}
       for: 60s
       labels:
         service: postgresql
@@ -201,7 +201,7 @@ spec:
     {{- end }}
     {{- if not ( .Values.postgres.disabledRules.pgBackrestLastCompletedDiff | default false ) }}
     - alert: PGBackRestLastCompletedDiff_main
-      expr: ccp_backrest_last_diff_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} > {{ required "maxTimeSinceDiff is required!" .Values.postgres.pgBackrest.maxTimeSinceDiff }}
+      expr: (ccp_backrest_last_diff_backup_time_since_completion_seconds{stanza="{{ required "pgBackrest stanza is required!" .Values.postgres.pgBackrest.stanza }}"} and on (deployment) (count by (deployment) (ccp_is_in_recovery_status{role="master"} > 1))) > {{ required "maxTimeSinceDiff is required!" .Values.postgres.pgBackrest.maxTimeSinceDiff }}
       for: 60s
       labels:
         service: postgresql

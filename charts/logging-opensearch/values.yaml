@@ -350,6 +350,8 @@ opensearch:
       - component: nodes
         replicas: 3
         diskSize: "200Gi"
+        # The line below needs to be manually enabled to set the heap size
+        # jvm: -Xmx4096M -Xms4096M 
         persistence:
           pvc:
             accessModes:

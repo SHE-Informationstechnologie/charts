@@ -1,0 +1,27 @@
+{{- if .Values.opensearch.indexTemplates.defaultTemplates.kernel }}
+apiVersion: opensearch.opster.io/v1
+kind: OpensearchIndexTemplate
+metadata:
+  name: {{ include "logging-opensearch.name" . }}-kernel
+  namespace: {{ .Release.Namespace | default "logging" }}
+  labels:
+    {{- include "logging-opensearch.labels" . | nindent 4 }}
+spec:
+  name: kernel
+  opensearchCluster:
+    name: {{ include "logging-opensearch.opensearchName" . }}
+  indexPatterns:
+    - "kernel-*"
+  # Issue: https://github.com/opensearch-project/opensearch-k8s-operator/issues/798
+  # Details: This issue causes re-syncs in ArgoCD since custom timefields keep getting
+  #          ignored by the operator. Un-comment this when the issue is fixed.
+  # dataStream:
+  #   timestamp_field:
+  #     name: "@timestamp"
+  dataStream:
+    timestamp_field:
+      name: "@timestamp"
+    message_field:
+      name: "@message"
+  priority: 1
+{{- end }}

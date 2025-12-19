@@ -1,0 +1,17 @@
+{{- with .Values.grafanaDashboard.postgres -}}
+{{- if .enabled }}
+
+apiVersion: v1
+data:
+  "postgresql_pod_details2.json": |
+    {{ $.Files.Get "dashboards/postgresql_pod_details2.json" | fromJson | toJson | indent 4 }}
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-dashboard-postgresql-pod-details-2
+  namespace: monitoring
+
+---
+{{- end }}
+{{- end }}

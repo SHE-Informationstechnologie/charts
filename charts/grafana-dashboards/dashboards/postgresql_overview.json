@@ -1,0 +1,223 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 56,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "Cluster Details",
+              "url": "dashboard/db/postgresqldetails?$__all_variables"
+            },
+            {
+              "targetBlank": true,
+              "title": "Backup Details",
+              "url": "dashboard/db/pgbackrest?$__all_variables"
+            },
+            {
+              "targetBlank": true,
+              "title": "POD Details",
+              "url": "dashboard/db/pod-details?$__all_variables"
+            },
+            {
+              "targetBlank": true,
+              "title": "Query Statistics",
+              "url": "dashboard/db/query-statistics?$__all_variables"
+            },
+            {
+              "targetBlank": true,
+              "title": "Service Health",
+              "url": "dashboard/db/postgresql-service-health?$__all_variables"
+            }
+          ],
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "text": "DOWN"
+                },
+                "to": 99
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 100,
+                "result": {
+                  "text": "Standalone Cluster"
+                },
+                "to": 199
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 200,
+                "result": {
+                  "text": "HA CLUSTER"
+                },
+                "to": 1000
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#bf1b00",
+                "value": null
+              },
+              {
+                "color": "#eab839",
+                "value": 10
+              },
+              {
+                "color": "#56A64B",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "maxDataPoints": 100,
+      "maxPerRow": 2,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {
+          "valueSize": 30
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.4.0",
+      "repeat": "cluster",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "$hashKey": "object:243",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(pg_up{pg_cluster=~\"$cluster\"})*100+sum(ccp_is_in_recovery_status{pg_cluster=~\"$cluster\"})",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{cluster}}",
+          "metric": "up",
+          "refId": "A",
+          "step": 2
+        }
+      ],
+      "title": "$cluster - Overview",
+      "type": "stat"
+    }
+  ],
+  "preload": false,
+  "refresh": "5m",
+  "schemaVersion": 40,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "Prometheus",
+          "value": "prometheus"
+        },
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(pg_up,pg_cluster)",
+        "hide": 1,
+        "includeAll": true,
+        "label": "cluster",
+        "name": "cluster",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(pg_up,pg_cluster)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Postgres | Overview",
+  "uid": "D2X39SlGk",
+  "version": 1,
+  "weekStart": ""
+}

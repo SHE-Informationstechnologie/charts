@@ -1,4 +1,30 @@
 # 1.5.0
+- Bump eck-operator version to 2.16.1
+- Bump x509-certificate-exporter version to 3.18.1
+- Bump argoapp to version 7.8.2
+- Bump metrics server to version 3.12.2
+- bump ingress-nginx to 4.12.0
+- bump sealed-secrets to 2.17.1
+- bump postgres-operator to 5.7.1
+- bump trivy-operator to 0.25.0
+- bump opensearch-operator to 2.7.0
+- Bump kube-prometheus-stack to version 69.4.1
+
+  Following The documentation in https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
+
+  Need to update CRDs:
+    ```bash
+    kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagerconfigs.yaml
+    kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagers.yaml
+    kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_podmonitors.yaml
+    kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_probes.yaml
+    kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_prometheusagents.yaml
+    kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_prometheuses.yaml
+    kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_prometheusrules.yaml
+    kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_scrapeconfigs.yaml
+    kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml
+    kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.80.0/example/prometheus-operator-crd/monitoring.coreos.com_thanosrulers.yaml
+    ```
 - Read the Docs for detailed Changelogs and possible breaking changes before upgrading.
 - Bump ArgoCD to v7.8.5
 - Bump argoWorkflow to v0.45.8

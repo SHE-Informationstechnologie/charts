@@ -28,7 +28,7 @@ postgresOperator:
   source:
     repoURL: https://github.com/SHE-Informationstechnologie/postgres-operator-examples.git
     path: kustomize/install
-    targetRevision: v5.3.1-she-3
+    targetRevision: v5.7.1-she-2
 
 customerApplications:
   enabled: false
@@ -54,6 +54,12 @@ prometheusOperator:
   namespace: monitoring
   name: prom-operator
   enabled: true
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 69.4.1
+    chart: kube-prometheus-stack
+    helm:
+      values: |
   global: {}
   # crds:
   #   upgradeJob:
@@ -65,17 +71,20 @@ prometheusOperator:
     # baseUrl: my.domain
     # annotations: {}
   kubeStateMetrics:
-    prometheus:
-      monitor:
-        additionalLabels:
-          kubernetes.she.net/prometheus-instance: default
-  prometheusOperator: {}
-  prometheusNodeExporter:
+    serviceMonitor:
+      additionalLabels:
+        kubernetes.she.net/prometheus-instance: default
+
+  prometheusOperator: 
     hostNetwork: true
-    prometheus:
-      monitor:
-        additionalLabels:
-          kubernetes.she.net/prometheus-instance: default
+    web:
+      listenAddress: ":40250"
+
+  prometheusNodeExporter:
+    serviceMonitor:
+      additionalLabels:
+        kubernetes.she.net/prometheus-instance: default
+
   alertmanager:
     enabled: true
     alertmanagerSpec:
@@ -98,34 +107,13 @@ prometheusOperator:
     serviceMonitor:
       labels:
         kubernetes.she.net/prometheus-instance: default
-    ingress: {}
-    # ingress:
-      # enabled: true
-      # baseUrl: my.domain
-      # annotations: {}
-    # auth:
-      # generic_oauth: # See also https://grafana.com/docs/grafana/latest/setup-grafana/configure-security/configure-authentication/generic-oauth/#generic-oauth-authentication
-        # enabled: true
-        # role_attribute_path: resource_access.grafana.roles[0]
-        # name: Oauth
-        # ...
-    # extraConfigmapMounts:
-    # - name: example
-    #   mountPath: /etc/example
-    #   configMap: example
-    #   readOnly: true
-    # extraSecretMounts:
-    # - name: example-name
-    #   mountPath: /etc/example
-    #   secretName: exmple
-    #   readOnly: true
-    #   defaultMode: 0440
-    # smtp:
-    #   enabled: false
-    # smtpConfig:
-    #   existingSecret: ""
-    #   userKey: ""
-    #   passwordKey: ""   
+    ingress:
+      ingressClassName: nginx-internal
+      enabled: true
+      hosts:
+        - my.domain
+      annotations: {}
+
   prometheus:
     enabled: true
     crunchyPostgresExporter:
@@ -343,7 +331,7 @@ opensearchOperator:
   source:
     repoURL: https://opensearch-project.github.io/opensearch-k8s-operator/
     chart: opensearch-operator
-    targetRevision: 2.6.1
+    targetRevision: 2.7.0
 
 taintController:
   enabled: false

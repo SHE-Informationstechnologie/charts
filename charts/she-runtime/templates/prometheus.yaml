@@ -28,7 +28,7 @@ spec:
           {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- with .kubeStateMetrics }}
-        kube-state-metrics:
+        kubeStateMetrics:
           {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- with .coreDns }}
@@ -60,7 +60,7 @@ spec:
           {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- with .prometheusNodeExporter }}
-        prometheus-node-exporter:
+        prometheusNodeExporter:
           {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- if .alertmanager.enabled }}
@@ -73,45 +73,44 @@ spec:
           config:
             {{- toYaml .alertmanager.config | nindent 12 }}
           {{- end }}
-          {{- if .alertmanager.ingress.enabled | default .ingress.enabled }}
           ingress:
-            ingressClassName: {{ .alertmanager.ingress.className }}
+            ingressClassName: {{ .alertmanager.ingress.ingressClassName }}
             enabled: true
             hosts:
-              - alertmanager.{{ .alertmanager.ingress.baseUrl | default .ingress.baseUrl }}
+              {{- range .alertmanager.ingress.hosts }} 
+              - {{.}}
+              {{- end }}
             tls:
-              - hosts:
-                  - alertmanager.{{ .alertmanager.ingress.baseUrl | default .ingress.baseUrl }}
+              - hosts: 
+                {{- range .alertmanager.ingress.hosts }}
+                - {{.}}
+                {{- end }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
-              {{- if .ingress.annotations }}
-              {{- toYaml .ingress.annotations | nindent 14 }}
-              {{- end }}
               {{- if .alertmanager.ingress.annotations }}
               {{- toYaml .alertmanager.ingress.annotations | nindent 14 }}
               {{- end }}
           extraArgs:
               - --insecure
-          {{- end }}
         {{- end }}
         {{- if .grafana.enabled }}
         grafana:
-          {{- if .grafana.ingress.enabled | default .ingress.enabled }}
           ingress:
-            ingressClassName: {{ .grafana.ingress.className }}
+            ingressClassName: {{ .grafana.ingress.ingressClassName }}
             enabled: true
-            hosts:
-              - grafana.{{ .grafana.ingress.baseUrl | default .ingress.baseUrl }}
+            hosts: 
+              {{- range .grafana.ingress.hosts }} 
+              - {{.}}
+              {{- end }}
             tls:
-              - hosts:
-                  - grafana.{{ .grafana.ingress.baseUrl | default .ingress.baseUrl }}
+              - hosts: 
+                {{- range .grafana.ingress.hosts }}
+                - {{.}}
+                {{- end }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
-              {{- if .ingress.annotations }}
-              {{- toYaml .ingress.annotations | nindent 14 }}
-              {{- end }}
               {{- if .grafana.ingress.annotations }}
               {{- toYaml .grafana.ingress.annotations | nindent 14 }}
               {{- end }}
@@ -154,7 +153,7 @@ spec:
           {{- with .grafana.smtpConfig }}
           smtp:
           {{- toYaml . | nindent 12 }}
-          {{- end }}  
+          {{- end }}
           grafana.ini:
             {{- with .grafana.smtp }}
             smtp:
@@ -168,8 +167,6 @@ spec:
             grafana_net:
               url: https://grafana.net
             server:
-              domain: "grafana.{{ .grafana.ingress.baseUrl | default .ingress.baseUrl }}"
-              root_url: https://grafana.{{ .grafana.ingress.baseUrl | default .ingress.baseUrl }}
               router_logging: true
               enforce_domain: true
             auth:
@@ -294,21 +291,22 @@ spec:
             additionalAlertManagerConfigs:
               {{- toYaml .prometheus.additionalAlertManagerConfigs | nindent 14 }}
             {{- end }}
-          {{- if .prometheus.ingress.enabled | default .ingress.enabled }}
+          {{- if .prometheus.ingress.enabled }}
           ingress:
-            ingressClassName: {{ .prometheus.ingress.className }}
+            ingressClassName: {{ .prometheus.ingress.ingressClassName }}
             enabled: true
-            hosts:
-              - prometheus.{{ .prometheus.ingress.baseUrl | default .ingress.baseUrl }}
+            hosts: 
+              {{- range .prometheus.ingress.hosts }}
+              - {{.}}
+              {{- end }}
             tls:
-              - hosts:
-                 - prometheus.{{ .prometheus.ingress.baseUrl | default .ingress.baseUrl }}
+              - hosts: 
+                {{- range .prometheus.ingress.hosts }}
+                - {{.}}
+                {{- end }}
             annotations:
               nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
               nginx.ingress.kubernetes.io/backend-protocol: HTTP
-              {{- if .ingress.annotations }}
-              {{- toYaml .ingress.annotations | nindent 14 }}
-              {{- end }}
               {{- if .prometheus.ingress.annotations }}
               {{- toYaml .prometheus.ingress.annotations | nindent 14 }}
               {{- end }}
@@ -328,5 +326,4 @@ spec:
     namespace: {{ include "application.namespace" . }}
 
 ---
-{{- end }}
 {{- end }}

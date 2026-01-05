@@ -8,7 +8,7 @@ A Helm chart which deploys fluent bit
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://fluent.github.io/helm-charts | fluentbit(fluent-bit) | 0.48.6 |
+| https://fluent.github.io/helm-charts | fluentbit(fluent-bit) | 0.54.0 |
 
 ## Values
 
@@ -29,3 +29,4 @@ A Helm chart which deploys fluent bit
 | fluentbit.tolerations[0].effect | string | `"NoSchedule"` |  |
 | fluentbit.tolerations[0].operator | string | `"Exists"` |  |
 
+----------------------------------------------

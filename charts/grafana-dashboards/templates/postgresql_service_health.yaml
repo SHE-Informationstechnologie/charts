@@ -1,0 +1,17 @@
+{{- with .Values.grafanaDashboard.postgres -}}
+{{- if .enabled }}
+
+apiVersion: v1
+data:
+  "postgresql_service_health.json": |
+    {{ $.Files.Get "dashboards/postgresql_service_health.json" | fromJson | toJson | indent 4 }}
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-dashboard-postgresql-service-health
+  namespace: monitoring
+
+---
+{{- end }}
+{{- end }}

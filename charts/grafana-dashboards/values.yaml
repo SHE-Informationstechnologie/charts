@@ -3,3 +3,5 @@ grafanaDashboard:
     enabled: false
   minio:
     enabled: true
+  postgres:
+    enabled: false

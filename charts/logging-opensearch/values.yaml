@@ -22,6 +22,45 @@ fluentbit:
     labelKey: grafana_dashboard
     labelValue: 1
     namespace: monitoring
+  luaScripts:
+    kubernetes.lua: |
+      function cb_convert_labels(tag, timestamp, record)
+        if record["autodiscover.event"]["kubernetes"] == nil then
+          return 0, 0, 0
+        end
+
+        for k, v in pairs(record["autodiscover.event"]["kubernetes"]["labels"])
+        do
+          if (v ~= nil and type(v) ~= "table") then
+            if k == "app" then
+              k = "app_"  -- Rename 'app' to 'app_'
+            end
+            record["autodiscover.event"]["kubernetes"]["labels"][k] = {[k .. "Name"] = v}
+          end
+        end
+        return 2, timestamp, record
+      end
+      function dedot(tag, timestamp, record)
+          if record["kubernetes"] == nil then
+              return 0, 0, 0
+          end
+          dedot_keys(record["kubernetes"]["annotations"])
+          dedot_keys(record["kubernetes"]["labels"])
+          return 1, timestamp, record
+      end
+
+      function dedot_keys(map)
+          if map == nil then
+              return
+          end
+          for k, v in pairs(map) do
+              dedotted = string.gsub(k, "%.", "_")
+              if k ~= dedotted then
+                  map[dedotted] = v
+                  map[k] = nil
+              end
+          end
+      end
   config:
     inputs: |
       [INPUT]
@@ -54,7 +93,31 @@ fluentbit:
           Buffer_Chunk_Size 15m
           Buffer_Max_Size 64m
 
+      # [INPUT]
+      #     Name                syslog
+      #     Path                /var/log/*syslog.log*
+      #     Tag                 syslog
+      #     Buffer_Chunk_Size   32000
+      #     Buffer_Max_Size     64000
+      #     Receive_Buffer_Size 512000
+      
+      # [INPUT]
+      #     Name            systemd
+      #     Path            /run/log/journal
+      #     Tag             kubelet
+      #     Systemd_Filter  _SYSTEMD_UNIT=kubelet.service
+
+      # [INPUT]
+      #     Name   kmsg
+      #     Tag    kernel
+
     filters: |
+      [FILTER]
+          Name    lua
+          Match   kube.*
+          script  /fluent-bit/scripts/kubernetes.lua
+          call    dedot
+
       [FILTER]
           Name kubernetes
           Match kube.*
@@ -91,6 +154,7 @@ fluentbit:
           Host opensearch-cluster.logging.svc
           Port 9200
           Index container-%Y.%m
+          Replace_Dots On
           Retry_Limit 3
           Suppress_Type_Name On
           tls On
@@ -107,6 +171,7 @@ fluentbit:
           Host opensearch-cluster.logging.svc
           Port 9200
           Index audit-%Y.%m
+          Replace_Dots On
           Retry_Limit 3
           Suppress_Type_Name On
           tls On
@@ -122,6 +187,7 @@ fluentbit:
           Host opensearch-cluster.logging.svc
           Port 9200
           Index access-logs-%Y.%m
+          Replace_Dots On
           Retry_Limit 3
           Suppress_Type_Name On
           tls On
@@ -130,6 +196,51 @@ fluentbit:
           HTTP_Passwd ${password}
           Trace_Error On
           Buffer_Size 67108864B
+
+      # [OUTPUT]
+      #     Name opensearch
+      #     Match syslog
+      #     Host opensearch-cluster.logging.svc
+      #     Port 9200
+      #     Index syslog-logs-%Y.%m
+      #     Retry_Limit 3
+      #     Suppress_Type_Name On
+      #     tls On
+      #     tls.verify Off
+      #     HTTP_User fluentbit
+      #     HTTP_Passwd ${password}
+      #     Trace_Error On
+      #     Buffer_Size 2MB
+
+      # [OUTPUT]
+      #     Name opensearch
+      #     Match kubelet
+      #     Host opensearch-cluster.logging.svc
+      #     Port 9200
+      #     Index kubelet-logs-%Y.%m
+      #     Retry_Limit 3
+      #     Suppress_Type_Name On
+      #     tls On
+      #     tls.verify Off
+      #     HTTP_User fluentbit
+      #     HTTP_Passwd ${password}
+      #     Trace_Error On
+      #     Buffer_Size 2MB
+
+      # [OUTPUT]
+      #     Name opensearch
+      #     Match kernel
+      #     Host opensearch-cluster.logging.svc
+      #     Port 9200
+      #     Index kernel-logs-%Y.%m
+      #     Retry_Limit 3
+      #     Suppress_Type_Name On
+      #     tls On
+      #     tls.verify Off
+      #     HTTP_User fluentbit
+      #     HTTP_Passwd ${password}
+      #     Trace_Error On
+      #     Buffer_Size 2MB
 
     customParsers: |
       [PARSER]
@@ -197,6 +308,9 @@ opensearch:
             - audit-*
             - container-*
             - access-*
+            - kernel-*
+            - syslog-*
+            - kubelet-*
           allowedActions:
             - create_index
             - index
@@ -236,6 +350,8 @@ opensearch:
       - component: nodes
         replicas: 3
         diskSize: "200Gi"
+        # The line below needs to be manually enabled to set the heap size
+        # jvm: -Xmx4096M -Xms4096M 
         persistence:
           pvc:
             accessModes:
@@ -270,6 +386,9 @@ opensearch:
       access: true
       audit: true
       container: true
+      kernel: false
+      syslog: false
+      kubelet: false
 
     # Additional to the default index templates
     # deploy custom ones

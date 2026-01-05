@@ -155,6 +155,26 @@ spec:
       annotations:
         description: {{`  'One or more settings in the pg_settings system catalog on system {{ $labels.job }} are in a pending_restart state. Check the system catalog for which settings are pending and review postgresql.conf for changes.' `}}
     {{- end }}
+    {{- if not ( .Values.postgres.disabledRules.PGStatArchiverLastArchiveAgeNan | default false ) }}
+    - alert: PGStatArchiverLastArchiveAgeNan
+      expr: pg_stat_archiver_last_archive_age{role="master"} != pg_stat_archiver_last_archive_age{role="master"}
+      for: 60s
+      labels:
+        service: postgresql
+        severity: critical
+      annotations:
+        description: {{` '{{ $labels.pg_cluster }} does not provide information regarding archived WAL files. This indicates that the leader is not running correctly. ' `}}
+    {{- end }}
+    {{- if not ( .Values.postgres.disabledRules.PGStatArchiverLastArchiveAge | default false ) }}
+    - alert: PGStatArchiverLastArchiveAge
+      expr: pg_stat_archiver_last_archive_age{role="master"} > 600
+      for: 60s
+      labels:
+        service: postgresql
+        severity: warning
+      annotations:
+        description: {{` '{{ $labels.pg_cluster }} has issues archiving WAL files. This indicates that there are problems with the archive repo. ' `}}
+    {{- end }}
 
   - name: pgbackrest-rules
     rules:

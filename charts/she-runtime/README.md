@@ -20,14 +20,14 @@ SHE default K8s cluster toolset
 | argoApp.source.helm.parameters[1].name | string | `"controller.metrics.enabled"` |  |
 | argoApp.source.helm.parameters[1].value | string | `"true"` |  |
 | argoApp.source.repoURL | string | `"https://argoproj.github.io/argo-helm"` |  |
-| argoApp.source.targetRevision | string | `"7.8.2"` |  |
+| argoApp.source.targetRevision | string | `"7.8.5"` |  |
 | argoWorkflow.enabled | bool | `false` |  |
 | argoWorkflow.name | string | `"argo-workflows"` |  |
 | argoWorkflow.namespace | string | `"argo-workflows"` |  |
 | argoWorkflow.source.chart | string | `"argo-workflows"` |  |
 | argoWorkflow.source.helm.values | string | `"controller:\n  metricsConfig:\n    enabled: true\n  telemetryConfig:\n    enabled: true\n  serviceMonitor:\n    enabled: true\n    additionalLabels:\n      kubernetes.she.net/prometheus-instance: default\n    namespace: \"monitoring\"\nworkflow:\n  serviceAccount:\n    create: true\n    name: \"argo-workflows\"\nserver:\n  authMode: \"server\"\n"` |  |
 | argoWorkflow.source.repoURL | string | `"https://argoproj.github.io/argo-helm"` |  |
-| argoWorkflow.source.targetRevision | string | `"0.45.4"` |  |
+| argoWorkflow.source.targetRevision | string | `"0.45.8"` |  |
 | customerApplications.enabled | bool | `false` |  |
 | customerApplications.name | string | `"customer-applications"` |  |
 | customerApplications.namespace | string | `"she-vendor"` |  |
@@ -54,7 +54,7 @@ SHE default K8s cluster toolset
 | internalIngressController.source.helm.parameters[3].name | string | `"controller.ingressClassResource.default"` |  |
 | internalIngressController.source.helm.parameters[3].value | string | `"true"` |  |
 | internalIngressController.source.repoURL | string | `"https://kubernetes.github.io/ingress-nginx"` |  |
-| internalIngressController.source.targetRevision | string | `"4.12.0"` |  |
+| internalIngressController.source.targetRevision | string | `"4.12.1"` |  |
 | kyverno.enabled | bool | `false` |  |
 | kyverno.name | string | `"kyverno"` |  |
 | kyverno.namespace | string | `"kyverno"` |  |
@@ -110,7 +110,9 @@ SHE default K8s cluster toolset
 | prometheusOperator.grafana.ingress.hosts[0] | string | `"my.domain"` |  |
 | prometheusOperator.grafana.ingress.ingressClassName | string | `"nginx-internal"` |  |
 | prometheusOperator.grafana.serviceMonitor.labels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
-| prometheusOperator.kubeStateMetrics.serviceMonitor.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
+| prometheusOperator.helm.values | string | `""` |  |
+| prometheusOperator.ingress | object | `{}` |  |
+| prometheusOperator.kubeStateMetrics.prometheus.monitor.additionalLabels."kubernetes.she.net/prometheus-instance" | string | `"default"` |  |
 | prometheusOperator.name | string | `"prom-operator"` |  |
 | prometheusOperator.namespace | string | `"monitoring"` |  |
 | prometheusOperator.prometheus.crunchyPostgresExporter.enabled | bool | `true` |  |
@@ -127,7 +129,6 @@ SHE default K8s cluster toolset
 | prometheusOperator.prometheusOperator.hostNetwork | bool | `true` |  |
 | prometheusOperator.prometheusOperator.web.listenAddress | string | `":40250"` |  |
 | prometheusOperator.source.chart | string | `"kube-prometheus-stack"` |  |
-| prometheusOperator.source.helm.values | string | `""` |  |
 | prometheusOperator.source.repoURL | string | `"https://prometheus-community.github.io/helm-charts"` |  |
 | prometheusOperator.source.targetRevision | string | `"69.4.1"` |  |
 | publicIngressController.enabled | bool | `true` |  |
@@ -137,7 +138,7 @@ SHE default K8s cluster toolset
 | publicIngressController.source.helm.parameters[0].name | string | `"controller.ingressClassResource.controllerValue"` |  |
 | publicIngressController.source.helm.parameters[0].value | string | `"k8s.io/ingress-nginx-public"` |  |
 | publicIngressController.source.repoURL | string | `"https://kubernetes.github.io/ingress-nginx"` |  |
-| publicIngressController.source.targetRevision | string | `"4.12.0"` |  |
+| publicIngressController.source.targetRevision | string | `"4.12.1"` |  |
 | sealedSecrets.enabled | bool | `true` |  |
 | sealedSecrets.name | string | `"sealed-secrets"` |  |
 | sealedSecrets.namespace | string | `"sealed-secrets"` |  |
@@ -146,8 +147,10 @@ SHE default K8s cluster toolset
 | sealedSecrets.source.helm.parameters[0].value | string | `"true"` |  |
 | sealedSecrets.source.helm.parameters[1].name | string | `"keyRenewPeriod"` |  |
 | sealedSecrets.source.helm.parameters[1].value | string | `"0"` |  |
-| sealedSecrets.source.repoURL | string | `"https://bitnami-labs.github.io/sealed-secrets"` |  |
-| sealedSecrets.source.targetRevision | string | `"2.17.1"` |  |
+| sealedSecrets.source.helm.parameters[2].name | string | `"global.security.allowInsecureImages"` |  |
+| sealedSecrets.source.helm.parameters[2].value | string | `"true"` |  |
+| sealedSecrets.source.repoURL | string | `"registry-1.docker.io/bitnamicharts"` |  |
+| sealedSecrets.source.targetRevision | string | `"2.5.6"` |  |
 | taintController.enabled | bool | `false` |  |
 | taintController.name | string | `"taint-controller"` |  |
 | taintController.namespace | string | `"taint-controller"` |  |
@@ -166,14 +169,14 @@ SHE default K8s cluster toolset
 | velero.name | string | `"velero"` |  |
 | velero.namespace | string | `"velero"` |  |
 | velero.source.chart | string | `"velero"` |  |
-| velero.source.helm.values | string | `"initContainers:\n- name: velero-plugin-for-aws\n  image: velero/velero-plugin-for-aws:v1.11.0\n  imagePullPolicy: IfNotPresent\n  volumeMounts:\n  - mountPath: /target\n    name: plugins\n# - name: velero-plugin-for-azure\n#   image: velero/velero-plugin-for-microsoft-azure:v1.11.0\n#   imagePullPolicy: IfNotPresent\n#   volumeMounts:\n#   - mountPath: /target\n#     name: plugins\n\nresources:\n  requests:\n    cpu: 500m\n    memory: 128Mi\n  limits:\n    cpu: 1000m\n    memory: 512Mi\n"` |  |
+| velero.source.helm.values | string | `"initContainers:\n- name: velero-plugin-for-aws\n  image: velero/velero-plugin-for-aws:v1.11.0\n  imagePullPolicy: IfNotPresent\n  volumeMounts:\n  - mountPath: /target\n    name: plugins\n# - name: velero-plugin-for-azure\n#   image: velero/velero-plugin-for-microsoft-azure:v1.11.0\n#   imagePullPolicy: IfNotPresent\n#   volumeMounts:\n#   - mountPath: /target\n#     name: plugins\n"` |  |
 | velero.source.repoURL | string | `"https://vmware-tanzu.github.io/helm-charts"` |  |
 | velero.source.targetRevision | string | `"8.3.0"` |  |
 | x509Exporter.enabled | bool | `true` |  |
 | x509Exporter.name | string | `"x509-exporter"` |  |
 | x509Exporter.namespace | string | `"monitoring"` |  |
 | x509Exporter.source.chart | string | `"x509-certificate-exporter"` |  |
-| x509Exporter.source.helm.values | string | `"secretTypes:\n- type: kubernetes.io/tls\n  key: tls.crt\n- type: Opaque\n  key: tls.crt\nprometheusServiceMonitor:\n  extraLabels:\n    kubernetes.she.net/prometheus-instance: default\nprometheusRules:\n  extraLabels:\n    kubernetes.she.net/prometheus-instance: default\n  disableBuiltinAlertGroup: false\nsecretsExporter:\n  resources:\n    requests:\n      cpu: 20m\n      memory: 20Mi\n    limits:\n      cpu: null\n      memory: 150M\n"` |  |
+| x509Exporter.source.helm.values | string | `"prometheusServiceMonitor:\n  extraLabels:\n    kubernetes.she.net/prometheus-instance: default\nprometheusRules:\n  extraLabels:\n    kubernetes.she.net/prometheus-instance: default\n  disableBuiltinAlertGroup: false\nsecretsExporter:\n  secretTypes:\n  - type: kubernetes.io/tls\n    key: tls.crt\n  - type: Opaque\n    key: tls.crt\n  resources:\n    requests:\n      cpu: 20m\n      memory: 20Mi\n    limits:\n      cpu: null\n      memory: 150M\n"` |  |
 | x509Exporter.source.repoURL | string | `"https://charts.enix.io"` |  |
 | x509Exporter.source.targetRevision | string | `"3.18.1"` |  |
 

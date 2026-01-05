@@ -51,6 +51,16 @@ entries:
     version: 1.0.0
   grafana-dashboards:
   - apiVersion: v2
+    appVersion: 0.0.11
+    created: "2026-01-05T13:13:12.930551091Z"
+    description: A collection of Dashboards for grafana
+    digest: bb7909ec5260e0ef1295b3aaaf5f4702c110c68da44dece9299988f0cde84267
+    name: grafana-dashboards
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/grafana-dashboards-0.0.11/grafana-dashboards-0.0.11.tgz
+    version: 0.0.11
+  - apiVersion: v2
     appVersion: 0.0.10
     created: "2024-01-30T08:06:23.250390706Z"
     description: A collection of Dashboards for grafana
@@ -280,6 +290,22 @@ entries:
     description: A Helm chart which deploys a Opensearch cluster manifests, its configuation
       and fluent bit
     digest: 7203e4515866662dc0f1b6db7e194b94c7003ee251c7ab1be262b414dd5a909d
+    name: logging-opensearch
+    type: application
+    urls:
+    - https://github.com/SHE-Informationstechnologie/charts/releases/download/logging-opensearch-1.2.3-1/logging-opensearch-1.2.3-1.tgz
+    version: 1.2.3-1
+  - apiVersion: v2
+    appVersion: 1.2.3
+    created: "2026-01-05T13:13:13.073971889Z"
+    dependencies:
+    - alias: fluentbit
+      name: fluent-bit
+      repository: https://fluent.github.io/helm-charts
+      version: 0.54.0
+    description: A Helm chart which deploys a Opensearch cluster manifests, its configuation
+      and fluent bit
+    digest: b351f98005840d023955d5e9368524b969786a6ba479e446c165ef205a7be8fc
     name: logging-opensearch
     type: application
     urls:
@@ -2467,4 +2493,4 @@ entries:
     urls:
     - https://github.com/SHE-Informationstechnologie/charts/releases/download/she-sso-0.0.2/she-sso-0.0.2.tgz
     version: 0.0.2
-generated: "2025-12-17T12:16:50.263466839Z"
+generated: "2026-01-05T13:13:13.799819157Z"

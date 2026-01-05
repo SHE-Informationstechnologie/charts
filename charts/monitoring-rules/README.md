@@ -49,5 +49,8 @@ A curated set of prometheus alerting rules for Kubernetes.
 | prometheusLabels.release | string | `"kube-prometheus-stack"` |  |
 | trivy.enabled | bool | `false` |  |
 | trivy.grafanaDashboards.enabled | bool | `true` |  |
+| velero.disabledRules | object | `{}` |  |
+| velero.enabled | bool | `false` |  |
+| velero.namespace | string | `"velero"` |  |
 
 ----------------------------------------------

@@ -8,7 +8,7 @@ Integration internal cluster services into SHE SSO
 
 | Repository | Name | Version |
 |------------|------|---------|
-| oci://registry-1.docker.io/bitnamicharts | redis | 18.8.0 |
+| oci://registry-1.docker.io/bitnamicharts | redis | 24.1.0 |
 
 ## Values
 

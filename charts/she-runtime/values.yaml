@@ -154,7 +154,7 @@ internalIngressController:
   enabled: true
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.14.1
+    targetRevision: 4.14.3
     chart: ingress-nginx
     helm:
       parameters:
@@ -173,7 +173,7 @@ publicIngressController:
   enabled: true
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.14.1
+    targetRevision: 4.14.3
     chart: ingress-nginx
     helm:
       parameters:

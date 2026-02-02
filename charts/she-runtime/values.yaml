@@ -56,7 +56,7 @@ prometheusOperator:
   enabled: true
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 69.4.1
+    targetRevision: 69.8.2
     chart: kube-prometheus-stack
     helm:
       values: |

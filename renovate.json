@@ -10,5 +10,11 @@
 		"matchStrings": [
 			" +repoURL: +(?<registryUrl>[^'\"\\n]+)\\s*targetRevision:\\s+(?<currentValue>[^'\" \\n]+)\\s*chart:\\s+(?<depName>[^'\" \\n]+)"
 		]
-	}]
+	}],
+	"packageRules": [
+		{
+			"matchFileNames": ["charts/she-runtime/values.yaml"],
+			"enabled": false
+		}
+	]
 }

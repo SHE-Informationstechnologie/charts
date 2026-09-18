@@ -115,7 +115,7 @@ opensearch-cluster:
       vendor: Opensearch
 
       # -- Opensearch version
-      version: 2.3.0
+      version: 2.19.6
 
     # OpenSearchCluster boostrap pod configuration
     bootstrap:

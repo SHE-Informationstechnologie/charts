@@ -227,7 +227,7 @@ opensearch-cluster:
       tolerations: []
 
       # -- dashboards version
-      version: 2.3.0
+      version: 2.19.7
 
     # initHelper configuration
     initHelper:
